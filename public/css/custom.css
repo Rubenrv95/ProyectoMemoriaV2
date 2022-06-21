@@ -1,0 +1,293 @@
+
+header {
+    position: relative;
+    margin: 0;
+    padding-top: 0px;
+}
+
+.header {
+    font-size: 26px;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 30px;
+    
+}
+
+
+.button-login{
+    background-color: #333333 ; 
+    color: white;
+    padding: 5px;
+    border: 2px solid black;
+    width: 60%; 
+    text-align: center;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.button-login:hover {
+    background-color: #5f5f5f ;
+}
+
+.button-login:active {
+    background-color: rgb(150, 150, 150) ;
+}
+
+.agregar {
+    background-image: url('/images/add_icon.png');
+    background-repeat: no-repeat; 
+    background-color: #333333;
+    border-color: #333333;
+    color: white;
+    margin-left: auto;   
+    height: 28px;
+    text-align: left;
+    border-radius: 6px;
+    padding: 0px 30px; /* Some padding */
+    cursor: pointer; /* Mouse pointer on hover */
+}
+
+.agregar:hover {
+    background-color: #636363;
+    border-color: rgb(87, 87, 87);
+    border-radius: 6px;
+}
+
+.agregar:focus, .agregar.focus  {
+    background-color: #525252;
+    border-color: rgb(87, 87, 87);
+    border-radius: 6px;
+    box-shadow: 0 0 0 0.2rem #999999;;
+}
+
+
+.agregar:active {
+    background-color: #999999;
+    border-radius: 6px;
+}
+
+.boton_gestionar {
+    background-repeat: no-repeat; 
+    background-repeat: no-repeat; 
+    background-color: #333333;
+    border-color: #333333;
+    color: white;
+    margin-left: auto;   
+    height: 28px;
+    text-align: left;
+    border-radius: 6px;
+    padding: 0px 30px; /* Some padding */
+    cursor: pointer; /* Mouse pointer on hover */
+}
+
+.boton_gestionar:hover {
+    background-color: #636363;
+    border-color: rgb(87, 87, 87);
+    border-radius: 6px;
+}
+
+.boton_gestionar:focus, .boton_gestionar.focus {
+    background-color: #525252;
+    border-color: rgb(87, 87, 87);
+    border-radius: 6px;
+    box-shadow: 0 0 0 0.2rem #999999;;
+}
+
+.boton_gestionar:active {
+    background-color: #999999;
+    border-radius: 8px;
+}
+
+.nav-link:hover{
+
+    background-color: #616161;
+    border-radius: 8px;
+}
+
+#busc_carrera {
+    background-image: url('/images/search_icon.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 2px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+
+
+#info {
+
+    background-image: url('/images/info_icon.png');
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    border: none;
+
+
+}
+
+#info:hover {
+    background-color: rgb(84, 127, 175);
+    border-radius: 12px;
+}
+
+#info:active {
+    background-color: rgb(52, 78, 107);
+    border-radius: 12px;
+}
+
+#mod {
+    background-image: url('/images/edit_icon.png');
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    border: none;
+}
+#mod:hover {
+    background-color: rgb(9, 128, 224);
+    border-radius: 10px;
+}
+
+#mod:active {
+    background-color: rgb(4, 79, 139);
+    border-radius: 10px;
+}
+#del {
+    background-image: url('/images/delete_icon.png');
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    border: none;   
+}
+#del:hover {
+    background-color: rgb(245, 39, 39);
+    border-radius: 10px;
+}
+  
+#del:active {
+    background-color: rgb(172, 23, 23);
+    border-radius: 10px;
+}
+
+.cursor-grab {
+    cursor: -webkit-grab;
+    cursor: grab;
+}
+
+#copy {
+    background-image: url('/images/copy_icon.png');
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    border: none;   
+}
+#copy:hover {
+    background-color: rgb(167, 167, 167);
+    border-radius: 10px;
+}
+  
+#copy:active {
+    background-color: rgb(112, 112, 112);
+    border-radius: 10px;
+}
+  
+.tasks {
+    min-height: 450px;
+}
+
+#lista {
+    border-collapse: collapse; /* Collapse borders */
+    width: 100%; /* Full-width */
+    border: 2px solid #ddd; /* Add a grey border */
+    font-size: 18px; /* Increase font-size */
+}
+  
+#lista td {
+    text-align: left; /* Left-align text */
+    padding: 12px; /* Add padding */
+    color: black;
+}
+
+  
+#lista th {
+    /* Add a bottom border to all table rows */
+    border-bottom: 2px solid #ddd;
+    cursor: pointer;
+    background: #333333;
+}
+  
+#lista tr.header, #lista tr:hover {
+    /* Add a grey background color to the table header and on hover */
+    background-color: #929292;
+}
+
+#lista2 {
+    border-collapse: collapse; /* Collapse borders */
+    width: 100%; /* Full-width */
+    border: 2px solid #ddd; /* Add a grey border */
+    font-size: 18px; /* Increase font-size */
+}
+  
+#lista2 td {
+    text-align: left; /* Left-align text */
+    padding: 12px; /* Add padding */
+    color: black;
+}
+
+  
+#lista2 th {
+    /* Add a bottom border to all table rows */
+    border-bottom: 2px solid #ddd;
+    cursor: pointer;
+    background: #333333;
+}
+  
+#lista2 tr.header, #lista2 tr:hover {
+    /* Add a grey background color to the table header and on hover */
+    background-color: #929292;
+}
+
+#lista3 {
+    border-collapse: collapse; /* Collapse borders */
+    width: 100%; /* Full-width */
+    border: 2px solid #ddd; /* Add a grey border */
+    font-size: 18px; /* Increase font-size */
+}
+  
+#lista3 td {
+    text-align: left; /* Left-align text */
+    padding: 12px; /* Add padding */
+    color: black;
+}
+
+  
+#lista3 th {
+    /* Add a bottom border to all table rows */
+    border-bottom: 2px solid #ddd;
+    cursor: pointer;
+    background: #333333;
+}
+  
+#lista3 tr.header, #lista3 tr:hover {
+    /* Add a grey background color to the table header and on hover */
+    background-color: #929292;
+}
+
