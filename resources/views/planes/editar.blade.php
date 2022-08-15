@@ -26,103 +26,47 @@
         <a href="/carreras/{{$c['id']}}"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="mb-0 text-gray-800">
-                    @foreach ($carrera as $c)
-                    {{$c['nombre']}} 
-                    @endforeach
-                    -
+                    Malla Curricular                    
                     @foreach ($plan as $p)
                     {{$p['Nombre']}}
+                    @endforeach
+                    -
+                    @foreach ($carrera as $c)
+                    {{$c['nombre']}} 
                     @endforeach
                     <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_editar_plan" class="edit" > </button>
                 
                 </h1> 
         </div>
 
-            <a href="/carreras/{{$c['id']}}/{{$p['id']}}/perfil_de_egreso"><button type="button" class="boton_gestionar">Perfil de Egreso</button></a> 
-
-            <div class="form-inline" style="margin-top: 1%">
-                <h5 style="color: black">Seleccionar total de semestres</h5>
-                <select action="" class="form-select form-select-md" style="width: 10%; margin-left: 1%"name="" id="">
-                    <option default selected value="1">1</option>
-                    <option value="">2</option>
-                </select>
-            </div>
-
-            <!--
-            <div class="container-fluid kanban-container py-4 px-0">
-                <div class="row d-flex flex-nowrap">
-                    <div class="col-12 col-lg-6 col-xl-4 col-xxl-3">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="fs-6 fw-bold mb-0">
-                                Semestre 1
-                            </h5>
-
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-sm fs-6 px-1 py-0 dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z">
-
-                                        </path>
-                                    </svg>
-                                </button>
-                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <svg class="dropdown-icon text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd">
-
-                                            </path>
-                                        </svg> 
-                                        Eliminar
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                               <div id="kanbanColumn1" class="list-group kanban-list">
-                                   <div class="card border-0 shadow p-4"><div class="card-header d-flex align-items-center justify-content-between border-0 p-0 mb-3"><h3 class="h5 mb-0">Cálculo 1</h3><div><div class="dropdown"><button type="button" class="btn btn-sm fs-6 px-1 py-0 dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><svg class="icon icon-xs text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg></button><div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1"><a class="dropdown-item d-flex align-items-center" href="#" data-bs-toggle="modal" data-bs-target="#editTaskModal"><svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path></svg> Editar </a><div role="separator" class="dropdown-divider my-1"></div><a class="dropdown-item d-flex align-items-center" href="#"><svg class="dropdown-icon text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg> Eliminar</a></div>
-                                    <div class="dropdown-menu dashboard-dropdown dropdown-menu-start py-0" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item fw-normal rounded-top" href="#" data-bs-toggle="modal" data-bs-target="#editTaskModal"><span class="fas fa-edit"></span>Edit task</a> <a class="dropdown-item fw-normal" href="#"><span class="far fa-clone"></span>Copy Task</a> <a class="dropdown-item fw-normal" href="#"><span class="far fa-star"></span> Add to favorites</a><div role="separator" class="dropdown-divider my-0"></div><a class="dropdown-item fw-normal text-danger rounded-bottom" href="#"><span class="fas fa-trash-alt"></span>Remove</a></div></div></div></div>
-                                        
-                                    </div>
-
-                                    <div class="card border-0 shadow p-4"><div class="card-header d-flex align-items-center justify-content-between border-0 p-0 mb-3"><h3 class="h5 mb-0">Introducción a la Programación</h3><div><div class="dropdown"><button type="button" class="btn btn-sm fs-6 px-1 py-0 dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><svg class="icon icon-xs text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg></button><div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1"><a class="dropdown-item d-flex align-items-center" href="#" data-bs-toggle="modal" data-bs-target="#editTaskModal"><svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path></svg> Editar </a><div role="separator" class="dropdown-divider my-1"></div><a class="dropdown-item d-flex align-items-center" href="#"><svg class="dropdown-icon text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg> Eliminar</a></div>
-                                    <div class="dropdown-menu dashboard-dropdown dropdown-menu-start py-0" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item fw-normal rounded-top" href="#" data-bs-toggle="modal" data-bs-target="#editTaskModal"><span class="fas fa-edit"></span>Edit task</a> <a class="dropdown-item fw-normal" href="#"><span class="far fa-clone"></span>Copy Task</a> <a class="dropdown-item fw-normal" href="#"><span class="far fa-star"></span> Add to favorites</a><div role="separator" class="dropdown-divider my-0"></div><a class="dropdown-item fw-normal text-danger rounded-bottom" href="#"><span class="fas fa-trash-alt"></span>Remove</a></div></div></div></div>
-                                        
-                                    </div>                       
-                                    <button class="agregar" href="#" style="font-size: 16; margin-top: 10px; margin-right: auto" data-bs-toggle="modal" data-bs-target="#modal_crear_modulo">
-                                        Añadir módulo
-                                    </button>
-                                </div>     
-                                
-                                
-
-                                
-                    </div>
-
-                </div>
-            </div> -->
+            <a href="/carreras/{{$c['id']}}/{{$p['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
+            <a href="/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
+            <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
+            <a href="/carreras/{{$c['id']}}/{{$p['id']}}/malla"><button type="button" class="boton_gestionar">Malla Curricular</button></a> 
+    
             
 
-            <div class="container-fluid" style="margin-top: 1%">
-                                        
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="mb-0 text-gray-800" style="font-size: 32px">Semestre 1</h1>
-                </div>
+                
+    </div>
 
-                <button class="agregar" href="#" style="font-size: 16; margin-top: 10px; margin-right: auto; margin-bottom: 2%" data-bs-toggle="modal" data-bs-target="#modal_crear_modulo">
-                                            Añadir módulo
-                    </button>
+    <div class="container-fluid" style="margin-top: 2%">
+    
+                                        
+
+                <button class="agregar" href="#" style="font-size: 16; margin-right: auto; margin-bottom: 2%" data-bs-toggle="modal" data-bs-target="#modal_crear_modulo">
+                                            Agregar módulo
+                </button>
 
                 <table id="lista" class="table table-striped table-bordered" width="100%">
                     <thead>
                         <tr>
                             <th style="display: none">ID</th>
+                            <th>Nivel</th>
                             <th>Código</th>
                             <th>Nombre</th>
                             <th>Prerrequisitos</th>
                             <th>Créditos</th>
                             <th>Horas semanales</th>
-                            <th>Semestre</th>
                             <th>
                             </th>
                         </tr>
@@ -137,13 +81,8 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
                             <td>
-                                <select class="form-select form-select-md"  aria-label=".form-select-md example" name="" id="">
-                                    <option value="1">1</option>
-                                </select>
-                            </td>
-                            <td>
-                                <button type="button" id="info" > </button>
                                 <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="" class="edit"> </button>
                                 <button type="button" id="del" data-bs-toggle="modal" data-bs-target="" class="delete"> </button>
                             </td>
@@ -157,31 +96,13 @@
                 </table>
 
                     
-            </div>
+       
 
             <button class="agregar" style="font-size: 16; margin-top: 10px; margin-right: auto; margin-left: auto; display: block; margin-bottom: 2%">
                                             Añadir semestre
             </button>
 
 
-       <div class="ms-auto ml-auto">
-            <button class="btn btn-success">Guardar</button>
-       </div>                                     
-
-
-       <table>
-           <thead>
-                <tr>
-                    
-                </tr>
-           </thead>
-           <tbody>
-               <tr>
-
-               </tr>
-           </tbody>
-       </table>
-                
     </div>
 
 
@@ -412,6 +333,7 @@
 
     });
     </script>
+
 
 </body>
 @endsection

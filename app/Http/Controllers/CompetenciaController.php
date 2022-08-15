@@ -30,11 +30,11 @@ class CompetenciaController extends Controller
         $carrera = json_decode($carrera, true);
         $competencia = DB::table('competencias')->where('refPlan', $id_plan)->get();
         $aprendizaje = DB::table('aprendizajes')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $id_plan)->select('aprendizajes.*', 'competencias.Descripcion')->get();
-        $saber = DB::table('sabers')->leftJoin('aprendizajes', 'sabers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $id_plan)->select('sabers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refPlan')->get();
+        $saber = DB::table('saber_conocers')->leftJoin('aprendizajes', 'saber_conocers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $id_plan)->select('saber_conocers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refPlan')->get();
         $competencia = json_decode($competencia, true);
         $aprendizaje = json_decode($aprendizaje, true);
         $saber = json_decode($saber, true);
-        return view('planes.perfil')->with('plan', $plan)->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje)->with('saber', $saber);
+        return view('planes.competencias')->with('plan', $plan)->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje)->with('saber', $saber);
     }
 
     /**
@@ -45,14 +45,17 @@ class CompetenciaController extends Controller
     public function create($id_carrera, $id_plan, Request $request)
     {
         $request->validate([
+            'nombre_competencia'=>'required',
             'desc_competencia'=>'required'
         ]);
 
 
         $query = DB::table('competencias')->insert([
+            'Nombre'=>$request->input('nombre_competencia'),
             'Descripcion'=>$request->input('desc_competencia'),
-            'Tipo'=>$request->input('tipo'),
-            'Nivel'=>$request->input('nivel'),
+            'Nivel_basico'=>$request->input('basico_competencia'),
+            'Nivel_intermedio'=>$request->input('intermedio_competencia'),
+            'Nivel_avanzado'=>$request->input('avanzado_competencia'),
             'refPlan'=>$id_plan,
         ]);
 
@@ -102,6 +105,7 @@ class CompetenciaController extends Controller
     public function update($id_carrera, $id_plan, Request $request, $id_comp)
     {
         $request->validate([
+            'nombre_competencia'=>'required',
             'desc_competencia'=>'required'
         ]);
 
@@ -121,10 +125,11 @@ class CompetenciaController extends Controller
      * @param  \App\Models\Competencia  $competencia
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_comp)
+    public function destroy($id, $id_plan, $id_comp)
     {
         $query = DB::table('competencias')->where('id', $id_comp)->delete();
         
+        echo $id_comp;
         return back()->withSuccess('Competencia eliminada con éxito');
     }
 }

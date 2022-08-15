@@ -59,7 +59,9 @@
                                             <h4 style="color: black; font-weight: bold">Nombre</h4>
                                             <h6 style="color: black">{{Auth::user()->nombre}}</h6>      
                                             <h4 style="color: black; font-weight: bold">Correo Electrónico</h4>
-                                            <h6 style="color: black">{{Auth::user()->email}}</h6>                    
+                                            <h6 style="color: black">{{Auth::user()->email}}</h6>      
+                                            <h4 style="color: black; font-weight: bold">Rol</h4>
+                                            <h6 style="color: black">{{Auth::user()->rol}}</h6>                    
                                         </div>
                                         <div class="modal-footer">
                                             <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cerrar</button>

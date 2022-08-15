@@ -26,6 +26,7 @@
                                 <th style="display: none">ID <img src="/images/arrows.png" alt="" srcset=""></th>
                                 <th>Nombre de usuario <img src="/images/arrows.png" alt="" srcset=""></th>
                                 <th>Correo Electrónico <img src="/images/arrows.png" alt="" srcset=""></th>
+                                <th>Rol <img src="/images/arrows.png" alt="" srcset=""></th>
                                 <th style="width: 150px"></th>
                                 </tr>
                         </thead>
@@ -37,6 +38,7 @@
                                 <td style="display: none"> {{$u['id']}}</td>
                                 <td> {{$u['nombre']}}</td>
                                 <td>{{$u['email']}}</td>
+                                <td>{{$u['rol']}}</td>
                                 <td>
                                         <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_carrera" class="edit"> </button>
                                         <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_carrera" class="delete"> </button>
@@ -74,6 +76,15 @@
                                         <div class="form-group" style="margin: auto;">
                                             <label style="font-size: 20" >Correo Electrónico</label>
                                             <input type="email" class="form-control form-control-lg" name="email" style="width:100%; margin-bottom: 20px" placeholder="Ingrese el correo del usuario" maxlength="100" required />
+                                        </div>
+
+                                        <div class="form-group" style="margin: auto;">
+                                            <label style="font-size: 20" >Rol</label>
+                                            <select name="rol" id="" class="form-select form-select-lg" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18">
+                                                    <option selected value="Asesor curricular">Asesor curricular</option>
+                                                    <option value="Equipo académico desarrollador">Equipo académico desarrollador</option>
+                                                    <option value="Dirección de docencia">Dirección de docencia</option>
+                                            </select>
                                         </div>
 
 
@@ -137,6 +148,16 @@
                                             <label style="font-size: 20" >Correo Electrónico</label>
                                             <input type="email" class="form-control form-control-lg" name="email" id="email" style="width:95%; margin-bottom: 20px" placeholder="Ingrese el correo del usuario" maxlength="100" required/>
                                         </div>
+
+                                        <div class="form-group" style="margin: auto;">
+                                            <label style="font-size: 20" >Rol</label>
+                                            <select name="rol" id="rol" class="form-select form-select-lg" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18">
+                                                    <option selected value="Asesor curricular">Asesor curricular</option>
+                                                    <option value="Equipo académico desarrollador">Equipo académico desarrollador</option>
+                                                    <option value="Dirección de docencia">Dirección de docencia</option>
+                                            </select>
+                                        </div>
+
 
                                     </div>
                                     <div class="modal-footer">
@@ -214,6 +235,7 @@
 
                 $('#nombre').val(data[1]);
                 $('#email').val(data[2]);
+                $('#rol').val(data[3]);
 
                 $('#editForm').attr('action', '/usuarios/'+data[0]);
                 $('#modal_modificar_usuario').modal('show');

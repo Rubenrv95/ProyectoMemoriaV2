@@ -12,7 +12,7 @@
     <div class="container-fluid">   
                 
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="mb-0 text-gray-800" style="font-size: 32px">Lista de Planes de Estudio</h1>
+                        <h1 class="mb-0 text-gray-800">Lista de Planes de Estudio</h1>
                 </div>
 
 
@@ -34,7 +34,7 @@
                                 <td>{{$p['Nombre']}}</td>
                                 <td>{{$p['Ncarrera']}}</td>
                                 <td>
-                                    <a href="/carreras/{{$p['idCarrera']}}/{{$p['id']}}"><button type="button" id="info" > </button></a>
+                                    <a href="/carreras/{{$p['idCarrera']}}/{{$p['id']}}/malla"><button type="button" id="info" > </button></a>
                                 </td>
                                 
                                 </tr>

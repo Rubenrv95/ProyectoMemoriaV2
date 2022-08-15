@@ -29,7 +29,7 @@ class PlanController extends Controller
     {
         $query = DB::table('plans')->orderBy('Nombre')->join('carreras', 'plans.Carrera_asociada', '=', 'carreras.id')->select('plans.Nombre', 'plans.id', 'carreras.nombre as Ncarrera', 'carreras.id as idCarrera')->get();
         $query = json_decode($query, true);
-        return view ('planes.vistaplanes')->with('data', $query);
+        return view ('vistaplanes')->with('data', $query);
     }
 
     /**
@@ -110,12 +110,12 @@ class PlanController extends Controller
 
         $competencia = DB::table('competencias')->where('refPlan', $plan)->get();
         $aprendizaje = DB::table('aprendizajes')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $plan)->select('aprendizajes.*', 'competencias.Descripcion')->get();
-        $saber = DB::table('sabers')->leftJoin('aprendizajes', 'sabers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $plan)->select('sabers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refPlan')->get();
+        $saber = DB::table('saber_conocers')->leftJoin('aprendizajes', 'saber_conocers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $plan)->select('saber_conocers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refPlan')->get();
         $competencia = json_decode($competencia, true);
         $aprendizaje = json_decode($aprendizaje, true);
         $saber = json_decode($saber, true);
 
-        return view('editar')->with('plan', $query)->with('carrera', $carrera)->with('saber', $saber);
+        return view('planes.editar')->with('plan', $query)->with('carrera', $carrera)->with('saber', $saber);
     }
 
     /**
@@ -165,7 +165,7 @@ class PlanController extends Controller
         //se eliminan todas las competencias, aprendizajes y saberes asociados al plan de estudio
         $competencias = DB::table('competencias')->where('refPlan', $plan)->delete();
         $aprendizajes = DB::table('aprendizajes')->where('refPlan', $plan)->delete();
-        $saberes = DB::table('sabers')->where('refPlan', $plan)->delete();
+        $saberes = DB::table('saber_conocers')->where('refPlan', $plan)->delete();
 
         $query = DB::table('plans')->where('id', $plan)->delete();
 

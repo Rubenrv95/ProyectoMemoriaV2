@@ -26,7 +26,7 @@
         @endforeach
         </div>
         <button class="agregar" data-bs-toggle="modal" data-bs-target="#modal_crear_plan"  style="margin-bottom: 10px;">
-            Añadir plan de estudio                    
+            Agregar plan de estudio                    
         </button>
 
 
@@ -49,7 +49,7 @@
                     <td > {{ $item['Nombre'] }}</td>
                     <td >{{ $item['updated_at'] }}</td>
                     <td>
-                        <a href="/carreras/{{$id}}/{{ $item['id'] }}"><button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_carrera" class="edit"></button></a>
+                        <a href="/carreras/{{$id}}/{{ $item['id'] }}/malla"><button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_carrera" class="edit"></button></a>
                         <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_plan" class="delete">
                         <button type="button" id="copy" data-bs-toggle="modal" data-bs-target="#modal_copiar_plan" class="copy" style="margin-left: 2%">
                     </td>

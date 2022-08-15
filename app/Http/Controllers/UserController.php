@@ -56,6 +56,7 @@ class UserController extends Controller
         $query = DB::table('users')->insert([
             'nombre'=>$request->input('nombre'),
             'email'=>$request->input('email'),
+            'rol'=>$request->input('rol'),
             'password' => Hash::make($request->input('password')),
             'remember_token' => Str::random(10)
         ]);
@@ -103,6 +104,7 @@ class UserController extends Controller
         $query = DB::table('users')->where('id', $id)->update([
             'nombre'=>$request->input('nombre'),
             'email'=>$request->input('email'),
+            'rol'=>$request->input('rol'),
         ]);
         
 
