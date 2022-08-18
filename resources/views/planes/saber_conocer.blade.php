@@ -27,10 +27,21 @@
                         <h1 class="mb-0 text-gray-800">Saberes {{$p['Nombre']}} - {{$c['nombre']}} </h1>
                 </div>
 
+                <hr class="solid">
+
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/malla"><button type="button" class="boton_gestionar">Malla Curricular</button></a> 
+
+                <hr class="solid">
+
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="btn btn-secondary">Gestión de Saber Conocer</button></a> 
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="btn btn-secondary">Gestión de Saber Hacer</button></a> 
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="btn btn-secondary">Gestión de Saber Ser</button></a> 
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="btn btn-secondary">Temporalización de Saberes</button></a> 
+
+                <hr class="solid">
 
         </div>
 
@@ -42,16 +53,15 @@
                         Agregar saber                   
                 </button>
 
-                <table id="lista3" class="table table-striped table-bordered" width="100%">
+                <table id="lista" class="table table-striped table-bordered" width="100%">
                         <thead>
                                 <tr style="font-weight: bold; color: white">
                                 <th style="display: none">ID <img src="/images/arrows.png" alt="" srcset=""> </th>
                                 <th>Descripción <img src="/images/arrows.png" alt="" srcset=""></th>
-                                <th>Nivel <img src="/images/arrows.png" alt="" srcset=""></th>
                                 <th>Condicion <img src="/images/arrows.png" alt="" srcset=""></th>
-                                <th>Fecha de Creación <img src="/images/arrows.png" alt="" srcset=""></th>
                                 <th>Aprendizaje Asociado <img src="/images/arrows.png" alt="" srcset=""></th>
-                                <th style="width: 150px"></th>
+                                <th>Fecha de Creación <img src="/images/arrows.png" alt="" srcset=""></th>
+                                <th style="width: 7%"></th>
                                 </tr>
                         </thead>
                         
@@ -60,13 +70,14 @@
                                 <tr>
                                 <td style="display: none">{{$s['id']}}</td>
                                 <td>{{$s['Descripcion_saber']}}</td>
-                                <td>{{$s['Nivel']}}</td>
                                 <td>{{$s['Condicion']}}</td>
-                                <td>{{$s['Fecha_creacion']}}</td>
                                 <td>{{$s['Descripcion_aprendizaje']}}</td>
+                                <td>{{$s['Fecha_creacion']}}</td>
                                 <td>
-                                        <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_saber" class="edit3"> </button>
-                                        <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_saber" class="delete3"> </button>
+                                    @if (Auth::user()->rol != 'Dirección de docencia')
+                                        <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_saber" class="edit"> </button>
+                                        <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_saber" class="delete"> </button>
+                                    @endif
                                 </td>
                                 
                                 </tr>
@@ -101,14 +112,6 @@
                                                 <span style="color: red">@error('desc_saber')  Debe ingresar una descripción para el saber  @enderror</span>
                                             </div>
 
-                                            <div class="form-group" style="margin: auto">
-                                                <label style="font-size: 20">Tipo de Saber</label>
-                                                <select class="form-select form-select-lg" name="tipo_saber" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required>
-                                                    <option selected value="Cognitivo">Cognitivo</option>
-                                                    <option value="Actitudinal">Actitudinal</option>
-                                                    <option value="Procedimental">Procedimental</option>
-                                                </select>
-                                            </div>
 
                                             <div class="form-group" style="margin: auto">
                                                 <label style="font-size: 20">Aprendizaje asociado </label>
@@ -240,20 +243,6 @@
                 "order": [[ 1, "asc" ]]
             });
 
-            var table2 = $('#lista2').DataTable({
-
-                "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]]
-            });
-
-            var table3 = $('#lista3').DataTable({
-
-                "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]]
-            });
-
-
-
             //TABLA DE COMPETENCIAS
 
             //modificar
@@ -292,91 +281,6 @@
 
                 $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/perfil_de_egreso/'+data[0]);
                 $('#modal_eliminar_competencia').modal('show');
-
-            }  );
-
-
-            //TABLA DE APRENDIZAJES
-            
-
-            //modificar
-            table2.on('click', '.edit2', function() {
-
-                $tr = $(this).closest('tr');
-                if ($($tr).hasClass('child')) {
-                    $tr = $tr.prev('.parent');
-                }
-
-
-                var data = table2.row($tr).data();
-                console.log(data);
-
-                $('#desc_aprendizaje').val(data[1]);
-                $('#tipo_aprend').val(data[2]);
-                //$('#refComp').val(data[3]);
-
-                $('#editForm2').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/perfil_de_egreso/aprendizajes/'+data[0]);
-                $('#modal_modificar_aprendizaje').modal('show');
-
-            });
-
-
-            //eliminar
-            table2.on('click', '.delete2', function() {
-
-                $tr = $(this).closest('tr');
-                if ($($tr).hasClass('child')) {
-                    $tr = $tr.prev('.parent');
-                }
-
-                var data = table2.row($tr).data();
-                console.log(data);
-
-
-                $('#deleteForm2').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/perfil_de_egreso/aprendizajes/'+data[0]);
-                $('#modal_eliminar_aprendizaje').modal('show');
-
-            }  );
-
-            //TABLA DE SABERES
-            
-
-            //modificar
-            table3.on('click', '.edit3', function() {
-
-            $tr = $(this).closest('tr');
-            if ($($tr).hasClass('child')) {
-                $tr = $tr.prev('.parent');
-            }
-
-
-            var data = table3.row($tr).data();
-            console.log(data);
-
-            $('#desc_saber').val(data[1]);
-            $('#tipo_saber').val(data[2]);
-            //$('#refAprend').val(data[3]);
-
-            $('#editForm3').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/perfil_de_egreso/saberes/'+data[0]);
-            $('#modal_modificar_saber').modal('show');
-
-            });
-
-
-            //eliminar
-            table3.on('click', '.delete3', function() {
-
-            $tr = $(this).closest('tr');
-            if ($($tr).hasClass('child')) {
-                $tr = $tr.prev('.parent');
-            }
-
-            var data = table3.row($tr).data();
-            console.log(data);
-
-
-            $('#deleteForm3').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/perfil_de_egreso/saberes/'+data[0]);
-            $('#modal_eliminar_saber').modal('show');
 
             }  );
         });

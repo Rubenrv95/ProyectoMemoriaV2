@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -24,7 +25,13 @@ class UserController extends Controller
     public function index()
     {
         $data = User::orderBy('nombre')->where('nombre', '<>', 'Administrador')->get(); 
-        return view ('/usuarios', ['user'=>$data]);
+
+        if (Auth::user()->rol == 'Administrador') {
+            return view ('/usuarios', ['user'=>$data]);
+        }
+        else {
+            abort(403);
+        }
     }
 
     /**

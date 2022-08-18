@@ -36,61 +36,30 @@
                 <hr class="solid">
 
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/competencias"><button type="button" class="btn btn-secondary">Gestión de Competencias</button></a> 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/tempo_competencias"><button type="button" class="btn btn-secondary">Temporalización de Competencias</button></a> 
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/competencias"><button type="button" class="btn btn-secondary">Temporalización de Competencias</button></a> 
 
                 <hr class="solid">
 
         </div>
         <div class="container-fluid">   
-            <h3 class="mb-0 text-gray-800">Gestión de Competencias</h3>
-            @if (Auth::user()->rol != 'Dirección de docencia')
-                <button class="agregar" data-bs-toggle="modal" data-bs-target="#modal_crear_competencia" style="margin-bottom: 1%; margin-top: 1%">
-                        Agregar competencia                   
-                </button>
-            @endif
+            <h3 class="mb-0 text-gray-800">Temporalización de Competencias</h3>
 
-                <table id="lista" class="table table-striped table-bordered" width="100%">
-                        <thead>
-                                <tr style="font-weight: bold; color: white">
-                                    <th style="display: none">ID <img src="/images/arrows.png" alt="" srcset=""> </th>
-                                    <th>Nombre<img src="/images/arrows.png" alt="" srcset=""></th>
-                                    <th>Descripción<img src="/images/arrows.png" alt="" srcset=""></th>
-                                    <th>Nivel Básico <img src="/images/arrows.png" alt="" srcset=""></th>
-                                    <th>Nivel Intermedio <img src="/images/arrows.png" alt="" srcset=""></th>
-                                    <th>Nivel Avanzado <img src="/images/arrows.png" alt="" srcset=""></th>
-                                    <th>Orden <img src="/images/arrows.png" alt="" srcset=""></th>
-                                    <th>Condicion <img src="/images/arrows.png" alt="" srcset=""></th>
-                                    <th>Fecha de creación <img src="/images/arrows.png" alt="" srcset=""></th>
-                                    <th style="width: 7%"></th>
-                                </tr>
-                        </thead>
-                        
-                        <tbody>
-                        
-                            @foreach ($competencia as $comp)   
-                                <tr>
-                                <td style="display: none">{{$comp['id']}}</td>
-                                <td>{{$comp['Nombre']}}</td>
-                                <td>{{$comp['Descripcion']}}</td>
-                                <td>{{$comp['Nivel_basico']}}</td>
-                                <td>{{$comp['Nivel_intermedio']}}</td>
-                                <td>{{$comp['Nivel_avanzado']}}</td>
-                                <td>{{$comp['Orden']}}</td>
-                                <td>{{$comp['Condicion']}}</td>
-                                <td>{{$comp['Fecha_creacion']}}</td>
-                                <td>
-                                    @if (Auth::user()->rol != 'Dirección de docencia')
-                                        <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_competencia" class="edit"> </button>
-                                        <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_competencia" class="delete"> </button>
-                                    @endif
-                                </td>
-                                
-                                </tr>
-                            @endforeach   
-                        
-                        </tbody>
-                </table> 
-
+               <table id="lista">
+                    <thead>
+                        <th>Competencia</th>
+                        <th>Nivel 1</th>
+                        <th>Nivel 2</th>
+                        <th>Nivel 3</th>
+                        <th>Nivel 4</th>
+                    </thead>
+                    <tbody>
+                        <td>Competencia 1</td>
+                        <td> <input type="checkbox"></td>
+                        <td> <input type="checkbox"></td>
+                        <td> <input type="checkbox"></td>
+                        <td> <input type="checkbox"></td>
+                    </tbody>
+               </table>
                 
 
 
@@ -268,53 +237,6 @@
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
                 "order": [[ 1, "asc" ]]
             });
-
-
-
-
-            //TABLA DE COMPETENCIAS
-
-            //modificar
-            table.on('click', '.edit', function() {
-
-                $tr = $(this).closest('tr');
-                if ($($tr).hasClass('child')) {
-                    $tr = $tr.prev('.parent');
-                }
-
-
-                var data = table.row($tr).data();
-                console.log(data);
-
-                $('#nombre_competencia').val(data[1]);
-                $('#desc_competencia').val(data[2]);
-                $('#basico_competencia').val(data[3]);
-                $('#intermedio_competencia').val(data[4]);
-                $('#avanzado_competencia').val(data[5]);
-
-                $('#editForm').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/competencias/'+data[0]);
-                $('#modal_modificar_competencia').modal('show');
-
-            });
-
-
-            //eliminar
-            table.on('click', '.delete', function() {
-
-                $tr = $(this).closest('tr');
-                if ($($tr).hasClass('child')) {
-                    $tr = $tr.prev('.parent');
-                }
-
-                var data = table.row($tr).data();
-                console.log(data);
-
-
-                $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/competencias/'+data[0]);
-                $('#modal_eliminar_competencia').modal('show');
-
-            }  );
-
 
             
         });

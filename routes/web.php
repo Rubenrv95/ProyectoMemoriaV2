@@ -44,15 +44,18 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/inicio', function() {
     Route::post('/carreras/{id}/{plan}/modulo', [ModuloController::class, 'create']);
     Route::post('/carreras/{id}/{plan}/copiar', [PlanController::class, 'copy']);
     Route::get('/planes', [PlanController::class, 'index']);
-    
+
+
     Route::resource('/usuarios', 'App\Http\Controllers\UserController');
 
     Route::get('/carreras/{id}/{plan}/competencias', [CompetenciaController::class, 'index']);
+    Route::get('/carreras/{id}/{plan}/tempo_competencias', [CompetenciaController::class, 'show']);
     Route::post('/carreras/{id}/{plan}/competencias', [CompetenciaController::class, 'create']);
     Route::put('/carreras/{id}/{plan}/competencias/{competencia}', [CompetenciaController::class, 'update']);
     Route::delete('/carreras/{id}/{plan}/competencias/{competencia}', [CompetenciaController::class, 'destroy']);
 
     Route::get('/carreras/{id}/{plan}/aprendizajes', [AprendizajeController::class, 'index']);
+    Route::get('/carreras/{id}/{plan}/tempo_aprendizajes', [AprendizajeController::class, 'show']);
     Route::post('/carreras/{id}/{plan}/aprendizajes', [AprendizajeController::class, 'create']);
     Route::put('/carreras/{id}/{plan}/aprendizajes/{aprend}', [AprendizajeController::class, 'update']);
     Route::delete('/carreras/{id}/{plan}/aprendizajes/{aprend}', [AprendizajeController::class, 'destroy']);

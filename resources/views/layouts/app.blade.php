@@ -218,13 +218,14 @@
                         <span>Planes</span></a>
                 </li>
 
+                @if (Auth::user()->rol == 'Administrador')
                 <!-- Listado de Usuarios -->
                 <li class="nav-item">
                     <a class="nav-link" href="/usuarios">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Usuarios</span></a>
                 </li>
-
+                @endif
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
                 <!-- Sidebar Message -->
