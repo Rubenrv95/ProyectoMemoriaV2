@@ -34,15 +34,19 @@
                     @foreach ($carrera as $c)
                     {{$c['nombre']}} 
                     @endforeach
-                    <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_editar_plan" class="edit" > </button>
+                    <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_editar_plan" class="edit" style="padding-top: 2%"> </button>
                 
                 </h1> 
         </div>
+
+        <hr class="solid">
 
             <a href="/carreras/{{$c['id']}}/{{$p['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
             <a href="/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
             <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
             <a href="/carreras/{{$c['id']}}/{{$p['id']}}/malla"><button type="button" class="boton_gestionar">Malla Curricular</button></a> 
+
+        <hr class="solid">
     
             
 
@@ -52,10 +56,11 @@
     <div class="container-fluid" style="margin-top: 2%">
     
                                         
-
+        @if (Auth::user()->rol != 'Dirección de docencia')
                 <button class="agregar" href="#" style="font-size: 16; margin-right: auto; margin-bottom: 2%" data-bs-toggle="modal" data-bs-target="#modal_crear_modulo">
-                                            Agregar módulo
+                        Agregar módulo
                 </button>
+        @endif
 
                 <table id="lista" class="table table-striped table-bordered" width="100%">
                     <thead>
@@ -83,8 +88,11 @@
                             <td></td>
                             <td></td>
                             <td>
+                                <button type="button" id="info" > </button>
+                                @if (Auth::user()->rol != 'Dirección de docencia')
                                 <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="" class="edit"> </button>
                                 <button type="button" id="del" data-bs-toggle="modal" data-bs-target="" class="delete"> </button>
+                                @endif
                             </td>
                         </tr>
                     </tbody>

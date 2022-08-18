@@ -25,9 +25,11 @@
             <h1 class="mb-0 text-gray-800"> {{ $n['nombre'] }} </h1>
         @endforeach
         </div>
+        @if (Auth::user()->rol != 'Dirección de docencia')
         <button class="agregar" data-bs-toggle="modal" data-bs-target="#modal_crear_plan"  style="margin-bottom: 10px;">
             Agregar plan de estudio                    
         </button>
+        @endif
 
 
         <table id="lista" class="table table-striped table-bordered" width="100%">
@@ -49,9 +51,13 @@
                     <td > {{ $item['Nombre'] }}</td>
                     <td >{{ $item['updated_at'] }}</td>
                     <td>
+                        @if (Auth::user()->rol != 'Dirección de docencia')
                         <a href="/carreras/{{$id}}/{{ $item['id'] }}/malla"><button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_carrera" class="edit"></button></a>
                         <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_plan" class="delete">
                         <button type="button" id="copy" data-bs-toggle="modal" data-bs-target="#modal_copiar_plan" class="copy" style="margin-left: 2%">
+                        @else
+                        <a href="/carreras/{{$id}}/{{ $item['id'] }}/malla"><button type="button" id="info" > </button></a>
+                        @endif
                     </td>
                 </tr>    
             @endforeach

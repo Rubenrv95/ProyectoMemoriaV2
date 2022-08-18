@@ -18,9 +18,11 @@
                         <h1 class="mb-0 text-gray-800">Lista de Carreras</h1>
                 </div>
 
+                @if (Auth::user()->rol != 'Dirección de docencia')
                 <button class="agregar" data-bs-toggle="modal" data-bs-target="#modal_crear_carrera" style="margin-bottom: 10px;">
                         Agregar carrera                    
                 </button>
+                @endif
 
                 <table id="lista" class="table table-striped table-bordered" width="100%">
                         <thead>
@@ -41,8 +43,10 @@
                                 <td>{{$item['area']}}</td>
                                 <td>
                                         <a href="/carreras/{{$item['id']}}"><button type="button" id="info" > </button></a>
+                                        @if (Auth::user()->rol != 'Dirección de docencia')
                                         <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_carrera" class="edit"> </button>
                                         <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_carrera" class="delete"> </button>
+                                        @endif
                                 </td>
                                 
                                 </tr>

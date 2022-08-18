@@ -24,7 +24,7 @@
                 
                 <a href="/carreras/{{$c['id']}}"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="mb-0 text-gray-800">Aprendizajes {{$p['Nombre']}} - {{$c['nombre']}} </h1>
+                        <h1 class="mb-0 text-gray-800">Saberes {{$p['Nombre']}} - {{$c['nombre']}} </h1>
                 </div>
 
                 <hr class="solid">
@@ -36,51 +36,52 @@
 
                 <hr class="solid">
 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes"><button type="button" class="btn btn-secondary">Gestión de Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/tempo_aprendizajes"><button type="button" class="btn btn-secondary">Temporalización de Aprendizajes</button></a> 
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="btn btn-secondary">Gestión de Saber Conocer</button></a> 
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="btn btn-secondary">Gestión de Saber Hacer</button></a> 
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="btn btn-secondary">Gestión de Saber Ser</button></a> 
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="btn btn-secondary">Temporalización de Saberes</button></a> 
 
                 <hr class="solid">
 
         </div>
 
-        <div class="container-fluid">   
-            <h3 class="mb-0 text-gray-800">Gestión de Aprendizajes</h3>
-            @if (Auth::user()->rol != 'Dirección de docencia')
-                <button class="agregar" data-bs-toggle="modal" data-bs-target="#modal_crear_aprendizaje" style="margin-bottom: 1%; margin-top: 1%">
-                        Agregar aprendizaje                    
+        <div class="container-fluid" style="margin-top: 2%">   
+
+                
+
+                <button class="agregar" data-bs-toggle="modal" data-bs-target="#modal_crear_saber" style="margin-bottom: 10px;">
+                        Agregar saber                   
                 </button>
-            @endif
+
                 <table id="lista" class="table table-striped table-bordered" width="100%">
                         <thead>
                                 <tr style="font-weight: bold; color: white">
                                 <th style="display: none">ID <img src="/images/arrows.png" alt="" srcset=""> </th>
                                 <th>Descripción <img src="/images/arrows.png" alt="" srcset=""></th>
-                                <th>Nivel<img src="/images/arrows.png" alt="" srcset=""></th>
                                 <th>Condicion <img src="/images/arrows.png" alt="" srcset=""></th>
-                                <th>Competencia asociada <img src="/images/arrows.png" alt="" srcset=""></th>
-                                <th>Fecha_creacion <img src="/images/arrows.png" alt="" srcset=""></th>
+                                <th>Aprendizaje Asociado <img src="/images/arrows.png" alt="" srcset=""></th>
+                                <th>Fecha de Creación <img src="/images/arrows.png" alt="" srcset=""></th>
                                 <th style="width: 7%"></th>
                                 </tr>
                         </thead>
                         
-                        <tbody>
-                            @foreach ($aprendizaje as $a)   
+                        <tbody> 
+                            @foreach ($saber as $s) 
                                 <tr>
-                                <td style="display: none">{{$a['id']}}</td>
-                                <td>{{$a['Descripcion_aprendizaje']}}</td>
-                                <td>{{$a['Nivel']}}</td>
-                                <td>{{$a['Condicion']}}</td>
-                                <td>{{$a['Nombre']}}</td>
-                                <td>{{$a['Fecha_creacion']}}</td>
-                                <td>   
+                                <td style="display: none">{{$s['id']}}</td>
+                                <td>{{$s['Descripcion_saber']}}</td>
+                                <td>{{$s['Condicion']}}</td>
+                                <td>{{$s['Descripcion_aprendizaje']}}</td>
+                                <td>{{$s['Fecha_creacion']}}</td>
+                                <td>
                                     @if (Auth::user()->rol != 'Dirección de docencia')
-                                        <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje" class="edit"> </button>
-                                        <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete"> </button>
+                                        <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_saber" class="edit"> </button>
+                                        <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_saber" class="delete"> </button>
                                     @endif
                                 </td>
                                 
                                 </tr>
-                            @endforeach   
+                            @endforeach
 
                         </tbody>
                 </table> 
@@ -88,33 +89,35 @@
 
         </div>
 
-        <!--MODALS APRENDIZAJE -->
+        <!-- MODALS SABERES -->
 
-        <!-- Modal crear aprendizaje   -->
+        <!-- Modal crear saber   -->
         <div class="container">
             <div class="row">
                 <div class ="col-md-12">
-                    <div tabIndex="-1"  class="modal fade" id="modal_crear_aprendizaje" aria-hidden="true">
+                    <div tabIndex="-1"  class="modal fade" id="modal_crear_saber" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form action="/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes" method="POST" class="form-group">
+                            <form action="/carreras/{{$c['id']}}/{{$p['id']}}/perfil_de_egreso/saberes" method="POST" class="form-group">
                             @csrf
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Agregar aprendizaje</h1>
+                                        <h1 class="justify-content-center" style="margin: auto"> Agregar saber</h1>
                                     </div>
                                     <div class="modal-body">
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Descripción del aprendizaje</label>
-                                                <textarea class="form-control" name="desc_aprendizaje" type="text"  placeholder="Ingrese la descripción del aprendizaje" rows="3" cols="50" maxlength="200" required></textarea>
+                                                <label style="font-size: 20">Descripción del saber</label>
+                                                <textarea class="form-control" name="desc_saber" type="text"  placeholder="Ingrese la descripción del saber" rows="3" cols="50" maxlength="200" required></textarea>
+                                                <span style="color: red">@error('desc_saber')  Debe ingresar una descripción para el saber  @enderror</span>
                                             </div>
 
+
                                             <div class="form-group" style="margin: auto">
-                                                <label style="font-size: 20">Competencia asociada</label>
-                                                <select class="form-select form-select-lg" name="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required> 
-                                                    @foreach ($competencia as $comp) 
-                                                    <option value="{{$comp['id']}}">{{$comp['Nombre']}}</option>
+                                                <label style="font-size: 20">Aprendizaje asociado </label>
+                                                <select class="form-select form-select-lg" name="refAprend" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required>
+                                                    @foreach ($aprendizaje as $a)  
+                                                    <option value="{{$a['id']}}">{{$a['Descripcion_aprendizaje']}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -133,35 +136,44 @@
         </div>
 
 
-        <!-- Modal modificar aprendizaje   -->
+        <!-- Modal modificar saber   -->
         <div class="container">
             <div class="row">
                 <div class ="col-md-12">
-                    <div class="modal fade" id="modal_modificar_aprendizaje" aria-hidden="true">
+                    <div class="modal fade" id="modal_modificar_saber" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
 
-                            <form method = "post" action = "/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes" class="form-group" id = "editForm">
+                            <form method = "POST" action = "" class="form-group" id = "editForm3">
 
-                            {{ csrf_field() }}
-                            {{ method_field('PUT') }}
+                            @csrf
+                            @method('PUT')
 
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Modificar aprendizaje</h1>
+                                        <h1 class="justify-content-center" style="margin: auto"> Modificar saber </h1>
                                     </div>
                                     <div class="modal-body">
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Descripción del aprendizaje </label>
-                                                <textarea class="form-control" name="desc_aprendizaje" id="desc_aprendizaje" type="text"  placeholder="Ingrese la descripción del aprendizaje" rows="3" cols="50" maxlength="200" required></textarea>
+                                                <label style="font-size: 20">Descripción de la competencia</label>
+                                                <textarea class="form-control" name="desc_saber" id="desc_saber" type="text"  placeholder="Ingrese la descripción del saber" rows="3" cols="50" maxlength="200" required></textarea>
+                                                <span style="color: red">@error('desc_saber')  Debe ingresar una descripción para el saber @enderror</span>
                                             </div>
 
                                             <div class="form-group" style="margin: auto">
-                                                <label style="font-size: 20">Competencia asociada</label>
-                                                <select class="form-select form-select-lg" name="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required> 
-                                                    @foreach ($competencia as $comp) 
-                                                    <option value="{{$comp['id']}}">{{$comp['Nombre']}}</option>
+                                                <label style="font-size: 20">Tipo de Saber</label>
+                                                <select class="form-select form-select-lg" name="tipo_saber" id="tipo_saber" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required>
+                                                    <option selected value="Cognitivo">Cognitivo</option>
+                                                    <option value="Actitudinal">Actitudinal</option>
+                                                    <option value="Procedimental">Procedimental</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group" style="margin: auto">
+                                                <label style="font-size: 20">Aprendizaje asociado </label>
+                                                <select class="form-select form-select-lg" name="refAprend" id ="refAprend" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required>                 
+                                                    @foreach ($aprendizaje as $a)  
+                                                    <option value="{{$a['id']}}">{{$a['Descripcion_aprendizaje']}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -181,25 +193,25 @@
 
 
 
-        <!-- Modal eliminar aprendizaje   -->
+        <!-- Modal eliminar saber    -->
         <div class="container">
             <div class="row">
                 <div class ="col-md-12">
-                    <div class="modal fade" id="modal_eliminar_aprendizaje" aria-hidden="true">
+                    <div class="modal fade" id="modal_eliminar_saber" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form method = "post" action = "/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes" class="form-group" id = "deleteForm">
+                            <form method = "POST" action = "" class="form-group" id = "deleteForm3">
 
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE')}}
+                                @csrf
+                                @method('DELETE')
 
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Eliminar aprendizaje</h1>
+                                        <h1 class="justify-content-center" style="margin: auto"> Eliminar saber </h1>
                                     </div>
                                     <div class="modal-body">
                                         <input type="hidden" name="method" value="DELETE"> 
-                                        <p style="font-size: 18">¿Está seguro de que desea eliminar éste aprendizaje? Se eliminarán todos los saberes vinculados.</p>
+                                        <p style="font-size: 18">¿Está seguro de que desea eliminar éste saber?</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -215,6 +227,9 @@
         </div>
 
 
+        <!--Terminan Modals Saberes -->
+
+
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -227,7 +242,6 @@
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
                 "order": [[ 1, "asc" ]]
             });
-
 
             //TABLA DE COMPETENCIAS
 
@@ -243,11 +257,12 @@
                 var data = table.row($tr).data();
                 console.log(data);
 
-                $('#desc_aprendizaje').val(data[1]);
-                $('#refComp').val(data[4]);
+                $('#desc_competencia').val(data[1]);
+                $('#tipo').val(data[2]);
+                $('#nivel').val(data[3]);
 
-                $('#editForm').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes/'+data[0]);
-                $('#modal_modificar_aprendizaje').modal('show');
+                $('#editForm').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/perfil_de_egreso/'+data[0]);
+                $('#modal_modificar_competencia').modal('show');
 
             });
 
@@ -264,12 +279,10 @@
                 console.log(data);
 
 
-                $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes/'+data[0]);
-                $('#modal_eliminar_aprendizaje').modal('show');
+                $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/perfil_de_egreso/'+data[0]);
+                $('#modal_eliminar_competencia').modal('show');
 
             }  );
-
-
         });
 
     </script>

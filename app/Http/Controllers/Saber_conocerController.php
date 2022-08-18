@@ -36,7 +36,7 @@ class Saber_conocerController extends Controller
         $competencia = json_decode($competencia, true);
         $aprendizaje = json_decode($aprendizaje, true);
         $saber = json_decode($saber, true);
-        return view('planes.saberes')->with('plan', $plan)->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje)->with('saber', $saber);
+        return view('planes.saber_conocer')->with('plan', $plan)->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje)->with('saber', $saber);
     }
 
     /**
@@ -53,7 +53,6 @@ class Saber_conocerController extends Controller
 
         $query = DB::table('sabers')->insert([
             'Descripcion_saber'=>$request->input('desc_saber'),
-            'tipo_saber'=>$request->input('tipo_saber'),
             'refAprendizaje'=>$request->input('refAprend'),
             'refPlan'=>$id_plan,
         ]);
@@ -110,7 +109,6 @@ class Saber_conocerController extends Controller
 
         $query = DB::table('sabers')->where('id', $id_saber)->update([
             'Descripcion_saber'=>$request->input('desc_saber'),
-            'tipo_saber'=>$request->input('tipo_saber'),
             'refAprendizaje'=>$request->input('refAprend'),
         ]);
 
@@ -125,7 +123,7 @@ class Saber_conocerController extends Controller
      */
     public function destroy($id_carrera, $id_plan, $id_saber)
     {
-        $query = DB::table('sabers')->where('id', $id_saber)->delete();
+        $query = DB::table('saber_conocers')->where('id', $id_saber)->delete();
         
         return back()->withSuccess('Saber eliminado con éxito');
     }
