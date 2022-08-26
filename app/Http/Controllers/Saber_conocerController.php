@@ -51,7 +51,7 @@ class Saber_conocerController extends Controller
         ]);
 
 
-        $query = DB::table('sabers')->insert([
+        $query = DB::table('saber_conocers')->insert([
             'Descripcion_saber'=>$request->input('desc_saber'),
             'refAprendizaje'=>$request->input('refAprend'),
             'refPlan'=>$id_plan,
@@ -107,7 +107,7 @@ class Saber_conocerController extends Controller
         ]);
 
 
-        $query = DB::table('sabers')->where('id', $id_saber)->update([
+        $query = DB::table('saber_conocers')->where('id', $id_saber)->update([
             'Descripcion_saber'=>$request->input('desc_saber'),
             'refAprendizaje'=>$request->input('refAprend'),
         ]);

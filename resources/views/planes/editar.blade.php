@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar
+    <title>Malla Curricular
         @foreach ($plan as $p)
             {{$p['Nombre']}}
         @endforeach
@@ -53,11 +53,12 @@
                 
     </div>
 
-    <div class="container-fluid" style="margin-top: 2%">
-    
+    <div class="container-fluid">
+        
+        <h3 class="mb-0 text-gray-800">Módulos</h3>
                                         
         @if (Auth::user()->rol != 'Dirección de docencia')
-                <button class="agregar" href="#" style="font-size: 16; margin-right: auto; margin-bottom: 2%" data-bs-toggle="modal" data-bs-target="#modal_crear_modulo">
+                <button class="agregar" href="#" style="font-size: 16; margin-right: auto; margin-bottom: 1%; margin-top: 1%" data-bs-toggle="modal" data-bs-target="#modal_crear_modulo">
                         Agregar módulo
                 </button>
         @endif
@@ -102,14 +103,6 @@
                     </tfoot>
 
                 </table>
-
-                    
-       
-
-            <button class="agregar" style="font-size: 16; margin-top: 10px; margin-right: auto; margin-left: auto; display: block; margin-bottom: 2%">
-                                            Añadir semestre
-            </button>
-
 
     </div>
 
@@ -275,7 +268,7 @@
                     $('#saberes').append(
                         '<div class="form-inline dynamic-added2" id = "row2'+j+'">' +
                         '<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="saber[]" style="width:80%; font-size: 18; margin-top: 2%">' +                                                  
-                                                            '@foreach ($saber as $s)' +
+                                                            '@foreach ($saber_conocer as $s)' +
                                                                 '<option value="{{$s["Descripcion_saber"]}}">{{$s["Descripcion_saber"]}}</option>' +
                                                             '@endforeach'+                                                            
                                                     '</select>' +                    

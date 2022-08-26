@@ -11,7 +11,7 @@
         @foreach ($carrera as $c)
         @endforeach
 
-        <title>Perfil de Egreso {{$p['Nombre']}} - {{$c['nombre']}}</title>
+        <title>Saberes {{$p['Nombre']}} - {{$c['nombre']}}</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
         <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
@@ -31,35 +31,36 @@
 
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saber_conocer"><button type="button" class="boton_gestionar">Saberes</button></a> 
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/malla"><button type="button" class="boton_gestionar">Malla Curricular</button></a> 
 
                 <hr class="solid">
 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="btn btn-secondary">Gestión de Saber Conocer</button></a> 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="btn btn-secondary">Gestión de Saber Hacer</button></a> 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="btn btn-secondary">Gestión de Saber Ser</button></a> 
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saber_conocer"><button type="button" class="btn btn-secondary">Gestión de Saber Conocer</button></a> 
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saber_hacer"><button type="button" class="btn btn-secondary">Gestión de Saber Hacer</button></a> 
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saber_ser"><button type="button" class="btn btn-secondary">Gestión de Saber Ser</button></a> 
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="btn btn-secondary">Temporalización de Saberes</button></a> 
 
                 <hr class="solid">
 
         </div>
 
-        <div class="container-fluid" style="margin-top: 2%">   
+        <div class="container-fluid">   
 
-                
+            <h3 class="mb-0 text-gray-800">Gestión de Saber Conocer</h3>
 
-                <button class="agregar" data-bs-toggle="modal" data-bs-target="#modal_crear_saber" style="margin-bottom: 10px;">
+            @if (Auth::user()->rol != 'Dirección de docencia')
+                <button class="agregar" data-bs-toggle="modal" data-bs-target="#modal_crear_saber" style="margin-bottom: 1%; margin-top: 1%">
                         Agregar saber                   
                 </button>
-
+            @endif
                 <table id="lista" class="table table-striped table-bordered" width="100%">
                         <thead>
                                 <tr style="font-weight: bold; color: white">
                                 <th style="display: none">ID <img src="/images/arrows.png" alt="" srcset=""> </th>
                                 <th>Descripción <img src="/images/arrows.png" alt="" srcset=""></th>
-                                <th>Condicion <img src="/images/arrows.png" alt="" srcset=""></th>
                                 <th>Aprendizaje Asociado <img src="/images/arrows.png" alt="" srcset=""></th>
+                                <th>Condicion <img src="/images/arrows.png" alt="" srcset=""></th>
                                 <th>Fecha de Creación <img src="/images/arrows.png" alt="" srcset=""></th>
                                 <th style="width: 7%"></th>
                                 </tr>
@@ -70,8 +71,8 @@
                                 <tr>
                                 <td style="display: none">{{$s['id']}}</td>
                                 <td>{{$s['Descripcion_saber']}}</td>
-                                <td>{{$s['Condicion']}}</td>
                                 <td>{{$s['Descripcion_aprendizaje']}}</td>
+                                <td>{{$s['Condicion']}}</td>
                                 <td>{{$s['Fecha_creacion']}}</td>
                                 <td>
                                     @if (Auth::user()->rol != 'Dirección de docencia')
@@ -97,7 +98,7 @@
                 <div class ="col-md-12">
                     <div tabIndex="-1"  class="modal fade" id="modal_crear_saber" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form action="/carreras/{{$c['id']}}/{{$p['id']}}/perfil_de_egreso/saberes" method="POST" class="form-group">
+                            <form action="/carreras/{{$c['id']}}/{{$p['id']}}/saber_conocer" method="POST" class="form-group">
                             @csrf
                                 <div class="modal-content">
 
@@ -143,10 +144,10 @@
                     <div class="modal fade" id="modal_modificar_saber" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
 
-                            <form method = "POST" action = "" class="form-group" id = "editForm3">
+                            <form method = "POST" action = "/carreras/{{$c['id']}}/{{$p['id']}}/saber_conocer" class="form-group" id = "editForm">
 
-                            @csrf
-                            @method('PUT')
+                            {{ csrf_field() }}
+                            {{ method_field('PUT') }}
 
                                 <div class="modal-content">
 
@@ -162,16 +163,8 @@
                                             </div>
 
                                             <div class="form-group" style="margin: auto">
-                                                <label style="font-size: 20">Tipo de Saber</label>
-                                                <select class="form-select form-select-lg" name="tipo_saber" id="tipo_saber" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required>
-                                                    <option selected value="Cognitivo">Cognitivo</option>
-                                                    <option value="Actitudinal">Actitudinal</option>
-                                                    <option value="Procedimental">Procedimental</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group" style="margin: auto">
                                                 <label style="font-size: 20">Aprendizaje asociado </label>
-                                                <select class="form-select form-select-lg" name="refAprend" id ="refAprend" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required>                 
+                                                <select class="form-select form-select-lg" name="refAprend" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required>                 
                                                     @foreach ($aprendizaje as $a)  
                                                     <option value="{{$a['id']}}">{{$a['Descripcion_aprendizaje']}}</option>
                                                     @endforeach
@@ -199,7 +192,7 @@
                 <div class ="col-md-12">
                     <div class="modal fade" id="modal_eliminar_saber" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form method = "POST" action = "" class="form-group" id = "deleteForm3">
+                            <form method = "POST" action = "" class="form-group" id = "deleteForm">
 
                                 @csrf
                                 @method('DELETE')
@@ -243,7 +236,7 @@
                 "order": [[ 1, "asc" ]]
             });
 
-            //TABLA DE COMPETENCIAS
+            //TABLA DE SABERES
 
             //modificar
             table.on('click', '.edit', function() {
@@ -257,12 +250,11 @@
                 var data = table.row($tr).data();
                 console.log(data);
 
-                $('#desc_competencia').val(data[1]);
-                $('#tipo').val(data[2]);
-                $('#nivel').val(data[3]);
+                $('#desc_saber').val(data[1]);
+                $('#refAprend').val(data[2]);
 
-                $('#editForm').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/perfil_de_egreso/'+data[0]);
-                $('#modal_modificar_competencia').modal('show');
+                $('#editForm').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/saber_conocer/'+data[0]);
+                $('#modal_modificar_saber').modal('show');
 
             });
 
@@ -279,8 +271,8 @@
                 console.log(data);
 
 
-                $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/perfil_de_egreso/'+data[0]);
-                $('#modal_eliminar_competencia').modal('show');
+                $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/saber_conocer/'+data[0]);
+                $('#modal_eliminar_saber').modal('show');
 
             }  );
         });

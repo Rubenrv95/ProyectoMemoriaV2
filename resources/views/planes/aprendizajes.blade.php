@@ -11,7 +11,7 @@
         @foreach ($carrera as $c)
         @endforeach
 
-        <title>Perfil de Egreso {{$p['Nombre']}} - {{$c['nombre']}}</title>
+        <title>Aprendizajes {{$p['Nombre']}} - {{$c['nombre']}}</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
         <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
@@ -31,7 +31,7 @@
 
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saber_conocer"><button type="button" class="boton_gestionar">Saberes</button></a> 
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/malla"><button type="button" class="boton_gestionar">Malla Curricular</button></a> 
 
                 <hr class="solid">
@@ -55,7 +55,6 @@
                                 <tr style="font-weight: bold; color: white">
                                 <th style="display: none">ID <img src="/images/arrows.png" alt="" srcset=""> </th>
                                 <th>Descripción <img src="/images/arrows.png" alt="" srcset=""></th>
-                                <th>Nivel<img src="/images/arrows.png" alt="" srcset=""></th>
                                 <th>Condicion <img src="/images/arrows.png" alt="" srcset=""></th>
                                 <th>Competencia asociada <img src="/images/arrows.png" alt="" srcset=""></th>
                                 <th>Fecha_creacion <img src="/images/arrows.png" alt="" srcset=""></th>
@@ -68,7 +67,6 @@
                                 <tr>
                                 <td style="display: none">{{$a['id']}}</td>
                                 <td>{{$a['Descripcion_aprendizaje']}}</td>
-                                <td>{{$a['Nivel']}}</td>
                                 <td>{{$a['Condicion']}}</td>
                                 <td>{{$a['Nombre']}}</td>
                                 <td>{{$a['Fecha_creacion']}}</td>

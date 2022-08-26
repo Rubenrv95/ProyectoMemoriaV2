@@ -58,6 +58,7 @@
                         @else
                         <a href="/carreras/{{$id}}/{{ $item['id'] }}/malla"><button type="button" id="info" > </button></a>
                         @endif
+                        <a href="/carreras/{{$id}}/{{ $item['id'] }}/descargar_reporte"><button type="button" id="download"  style="margin-left: 2%" > </button></a>
                     </td>
                 </tr>    
             @endforeach
