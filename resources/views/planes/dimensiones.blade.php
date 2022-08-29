@@ -11,7 +11,7 @@
         @foreach ($carrera as $c)
         @endforeach
 
-        <title>Competencias {{$p['Nombre']}} - {{$c['nombre']}}</title>
+        <title>Dimensiones {{$p['Nombre']}} - {{$c['nombre']}}</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
         <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
@@ -24,7 +24,7 @@
                 
                 <a href="/carreras/{{$c['id']}}"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="mb-0 text-gray-800">Competencias {{$p['Nombre']}} - {{$c['nombre']}} </h1>
+                        <h1 class="mb-0 text-gray-800">Dimensiones {{$p['Nombre']}} - {{$c['nombre']}} </h1>
                 </div>
 
                 <hr class="solid">
@@ -43,35 +43,58 @@
 
         </div>
         <div class="container-fluid">   
-            <h3 class="mb-0 text-gray-800">Gestión de Competencias</h3>
+            <h3 class="mb-0 text-gray-800">Gestión de Dimensiones</h3>
             @if (Auth::user()->rol != 'Dirección de docencia')
                 <button class="agregar" data-bs-toggle="modal" data-bs-target="#modal_crear_competencia" style="margin-bottom: 1%; margin-top: 1%">
-                        Agregar competencia                   
+                        Agregar dimensión                 
                 </button>
             @endif
 
                 <table id="lista" class="table table-striped table-bordered" width="100%">
                         <thead>
                                 <tr style="font-weight: bold; color: white">
-                                    <th style="display: none">ID <img src="/images/arrows.png" alt="" srcset=""> </th>
-                                    <th>Número<img src="/images/arrows.png" alt="" srcset=""></th>
-                                    <th>Descripción<img src="/images/arrows.png" alt="" srcset=""></th>
-                                    <th >Fecha de creación <img src="/images/arrows.png" alt="" srcset=""></th>
-                                    <th>Fecha de actualización <img src="/images/arrows.png" alt="" srcset=""></th>
-                                    <th></th>
+                                    <th rowspan="2">Competencia<img src="/images/arrows.png" alt="" srcset=""></th>
+                                    <th rowspan="2">Dimensión<img src="/images/arrows.png" alt="" srcset=""></th>
+                                    <th colspan="4">Niveles</th>
+                                    <th rowspan="2">Fecha de creación <img src="/images/arrows.png" alt="" srcset=""></th>
+                                    <th rowspan="2">Fecha de actualización <img src="/images/arrows.png" alt="" srcset=""></th>
+                                    <th rowspan="2"></th>
+                                </tr>
+                                <tr style="font-weight: bold; color: white">
+                                    <th>Básico <img src="/images/arrows.png" alt="" srcset=""></th>
+                                    <th>En desarrollo <img src="/images/arrows.png" alt="" srcset=""></th>
+                                    <th>Logrado <img src="/images/arrows.png" alt="" srcset=""></th>
+                                    <th>Especialización <img src="/images/arrows.png" alt="" srcset=""></th>
                                 </tr>
                         </thead>
                         
-                        <tbody>
-                        
-                            @foreach ($competencia as $comp)   
+                        <tbody> 
                                 <tr>
-                                    <td style="display: none">{{$comp['id']}}</td>
-                                    <td rowspan="1">{{$comp['Orden']}}</td>
-                                    <td rowspan="1">{{$comp['Descripcion']}}</td>
-                                    <td rowspan="1">{{$comp['Fecha_creacion']}}</td>
-                                    <td>{{$comp['updated_at']}}</td>
-                                    <td rowspan="1">
+                                    <td>Competencia 1</td>
+                                    <td>Dimension 1</td>
+                                    <td>Nivel basico 1</td>
+                                    <td>Nivel en desarrollo 1</td>
+                                    <td>Nivel logrado 1</td>
+                                    <td>Nivel especialización 1</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        @if (Auth::user()->rol != 'Dirección de docencia')
+                                            <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_competencia" class="edit"> </button>
+                                            <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_competencia" class="delete"> </button>
+                                        @endif
+                                    </td>                  
+                                </tr>
+                                <tr>
+                                    <td>Competencia 2</td>
+                                    <td>Dimension 2</td>
+                                    <td>Nivel basico 2</td>
+                                    <td>Nivel en desarrollo 2</td>
+                                    <td>Nivel logrado 2</td>
+                                    <td>Nivel especialización 2</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
                                         @if (Auth::user()->rol != 'Dirección de docencia')
                                             <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_competencia" class="edit"> </button>
                                             <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_competencia" class="delete"> </button>
@@ -92,7 +115,7 @@
                                     <td></td>
                                     <td></td>    
                                 </tr> -->
-                            @endforeach   
+                              
 
 
                             <!--
@@ -114,9 +137,7 @@
                                     </td>
                                 </tr>
                             </table>
-                            <button id="b1">click here</button> -->
-
-                        
+                            <button id="b1">click here</button> -->                       
                         </tbody>
                 </table> 
 
@@ -155,6 +176,11 @@
                                                 <span style="color: red">@error('orden_competencia')  Debe ingresar un número de orden para la competencia  @enderror</span>
                                             </div>
 
+                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
+                                                <label style="font-size: 20">Dimensiones</label>
+                                                <input class="form-control form-control-lg" name="dimension_competencia" style="width:100%"  placeholder="Ingrese una dimensión de la competencia" maxlength="40000" required/>        
+                                                <span style="color: red">@error('dimension_competencia')  Debe ingresar al menos una dimensión para la competencia  @enderror</span>
+                                            </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-success" type="submit"> Guardar</button>
@@ -199,6 +225,12 @@
                                                 <label style="font-size: 20">Número/Orden</label>
                                                 <input class="form-control form-control-lg" name="orden_competencia" id="orden_competencia" style="width:20%" type="number" min="0" max="100" required/>        
                                                 <span style="color: red">@error('orden_competencia')  Debe ingresar un número de orden para la competencia  @enderror</span>
+                                            </div>
+
+                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
+                                                <label style="font-size: 20">Dimensiones</label>
+                                                <input class="form-control form-control-lg" name="dimension_competencia" id="dimension_competencia" style="width:100%"  placeholder="Ingrese una dimensión de la competencia" maxlength="40000" required/>        
+                                                <span style="color: red">@error('dimension_competencia')  Debe ingresar al menos una dimensión para la competencia  @enderror</span>
                                             </div>
 
                                     </div>
@@ -255,14 +287,6 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
-    <script>
-        $(document).ready(function(){
-            $('#b1').on('click',function(){
-                var v=$('</tr><tr id="row11" colspan=3><td>text</td>'); 
-                $('#row1').after(v);
-            });
-        });
-    </script>
     <script>    
         $(document).ready(function() {
             var table = $('#lista').DataTable({
@@ -290,6 +314,7 @@
 
                 $('#desc_competencia').val(data[2]);
                 $('#orden_competencia').val(data[1]);
+                $('#dimension_competencia').val(data[3]);
 
                 $('#editForm').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/competencias/'+data[0]);
                 $('#modal_modificar_competencia').modal('show');

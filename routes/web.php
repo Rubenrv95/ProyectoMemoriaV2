@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CompetenciaController;
+use App\Http\Controllers\DimensionController;
 use App\Http\Controllers\AprendizajeController;
 use App\Http\Controllers\Saber_conocerController;
 use App\Http\Controllers\Saber_hacerController;
@@ -54,6 +55,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/inicio', function() {
     Route::post('/carreras/{id}/{plan}/competencias', [CompetenciaController::class, 'create']);
     Route::put('/carreras/{id}/{plan}/competencias/{competencia}', [CompetenciaController::class, 'update']);
     Route::delete('/carreras/{id}/{plan}/competencias/{competencia}', [CompetenciaController::class, 'destroy']);
+
+    Route::get('/carreras/{id}/{plan}/dimensiones', [DimensionController::class, 'index']);
+    Route::post('/carreras/{id}/{plan}/dimensiones', [DimensionController::class, 'create']);
+    Route::put('/carreras/{id}/{plan}/dimensiones/{dimension}', [DimensionController::class, 'update']);
+    Route::delete('/carreras/{id}/{plan}/dimensiones/{dimension}', [DimensionController::class, 'destroy']);
 
     Route::get('/carreras/{id}/{plan}/aprendizajes', [AprendizajeController::class, 'index']);
     Route::get('/carreras/{id}/{plan}/tempo_aprendizajes', [AprendizajeController::class, 'show']);

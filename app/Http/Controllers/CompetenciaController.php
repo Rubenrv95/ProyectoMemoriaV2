@@ -29,7 +29,7 @@ class CompetenciaController extends Controller
         $plan = json_decode($plan, true);
         $carrera = json_decode($carrera, true);
         $competencia = DB::table('competencias')->where('refPlan', $id_plan)->get();
-        $aprendizaje = DB::table('aprendizajes')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $id_plan)->select('aprendizajes.*', 'competencias.Descripcion')->get();
+        $aprendizaje = DB::table('aprendizajes')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $id_plan)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden')->get();
         $saber = DB::table('saber_conocers')->leftJoin('aprendizajes', 'saber_conocers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $id_plan)->select('saber_conocers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refPlan')->get();
         $competencia = json_decode($competencia, true);
         $aprendizaje = json_decode($aprendizaje, true);
@@ -45,17 +45,14 @@ class CompetenciaController extends Controller
     public function create($id_carrera, $id_plan, Request $request)
     {
         $request->validate([
-            'nombre_competencia'=>'required',
-            'desc_competencia'=>'required'
+            'desc_competencia'=>'required',
+            'orden_competencia'=>'required',
         ]);
 
 
         $query = DB::table('competencias')->insert([
-            'Nombre'=>$request->input('nombre_competencia'),
             'Descripcion'=>$request->input('desc_competencia'),
-            'Nivel_basico'=>$request->input('basico_competencia'),
-            'Nivel_intermedio'=>$request->input('intermedio_competencia'),
-            'Nivel_avanzado'=>$request->input('avanzado_competencia'),
+            'Orden'=>$request->input('orden_competencia'),
             'refPlan'=>$id_plan,
         ]);
 
@@ -116,18 +113,18 @@ class CompetenciaController extends Controller
     public function update($id_carrera, $id_plan, Request $request, $id_comp)
     {
         $request->validate([
-            'nombre_competencia'=>'required',
-            'desc_competencia'=>'required'
+            'desc_competencia'=>'required',
+            'orden_competencia'=>'required',
         ]);
 
 
         $query = DB::table('competencias')->where('id', $id_comp)->update([
-            'Nombre'=>$request->input('nombre_competencia'),
             'Descripcion'=>$request->input('desc_competencia'),
-            'Nivel_basico'=>$request->input('basico_competencia'),
-            'Nivel_intermedio'=>$request->input('intermedio_competencia'),
-            'Nivel_avanzado'=>$request->input('avanzado_competencia'),
+            'Orden'=>$request->input('orden_competencia'),
         ]);
+
+        $competencia = Competencia::find($id_comp);
+        $competencia -> touch();
 
         return back()->withSuccess('Competencia actualizada con éxito');
     }
