@@ -33,14 +33,11 @@
 
 </head>
 <body>
-    <div id="app">
 
-
-        <section id="loading">
-            <div id="loading-content"></div>
-        </section>
-
-
+    <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+    <div id="app" style = "display:none;">
 
         <div id="wrapper">
 
@@ -175,6 +172,8 @@
             </div>
         </div>
 
+
+
         @guest
 
         @if (Route::has('login'))
@@ -298,6 +297,13 @@
     </div>
 
 
+
+    <script>
+        $(window).on("load", function() {
+
+            $(".loader-wrapper").fadeOut("slow");
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $("#show_hide_password a").on('click', function(event) {
