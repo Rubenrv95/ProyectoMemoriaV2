@@ -34,9 +34,7 @@
 </head>
 <body>
 
-    <div class="loader-wrapper">
-        <span class="loader"><span class="loader-inner"></span></span>
-    </div>
+
     <div id="app" style = "display:none;">
 
         <div id="wrapper">
@@ -119,12 +117,12 @@
             </ul>
             <!-- End of Sidebar -->
 
-
             <div id="content-wrapper" class="d-flex flex-column">
 
 
                 <!-- Contenido principal -->
                 <div id="content" style="background-color: #f6f6f6">
+
                 <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background: #333333">
                     <!-- Topbar-->
                     <ul class="navbar-nav ms-auto ml-auto ms-md-0 me-3 me-lg-4">
@@ -166,6 +164,10 @@
                     </div>
                 @endif
 
+
+                <div class="loader-wrapper">
+                    <span class="loader"><span class="loader-inner"></span></span>
+                </div>
                     @yield('content')
                 </div>
 

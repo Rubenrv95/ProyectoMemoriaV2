@@ -112,7 +112,7 @@
                                                 <label style="font-size: 20">Competencia asociada</label>
                                                 <select class="form-select form-select-lg" name="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required> 
                                                     @foreach ($competencia as $comp) 
-                                                    <option value="{{$comp['id']}}">{{$comp['Nombre']}}</option>
+                                                    <option value="{{$comp['id']}}">{{$comp['Descripcion']}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

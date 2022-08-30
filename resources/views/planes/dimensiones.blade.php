@@ -45,7 +45,7 @@
         <div class="container-fluid">   
             <h3 class="mb-0 text-gray-800">Gestión de Dimensiones</h3>
             @if (Auth::user()->rol != 'Dirección de docencia')
-                <button class="agregar" data-bs-toggle="modal" data-bs-target="#modal_crear_competencia" style="margin-bottom: 1%; margin-top: 1%">
+                <button class="agregar" data-bs-toggle="modal" data-bs-target="#modal_crear_dimension" style="margin-bottom: 1%; margin-top: 1%">
                         Agregar dimensión                 
                 </button>
             @endif
@@ -69,15 +69,17 @@
                         </thead>
                         
                         <tbody> 
+
+                                @foreach ($dimension as $dim)
                                 <tr>
-                                    <td>Competencia 1</td>
-                                    <td>Dimension 1</td>
-                                    <td>Nivel basico 1</td>
-                                    <td>Nivel en desarrollo 1</td>
-                                    <td>Nivel logrado 1</td>
-                                    <td>Nivel especialización 1</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{$dim['Orden']}}. {{$dim['Descripcion']}}</td>
+                                    <td>{{$dim['Descripcion_dimension']}}</td>
+                                    <td>{{$dim['Basico']}}</td>
+                                    <td>{{$dim['En_desarrollo']}}</td>
+                                    <td>{{$dim['Logrado']}}</td>
+                                    <td>{{$dim['Especializacion']}}</td>
+                                    <td>{{$dim['created_at']}}</td>
+                                    <td>{{$dim['updated_at']}}</td>
                                     <td>
                                         @if (Auth::user()->rol != 'Dirección de docencia')
                                             <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_competencia" class="edit"> </button>
@@ -85,59 +87,8 @@
                                         @endif
                                     </td>                  
                                 </tr>
-                                <tr>
-                                    <td>Competencia 2</td>
-                                    <td>Dimension 2</td>
-                                    <td>Nivel basico 2</td>
-                                    <td>Nivel en desarrollo 2</td>
-                                    <td>Nivel logrado 2</td>
-                                    <td>Nivel especialización 2</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                        @if (Auth::user()->rol != 'Dirección de docencia')
-                                            <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_competencia" class="edit"> </button>
-                                            <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_competencia" class="delete"> </button>
-                                        @endif
-                                    </td>                  
-                                </tr>
-                                
-                                <!--
-                                <tr>
-                                    <td rowspan="1">Otra dimension</td>     
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="1">Dimension tercera</td>    
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>    
-                                </tr> -->
-                              
-
-
-                            <!--
-                            <table>
-                                <tr id="row1">
-                                    <td>a
-                                    </td>
-                                    <td>b
-                                    </td>
-                                    <td>c
-                                    </td>
-                                </tr>
-                                <tr id="row2">
-                                    <td>a2
-                                    </td>
-                                    <td>b2
-                                    </td>
-                                    <td>c2
-                                    </td>
-                                </tr>
-                            </table>
-                            <button id="b1">click here</button> -->                       
+                                @endforeach
+                                                      
                         </tbody>
                 </table> 
 
@@ -147,39 +98,59 @@
         </div>
 
 
-        <!-- MODALS COMPETENCIA -->
+        <!-- MODALS DIMENSION -->
 
-        <!-- Modal crear competencia   -->
+        <!-- Modal crear dimension   -->
         <div class="container">
             <div class="row">
                 <div class ="col-md-12">
-                    <div tabIndex="-1"  class="modal fade" id="modal_crear_competencia" aria-hidden="true">
+                    <div tabIndex="-1"  class="modal fade" id="modal_crear_dimension" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form action="/carreras/{{$c['id']}}/{{$p['id']}}/competencias" method="POST" class="form-group">
+                            <form action="/carreras/{{$c['id']}}/{{$p['id']}}/dimensiones" method="POST" class="form-group">
                             @csrf
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Agregar competencia</h1>
+                                        <h1 class="justify-content-center" style="margin: auto"> Agregar dimensión</h1>
                                     </div>
                                     <div class="modal-body">
 
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Descripción de la competencia</label>
-                                                <textarea class="form-control" name="desc_competencia" type="text"  placeholder="Ingrese la descripción de la competencia" rows="3" cols="50"  required></textarea>
-                                                <span style="color: red">@error('desc_competencia')  Debe ingresar una descripción para la competencia  @enderror</span>
+                                            <div class="form-group" style="margin: auto; margin-bottom: 1%">
+                                                <label style="font-size: 20">Descripción de la dimension</label>
+                                                <textarea class="form-control" name="desc_dimension" type="text"  placeholder="Ingrese la descripción de la dimension" rows="3" cols="50"  required></textarea>
+                                                <span style="color: red">@error('desc_dimension')  Debe ingresar una descripción para la dimensión @enderror</span>
                                             </div>
 
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Número/Orden</label>
-                                                <input class="form-control form-control-lg" name="orden_competencia" style="width:20%" type="number"  min="0" max="100" required/>        
-                                                <span style="color: red">@error('orden_competencia')  Debe ingresar un número de orden para la competencia  @enderror</span>
+                                            <div class="form-group" style="margin: auto; margin-bottom: 1%">
+                                                <label style="font-size: 20">Competencia asociada</label>
+                                                <select class="form-select form-select-lg" name="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required> 
+                                                    @foreach ($competencia as $comp) 
+                                                    <option value="{{$comp['id']}}">{{$comp['Descripcion']}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Dimensiones</label>
-                                                <input class="form-control form-control-lg" name="dimension_competencia" style="width:100%"  placeholder="Ingrese una dimensión de la competencia" maxlength="40000" required/>        
-                                                <span style="color: red">@error('dimension_competencia')  Debe ingresar al menos una dimensión para la competencia  @enderror</span>
+                                            <div class="form-group" style="margin: auto; margin-bottom: 1%">
+                                                <label style="font-size: 20">Nivel básico</label>
+                                                <input class="form-control form-control-lg" name="basico_dimension" style="width:100%"  placeholder="Ingrese el nivel básico de la dimensión" maxlength="2000" required/>        
+                                                <span style="color: red">@error('dimension_competencia')  Debe ingresar una descripción para el nivel básico  @enderror</span>
+                                            </div>
+
+                                            <div class="form-group" style="margin: auto; margin-bottom: 1%">
+                                                <label style="font-size: 20">Nivel en desarrollo</label>
+                                                <input class="form-control form-control-lg" name="desarrollo_dimension" style="width:100%"  placeholder="Ingrese el nivel en desarrollo de la dimensión" maxlength="2000" required/>        
+                                                <span style="color: red">@error('dimension_competencia')  Debe ingresar una descripción para el nivel en desarrollo   @enderror</span>
+                                            </div>
+
+                                            <div class="form-group" style="margin: auto; margin-bottom: 1%">
+                                                <label style="font-size: 20">Nivel logrado</label>
+                                                <input class="form-control form-control-lg" name="logrado_dimension" style="width:100%"  placeholder="Ingrese el nivel logrado de la dimensión" maxlength="2000" required/>        
+                                                <span style="color: red">@error('dimension_competencia')  Debe ingresar una descripción para el nivel logrado  @enderror</span>
+                                            </div>
+
+                                            <div class="form-group" style="margin: auto; margin-bottom: 1%">
+                                                <label style="font-size: 20">Nivel especializado (opcional)</label>
+                                                <input class="form-control form-control-lg" name="especializado_dimension" style="width:100%"  placeholder="Ingrese el nivel de especialización de la dimensión" maxlength="2000"/>        
                                             </div>
                                     </div>
                                     <div class="modal-footer">
@@ -196,14 +167,14 @@
         </div>
 
 
-        <!-- Modal modificar competencia   -->
+        <!-- Modal modificar dimension   -->
         <div class="container">
             <div class="row">
                 <div class ="col-md-12">
-                    <div class="modal fade" id="modal_modificar_competencia" aria-hidden="true">
+                    <div class="modal fade" id="modal_modificar_dimension" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
 
-                            <form method = "POST" action = "/carreras/{{$c['id']}}/{{$p['id']}}/competencias" class="form-group" id = "editForm">
+                            <form method = "POST" action = "/carreras/{{$c['id']}}/{{$p['id']}}/dimensiones" class="form-group" id = "editForm">
 
                             @csrf
                             @method('PUT')
@@ -211,7 +182,7 @@
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Modificar competencia</h1>
+                                        <h1 class="justify-content-center" style="margin: auto"> Modificar dimensión</h1>
                                     </div>
                                     <div class="modal-body">
 
@@ -249,13 +220,13 @@
 
 
 
-        <!-- Modal eliminar competencia   -->
+        <!-- Modal eliminar dimension  -->
         <div class="container">
             <div class="row">
                 <div class ="col-md-12">
-                    <div class="modal fade" id="modal_eliminar_competencia" aria-hidden="true">
+                    <div class="modal fade" id="modal_eliminar_dimension" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form method = "POST" action = "/carreras/{{$c['id']}}/{{$p['id']}}/competencias" class="form-group" id = "deleteForm">
+                            <form method = "POST" action = "/carreras/{{$c['id']}}/{{$p['id']}}/dimensiones" class="form-group" id = "deleteForm">
 
                                 @csrf
                                 @method('DELETE')
@@ -267,7 +238,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <input type="hidden" name="method" value="DELETE"> 
-                                        <p style="font-size: 18">¿Está seguro de que desea eliminar ésta competencia? Se eliminarán todos los aprendizajes y saberes vinculados.</p>
+                                        <p style="font-size: 18">¿Está seguro de que desea eliminar ésta dimensión?</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -292,7 +263,7 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]]
+                "order": [[ 0, "asc" ]]
             });
 
 
@@ -317,7 +288,7 @@
                 $('#dimension_competencia').val(data[3]);
 
                 $('#editForm').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/competencias/'+data[0]);
-                $('#modal_modificar_competencia').modal('show');
+                $('#modal_modificar_dimension').modal('show');
 
             });
 
@@ -335,7 +306,7 @@
 
 
                 $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/competencias/'+data[0]);
-                $('#modal_eliminar_competencia').modal('show');
+                $('#modal_eliminar_dimension').modal('show');
 
             }  );
 
