@@ -25,6 +25,10 @@ use App\Http\Controllers\Saber_serController;
 */
 
 Route::get('/', function () {
+
+    if(Auth::check()) {
+        return redirect('/home');
+    }
     return view('auth.login');
 });
 

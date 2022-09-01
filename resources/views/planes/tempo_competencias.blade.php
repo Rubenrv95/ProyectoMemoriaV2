@@ -36,6 +36,7 @@
                 <hr class="solid">
 
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/competencias"><button type="button" class="btn btn-secondary">Gestión de Competencias</button></a> 
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/dimensiones"><button type="button" class="btn btn-secondary">Gestión de Dimensiones</button></a> 
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/competencias"><button type="button" class="btn btn-secondary">Temporalización de Competencias</button></a> 
 
                 <hr class="solid">
@@ -48,7 +49,7 @@
             <form action="" method="post">
                 <table id="lista" class="table table-striped table-bordered" width="100%">
                     <thead>
-                        <th>Competencia</th>
+                        <th>Competencia <img src="/images/arrows.png" alt="" srcset=""></th>
                         <th>Nivel 1</th>
                         <th>Nivel 2</th>
                         <th>Nivel 3</th>
@@ -61,11 +62,19 @@
                         <th>Nivel 10</th>
                         <th>Nivel 11</th>
                         <th>Nivel 12</th>
+                        <th>Nivel 13</th>
+                        <th>Nivel 14</th>
+                        <th>Nivel 15</th>
+                        <th>Nivel 16</th>
                     </thead>
                     <tbody>
                         @foreach ($competencia as $c)
                         <tr>
-                            <td>{{$c['Nombre']}}</td>
+                            <td>{{$c['Orden']}}. {{$c['Descripcion']}}</td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
                             <td> <input type="checkbox"></td>
                             <td> <input type="checkbox"></td>
                             <td> <input type="checkbox"></td>

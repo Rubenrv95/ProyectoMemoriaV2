@@ -139,7 +139,6 @@ class CompetenciaController extends Controller
     {
         $query = DB::table('competencias')->where('id', $id_comp)->delete();
         
-        echo $id_comp;
         return back()->withSuccess('Competencia eliminada con éxito');
     }
 }

@@ -42,7 +42,7 @@ class CarreraController extends Controller
 
         $query = DB::table('carreras')->insert([
             'nombre'=>$request->input('nombre_carrera'),
-            'area'=>$request->input('area'),
+            'facultad'=>$request->input('facultad'),
         ]);
 
 
@@ -108,7 +108,7 @@ class CarreraController extends Controller
 
         $query = DB::table('carreras')->where('id', $id)->update([
             'nombre'=>$request->input('nombre_carrera'),
-            'area'=>$request->input('area'),
+            'facultad'=>$request->input('facultad'),
         ]);
         
 

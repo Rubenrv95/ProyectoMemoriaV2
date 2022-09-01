@@ -62,12 +62,20 @@
                         <th>Nivel 10</th>
                         <th>Nivel 11</th>
                         <th>Nivel 12</th>
+                        <th>Nivel 13</th>
+                        <th>Nivel 14</th>
+                        <th>Nivel 15</th>
+                        <th>Nivel 16</th>
                     </thead>
                     <tbody>
                         @foreach ($aprendizaje as $a)
                         <tr>
-                            <td>{{$a['Nombre']}}</td>
+                            <td>{{$a['Orden']}}. {{$a['Descripcion']}}</td>
                             <td>{{$a['Descripcion_aprendizaje']}}</td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
                             <td> <input type="checkbox"></td>
                             <td> <input type="checkbox"></td>
                             <td> <input type="checkbox"></td>

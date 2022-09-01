@@ -11,7 +11,7 @@
 
     <h1>Competencias</h1>
     @foreach ($competencia as $c)
-    <h3>{{$c['Nombre']}}</h3>
+    <h3>{{$c['Descripcion']}}</h3>
     @endforeach
 
     <h1>Aprendizajes</h1>

@@ -34,7 +34,6 @@
                     @foreach ($carrera as $c)
                     {{$c['nombre']}} 
                     @endforeach
-                    <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_editar_plan" class="edit" style="padding-top: 2%"> </button>
                 
                 </h1> 
         </div>
@@ -104,42 +103,6 @@
 
                 </table>
 
-    </div>
-
-
-    <!--Modal modificar nombre plan de estudio -->
-    <div class="container">
-            <div class="row">
-                <div class ="col-md-12">
-                    <div tabIndex="-1" class="modal fade" id="modal_editar_plan" aria-hidden="true"> 
-                        <div class="modal-dialog modal-md">
-                            <form action="/carreras/{{$c['id']}}/{{$p['id']}}" method="POST" class="form-group">
-                            @csrf
-                            @method('PUT')
-                                <div class="modal-content" style="width: 600px">
-
-                                    <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Modificar Plan de Estudio</h1>
-                                    </div>
-                                    <div class="modal-body">
-
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Nombre del plan</label>
-                                                <input class="form-control form-control-lg" name="nombre_plan" style="width:100%"  placeholder="Ingrese el nombre del plan" value="{{$p['Nombre']}}" required/>  
-                                            </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                                <button class="btn btn-success" type="submit">Guardar</button>
-                                                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancelar</button>
-                                    </div> 
-                                
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
     </div>
 
     <!--Modal añadir modulo -->

@@ -27,9 +27,10 @@
                 <table id="lista" class="table table-striped table-bordered" width="100%">
                         <thead>
                                 <tr style="font-weight: bold; color: white">
-                                <th style="display: none">ID <img src="/images/arrows.png" alt="" srcset=""> </th>
-                                <th>Carrera <img src="/images/arrows.png" alt="" srcset=""></th>
-                                <th>Área profesional <img src="/images/arrows.png" alt="" srcset=""></th>
+                                <th style="display: none">ID </th>
+                                <th style="display: none">Nombre</th>
+                                <th>Facultad⇵</th>
+                                <th>Carrera⇵</th>
                                 <th style="width: 150px"></th>
                                 </tr>
                         </thead>
@@ -39,10 +40,10 @@
                                 @foreach($carrera as $item)
                                 <tr>
                                 <td style="display: none">{{$item['id']}}</td>
-                                <td> {{$item['nombre']}}</td>
-                                <td>{{$item['area']}}</td>
+                                <td style="display: none">{{$item['nombre']}}</td>
+                                <td>{{$item['facultad']}}</td>
+                                <td><a href="/carreras/{{$item['id']}}">{{$item['nombre']}} </a> </td>
                                 <td>
-                                        <a href="/carreras/{{$item['id']}}"><button type="button" id="info" > </button></a>
                                         @if (Auth::user()->rol != 'Dirección de docencia')
                                         <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_carrera" class="edit"> </button>
                                         <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_carrera" class="delete"> </button>
@@ -72,23 +73,19 @@
                                     </div>
                                     <div class="modal-body">
 
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
+                                            <div class="form-group" style="margin: auto; margin-bottom: 2%">
                                                 <label style="font-size: 20">Nombre de la carrera</label>
-                                                <input class="form-control form-control-lg" name="nombre_carrera" style="width:100%"  placeholder="Ingrese el nombre de la carrera" maxlength="191" required/>
+                                                <input class="form-control form-control-lg" name="nombre_carrera" style="width:100%; color: black"  placeholder="Ingrese el nombre de la carrera" maxlength="191" required/>
                                             </div>
 
                                             <div class="form-group" style="margin: auto">
-                                                <label style="font-size: 20">Área profesional</label>
-                                                <select class="form-select form-select-lg" name="area" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18">
-                                                    <option selected value="Administración y Comercio">Administración y Comercio</option>
-                                                    <option value="Arte y Arquitectura">Arte y Arquitectura</option>
-                                                    <option value="Carreras Técnicas">Carreras Técnicas</option>
-                                                    <option value="Ciencias">Ciencias</option>
-                                                    <option value="Ciencias Sociales">Ciencias Sociales</option>
-                                                    <option value="Educación">Educación</option>
-                                                    <option value="Recursos Naturales">Recursos Naturales</option>
-                                                    <option value="Salud">Salud</option>
-                                                    <option value="Tecnología">Tecnología</option>
+                                                <label style="font-size: 20">Facultad</label>
+                                                <select class="form-select form-select-lg" name="facultad" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
+                                                    <option selected disabled="true" value="">Seleccione una facultad</option>
+                                                    <option value="Linares">Linares</option>
+                                                    <option value="Los Niches">Los Niches</option>       
+                                                    <option value="Santiago">Santiago</option>      
+                                                    <option value="Talca">Talca</option>                                                 
                                                 </select>
                                             </div>
                                     </div>
@@ -124,23 +121,19 @@
                                         <h1 class="justify-content-center" style="margin: auto"> Modificar carrera</h1>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="form-group" style="margin: auto;">
+                                        <div class="form-group" style="margin: auto; margin-bottom: 2%">
                                             <label style="font-size: 20">Nombre de la carrera</label>
-                                            <input class="form-control form-control-lg" name="nombre_carrera" id ="nombre_carrera" style="width:100%; margin-bottom: 20px" value="" placeholder="Ingrese el nombre de la carrera" maxlength="191" required/>
+                                            <input class="form-control form-control-lg" name="nombre_carrera" id ="nombre_carrera" style="width:100%; color: black" value="" placeholder="Ingrese el nombre de la carrera" maxlength="191" required/>
                                         </div>
 
                                         <div class="form-group" style="margin: auto">
-                                            <label style="font-size: 20">Área profesional</label>
-                                            <select class="form-select form-select-lg" name="area" id = "area" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18">
-                                                    <option selected value="Administración y Comercio">Administración y Comercio</option>
-                                                    <option value="Arte y Arquitectura">Arte y Arquitectura</option>
-                                                    <option value="Carreras Técnicas">Carreras Técnicas</option>
-                                                    <option value="Ciencias">Ciencias</option>
-                                                    <option value="Ciencias Sociales">Ciencias Sociales</option>
-                                                    <option value="Educación">Educación</option>
-                                                    <option value="Recursos Naturales">Recursos Naturales</option>
-                                                    <option value="Salud">Salud</option>
-                                                    <option value="Tecnología">Tecnología</option>
+                                            <label style="font-size: 20">Facultad</label>
+                                            <select class="form-select form-select-lg" name="facultad" id = "facultad" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
+                                                    <option selected disabled="true" value="">Seleccione una facultad</option>
+                                                    <option value="Linares">Linares</option>
+                                                    <option value="Los Niches">Los Niches</option>       
+                                                    <option value="Santiago">Santiago</option>      
+                                                    <option value="Talca">Talca</option>      
                                             </select>
                                         </div>
                                     </div>
@@ -197,10 +190,32 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     <script>    
         $(document).ready(function() {
+
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]]
+                "order": [[ 1, "asc" ]],
+
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
             });
 
             
@@ -218,7 +233,7 @@
                 console.log(data);
 
                 $('#nombre_carrera').val(data[1]);
-                $('#area').val(data[2]);
+                $('#facultad').val(data[2]);
 
                 $('#editForm').attr('action', '/carreras/'+data[0]);
                 $('#modal_modificar_carrera').modal('show');

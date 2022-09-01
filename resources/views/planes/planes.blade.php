@@ -35,10 +35,12 @@
         <table id="lista" class="table table-striped table-bordered" width="100%">
             <thead>
                 <tr style="font-weight: bold; color: white">
-                    <th style="width: 50px; display: none">ID <img src="/images/arrows.png" alt="" srcset=""></th>
-                    <th style="width: 250px">Plan <img src="/images/arrows.png" alt="" srcset=""> </th>
-                    <th style="width: 250px">Fecha de actualización <img src="/images/arrows.png" alt="" srcset=""> </th>
-                    <th style="width: 150px"></th>
+                    <th style="display: none">ID </th>
+                    <th style="display: none">Nombre</th>
+                    <th>Plan⇵</th>
+                    <th>Fecha de creación⇵</th>
+                    <th>Fecha de actualización⇵</th>
+                    <th></th>
                 </tr>
             </thead>
             
@@ -48,15 +50,15 @@
             @foreach($data as $item)
                 <tr>
                     <td style="display: none"> {{ $item['id'] }}</td>
-                    <td > {{ $item['Nombre'] }}</td>
+                    <td style="display: none">{{ $item['Nombre'] }}</td>
+                    <td > <a href="/carreras/{{$id}}/{{ $item['id'] }}/competencias">{{ $item['Nombre'] }} </a></td>
+                    <td > {{ $item['created_at'] }}</td>
                     <td >{{ $item['updated_at'] }}</td>
                     <td>
                         @if (Auth::user()->rol != 'Dirección de docencia')
-                        <a href="/carreras/{{$id}}/{{ $item['id'] }}/malla"><button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_carrera" class="edit"></button></a>
+                        <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_editar_plan" class="edit" style="padding-top: 2%"> </button>
                         <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_plan" class="delete">
                         <button type="button" id="copy" data-bs-toggle="modal" data-bs-target="#modal_copiar_plan" class="copy" style="margin-left: 2%">
-                        @else
-                        <a href="/carreras/{{$id}}/{{ $item['id'] }}/malla"><button type="button" id="info" > </button></a>
                         @endif
                         <a href="/carreras/{{$id}}/{{ $item['id'] }}/descargar_reporte"><button type="button" id="download"  style="margin-left: 2%" > </button></a>
                     </td>
@@ -83,9 +85,9 @@
                                     </div>
                                     <div class="modal-body">
 
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
+                                            <div class="form-group" style="margin: auto; margin-bottom: 2%">
                                                 <label style="font-size: 20">Nombre del plan</label>
-                                                <input class="form-control form-control-lg" name="nombre_plan" style="width:100%"  placeholder="Ingrese el nombre del plan" required/>        
+                                                <input class="form-control form-control-lg" name="nombre_plan" style="width:100%; color: black"  placeholder="Ingrese el nombre del plan" required/>        
                                             </div>
 
                                             <div class="form-group">
@@ -104,6 +106,41 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!--Modal modificar nombre plan de estudio -->
+        <div class="container">
+                <div class="row">
+                    <div class ="col-md-12">
+                        <div tabIndex="-1" class="modal fade" id="modal_editar_plan" aria-hidden="true"> 
+                            <div class="modal-dialog modal-md">
+                                <form action="/carreras/{{$id}}" method="POST" class="form-group" id = "editForm">
+                                @csrf
+                                @method('PUT')
+                                    <div class="modal-content" style="width: 600px">
+
+                                        <div class="modal-header">
+                                            <h1 class="justify-content-center" style="margin: auto"> Modificar Plan de Estudio</h1>
+                                        </div>
+                                        <div class="modal-body">
+
+                                                <div class="form-group" style="margin: auto; margin-bottom: 2%">
+                                                    <label style="font-size: 20">Nombre del plan</label>
+                                                    <input class="form-control form-control-lg" name="nombre_plan" id="nombre_plan" style="width:100%; color: black"  placeholder="Ingrese el nombre del plan" required/>  
+                                                </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                                    <button class="btn btn-success" type="submit">Guardar</button>
+                                                    <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancelar</button>
+                                        </div> 
+                                    
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
 
         <!-- Modal eliminar plan   -->
@@ -154,9 +191,9 @@
                                         </div>
                                         <div class="modal-body">
 
-                                                <div class="form-group" style="margin: auto; margin-bottom: 20px">
+                                                <div class="form-group" style="margin: auto; margin-bottom: 2%">
                                                     <label style="font-size: 20">Nombre del nuevo plan</label>
-                                                    <input class="form-control form-control-lg" name="nombre_plan_nuevo" style="width:100%"  placeholder="Ingrese el nombre del nuevo plan" value="" required/>  
+                                                    <input class="form-control form-control-lg" name="nombre_plan_nuevo" style="width:100%; color: black"  placeholder="Ingrese el nombre del nuevo plan" value="" required/>  
                                                 </div>
 
                                         </div>
@@ -183,8 +220,48 @@
         $(document).ready(function() {
             var table = $('#lista').DataTable( {
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]]
+                "order": [[ 1, "asc" ]],
+
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
                 
+            });
+
+            //modificar
+            table.on('click', '.edit', function() {
+
+                $tr = $(this).closest('tr');
+                if ($($tr).hasClass('child')) {
+                    $tr = $tr.prev('.parent');
+                }
+
+
+                var data = table.row($tr).data();
+                console.log(data);
+
+                $('#nombre_plan').val(data[1]);
+
+                $('#editForm').attr('action', '/carreras/{{$id}}/'+data[0]);
+                $('#modal_modificar_dimension').modal('show');
+
             });
 
             //eliminar

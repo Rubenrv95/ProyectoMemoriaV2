@@ -131,7 +131,7 @@ class PlanController extends Controller
         $saber_conocer = json_decode($saber_conocer, true);
         $saber_hacer = json_decode($saber_hacer, true);
 
-        return view('planes.editar')->with('plan', $query)->with('carrera', $carrera)->with('saber_conocer', $saber_conocer)->with('saber_hacer', $saber_hacer);
+        return view('planes.modulos')->with('plan', $query)->with('carrera', $carrera)->with('saber_conocer', $saber_conocer)->with('saber_hacer', $saber_hacer);
     }
 
     /**
@@ -182,6 +182,7 @@ class PlanController extends Controller
         $competencias = DB::table('competencias')->where('refPlan', $plan)->delete();
         $aprendizajes = DB::table('aprendizajes')->where('refPlan', $plan)->delete();
         $saberes = DB::table('saber_conocers')->where('refPlan', $plan)->delete();
+        $dimensiones = DB::table('dimensions')->where('refPlan', $plan)->delete();
 
         $query = DB::table('plans')->where('id', $plan)->delete();
 

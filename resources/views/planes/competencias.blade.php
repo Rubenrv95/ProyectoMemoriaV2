@@ -53,11 +53,11 @@
                 <table id="lista" class="table table-striped table-bordered" width="100%">
                         <thead>
                                 <tr style="font-weight: bold; color: white">
-                                    <th style="display: none">ID <img src="/images/arrows.png" alt="" srcset=""> </th>
-                                    <th>Número<img src="/images/arrows.png" alt="" srcset=""></th>
-                                    <th>Descripción<img src="/images/arrows.png" alt="" srcset=""></th>
-                                    <th >Fecha de creación <img src="/images/arrows.png" alt="" srcset=""></th>
-                                    <th>Fecha de actualización <img src="/images/arrows.png" alt="" srcset=""></th>
+                                    <th style="display: none">ID⇵</th>
+                                    <th>Número⇵</th>
+                                    <th>Competencia⇵</th>
+                                    <th>Fecha de creación⇵</th>
+                                    <th>Fecha de actualización⇵</th>
                                     <th></th>
                                 </tr>
                         </thead>
@@ -78,44 +78,8 @@
                                         @endif
                                     </td>                  
                                 </tr>
-                                
-                                <!--
-                                <tr>
-                                    <td rowspan="1">Otra dimension</td>     
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="1">Dimension tercera</td>    
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>    
-                                </tr> -->
+                            
                             @endforeach   
-
-
-                            <!--
-                            <table>
-                                <tr id="row1">
-                                    <td>a
-                                    </td>
-                                    <td>b
-                                    </td>
-                                    <td>c
-                                    </td>
-                                </tr>
-                                <tr id="row2">
-                                    <td>a2
-                                    </td>
-                                    <td>b2
-                                    </td>
-                                    <td>c2
-                                    </td>
-                                </tr>
-                            </table>
-                            <button id="b1">click here</button> -->
-
                         
                         </tbody>
                 </table> 
@@ -145,13 +109,13 @@
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
                                                 <label style="font-size: 20">Descripción de la competencia</label>
-                                                <textarea class="form-control" name="desc_competencia" type="text"  placeholder="Ingrese la descripción de la competencia" rows="3" cols="50"  required></textarea>
+                                                <textarea class="form-control" style="color: black" name="desc_competencia" type="text"  placeholder="Ingrese la descripción de la competencia" rows="3" cols="50"  required></textarea>
                                                 <span style="color: red">@error('desc_competencia')  Debe ingresar una descripción para la competencia  @enderror</span>
                                             </div>
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
                                                 <label style="font-size: 20">Número/Orden</label>
-                                                <input class="form-control form-control-lg" name="orden_competencia" style="width:20%" type="number"  min="0" max="100" required/>        
+                                                <input class="form-control form-control-lg" name="orden_competencia" style="width:20%; color: black" type="number"  min="0" max="100" required/>        
                                                 <span style="color: red">@error('orden_competencia')  Debe ingresar un número de orden para la competencia  @enderror</span>
                                             </div>
 
@@ -191,13 +155,13 @@
 
                                     <div class="form-group" style="margin: auto; margin-bottom: 20px">
                                                 <label style="font-size: 20">Descripción de la competencia</label>
-                                                <textarea class="form-control" name="desc_competencia" id="desc_competencia" type="text"  placeholder="Ingrese la descripción de la competencia" rows="3" cols="50"  required></textarea>
+                                                <textarea class="form-control" style="color: black" name="desc_competencia" id="desc_competencia" type="text"  placeholder="Ingrese la descripción de la competencia" rows="3" cols="50"  required></textarea>
                                                 <span style="color: red">@error('desc_competencia')  Debe ingresar una descripción para la competencia  @enderror</span>
                                             </div>
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
                                                 <label style="font-size: 20">Número/Orden</label>
-                                                <input class="form-control form-control-lg" name="orden_competencia" id="orden_competencia" style="width:20%" type="number" min="0" max="100" required/>        
+                                                <input class="form-control form-control-lg" name="orden_competencia" id="orden_competencia" style="width:20%; color: black" type="number" min="0" max="100" required/>        
                                                 <span style="color: red">@error('orden_competencia')  Debe ingresar un número de orden para la competencia  @enderror</span>
                                             </div>
 
@@ -268,7 +232,28 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]]
+                "order": [[ 1, "asc" ]],
+
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
             });
 
 

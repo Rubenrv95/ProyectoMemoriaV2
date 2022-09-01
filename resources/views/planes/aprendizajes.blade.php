@@ -53,11 +53,13 @@
                 <table id="lista" class="table table-striped table-bordered" width="100%">
                         <thead>
                                 <tr style="font-weight: bold; color: white">
-                                <th style="display: none">ID <img src="/images/arrows.png" alt="" srcset=""> </th>
-                                <th>Descripción <img src="/images/arrows.png" alt="" srcset=""></th>
-                                <th>Condicion <img src="/images/arrows.png" alt="" srcset=""></th>
-                                <th>Competencia asociada <img src="/images/arrows.png" alt="" srcset=""></th>
-                                <th>Fecha_creacion <img src="/images/arrows.png" alt="" srcset=""></th>
+                                <th style="display: none">ID⇵ </th>
+                                <th>Competencia⇵</th>
+                                <th>Nivel⇵</th>
+                                <th>Aprendizaje⇵</th>
+                                <th>Dimension⇵</th>
+                                <th>Fecha de creacion⇵</th>
+                                <th>Fecha de actualización⇵</th>
                                 <th style="width: 7%"></th>
                                 </tr>
                         </thead>
@@ -66,10 +68,12 @@
                             @foreach ($aprendizaje as $a)   
                                 <tr>
                                 <td style="display: none">{{$a['id']}}</td>
+                                <td>{{$a['Orden']}}. {{$a['Descripcion']}}</td>
+                                <td>{{$a['Nivel_aprend']}}</td>
                                 <td>{{$a['Descripcion_aprendizaje']}}</td>
-                                <td>{{$a['Condicion']}}</td>
-                                <td>{{$a['Nombre']}}</td>
+                                <td></td>
                                 <td>{{$a['Fecha_creacion']}}</td>
+                                <td>{{$a['updated_at']}}</td>
                                 <td>   
                                     @if (Auth::user()->rol != 'Dirección de docencia')
                                         <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje" class="edit"> </button>
@@ -105,15 +109,27 @@
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
                                                 <label style="font-size: 20">Descripción del aprendizaje</label>
-                                                <textarea class="form-control" name="desc_aprendizaje" type="text"  placeholder="Ingrese la descripción del aprendizaje" rows="3" cols="50" maxlength="200" required></textarea>
+                                                <textarea class="form-control" name="desc_aprendizaje" type="text" style="color: black" placeholder="Ingrese la descripción del aprendizaje" rows="3" cols="50" maxlength="200" required></textarea>
                                             </div>
 
                                             <div class="form-group" style="margin: auto">
                                                 <label style="font-size: 20">Competencia asociada</label>
-                                                <select class="form-select form-select-lg" name="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required> 
+                                                <select class="form-select form-select-lg" name="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required> 
+                                                    <option selected disabled="true" value="">Seleccione una competencia</option>
                                                     @foreach ($competencia as $comp) 
                                                     <option value="{{$comp['id']}}">{{$comp['Descripcion']}}</option>
                                                     @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group" style="margin: auto">
+                                                <label style="font-size: 20">Dimensión asociada</label>
+                                                <select class="form-select form-select-lg" name="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required> 
+                                                    <option selected disabled="true" value="">Seleccione una competencia</option>
+                                                    
+                                                    <option value="">Dimension 1</option>
+                                                    <option value="">Dimension 2</option>
+                                                    
                                                 </select>
                                             </div>
                                     </div>
@@ -152,14 +168,15 @@
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
                                                 <label style="font-size: 20">Descripción del aprendizaje </label>
-                                                <textarea class="form-control" name="desc_aprendizaje" id="desc_aprendizaje" type="text"  placeholder="Ingrese la descripción del aprendizaje" rows="3" cols="50" maxlength="200" required></textarea>
+                                                <textarea class="form-control" name="desc_aprendizaje" id="desc_aprendizaje" type="text" style="color: black"  placeholder="Ingrese la descripción del aprendizaje" rows="3" cols="50" maxlength="200" required></textarea>
                                             </div>
 
                                             <div class="form-group" style="margin: auto">
                                                 <label style="font-size: 20">Competencia asociada</label>
-                                                <select class="form-select form-select-lg" name="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required> 
+                                                <select class="form-select form-select-lg" name="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required> 
+                                                    <option selected disabled="true" value="">Seleccione una competencia</option>
                                                     @foreach ($competencia as $comp) 
-                                                    <option value="{{$comp['id']}}">{{$comp['Nombre']}}</option>
+                                                    <option value="{{$comp['id']}}">{{$comp['Descripcion']}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -223,7 +240,28 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]]
+                "order": [[ 1, "asc" ]],
+
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
             });
 
 
