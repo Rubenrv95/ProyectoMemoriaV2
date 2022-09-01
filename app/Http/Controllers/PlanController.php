@@ -11,6 +11,7 @@ use App\Models\Saber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Datatables;
+use PDF;
 
 
 class PlanController extends Controller
@@ -92,6 +93,19 @@ class PlanController extends Controller
         return back();
     }
 
+    public function createPDF($id, $plan) {
+        $competencia = DB::table('competencias')->where('refPlan', $plan)->get();
+        $aprendizaje = DB::table('aprendizajes')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $plan)->select('aprendizajes.*', 'competencias.Descripcion')->get();
+        $saber_conocer = DB::table('saber_conocers')->leftJoin('aprendizajes', 'saber_conocers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $plan)->select('saber_conocers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refPlan')->get();
+        $saber_hacer = DB::table('saber_hacers')->leftJoin('aprendizajes', 'saber_hacers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $plan)->select('saber_hacers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refPlan')->get();
+        $competencia = json_decode($competencia, true);
+        $aprendizaje = json_decode($aprendizaje, true);
+        $saber_conocer = json_decode($saber_conocer, true);
+        $saber_hacer = json_decode($saber_hacer, true);
+        $pdf = PDF::loadView('descargas.reporte', compact('plan', 'competencia', 'aprendizaje', 'saber_conocer', 'saber_hacer'));
+        return $pdf->download('reporte.pdf');
+      }
+
 
     /**
      * Display the specified resource.
@@ -110,12 +124,14 @@ class PlanController extends Controller
 
         $competencia = DB::table('competencias')->where('refPlan', $plan)->get();
         $aprendizaje = DB::table('aprendizajes')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $plan)->select('aprendizajes.*', 'competencias.Descripcion')->get();
-        $saber = DB::table('saber_conocers')->leftJoin('aprendizajes', 'saber_conocers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $plan)->select('saber_conocers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refPlan')->get();
+        $saber_conocer = DB::table('saber_conocers')->leftJoin('aprendizajes', 'saber_conocers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $plan)->select('saber_conocers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refPlan')->get();
+        $saber_hacer = DB::table('saber_hacers')->leftJoin('aprendizajes', 'saber_hacers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $plan)->select('saber_hacers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refPlan')->get();
         $competencia = json_decode($competencia, true);
         $aprendizaje = json_decode($aprendizaje, true);
-        $saber = json_decode($saber, true);
+        $saber_conocer = json_decode($saber_conocer, true);
+        $saber_hacer = json_decode($saber_hacer, true);
 
-        return view('planes.editar')->with('plan', $query)->with('carrera', $carrera)->with('saber', $saber);
+        return view('planes.modulos')->with('plan', $query)->with('carrera', $carrera)->with('saber_conocer', $saber_conocer)->with('saber_hacer', $saber_hacer);
     }
 
     /**
@@ -166,6 +182,7 @@ class PlanController extends Controller
         $competencias = DB::table('competencias')->where('refPlan', $plan)->delete();
         $aprendizajes = DB::table('aprendizajes')->where('refPlan', $plan)->delete();
         $saberes = DB::table('saber_conocers')->where('refPlan', $plan)->delete();
+        $dimensiones = DB::table('dimensions')->where('refPlan', $plan)->delete();
 
         $query = DB::table('plans')->where('id', $plan)->delete();
 

@@ -30,12 +30,13 @@
                 <hr class="solid">
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/malla"><button type="button" class="boton_gestionar">Malla Curricular</button></a> 
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saber_conocer"><button type="button" class="boton_gestionar">Saberes</button></a> 
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/malla"><button type="button" class="boton_gestionar">Módulos</button></a> 
 
                 <hr class="solid">
 
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/competencias"><button type="button" class="btn btn-secondary">Gestión de Competencias</button></a> 
+                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/dimensiones"><button type="button" class="btn btn-secondary">Gestión de Dimensiones</button></a> 
                 <a href="/carreras/{{$c['id']}}/{{$p['id']}}/competencias"><button type="button" class="btn btn-secondary">Temporalización de Competencias</button></a> 
 
                 <hr class="solid">
@@ -44,24 +45,58 @@
         <div class="container-fluid">   
             <h3 class="mb-0 text-gray-800">Temporalización de Competencias</h3>
 
-               <table id="lista">
+
+            <form action="" method="post">
+                <table id="lista" class="table table-striped table-bordered" width="100%">
                     <thead>
-                        <th>Competencia</th>
+                        <th>Competencia <img src="/images/arrows.png" alt="" srcset=""></th>
                         <th>Nivel 1</th>
                         <th>Nivel 2</th>
                         <th>Nivel 3</th>
                         <th>Nivel 4</th>
+                        <th>Nivel 5</th>
+                        <th>Nivel 6</th>
+                        <th>Nivel 7</th>
+                        <th>Nivel 8</th>
+                        <th>Nivel 9</th>
+                        <th>Nivel 10</th>
+                        <th>Nivel 11</th>
+                        <th>Nivel 12</th>
+                        <th>Nivel 13</th>
+                        <th>Nivel 14</th>
+                        <th>Nivel 15</th>
+                        <th>Nivel 16</th>
                     </thead>
                     <tbody>
-                        <td>Competencia 1</td>
-                        <td> <input type="checkbox"></td>
-                        <td> <input type="checkbox"></td>
-                        <td> <input type="checkbox"></td>
-                        <td> <input type="checkbox"></td>
+                        @foreach ($competencia as $c)
+                        <tr>
+                            <td>{{$c['Orden']}}. {{$c['Descripcion']}}</td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                            <td> <input type="checkbox"></td>
+                        </tr>
+                        @endforeach
                     </tbody>
                </table>
-                
 
+               <div class="col text-center">
+                    <button type="submit" class="btn btn-success">Guardar</button>
+               </div>
+                
+            </form>
 
         </div>
 

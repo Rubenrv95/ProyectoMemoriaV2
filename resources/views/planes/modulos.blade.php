@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar
+    <title>Propuesta de Módulo
         @foreach ($plan as $p)
             {{$p['Nombre']}}
         @endforeach
@@ -34,7 +34,6 @@
                     @foreach ($carrera as $c)
                     {{$c['nombre']}} 
                     @endforeach
-                    <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_editar_plan" class="edit" style="padding-top: 2%"> </button>
                 
                 </h1> 
         </div>
@@ -44,7 +43,7 @@
             <a href="/carreras/{{$c['id']}}/{{$p['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
             <a href="/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
             <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
-            <a href="/carreras/{{$c['id']}}/{{$p['id']}}/malla"><button type="button" class="boton_gestionar">Malla Curricular</button></a> 
+            <a href="/carreras/{{$c['id']}}/{{$p['id']}}/malla"><button type="button" class="boton_gestionar">Módulos</button></a> 
 
         <hr class="solid">
     
@@ -53,11 +52,12 @@
                 
     </div>
 
-    <div class="container-fluid" style="margin-top: 2%">
-    
+    <div class="container-fluid">
+        
+        <h3 class="mb-0 text-gray-800">Módulos</h3>
                                         
         @if (Auth::user()->rol != 'Dirección de docencia')
-                <button class="agregar" href="#" style="font-size: 16; margin-right: auto; margin-bottom: 2%" data-bs-toggle="modal" data-bs-target="#modal_crear_modulo">
+                <button class="agregar" href="#" style="font-size: 16; margin-right: auto; margin-bottom: 1%; margin-top: 1%" data-bs-toggle="modal" data-bs-target="#modal_crear_modulo">
                         Agregar módulo
                 </button>
         @endif
@@ -103,50 +103,6 @@
 
                 </table>
 
-                    
-       
-
-            <button class="agregar" style="font-size: 16; margin-top: 10px; margin-right: auto; margin-left: auto; display: block; margin-bottom: 2%">
-                                            Añadir semestre
-            </button>
-
-
-    </div>
-
-
-    <!--Modal modificar nombre plan de estudio -->
-    <div class="container">
-            <div class="row">
-                <div class ="col-md-12">
-                    <div tabIndex="-1" class="modal fade" id="modal_editar_plan" aria-hidden="true"> 
-                        <div class="modal-dialog modal-md">
-                            <form action="/carreras/{{$c['id']}}/{{$p['id']}}" method="POST" class="form-group">
-                            @csrf
-                            @method('PUT')
-                                <div class="modal-content" style="width: 600px">
-
-                                    <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Modificar Plan de Estudio</h1>
-                                    </div>
-                                    <div class="modal-body">
-
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Nombre del plan</label>
-                                                <input class="form-control form-control-lg" name="nombre_plan" style="width:100%"  placeholder="Ingrese el nombre del plan" value="{{$p['Nombre']}}" required/>  
-                                            </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                                <button class="btn btn-success" type="submit">Guardar</button>
-                                                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancelar</button>
-                                    </div> 
-                                
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
     </div>
 
     <!--Modal añadir modulo -->
@@ -275,7 +231,7 @@
                     $('#saberes').append(
                         '<div class="form-inline dynamic-added2" id = "row2'+j+'">' +
                         '<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="saber[]" style="width:80%; font-size: 18; margin-top: 2%">' +                                                  
-                                                            '@foreach ($saber as $s)' +
+                                                            '@foreach ($saber_conocer as $s)' +
                                                                 '<option value="{{$s["Descripcion_saber"]}}">{{$s["Descripcion_saber"]}}</option>' +
                                                             '@endforeach'+                                                            
                                                     '</select>' +                    

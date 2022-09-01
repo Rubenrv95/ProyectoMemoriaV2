@@ -13,25 +13,127 @@ header {
     
 }
 
+.loader-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border: 4px solid #Fff;
+  animation: loader 2s infinite ease;
+}
+
+.loader-inner {
+  vertical-align: top;
+  display: inline-block;
+  width: 100%;
+  background-color: #fff;
+  animation: loader-inner 2s infinite ease-in;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  
+  25% {
+    transform: rotate(180deg);
+  }
+  
+  50% {
+    transform: rotate(180deg);
+  }
+  
+  75% {
+    transform: rotate(360deg);
+  }
+  
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-inner {
+  0% {
+    height: 0%;
+  }
+  
+  25% {
+    height: 0%;
+  }
+  
+  50% {
+    height: 100%;
+  }
+  
+  75% {
+    height: 100%;
+  }
+  
+  100% {
+    height: 0%;
+  }
+}
+
+
+#app { display:block !important; }
 
 .button-login{
-    background-color: #333333 ; 
-    color: white;
-    padding: 5px;
-    border: 2px solid black;
-    width: 60%; 
+    display: inline-block;
+    font-weight: 400;
+    color: #858796;
     text-align: center;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    border-radius: 8px;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.35rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    color: #fff;
+    background-color: #333333;
+    border-color: #333333;
+    cursor: pointer; /* Mouse pointer on hover */
 }
 
 .button-login:hover {
-    background-color: #5f5f5f ;
+    background-color: #636363;
+    border-color: rgb(87, 87, 87);
+    border-radius: 6px;
 }
 
+.boton_login:focus, .boton_login.focus {
+    background-color: #525252;
+    border-color: rgb(87, 87, 87);
+    border-radius: 6px;
+    box-shadow: 0 0 0 0.2rem #999999;;
+}
+
+.boton_login.disabled, .boton_login:disabled {
+    color: #fff;
+    background-color: #333333;
+    border-color: #333333;
+  }
+
 .button-login:active {
-    background-color: rgb(150, 150, 150) ;
+    background-color: #999999;
+    border-radius: 8px;
 }
 
 .agregar {
@@ -219,6 +321,31 @@ header {
 #info:active {
     background-color: rgb(52, 78, 107);
     border-radius: 12px;
+}
+
+#download {
+
+    background-image: url('/images/download_icon.png');
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    border: none;
+
+
+}
+
+#download:hover {
+    background-color: rgb(68, 68, 68);
+    border-radius: 10px;
+}
+
+#download:active {
+    background-color: rgb(43, 43, 43);
+    border-radius: 10px;
 }
 
 #mod {

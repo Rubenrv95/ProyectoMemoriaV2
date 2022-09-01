@@ -11,7 +11,7 @@ use App\Models\Plan;
 use Illuminate\Support\Facades\DB;
 use Datatables;
 
-class Saber_hacersController extends Controller
+class Saber_hacerController extends Controller
 {
 
     public function __construct()
@@ -25,7 +25,7 @@ class Saber_hacersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id_carrera, $id_plan)
     {
         $plan = DB::table('plans')->where('id', $id_plan)->get();
         $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
@@ -37,7 +37,7 @@ class Saber_hacersController extends Controller
         $competencia = json_decode($competencia, true);
         $aprendizaje = json_decode($aprendizaje, true);
         $saber = json_decode($saber, true);
-        return view('planes.saberes')->with('plan', $plan)->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje)->with('saber', $saber);
+        return view('planes.saber_hacer')->with('plan', $plan)->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje)->with('saber', $saber);
 
     }
 
@@ -53,7 +53,7 @@ class Saber_hacersController extends Controller
         ]);
 
 
-        $query = DB::table('sabers')->insert([
+        $query = DB::table('saber_hacers')->insert([
             'Descripcion_saber'=>$request->input('desc_saber'),
             'refAprendizaje'=>$request->input('refAprend'),
             'refPlan'=>$id_plan,
@@ -109,7 +109,7 @@ class Saber_hacersController extends Controller
         ]);
 
 
-        $query = DB::table('sabers')->insert([
+        $query = DB::table('saber_hacers')->where('id', $id_saber)->update([
             'Descripcion_saber'=>$request->input('desc_saber'),
             'refAprendizaje'=>$request->input('refAprend'),
         ]);
@@ -123,7 +123,7 @@ class Saber_hacersController extends Controller
      * @param  \App\Models\Saber_hacer  $saber_hacer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Saber_hacer $saber_hacer)
+    public function destroy($id_carrera, $id_plan, $id_saber)
     {
         $query = DB::table('saber_hacers')->where('id', $id_saber)->delete();
         

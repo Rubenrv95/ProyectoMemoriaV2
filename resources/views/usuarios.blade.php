@@ -16,7 +16,7 @@
                         <h1 class="mb-0 text-gray-800">Lista de Usuarios</h1>
                 </div>
 
-                <button class="agregar" href="#" data-bs-toggle="modal" data-bs-target="#modal_user" style="font-size: 16; margin-bottom: 10px;">
+                <button class="agregar" href="#" data-bs-toggle="modal" data-bs-target="#modal_user" style="font-size: 16; margin-bottom: 1%;">
                 Agregar usuario
                 </button>
 
@@ -24,9 +24,9 @@
                         <thead>
                                 <tr style="font-weight: bold; color: white">
                                 <th style="display: none">ID <img src="/images/arrows.png" alt="" srcset=""></th>
-                                <th>Nombre de usuario <img src="/images/arrows.png" alt="" srcset=""></th>
-                                <th>Correo Electrónico <img src="/images/arrows.png" alt="" srcset=""></th>
-                                <th>Rol <img src="/images/arrows.png" alt="" srcset=""></th>
+                                <th>Nombre de usuario⇵</th>
+                                <th>Correo Electrónico⇵</th>
+                                <th>Rol⇵</th>
                                 <th style="width: 150px"></th>
                                 </tr>
                         </thead>
@@ -70,17 +70,17 @@
                                     <div class="modal-body">
                                         <div class="form-group" style="margin: auto;">
                                             <label style="font-size: 20">Nombre Completo</label>
-                                            <input type="name" class="form-control form-control-lg" name="nombre"  style="width:100%; margin-bottom: 20px" placeholder="Ingrese el nombre del usuario" maxlength="100" required />
+                                            <input type="name" class="form-control form-control-lg" name="nombre"  style="width:100%; margin-bottom: 2%; color: black" placeholder="Ingrese el nombre del usuario" maxlength="100" required />
                                         </div>
 
                                         <div class="form-group" style="margin: auto;">
                                             <label style="font-size: 20" >Correo Electrónico</label>
-                                            <input type="email" class="form-control form-control-lg" name="email" style="width:100%; margin-bottom: 20px" placeholder="Ingrese el correo del usuario" maxlength="100" required />
+                                            <input type="email" class="form-control form-control-lg" name="email" style="width:100%; margin-bottom: 2%; color: black" placeholder="Ingrese el correo del usuario" maxlength="100" required />
                                         </div>
 
                                         <div class="form-group" style="margin: auto;">
                                             <label style="font-size: 20" >Rol</label>
-                                            <select name="rol" id="" class="form-select form-select-lg" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18">
+                                            <select name="rol" id="" class="form-select form-select-lg" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18">
                                                     <option selected value="Asesor curricular">Asesor curricular</option>
                                                     <option value="Equipo académico desarrollador">Equipo académico desarrollador</option>
                                                     <option value="Dirección de docencia">Dirección de docencia</option>
@@ -91,7 +91,7 @@
 
                                         <div class="form-inline" id="show_hide_password">
                                             <label style="font-size: 20">Contraseña</label>
-                                            <input type="password" class="form-control form-control-lg" name="password" id="password" style="width:92%; margin-bottom: 20px" autocomplete="new-password" placeholder="Ingrese la contraseña del usuario" maxlength="20" required/>
+                                            <input type="password" class="form-control form-control-lg" name="password" id="password" style="width:92%; margin-bottom: 2%" autocomplete="new-password" placeholder="Ingrese la contraseña del usuario" maxlength="20" required/>
                                             <div class="form-group-addon" style="padding-left: 1%; margin-bottom: 2%">
                                                     <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                                             </div>
@@ -99,7 +99,7 @@
 
                                         <div class="form-inline" id="show_hide_password2">
                                             <label style="font-size: 20">Confirmar contraseña</label>
-                                            <input type="password" class="form-control form-control-lg" name="password_confirmation" id = "password_confirmation" style="width:92%; margin-bottom: 20px" autocomplete="new-password" placeholder="Ingrese nuevamente la contraseña del usuario" maxlength="20" required/>
+                                            <input type="password" class="form-control form-control-lg" name="password_confirmation" id = "password_confirmation" style="width:92%; margin-bottom: 2%" autocomplete="new-password" placeholder="Ingrese nuevamente la contraseña del usuario" maxlength="20" required/>
                                             <div class="form-group-addon" style="padding-left: 1%; margin-bottom: 2%">
                                                     <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                                             </div>
@@ -141,17 +141,17 @@
                                     <div class="modal-body">
                                         <div class="form-group" style="margin: auto;">
                                             <label style="font-size: 20">Nombre Completo</label>
-                                            <input type="name" class="form-control form-control-lg" name="nombre" id="nombre" style="width:95%; margin-bottom: 20px" placeholder="Ingrese el nombre del usuario" maxlength="100" required />
+                                            <input type="name" class="form-control form-control-lg" name="nombre" id="nombre" style="width:95%; margin-bottom: 2%; color: black" placeholder="Ingrese el nombre del usuario" maxlength="100" required />
                                         </div>
 
                                         <div class="form-group" style="margin: auto;">
                                             <label style="font-size: 20" >Correo Electrónico</label>
-                                            <input type="email" class="form-control form-control-lg" name="email" id="email" style="width:95%; margin-bottom: 20px" placeholder="Ingrese el correo del usuario" maxlength="100" required/>
+                                            <input type="email" class="form-control form-control-lg" name="email" id="email" style="width:95%; margin-bottom: 2%; color: black" placeholder="Ingrese el correo del usuario" maxlength="100" required/>
                                         </div>
 
                                         <div class="form-group" style="margin: auto;">
                                             <label style="font-size: 20" >Rol</label>
-                                            <select name="rol" id="rol" class="form-select form-select-lg" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18">
+                                            <select name="rol" id="rol" class="form-select form-select-lg" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18">
                                                     <option selected value="Asesor curricular">Asesor curricular</option>
                                                     <option value="Equipo académico desarrollador">Equipo académico desarrollador</option>
                                                     <option value="Dirección de docencia">Dirección de docencia</option>
@@ -216,7 +216,28 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]]
+                "order": [[ 1, "asc" ]],
+
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
             });
 
             
