@@ -84,6 +84,40 @@
                                 </tr>
                             @endforeach   
 
+                                <tr>
+                                    <td style="display: none"></td>
+                                    <td>1. Competencia 1</td>
+                                    <td>Inicial</td>
+                                    <td>Identifica estrategias y metodologías de enseñanza y aprendizaje acordes a las disciplinas de Educación General Básica. </td>
+                                    <td>Estrategias y metodologías según disciplina</td>
+                                    <td>2022-09-01 12:44:35</td>
+                                    <td>2022-09-01 12:44:35</td>
+                                    <td>   
+                                        @if (Auth::user()->rol != 'Dirección de docencia')
+                                            <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje" class="edit"> </button>
+                                            <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete"> </button>
+                                        @endif
+                                    </td>
+                                
+                                </tr>
+
+                                <tr>
+                                    <td style="display: none"></td>
+                                    <td>2. Competencia 2</td>
+                                    <td>Logrado</td>
+                                    <td>Reconoce estrategias y metodologías de enseñanza que favorezcan el logro de los objetivos en Educación General Básica.   </td>
+                                    <td>Implementación de estrategias y metodologías</td>
+                                    <td>2022-09-01 12:44:35</td>
+                                    <td>2022-08-28 13:51:32</td>
+                                    <td>   
+                                        @if (Auth::user()->rol != 'Dirección de docencia')
+                                            <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje" class="edit"> </button>
+                                            <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete"> </button>
+                                        @endif
+                                    </td>
+                                
+                                </tr>
+
                         </tbody>
                 </table> 
 

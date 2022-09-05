@@ -48,7 +48,7 @@ class DimensionController extends Controller
     {
         $request->validate([
             'desc_dimension'=>'required',
-            'basico_dimension'=>'required',
+            'inicial_dimension'=>'required',
             'desarrollo_dimension'=>'required',
             'logrado_dimension'=>'required',
         ]);
@@ -56,7 +56,7 @@ class DimensionController extends Controller
 
         $query = DB::table('dimensions')->insert([
             'Descripcion_dimension'=>$request->input('desc_dimension'),
-            'Basico'=>$request->input('basico_dimension'),
+            'Inicial'=>$request->input('inicial_dimension'),
             'En_desarrollo'=>$request->input('desarrollo_dimension'),
             'Logrado'=>$request->input('logrado_dimension'),
             'Especializacion'=>$request->input('especializado_dimension'),
@@ -111,7 +111,7 @@ class DimensionController extends Controller
     {
         $request->validate([
             'desc_dimension'=>'required',
-            'basico_dimension'=>'required',
+            'inicial_dimension'=>'required',
             'desarrollo_dimension'=>'required',
             'logrado_dimension'=>'required',
         ]);
@@ -119,7 +119,7 @@ class DimensionController extends Controller
 
         $query = DB::table('dimensions')->where('id', $id_dim)->update([
             'Descripcion_dimension'=>$request->input('desc_dimension'),
-            'Basico'=>$request->input('basico_dimension'),
+            'Inicial'=>$request->input('inicial_dimension'),
             'En_desarrollo'=>$request->input('desarrollo_dimension'),
             'Logrado'=>$request->input('logrado_dimension'),
             'Especializacion'=>$request->input('especializado_dimension'),

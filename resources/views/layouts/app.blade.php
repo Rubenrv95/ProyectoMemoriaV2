@@ -92,13 +92,6 @@
                         <span>Carreras</span></a>
                 </li>
 
-                <!--Listado de planes -->
-                <li class="nav-item">
-                    <a class="nav-link" href="/planes">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Planes</span></a>
-                </li>
-
                 @if (Auth::user()->rol == 'Administrador')
                 <!-- Listado de Usuarios -->
                 <li class="nav-item">

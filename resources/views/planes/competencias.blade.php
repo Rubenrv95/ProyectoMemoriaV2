@@ -54,7 +54,7 @@
                         <thead>
                                 <tr style="font-weight: bold; color: white">
                                     <th style="display: none">ID⇵</th>
-                                    <th>Número⇵</th>
+                                    <th>Número/Orden⇵</th>
                                     <th>Competencia⇵</th>
                                     <th>Fecha de creación⇵</th>
                                     <th>Fecha de actualización⇵</th>
