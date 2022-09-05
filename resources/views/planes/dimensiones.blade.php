@@ -25,7 +25,6 @@
 
                 <h4>
                     <a href="/carreras/{{$c['id']}}"><img src="/images/back.png" alt="" srcset="" style="margin-top: 1%; margin-bottom: 1%;"></a> 
-                    Regresar
                 </h4>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Dimensiones {{$p['Nombre']}} - {{$c['nombre']}} </h1>
@@ -61,13 +60,13 @@
                                     <th rowspan="2" style="display: none">ID</th>
                                     <th rowspan="2">Competencia⇵</th>
                                     <th rowspan="2">Dimensión⇵</th>
-                                    <th colspan="4">Niveles</th>
+                                    <th colspan="4">Aprendizajes</th>
                                     <th rowspan="2">Fecha de creación⇵</th>
                                     <th rowspan="2">Fecha de actualización⇵</th>
                                     <th rowspan="2"></th>
                                 </tr>
                                 <tr style="font-weight: bold; color: white">
-                                    <th>Básico⇵</th>
+                                    <th>Inicial⇵</th>
                                     <th>En desarrollo⇵</th>
                                     <th>Logrado⇵</th>
                                     <th>Especialización⇵</th>
@@ -82,7 +81,7 @@
                                     <td style="display: none">{{$dim['idComp']}}</td>
                                     <td>{{$dim['Orden']}}. {{$dim['Descripcion']}}</td>
                                     <td>{{$dim['Descripcion_dimension']}}</td>
-                                    <td>{{$dim['Basico']}}</td>
+                                    <td>{{$dim['Inicial']}}</td>
                                     <td>{{$dim['En_desarrollo']}}</td>
                                     <td>{{$dim['Logrado']}}</td>
                                     <td>{{$dim['Especializacion']}}</td>
@@ -141,7 +140,7 @@
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 1%">
                                                 <label style="font-size: 20">Nivel básico</label>
-                                                <input class="form-control form-control-lg" name="basico_dimension" style="width:100%; color: black"  placeholder="Ingrese el nivel básico de la dimensión" maxlength="2000" required/>        
+                                                <input class="form-control form-control-lg" name="inicial_dimension" style="width:100%; color: black"  placeholder="Ingrese el nivel básico de la dimensión" maxlength="2000" required/>        
                                                 <span style="color: red">@error('dimension_competencia')  Debe ingresar una descripción para el nivel básico  @enderror</span>
                                             </div>
 
@@ -213,7 +212,7 @@
 
                                         <div class="form-group" style="margin: auto; margin-bottom: 1%">
                                             <label style="font-size: 20">Nivel básico</label>
-                                            <input class="form-control form-control-lg" name="basico_dimension" id="basico_dimension" style="width:100%; color: black"  placeholder="Ingrese el nivel básico de la dimensión" maxlength="2000" required/>        
+                                            <input class="form-control form-control-lg" name="inicial_dimension" id="inicial_dimension" style="width:100%; color: black"  placeholder="Ingrese el nivel básico de la dimensión" maxlength="2000" required/>        
                                             <span style="color: red">@error('dimension_competencia')  Debe ingresar una descripción para el nivel básico  @enderror</span>
                                         </div>
 
@@ -338,7 +337,7 @@
                 $('#refComp').val(data[1]);
 
                 $('#desc_dimension').val(data[3]);
-                $('#basico_dimension').val(data[4]);
+                $('#inicial_dimension').val(data[4]);
                 $('#desarrollo_dimension').val(data[5]);
                 $('#logrado_dimension').val(data[6]);
                 $('#especializado_dimension').val(data[7]);
