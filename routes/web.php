@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarreraController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PlanController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CompetenciaController;
 use App\Http\Controllers\DimensionController;
@@ -38,53 +37,46 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/inicio', function() {
 
     Route::post('crearCarrera', [CarreraController::class, 'create']);
     Route::resource('/carreras', 'App\Http\Controllers\CarreraController');
-    Route::get('/carreras/{id}', [CarreraController::class, 'show']);
 
     Route::post('changepassword', [ChangePasswordController::class, 'store'])->name('change.password');
-
-    Route::post('/carreras/{id}/crearPlan', [PlanController::class, 'create']);
-    Route::delete('/carreras/{id}/{plan}', [PlanController::class, 'destroy']);
-    Route::put('/carreras/{id}/{plan}', [PlanController::class, 'update']);
-    Route::get('/carreras/{id}/{plan}/malla', [PlanController::class, 'show']);
-    Route::get('/carreras/{id}/{plan}/descargar_reporte', [PlanController::class, 'createPDF']);
-    Route::post('/carreras/{id}/{plan}/modulo', [ModuloController::class, 'create']);
-    Route::post('/carreras/{id}/{plan}/copiar', [PlanController::class, 'copy']);
-    Route::get('/planes', [PlanController::class, 'index']);
+    Route::get('/carreras/{id}/descargar_reporte', [CarreraController::class, 'createPDF']);
+    Route::post('/carreras/{id}/{}/modulo', [ModuloController::class, 'create']);
+    Route::post('/carreras/{id}/copiar', [CarreraController::class, 'copy']);
 
 
     Route::resource('/usuarios', 'App\Http\Controllers\UserController');
 
-    Route::get('/carreras/{id}/{plan}/competencias', [CompetenciaController::class, 'index']);
-    Route::get('/carreras/{id}/{plan}/tempo_competencias', [CompetenciaController::class, 'show']);
-    Route::post('/carreras/{id}/{plan}/competencias', [CompetenciaController::class, 'create']);
-    Route::put('/carreras/{id}/{plan}/competencias/{competencia}', [CompetenciaController::class, 'update']);
-    Route::delete('/carreras/{id}/{plan}/competencias/{competencia}', [CompetenciaController::class, 'destroy']);
+    Route::get('/carreras/{id}/competencias', [CompetenciaController::class, 'index']);
+    Route::get('/carreras/{id}/tempo_competencias', [CompetenciaController::class, 'show']);
+    Route::post('/carreras/{id}/competencias', [CompetenciaController::class, 'create']);
+    Route::put('/carreras/{id}/competencias/{competencia}', [CompetenciaController::class, 'update']);
+    Route::delete('/carreras/{id}/competencias/{competencia}', [CompetenciaController::class, 'destroy']);
 
-    Route::get('/carreras/{id}/{plan}/dimensiones', [DimensionController::class, 'index']);
-    Route::post('/carreras/{id}/{plan}/dimensiones', [DimensionController::class, 'create']);
-    Route::put('/carreras/{id}/{plan}/dimensiones/{dimension}', [DimensionController::class, 'update']);
-    Route::delete('/carreras/{id}/{plan}/dimensiones/{dimension}', [DimensionController::class, 'destroy']);
+    Route::get('/carreras/{id}/dimensiones', [DimensionController::class, 'index']);
+    Route::post('/carreras/{id}/dimensiones', [DimensionController::class, 'create']);
+    Route::put('/carreras/{id}/dimensiones/{dimension}', [DimensionController::class, 'update']);
+    Route::delete('/carreras/{id}/dimensiones/{dimension}', [DimensionController::class, 'destroy']);
 
-    Route::get('/carreras/{id}/{plan}/aprendizajes', [AprendizajeController::class, 'index']);
-    Route::get('/carreras/{id}/{plan}/tempo_aprendizajes', [AprendizajeController::class, 'show']);
-    Route::post('/carreras/{id}/{plan}/aprendizajes', [AprendizajeController::class, 'create']);
-    Route::put('/carreras/{id}/{plan}/aprendizajes/{aprend}', [AprendizajeController::class, 'update']);
-    Route::delete('/carreras/{id}/{plan}/aprendizajes/{aprend}', [AprendizajeController::class, 'destroy']);
+    Route::get('/carreras/{id}/aprendizajes', [AprendizajeController::class, 'index']);
+    Route::get('/carreras/{id}/tempo_aprendizajes', [AprendizajeController::class, 'show']);
+    Route::post('/carreras/{id}/aprendizajes', [AprendizajeController::class, 'create']);
+    Route::put('/carreras/{id}/aprendizajes/{aprend}', [AprendizajeController::class, 'update']);
+    Route::delete('/carreras/{id}/aprendizajes/{aprend}', [AprendizajeController::class, 'destroy']);
 
-    Route::get('/carreras/{id}/{plan}/saber_conocer', [Saber_conocerController::class, 'index']);
-    Route::post('/carreras/{id}/{plan}/saber_conocer', [Saber_conocerController::class, 'create']);
-    Route::put('/carreras/{id}/{plan}/saber_conocer/{saber}', [Saber_conocerController::class, 'update']);
-    Route::delete('/carreras/{id}/{plan}/saber_conocer/{saber}', [Saber_conocerController::class, 'destroy']);
+    Route::get('/carreras/{id}/saber_conocer', [Saber_conocerController::class, 'index']);
+    Route::post('/carreras/{id}/saber_conocer', [Saber_conocerController::class, 'create']);
+    Route::put('/carreras/{id}/saber_conocer/{saber}', [Saber_conocerController::class, 'update']);
+    Route::delete('/carreras/{id}/saber_conocer/{saber}', [Saber_conocerController::class, 'destroy']);
 
-    Route::get('/carreras/{id}/{plan}/saber_hacer', [Saber_hacerController::class, 'index']);
-    Route::post('/carreras/{id}/{plan}/saber_hacer', [Saber_hacerController::class, 'create']);
-    Route::put('/carreras/{id}/{plan}/saber_hacer/{saber}', [Saber_hacerController::class, 'update']);
-    Route::delete('/carreras/{id}/{plan}/saber_hacer/{saber}', [Saber_hacerController::class, 'destroy']);
+    Route::get('/carreras/{id}/saber_hacer', [Saber_hacerController::class, 'index']);
+    Route::post('/carreras/{id}/saber_hacer', [Saber_hacerController::class, 'create']);
+    Route::put('/carreras/{id}/saber_hacer/{saber}', [Saber_hacerController::class, 'update']);
+    Route::delete('/carreras/{id}/saber_hacer/{saber}', [Saber_hacerController::class, 'destroy']);
 
-    Route::get('/carreras/{id}/{plan}/saber_ser', [Saber_serController::class, 'index']);
-    Route::post('/carreras/{id}/{plan}/saber_ser', [Saber_serController::class, 'create']);
-    Route::put('/carreras/{id}/{plan}/saber_ser/{saber}', [Saber_serController::class, 'update']);
-    Route::delete('/carreras/{id}/{plan}/saber_ser/{saber}', [Saber_serController::class, 'destroy']);
+    Route::get('/carreras/{id}/saber_ser', [Saber_serController::class, 'index']);
+    Route::post('/carreras/{id}/saber_ser', [Saber_serController::class, 'create']);
+    Route::put('/carreras/{id}/saber_ser/{saber}', [Saber_serController::class, 'update']);
+    Route::delete('/carreras/{id}/saber_ser/{saber}', [Saber_serController::class, 'destroy']);
 
     Auth::routes();
     Route::get('/home', [HomeController::class, 'index']);

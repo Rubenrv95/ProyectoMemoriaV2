@@ -5,13 +5,10 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        @foreach ($plan as $p)
-        @endforeach
-
         @foreach ($carrera as $c)
         @endforeach
 
-        <title>Aprendizajes {{$p['Nombre']}} - {{$c['nombre']}}</title>
+        <title>Aprendizajes {{$c['nombre']}}</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
         <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
@@ -24,20 +21,20 @@
                 
                 <a href="/carreras/{{$c['id']}}"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="mb-0 text-gray-800">Aprendizajes {{$p['Nombre']}} - {{$c['nombre']}} </h1>
+                        <h1 class="mb-0 text-gray-800">Aprendizajes {{$c['nombre']}} </h1>
                 </div>
 
                 <hr class="solid">
 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saber_conocer"><button type="button" class="boton_gestionar">Saberes</button></a> 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/malla"><button type="button" class="boton_gestionar">Módulos</button></a> 
+                <a href="/carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
+                <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
+                <a href="/carreras/{{$c['id']}}/saber_conocer"><button type="button" class="boton_gestionar">Saberes</button></a> 
+                <a href="/carreras/{{$c['id']}}/malla"><button type="button" class="boton_gestionar">Módulos</button></a> 
 
                 <hr class="solid">
 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes"><button type="button" class="btn btn-secondary">Gestión de Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/tempo_aprendizajes"><button type="button" class="btn btn-secondary">Temporalización de Aprendizajes</button></a> 
+                <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="btn btn-secondary">Gestión de Aprendizajes</button></a> 
+                <a href="/carreras/{{$c['id']}}/tempo_aprendizajes"><button type="button" class="btn btn-secondary">Temporalización de Aprendizajes</button></a> 
 
                 <hr class="solid">
 
@@ -50,76 +47,51 @@
                         Agregar aprendizaje                    
                 </button>
             @endif
-                <table id="lista" class="table table-striped table-bordered" width="100%">
+            <table id="lista" class="table table-striped table-bordered" width="100%">
                         <thead>
                                 <tr style="font-weight: bold; color: white">
-                                <th style="display: none">ID⇵ </th>
-                                <th>Competencia⇵</th>
-                                <th>Nivel⇵</th>
-                                <th>Aprendizaje⇵</th>
-                                <th>Dimension⇵</th>
-                                <th>Fecha de creacion⇵</th>
-                                <th>Fecha de actualización⇵</th>
-                                <th style="width: 7%"></th>
+                                    <th rowspan="2" style="display: none">ID  </th>
+                                    <th rowspan="2" style="display: none">ID</th>
+                                    <th rowspan="2">Competencia⇵</th>
+                                    <th rowspan="2">Dimensión⇵</th>
+                                    <th colspan="4">Aprendizajes</th>
+                                    <th rowspan="2">Fecha de creación⇵</th>
+                                    <th rowspan="2">Fecha de actualización⇵</th>
+                                    <th rowspan="2"></th>
+                                </tr>
+                                <tr style="font-weight: bold; color: white">
+                                    <th>Inicial⇵</th>
+                                    <th>En desarrollo⇵</th>
+                                    <th>Logrado⇵</th>
+                                    <th>Especialización⇵</th>
                                 </tr>
                         </thead>
                         
-                        <tbody>
-                            @foreach ($aprendizaje as $a)   
-                                <tr>
-                                <td style="display: none">{{$a['id']}}</td>
-                                <td>{{$a['Orden']}}. {{$a['Descripcion']}}</td>
-                                <td>{{$a['Nivel_aprend']}}</td>
-                                <td>{{$a['Descripcion_aprendizaje']}}</td>
-                                <td></td>
-                                <td>{{$a['Fecha_creacion']}}</td>
-                                <td>{{$a['updated_at']}}</td>
-                                <td>   
-                                    @if (Auth::user()->rol != 'Dirección de docencia')
-                                        <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje" class="edit"> </button>
-                                        <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete"> </button>
-                                    @endif
-                                </td>
-                                
-                                </tr>
-                            @endforeach   
+                        <tbody> 
 
+                                
                                 <tr>
                                     <td style="display: none"></td>
-                                    <td>1. Competencia 1</td>
-                                    <td>Inicial</td>
-                                    <td>Identifica estrategias y metodologías de enseñanza y aprendizaje acordes a las disciplinas de Educación General Básica. </td>
-                                    <td>Estrategias y metodologías según disciplina</td>
-                                    <td>2022-09-01 12:44:35</td>
-                                    <td>2022-09-01 12:44:35</td>
-                                    <td>   
-                                        @if (Auth::user()->rol != 'Dirección de docencia')
-                                            <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje" class="edit"> </button>
-                                            <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete"> </button>
-                                        @endif
-                                    </td>
-                                
-                                </tr>
-
-                                <tr>
                                     <td style="display: none"></td>
-                                    <td>2. Competencia 2</td>
-                                    <td>Logrado</td>
-                                    <td>Reconoce estrategias y metodologías de enseñanza que favorezcan el logro de los objetivos en Educación General Básica.   </td>
-                                    <td>Implementación de estrategias y metodologías</td>
-                                    <td>2022-09-01 12:44:35</td>
-                                    <td>2022-08-28 13:51:32</td>
-                                    <td>   
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
                                         @if (Auth::user()->rol != 'Dirección de docencia')
-                                            <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje" class="edit"> </button>
-                                            <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete"> </button>
+                                            <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_dimension" class="edit"> </button>
+                                            <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_dimension" class="delete"> </button>
                                         @endif
-                                    </td>
-                                
+                                    </td>                  
                                 </tr>
-
+                                
+                                                      
                         </tbody>
-                </table> 
+            </table> 
 
 
         </div>
@@ -132,7 +104,7 @@
                 <div class ="col-md-12">
                     <div tabIndex="-1"  class="modal fade" id="modal_crear_aprendizaje" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form action="/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes" method="POST" class="form-group">
+                            <form action="/carreras/{{$c['id']}}/aprendizajes" method="POST" class="form-group">
                             @csrf
                                 <div class="modal-content">
 
@@ -188,7 +160,7 @@
                     <div class="modal fade" id="modal_modificar_aprendizaje" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
 
-                            <form method = "post" action = "/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes" class="form-group" id = "editForm">
+                            <form method = "post" action = "/carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "editForm">
 
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
@@ -236,7 +208,7 @@
                 <div class ="col-md-12">
                     <div class="modal fade" id="modal_eliminar_aprendizaje" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form method = "post" action = "/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes" class="form-group" id = "deleteForm">
+                            <form method = "post" action = "/carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "deleteForm">
 
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE')}}
@@ -316,7 +288,7 @@
                 $('#desc_aprendizaje').val(data[1]);
                 $('#refComp').val(data[4]);
 
-                $('#editForm').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes/'+data[0]);
+                $('#editForm').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[0]);
                 $('#modal_modificar_aprendizaje').modal('show');
 
             });
@@ -334,7 +306,7 @@
                 console.log(data);
 
 
-                $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes/'+data[0]);
+                $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[0]);
                 $('#modal_eliminar_aprendizaje').modal('show');
 
             }  );

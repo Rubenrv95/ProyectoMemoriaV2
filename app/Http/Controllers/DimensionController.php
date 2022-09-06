@@ -6,7 +6,6 @@ use App\Models\Dimension;
 use App\Models\Competencia;
 use Illuminate\Http\Request;
 use App\Models\Carrera;
-use App\Models\Plan;
 use Illuminate\Support\Facades\DB;
 use Datatables;
 
@@ -25,18 +24,16 @@ class DimensionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id_carrera, $id_plan)
+    public function index($id_carrera)
     {
-        $plan = DB::table('plans')->where('id', $id_plan)->get();
         $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
-        $plan = json_decode($plan, true);
         $carrera = json_decode($carrera, true);
-        $competencia = DB::table('competencias')->where('refPlan', $id_plan)->get();
-        $dimension = DB::table('dimensions')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $id_plan)->select('dimensions.*', 'competencias.Descripcion', 'competencias.Orden', 'competencias.id as idComp' )->get();
+        $competencia = DB::table('competencias')->where('refCarrera', $id_carrera)->get();
+        $dimension = DB::table('dimensions')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('dimensions.*', 'competencias.Descripcion', 'competencias.Orden as Orden_comp', 'competencias.id as idComp' )->get();
         $competencia = json_decode($competencia, true);
         $dimension = json_decode($dimension, true);
 
-        return view('planes.dimensiones')->with('plan', $plan)->with('carrera', $carrera)->with('competencia', $competencia)->with('dimension', $dimension);
+        return view('carreras.dimensiones')->with('carrera', $carrera)->with('competencia', $competencia)->with('dimension', $dimension);
     }
 
     /**
@@ -44,24 +41,19 @@ class DimensionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id_carrera, $id_plan, Request $request)
+    public function create($id_carrera, Request $request)
     {
         $request->validate([
             'desc_dimension'=>'required',
-            'inicial_dimension'=>'required',
-            'desarrollo_dimension'=>'required',
-            'logrado_dimension'=>'required',
+            'orden_dimension'=>'required',
         ]);
 
 
         $query = DB::table('dimensions')->insert([
             'Descripcion_dimension'=>$request->input('desc_dimension'),
-            'Inicial'=>$request->input('inicial_dimension'),
-            'En_desarrollo'=>$request->input('desarrollo_dimension'),
-            'Logrado'=>$request->input('logrado_dimension'),
-            'Especializacion'=>$request->input('especializado_dimension'),
+            'Orden'=>$request->input('orden_dimension'),
             'refCompetencia'=>$request->input('refComp'),
-            'refPlan'=>$id_plan,
+            'refCarrera'=>$id_carrera,
         ]);
 
         return back()->withSuccess('Dimensión creada con éxito');
@@ -107,22 +99,17 @@ class DimensionController extends Controller
      * @param  \App\Models\Dimension  $dimension
      * @return \Illuminate\Http\Response
      */
-    public function update($id_carrera, $id_plan, Request $request, $id_dim)
+    public function update($id_carrera, Request $request, $id_dim)
     {
         $request->validate([
             'desc_dimension'=>'required',
-            'inicial_dimension'=>'required',
-            'desarrollo_dimension'=>'required',
-            'logrado_dimension'=>'required',
+            'orden_dimension'=>'required',
         ]);
 
 
         $query = DB::table('dimensions')->where('id', $id_dim)->update([
             'Descripcion_dimension'=>$request->input('desc_dimension'),
-            'Inicial'=>$request->input('inicial_dimension'),
-            'En_desarrollo'=>$request->input('desarrollo_dimension'),
-            'Logrado'=>$request->input('logrado_dimension'),
-            'Especializacion'=>$request->input('especializado_dimension'),
+            'Orden'=>$request->input('orden_dimension'),
             'refCompetencia'=>$request->input('refComp'),
         ]);
 
@@ -138,7 +125,7 @@ class DimensionController extends Controller
      * @param  \App\Models\Dimension  $dimension
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_carrera, $id_plan, $id_dim)
+    public function destroy($id_carrera, $id_dim)
     {
         $query = DB::table('dimensions')->where('id', $id_dim)->delete();
         
