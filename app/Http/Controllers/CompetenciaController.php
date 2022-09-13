@@ -27,11 +27,9 @@ class CompetenciaController extends Controller
         $carrera = json_decode($carrera, true);
         $competencia = DB::table('competencias')->where('refCarrera', $id_carrera)->get();
         $aprendizaje = DB::table('aprendizajes')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden')->get();
-        $saber = DB::table('saber_conocers')->leftJoin('aprendizajes', 'saber_conocers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('saber_conocers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refCarrera')->get();
         $competencia = json_decode($competencia, true);
         $aprendizaje = json_decode($aprendizaje, true);
-        $saber = json_decode($saber, true);
-        return view('carreras.competencias')->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje)->with('saber', $saber);
+        return view('carreras.competencias')->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje);
     }
 
     /**
@@ -79,11 +77,9 @@ class CompetenciaController extends Controller
         $carrera = json_decode($carrera, true);
         $competencia = DB::table('competencias')->where('refCarrera', $id_carrera)->get();
         $aprendizaje = DB::table('aprendizajes')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden')->get();
-        $saber = DB::table('saber_conocers')->leftJoin('aprendizajes', 'saber_conocers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('saber_conocers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refCarrera')->get();
         $competencia = json_decode($competencia, true);
         $aprendizaje = json_decode($aprendizaje, true);
-        $saber = json_decode($saber, true);
-        return view('carreras.tempo_competencias')->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje)->with('saber', $saber);
+        return view('carreras.tempo_competencias')->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje);
 
     }
 

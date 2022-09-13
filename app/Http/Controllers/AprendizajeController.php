@@ -27,12 +27,16 @@ class AprendizajeController extends Controller
         $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
         $carrera = json_decode($carrera, true);
         $competencia = DB::table('competencias')->where('refCarrera', $id_carrera)->get();
-        $aprendizaje = DB::table('aprendizajes')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden')->get();
-        $saber = DB::table('saber_conocers')->leftJoin('aprendizajes', 'saber_conocers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('saber_conocers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refCarrera')->get();
+        $dimension =  DB::table('dimensions')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('dimensions.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp')->get();
+        $aprendizaje = DB::table('aprendizajes')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden', 'dimensions.id as idDim')->get();
+        
+        $dimension = $dimension->sortByDesc('Orden');
+        $aprendizaje = $aprendizaje->sortByDesc('Orden');
+        
         $competencia = json_decode($competencia, true);
         $aprendizaje = json_decode($aprendizaje, true);
-        $saber = json_decode($saber, true);
-        return view('carreras.aprendizajes')->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje)->with('saber', $saber);
+        $dimension = json_decode($dimension, true);
+        return view('carreras.aprendizajes')->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje)->with('dimension', $dimension);
     }
 
     /**
@@ -43,13 +47,15 @@ class AprendizajeController extends Controller
     public function create($id_carrera, Request $request)
     {
         $request->validate([
-            'desc_aprendizaje'=>'required'
+            'aprendizaje_desc'=>'required',
         ]);
 
 
         $query = DB::table('aprendizajes')->insert([
-            'Descripcion_aprendizaje'=>$request->input('desc_aprendizaje'),
-            'refCompetencia'=>$request->input('refComp'),
+            'Descripcion_aprendizaje'=>$request->input('aprendizaje_desc'),
+            'refCompetencia'=>$request->input('refCompCrear'),
+            'refDimension'=>$request->input('dimension'),
+            'Nivel_aprend'=>$request->input('nivel'),
             'refCarrera'=>$id_carrera,
         ]);
 
@@ -73,7 +79,21 @@ class AprendizajeController extends Controller
      * @param  \App\Models\Aprendizaje  $aprendizaje
      * @return \Illuminate\Http\Response
      */
-    public function show($id_carrera)
+    public function show($id_carrera, $id_competencia)
+    {
+
+        $dim =  DB::table('dimensions')->where('dimensions.refCompetencia', '=', $id_competencia)->get();
+
+        return response()->json($dim);
+    }
+
+       /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Aprendizaje  $aprendizaje
+     * @return \Illuminate\Http\Response
+     */
+    public function show_Tempo($id_carrera)
     {
         $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
         $carrera = json_decode($carrera, true);
@@ -84,6 +104,8 @@ class AprendizajeController extends Controller
         return view('carreras.tempo_aprendizajes')->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje);
 
     }
+
+    
 
     /**
      * Show the form for editing the specified resource.

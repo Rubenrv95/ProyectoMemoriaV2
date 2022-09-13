@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>Lista de Carreras</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
@@ -24,7 +25,7 @@
                 </button>
                 @endif
 
-                <table id="lista" class="table table-striped table-bordered" width="100%">
+                <table id="lista" class="table table-striped table-bordered" style="text-align: center" width="100%">
                         <thead>
                                 <tr style="font-weight: bold; color: white">
                                 <th style="display: none">ID </th>
@@ -32,7 +33,7 @@
                                 <th>Facultad⇵</th>
                                 <th>Carrera⇵</th>
                                 <th>Formación⇵</th>
-                                <th>Tipo de Carrera⇵</th>
+                                <th>Planificación⇵</th>
                                 <th style="width: 150px"></th>
                                 </tr>
                         </thead>
@@ -106,9 +107,9 @@
                                             </div>
 
                                             <div class="form-group" style="margin: auto">
-                                                <label style="font-size: 20">Tipo de Carrera</label>
+                                                <label style="font-size: 20">Planificación</label>
                                                 <select class="form-select form-select-lg" name="tipo" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
-                                                    <option selected disabled="true" value="">Seleccione un tipo de carrera</option>
+                                                    <option selected disabled="true" value="">Seleccione la planificación de la carrera</option>
                                                     <option value="Nueva">Nueva</option>
                                                     <option value="Rediseño">Rediseño</option>                                                   
                                                 </select>
@@ -172,11 +173,11 @@
                                         </div>
 
                                         <div class="form-group" style="margin: auto">
-                                            <label style="font-size: 20">Tipo de Carrera</label>
+                                            <label style="font-size: 20">Planificación</label>
                                             <select class="form-select form-select-lg" name="tipo" id="tipo" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
-                                                <option selected disabled="true" value="">Seleccione un tipo de carrera</option>
+                                                <option selected disabled="true" value="">Seleccione la planificación de la carrera</option>
                                                 <option value="Nueva">Nueva</option>
-                                                <option value="Rediseño">Rediseño</option>                                                   
+                                                <option value="Rediseño">Rediseño</option>                                                     
                                             </select>
                                         </div>
                                     </div>
@@ -269,11 +270,11 @@
                                             </div>
 
                                             <div class="form-group" style="margin: auto">
-                                                <label style="font-size: 20">Tipo de Carrera</label>
+                                                <label style="font-size: 20">Planificación</label>
                                                 <select class="form-select form-select-lg" name="tipo_nuevo" id="tipo_nuevo" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
-                                                    <option selected disabled="true" value="">Seleccione un tipo de carrera</option>
+                                                    <option selected disabled="true" value="">Seleccione la planificación de la carrera</option>
                                                     <option value="Nueva">Nueva</option>
-                                                    <option value="Rediseño">Rediseño</option>                                                   
+                                                    <option value="Rediseño">Rediseño</option>                                                      
                                                 </select>
                                             </div>
 

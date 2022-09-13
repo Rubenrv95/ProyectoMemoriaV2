@@ -58,10 +58,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/inicio', function() {
     Route::delete('/carreras/{id}/dimensiones/{dimension}', [DimensionController::class, 'destroy']);
 
     Route::get('/carreras/{id}/aprendizajes', [AprendizajeController::class, 'index']);
-    Route::get('/carreras/{id}/tempo_aprendizajes', [AprendizajeController::class, 'show']);
+    Route::get('/carreras/{id}/aprendizajes/{comp}', [AprendizajeController::class, 'show']);
     Route::post('/carreras/{id}/aprendizajes', [AprendizajeController::class, 'create']);
     Route::put('/carreras/{id}/aprendizajes/{aprend}', [AprendizajeController::class, 'update']);
     Route::delete('/carreras/{id}/aprendizajes/{aprend}', [AprendizajeController::class, 'destroy']);
+    Route::get('/carreras/{id}/tempo_aprendizajes', [AprendizajeController::class, 'show_Tempo']);
 
     Route::get('/carreras/{id}/saber_conocer', [Saber_conocerController::class, 'index']);
     Route::post('/carreras/{id}/saber_conocer', [Saber_conocerController::class, 'create']);

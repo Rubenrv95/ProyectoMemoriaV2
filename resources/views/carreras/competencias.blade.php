@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
 
         @foreach ($carrera as $c)
         @endforeach
@@ -48,7 +49,7 @@
                 </button>
             @endif
 
-                <table id="lista" class="table table-striped table-bordered" width="100%">
+                <table id="lista" class="table table-striped table-bordered" style="text-align: center" width="100%">
                         <thead>
                                 <tr style="font-weight: bold; color: white">
                                     <th style="display: none">ID⇵</th>
@@ -107,7 +108,7 @@
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
                                                 <label style="font-size: 20">Descripción de la competencia</label>
-                                                <textarea class="form-control" style="color: black" name="desc_competencia" type="text"  placeholder="Ingrese la descripción de la competencia" rows="3" cols="50"  required></textarea>
+                                                <textarea class="form-control form-control-lg" style="color: black" name="desc_competencia" type="text"  placeholder="Ingrese la descripción de la competencia" rows="3" cols="50"  required></textarea>
                                                 <span style="color: red">@error('desc_competencia')  Debe ingresar una descripción para la competencia  @enderror</span>
                                             </div>
 
@@ -153,7 +154,7 @@
 
                                     <div class="form-group" style="margin: auto; margin-bottom: 20px">
                                                 <label style="font-size: 20">Descripción de la competencia</label>
-                                                <textarea class="form-control" style="color: black" name="desc_competencia" id="desc_competencia" type="text"  placeholder="Ingrese la descripción de la competencia" rows="3" cols="50"  required></textarea>
+                                                <textarea class="form-control form-control-lg" style="color: black" name="desc_competencia" id="desc_competencia" type="text"  placeholder="Ingrese la descripción de la competencia" rows="3" cols="50"  required></textarea>
                                                 <span style="color: red">@error('desc_competencia')  Debe ingresar una descripción para la competencia  @enderror</span>
                                             </div>
 

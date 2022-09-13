@@ -42,7 +42,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Carreras totales
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Carreras profesionales totales
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{$carreras}}</div>
                                         </div>
@@ -59,13 +59,29 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Planes totales</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$planes}}</div>
+                                                Carreras técnicas totales</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$tecnicas}}</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Modulos totales -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-danger shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                Módulos totales</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">9</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <!-- Content Row -->

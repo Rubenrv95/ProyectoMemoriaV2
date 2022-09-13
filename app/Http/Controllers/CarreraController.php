@@ -168,6 +168,12 @@ class CarreraController extends Controller
     public function destroy($id)
     {
         $query = DB::table('carreras')->where('id', $id)->delete();
+
+        $query2= 'DELETE competencias, dimensions FROM competencias 
+          INNER JOIN dimensions ON dimensions.refCompetencia = competencias.id
+          WHERE competencias.refCarrera = ?';
+
+        $status = \DB::delete($query2, array($id));
         
         return back()->withSuccess('Carrera eliminada con éxito');
     }

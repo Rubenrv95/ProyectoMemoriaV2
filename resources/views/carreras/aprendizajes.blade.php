@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         @foreach ($carrera as $c)
         @endforeach
 
@@ -24,40 +25,39 @@
                         <h1 class="mb-0 text-gray-800">Aprendizajes {{$c['nombre']}} </h1>
                 </div>
 
-                <hr class="solid">
+                <hr class="solid" style="border-width: 1px; background-color: black">
 
                 <a href="/carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
                 <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
                 <a href="/carreras/{{$c['id']}}/saber_conocer"><button type="button" class="boton_gestionar">Saberes</button></a> 
                 <a href="/carreras/{{$c['id']}}/malla"><button type="button" class="boton_gestionar">Módulos</button></a> 
 
-                <hr class="solid">
+                <hr class="solid" style="border-width: 1px; background-color: black">
 
                 <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="btn btn-secondary">Gestión de Aprendizajes</button></a> 
                 <a href="/carreras/{{$c['id']}}/tempo_aprendizajes"><button type="button" class="btn btn-secondary">Temporalización de Aprendizajes</button></a> 
 
-                <hr class="solid">
+                <hr class="solid" style="border-width: 1px; background-color: black">
 
         </div>
 
         <div class="container-fluid">   
             <h3 class="mb-0 text-gray-800">Gestión de Aprendizajes</h3>
+
             @if (Auth::user()->rol != 'Dirección de docencia')
                 <button class="agregar" data-bs-toggle="modal" data-bs-target="#modal_crear_aprendizaje" style="margin-bottom: 1%; margin-top: 1%">
-                        Agregar aprendizaje                    
+                        Agregar aprendizaje                
                 </button>
             @endif
+
             <table id="lista" class="table table-striped table-bordered" width="100%">
-                        <thead>
+                        <thead style="text-align: center">
                                 <tr style="font-weight: bold; color: white">
-                                    <th rowspan="2" style="display: none">ID  </th>
-                                    <th rowspan="2" style="display: none">ID</th>
+                                    <th rowspan="2" style="display: none">ID Competencia</th>
+                                    <th rowspan="2" style="display: none">ID Dimension</th>
                                     <th rowspan="2">Competencia⇵</th>
                                     <th rowspan="2">Dimensión⇵</th>
-                                    <th colspan="4">Aprendizajes</th>
-                                    <th rowspan="2">Fecha de creación⇵</th>
-                                    <th rowspan="2">Fecha de actualización⇵</th>
-                                    <th rowspan="2"></th>
+                                    <th colspan="4" >Aprendizajes</th>
                                 </tr>
                                 <tr style="font-weight: bold; color: white">
                                     <th>Inicial⇵</th>
@@ -68,25 +68,20 @@
                         </thead>
                         
                         <tbody> 
-
-                                
                                 <tr>
                                     <td style="display: none"></td>
                                     <td style="display: none"></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                        @if (Auth::user()->rol != 'Dirección de docencia')
-                                            <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_dimension" class="edit"> </button>
-                                            <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_dimension" class="delete"> </button>
-                                        @endif
-                                    </td>                  
+
+                                    <td style="text-align: center">                                      
+                                    </td>
+                                    <td style="text-align: center">                                     
+                                    </td>
+                                    <td>                                      
+                                    </td>
+                                    <td style="text-align: center">
+                                    </td>               
                                 </tr>
                                 
                                                       
@@ -98,46 +93,51 @@
 
         <!--MODALS APRENDIZAJE -->
 
-        <!-- Modal crear aprendizaje   -->
+        <!-- Modal crear aprendizaje -->
         <div class="container">
             <div class="row">
                 <div class ="col-md-12">
                     <div tabIndex="-1"  class="modal fade" id="modal_crear_aprendizaje" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form action="/carreras/{{$c['id']}}/aprendizajes" method="POST" class="form-group">
+                            <form action="/carreras/{{$c['id']}}/aprendizajes" method="POST" class="form-group" id="createForm">
                             @csrf
                                 <div class="modal-content">
 
                                     <div class="modal-header">
                                         <h1 class="justify-content-center" style="margin: auto"> Agregar aprendizaje</h1>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" id="body-crear">
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Descripción del aprendizaje</label>
-                                                <textarea class="form-control" name="desc_aprendizaje" type="text" style="color: black" placeholder="Ingrese la descripción del aprendizaje" rows="3" cols="50" maxlength="200" required></textarea>
+                                                <label style="font-size: 20">Descripción de Aprendizaje</label>
+                                                <textarea class="form-control form-control-lg" name="aprendizaje_desc" type="text" style="color: black" placeholder="Ingrese la descripción del aprendizaje" rows="2" cols="50" maxlength="1000" required></textarea>
                                             </div>
 
-                                            <div class="form-group" style="margin: auto">
+                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
+                                                <label style="font-size: 20">Nivel de Aprendizaje</label>
+                                                <select class="form-select form-select-lg" name="nivel" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
+                                                    <option selected disabled="true" value="">Seleccione el nivel de aprendizaje</option>                                     
+                                                    <option value="Inicial">Inicial</option>           
+                                                    <option value="En desarrollo">En desarrollo</option>   
+                                                    <option value="Logrado">Logrado</option>   
+                                                    <option value="Especialización">Especialización</option>                               
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
                                                 <label style="font-size: 20">Competencia asociada</label>
-                                                <select class="form-select form-select-lg" name="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required> 
-                                                    <option selected disabled="true" value="">Seleccione una competencia</option>
-                                                    @foreach ($competencia as $comp) 
-                                                    <option value="{{$comp['id']}}">{{$comp['Descripcion']}}</option>
-                                                    @endforeach
+                                                <select class="form-select form-select-lg" name="refCompCrear" id="refCompCrear" onchange="addDimension()" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
+                                                    <option selected disabled="true" value="">Seleccione la competencia asociada</option>          
+                                                    @foreach ($competencia as $comp)                           
+                                                        <option value="{{$comp['id']}}">{{$comp['Descripcion']}}</option>     
+                                                    @endforeach                                                                                  
                                                 </select>
                                             </div>
 
-                                            <div class="form-group" style="margin: auto">
-                                                <label style="font-size: 20">Dimensión asociada</label>
-                                                <select class="form-select form-select-lg" name="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required> 
-                                                    <option selected disabled="true" value="">Seleccione una competencia</option>
-                                                    
-                                                    <option value="">Dimension 1</option>
-                                                    <option value="">Dimension 2</option>
-                                                    
-                                                </select>
-                                            </div>
+
+
+                                            <div id="dimension-crear"></div>
+                                          
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-success" type="submit"> Guardar</button>
@@ -151,7 +151,6 @@
                 </div>
             </div>
         </div>
-
 
         <!-- Modal modificar aprendizaje   -->
         <div class="container">
@@ -172,20 +171,16 @@
                                     </div>
                                     <div class="modal-body">
 
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Descripción del aprendizaje </label>
-                                                <textarea class="form-control" name="desc_aprendizaje" id="desc_aprendizaje" type="text" style="color: black"  placeholder="Ingrese la descripción del aprendizaje" rows="3" cols="50" maxlength="200" required></textarea>
-                                            </div>
+                                        <div class="form-group" style="margin: auto; margin-bottom: 20px">
+                                            <label style="font-size: 20">Descripción de Aprendizaje</label>
+                                            <textarea class="form-control form-control-lg" name="aprendizaje_inicial" type="text" style="color: black" placeholder="Ingrese la descripción del aprendizaje" rows="2" cols="50" maxlength="200" required></textarea>
+                                        </div>
 
-                                            <div class="form-group" style="margin: auto">
-                                                <label style="font-size: 20">Competencia asociada</label>
-                                                <select class="form-select form-select-lg" name="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required> 
-                                                    <option selected disabled="true" value="">Seleccione una competencia</option>
-                                                    @foreach ($competencia as $comp) 
-                                                    <option value="{{$comp['id']}}">{{$comp['Descripcion']}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+  
+
+                                        <input type="hidden" id="competencia"> 
+                                        <input type="hidden" id="dimension"> 
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-success">Guardar</button>
@@ -242,6 +237,7 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     <script>    
+
         $(document).ready(function() {
             var table = $('#lista').DataTable({
 
@@ -271,7 +267,27 @@
             });
 
 
-            //TABLA DE COMPETENCIAS
+            //TABLA DE APRENDIZAJES
+
+             //crear
+             table.on('click', '#add', function() {
+
+                $tr = $(this).closest('tr');
+                if ($($tr).hasClass('child')) {
+                    $tr = $tr.prev('.parent');
+                }
+
+
+                var data = table.row($tr).data();
+                console.log(data);
+
+                $('.competencia').val(data[0]);
+                $('.dimension').val(data[1]);
+
+                $('#createForm').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[0]);
+                $('#modal_crear_aprendizaje').modal('show');
+
+            });
 
             //modificar
             table.on('click', '.edit', function() {
@@ -285,8 +301,13 @@
                 var data = table.row($tr).data();
                 console.log(data);
 
-                $('#desc_aprendizaje').val(data[1]);
-                $('#refComp').val(data[4]);
+                $('#competencia').val(data[0]);
+                $('#dimension').val(data[1]);
+
+                $('#aprendizaje_inicial').val(data[4]);
+                $('#aprendizaje_desarrollo').val(data[5]);
+                $('#aprendizaje_logrado').val(data[6]);
+                $('#aprendizaje_especializacion').val(data[7]);
 
                 $('#editForm').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[0]);
                 $('#modal_modificar_aprendizaje').modal('show');
@@ -312,7 +333,41 @@
             }  );
 
 
+
+            
+
         });
+
+    </script>
+
+    <script>
+
+        function addDimension() {
+
+                var x = document.getElementById("refCompCrear").value;
+                $.ajax({
+                    type: "GET",
+                    url: '/carreras/{{$c['id']}}/aprendizajes/' + x, 
+                    data: { id: x },
+                }).done(function(response) {
+                    console.log(response);
+                    console.log(response[0]['Orden'])
+                    document.getElementById("dimension-crear").innerHTML = 
+                        '<div class="form-group" style="margin: auto">' +
+                            '<label style="font-size: 20">Dimension asociada</label>' +
+                            '<select class="form-select form-select-lg" name="dimension" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required> '+
+                                    '<option selected disabled="true" value="">Seleccione una dimensión</option>';
+
+                    for (const prop in response) {
+                        document.getElementById("dimension-crear").innerHTML +=                 
+                                    '<option value="' + response[prop]['id'] + '">' + response[prop]['Descripcion_dimension'] + '</option>';            
+                        }          
+                                                                  
+                    document.getElementById("dimension-crear").innerHTML +=         
+                            '</select>'+
+                        '</div>';
+                });                  
+        }
 
     </script>
 </body>

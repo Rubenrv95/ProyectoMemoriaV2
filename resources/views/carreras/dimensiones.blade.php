@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         @foreach ($carrera as $c)
         @endforeach
 
@@ -50,7 +51,7 @@
                 </button>
             @endif
 
-                <table id="lista" class="table table-striped table-bordered" width="100%">
+                <table id="lista" class="table table-striped table-bordered" style="text-align: center" width="100%">
                         <thead>
                                 <tr style="font-weight: bold; color: white">
                                     <th style="display: none">ID </th>
@@ -112,7 +113,7 @@
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 1%">
                                                 <label style="font-size: 20">Descripción de la dimension</label>
-                                                <textarea class="form-control" name="desc_dimension" type="text"  style="color: black" placeholder="Ingrese la descripción de la dimension" rows="3" cols="50"  required></textarea>
+                                                <textarea class="form-control form-control-lg" name="desc_dimension" type="text"  style="color: black" placeholder="Ingrese la descripción de la dimension" rows="3" cols="50"  required></textarea>
                                                 <span style="color: red">@error('desc_dimension')  Debe ingresar una descripción para la dimensión @enderror</span>
                                             </div>
 
@@ -168,7 +169,7 @@
 
                                         <div class="form-group" style="margin: auto; margin-bottom: 1%">
                                             <label style="font-size: 20">Descripción de la dimension</label>
-                                            <textarea class="form-control" name="desc_dimension" id="desc_dimension" type="text"  style="color: black" placeholder="Ingrese la descripción de la dimension" rows="3" cols="50"  required></textarea>
+                                            <textarea class="form-control form-control-lg" name="desc_dimension" id="desc_dimension" type="text"  style="color: black" placeholder="Ingrese la descripción de la dimension" rows="3" cols="50"  required></textarea>
                                             <span style="color: red">@error('desc_dimension')  Debe ingresar una descripción para la dimensión @enderror</span>
                                         </div>
 
@@ -275,7 +276,7 @@
 
 
 
-            //TABLA DE COMPETENCIAS
+            //TABLA DE DIMENSIONES
 
             //modificar
             table.on('click', '.edit', function() {
