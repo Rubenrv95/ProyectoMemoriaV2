@@ -36,6 +36,7 @@ class AprendizajeController extends Controller
         $competencia = json_decode($competencia, true);
         $aprendizaje = json_decode($aprendizaje, true);
         $dimension = json_decode($dimension, true);
+        
         return view('carreras.aprendizajes')->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje)->with('dimension', $dimension);
     }
 
@@ -127,17 +128,61 @@ class AprendizajeController extends Controller
      */
     public function update($id_carrera, Request $request, $id_aprend)
     {
-        $request->validate([
-            'desc_aprendizaje'=>'required'
-        ]);
 
 
-        $query = DB::table('aprendizajes')->where('id', $id_aprend)->update([
-            'Descripcion_aprendizaje'=>$request->input('desc_aprendizaje'),
-            'refCompetencia'=>$request->input('refComp'),
-        ]);
+        //Aprendizaje inicial
+        if ($request->input('Nivel') == 'Inicial') {
+            $request->validate([
+                'aprendizaje_inicial'=>'required',
+            ]);
 
-        return back()->withSuccess('Aprendizaje actualizado con éxito');
+            $query = DB::table('aprendizajes')->where('id', $id_aprend)->update([
+                'Descripcion_aprendizaje'=>$request->input('aprendizaje_inicial'),
+            ]);
+
+            return back()->withSuccess('Aprendizaje actualizado con éxito');
+        }
+
+        //Aprendizaje en desarrollo
+        else if ($request->input('Nivel') == 'En desarrollo') {
+            $request->validate([
+                'aprendizaje_desarrollo'=>'required',
+            ]);
+
+            $query = DB::table('aprendizajes')->where('id', $id_aprend)->update([
+                'Descripcion_aprendizaje'=>$request->input('aprendizaje_desarrollo'),
+            ]);
+
+            return back()->withSuccess('Aprendizaje actualizado con éxito');
+        }
+
+        //Aprendizaje logrado
+        else if ($request->input('Nivel') == 'Logrado') {
+            $request->validate([
+                'aprendizaje_logrado'=>'required',
+            ]);
+
+            $query = DB::table('aprendizajes')->where('id', $id_aprend)->update([
+                'Descripcion_aprendizaje'=>$request->input('aprendizaje_logrado'),
+            ]);
+
+            return back()->withSuccess('Aprendizaje actualizado con éxito');
+        }
+
+        //Aprendizaje especializacion
+        else if ($request->input('Nivel') == 'Especializacion') {
+            $request->validate([
+                'aprendizaje_especializacion'=>'required',
+            ]);
+
+            $query = DB::table('aprendizajes')->where('id', $id_aprend)->update([
+                'Descripcion_aprendizaje'=>$request->input('aprendizaje_especializacion'),
+            ]);
+
+            return back()->withSuccess('Aprendizaje actualizado con éxito');
+        }
+
+        return back()->withAlert('No se pudo modificar el aprendizaje');
     }
 
     /**

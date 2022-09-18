@@ -81,11 +81,6 @@
                                     </div>
                                     <div class="modal-body">
 
-                                            <div class="form-group" style="margin: auto; margin-bottom: 2%">
-                                                <label style="font-size: 20">Nombre de la carrera</label>
-                                                <input class="form-control form-control-lg" name="nombre_carrera" style="width:100%; color: black"  placeholder="Ingrese el nombre de la carrera" maxlength="191" required/>
-                                            </div>
-
                                             <div class="form-group" style="margin: auto">
                                                 <label style="font-size: 20">Facultad</label>
                                                 <select class="form-select form-select-lg" name="facultad" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
@@ -95,6 +90,11 @@
                                                     <option value="Santiago">Santiago</option>      
                                                     <option value="Talca">Talca</option>                                                 
                                                 </select>
+                                            </div>
+
+                                            <div class="form-group" style="margin: auto; margin-bottom: 2%">
+                                                <label style="font-size: 20">Nombre de la carrera</label>
+                                                <input class="form-control form-control-lg" name="nombre_carrera" style="width:100%; color: black"  placeholder="Ingrese el nombre de la carrera" maxlength="191" required/>
                                             </div>
 
                                             <div class="form-group" style="margin: auto">
@@ -147,10 +147,6 @@
                                         <h1 class="justify-content-center" style="margin: auto"> Modificar carrera</h1>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="form-group" style="margin: auto; margin-bottom: 2%">
-                                            <label style="font-size: 20">Nombre de la carrera</label>
-                                            <input class="form-control form-control-lg" name="nombre_carrera" id ="nombre_carrera" style="width:100%; color: black" value="" placeholder="Ingrese el nombre de la carrera" maxlength="191" required/>
-                                        </div>
 
                                         <div class="form-group" style="margin: auto">
                                             <label style="font-size: 20">Facultad</label>
@@ -161,6 +157,11 @@
                                                     <option value="Santiago">Santiago</option>      
                                                     <option value="Talca">Talca</option>      
                                             </select>
+                                        </div>
+                                        
+                                        <div class="form-group" style="margin: auto; margin-bottom: 2%">
+                                            <label style="font-size: 20">Nombre de la carrera</label>
+                                            <input class="form-control form-control-lg" name="nombre_carrera" id ="nombre_carrera" style="width:100%; color: black" value="" placeholder="Ingrese el nombre de la carrera" maxlength="191" required/>
                                         </div>
 
                                         <div class="form-group" style="margin: auto">
