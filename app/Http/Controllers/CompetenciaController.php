@@ -129,6 +129,8 @@ class CompetenciaController extends Controller
     public function destroy($id, $id_comp)
     {
         $query = DB::table('competencias')->where('id', $id_comp)->delete();
+        $query2 = DB::table('dimensions')->where('refCompetencia', $id_comp)->delete();
+        $query3 = DB::table('aprendizajes')->where('refCompetencia', $id_comp)->delete();
         
         return back()->withSuccess('Competencia eliminada con éxito');
     }

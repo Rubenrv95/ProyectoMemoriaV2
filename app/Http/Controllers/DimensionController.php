@@ -128,6 +128,7 @@ class DimensionController extends Controller
     public function destroy($id_carrera, $id_dim)
     {
         $query = DB::table('dimensions')->where('id', $id_dim)->delete();
+        $query2 = DB::table('aprendizajes')->where('refDimension', $id_dim)->delete();
         
         return back()->withSuccess('Dimensión eliminada con éxito');
     }

@@ -9,24 +9,64 @@
 <body>
 
 
-    <h1>Competencias</h1>
-    @foreach ($competencia as $c)
-    <h3>{{$c['Descripcion']}}</h3>
+
+    @foreach ($carrera as $car)
+    <h1 style="text-align: center">Resumen Plan de Estudio {{$car['nombre']}}</h1>
     @endforeach
 
-    <h1>Aprendizajes</h1>
+    <p>A continuación, se presenta un reporte de toda la información de la carrera de {{$car['nombre']}}, incluyendo
+        competencias, aprendizajes, saberes y módulos asociados.
+    </p>
 
-    @foreach ($aprendizaje as $a)
-    <h3>{{$a['Descripcion_aprendizaje']}}</h3>
-    @endforeach
+    <h2>Competencias</h2>
 
-    <h1>Saberes Conocer</h1>
+    <table>
+        <thead>
+            <tr>
+                <td>Orden</td>
+                <td>Descripción de Competencia</td>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach ($competencia as $c)
+            <tr>
+                <td>{{$c['Orden']}}</td>
+                <td>{{$c['Descripcion']}}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+
+    <h2>Aprendizajes</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <td>Competencia asociada</td>
+                <td>Dimensión</td>
+                <td>Aprendizaje</td>
+                <td>Nivel de aprendizaje</td>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach ($aprendizaje as $a)
+            <tr>
+                <td>{{$a['OrdenComp']}}. {{$a['Descripcion']}}</td>
+                <td>{{$a['Descripcion_dimension']}}</td>
+                <td>{{$a['Descripcion_aprendizaje']}}</td>
+                <td>{{$a['Nivel_aprend']}}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+
+    <h2>Saberes Conocer</h2>
 
     @foreach ($saber_conocer as $sc)
     <h3>{{$sc['Descripcion_saber']}}</h3>
     @endforeach
 
-    <h1>Saberes Hacer</h1>
+    <h2>Saberes Hacer</h2>
 
     @foreach ($saber_hacer as $sh)
     <h3>{{$sh['Descripcion_saber']}}</h3>

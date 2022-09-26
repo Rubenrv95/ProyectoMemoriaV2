@@ -94,7 +94,7 @@ class CarreraController extends Controller
 
     public function createPDF($carrera) {
         $competencia = DB::table('competencias')->where('refCarrera', $carrera)->get();
-        $aprendizaje = DB::table('aprendizajes')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $carrera)->select('aprendizajes.*', 'competencias.Descripcion')->get();
+        $aprendizaje = DB::table('aprendizajes')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden', 'dimensions.id as idDim')->get();
         $saber_conocer = DB::table('saber_conocers')->leftJoin('aprendizajes', 'saber_conocers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $carrera)->select('saber_conocers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refCarrera')->get();
         $saber_hacer = DB::table('saber_hacers')->leftJoin('aprendizajes', 'saber_hacers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $carrera)->select('saber_hacers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refCarrera')->get();
         $competencia = json_decode($competencia, true);

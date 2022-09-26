@@ -93,11 +93,16 @@
                                     </td>  
                                     <td style="display: none">{{$aprend['Descripcion_aprendizaje']}}</td>
                                     <td style="text-align: center">  
-                                        {{$aprend['Descripcion_aprendizaje']}}  
                                         @if (Auth::user()->rol != 'Dirección de docencia')
-                                            <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_inicial" class="edit1"> </button>
-                                            <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete1"> </button>
-                                        @endif                              
+                                        <div class="dropdown-container" tabindex="-1" style="float:right;">
+                                            <div class="three-dots"></div>
+                                            <div class="dropdown">
+                                                <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_inicial" class="edit1"> </button>
+                                                <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete1"> </button>
+                                            </div>
+                                        </div>
+                                        @endif         
+                                        {{$aprend['Descripcion_aprendizaje']}}                       
                                     </td>
                                     @else 
                                     <td style="text-align: center;display: none"></td>  
@@ -110,12 +115,17 @@
                                         {{$aprend['id']}}                 
                                     </td> 
                                     <td style="display: none">{{$aprend['Descripcion_aprendizaje']}}  </td>
-                                    <td style="text-align: center">      
-                                        {{$aprend['Descripcion_aprendizaje']}}   
+                                    <td style="text-align: center">   
                                         @if (Auth::user()->rol != 'Dirección de docencia')
-                                            <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_desarrollo" class="edit2"> </button>
-                                            <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete2"> </button>
-                                        @endif                                    
+                                        <div class="dropdown-container" tabindex="-1" style="float:right;">
+                                            <div class="three-dots"></div>
+                                            <div class="dropdown">
+                                                <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_desarrollo" class="edit2"> </button>
+                                                <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete2"> </button>
+                                            </div>
+                                        </div>
+                                        @endif    
+                                        {{$aprend['Descripcion_aprendizaje']}}                                    
                                     </td>
                                     @else 
                                     <td style="text-align: center;display: none"></td>  
@@ -128,12 +138,17 @@
                                         {{$aprend['id']}}                 
                                     </td> 
                                     <td style="display: none">{{$aprend['Descripcion_aprendizaje']}}  </td>
-                                    <td style="text-align: center">         
-                                        {{$aprend['Descripcion_aprendizaje']}}    
+                                    <td style="text-align: center"> 
                                         @if (Auth::user()->rol != 'Dirección de docencia')
-                                            <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_logrado" class="edit3"> </button>
-                                            <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete3"> </button>
-                                        @endif                           
+                                        <div class="dropdown-container" tabindex="-1" style="float:right;">
+                                            <div class="three-dots"></div>
+                                            <div class="dropdown">
+                                                <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_logrado" class="edit3"> </button>
+                                                <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete3"> </button>
+                                            </div>
+                                        </div>
+                                        @endif            
+                                        {{$aprend['Descripcion_aprendizaje']}}                             
                                     </td>
                                     @else 
                                     <td style="text-align: center;display: none"></td>
@@ -147,11 +162,16 @@
                                     </td> 
                                     <td style="display: none">{{$aprend['Descripcion_aprendizaje']}}  </td>
                                     <td style="text-align: center">
-                                        {{$aprend['Descripcion_aprendizaje']}}  
                                         @if (Auth::user()->rol != 'Dirección de docencia')
-                                            <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_especializacion" class="edit4"> </button>
-                                            <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete4"> </button>
-                                        @endif
+                                            <div class="dropdown-container" tabindex="-1" style="float:right;">
+                                                <div class="three-dots"></div>
+                                                <div class="dropdown">
+                                                    <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_especializacion" class="edit4"> </button>
+                                                    <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete4"> </button>
+                                                </div>
+                                            </div>
+                                        @endif  
+                                        {{$aprend['Descripcion_aprendizaje']}}  
                                     </td>      
                                     @else 
                                     <td style="text-align: center;display: none"></td>  
