@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>Lista de Usuarios</title>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
         <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
@@ -20,7 +21,7 @@
                 Agregar usuario
                 </button>
 
-                <table id="lista" class="table table-striped table-bordered" width="100%">
+                <table id="lista" class="table table-striped table-bordered" style="text-align: center" width="100%">
                         <thead>
                                 <tr style="font-weight: bold; color: white">
                                 <th style="display: none">ID <img src="/images/arrows.png" alt="" srcset=""></th>

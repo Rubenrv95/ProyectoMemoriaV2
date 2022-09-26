@@ -22,19 +22,23 @@ class AprendizajeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id_carrera, $id_plan)
+    public function index($id_carrera)
     {
-        $plan = DB::table('plans')->where('id', $id_plan)->get();
         $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
-        $plan = json_decode($plan, true);
         $carrera = json_decode($carrera, true);
-        $competencia = DB::table('competencias')->where('refPlan', $id_plan)->get();
-        $aprendizaje = DB::table('aprendizajes')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $id_plan)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden')->get();
-        $saber = DB::table('saber_conocers')->leftJoin('aprendizajes', 'saber_conocers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $id_plan)->select('saber_conocers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refPlan')->get();
+        
+        $competencia = DB::table('competencias')->where('refCarrera', $id_carrera)->get();
+        $dimension =  DB::table('dimensions')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('dimensions.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp')->get();
+        $aprendizaje = DB::table('aprendizajes')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden', 'dimensions.id as idDim')->get();
+        
+        $dimension = $dimension->sortByDesc('Orden');
+        $aprendizaje = $aprendizaje->sortByDesc('Orden');
+        
         $competencia = json_decode($competencia, true);
         $aprendizaje = json_decode($aprendizaje, true);
-        $saber = json_decode($saber, true);
-        return view('planes.aprendizajes')->with('plan', $plan)->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje)->with('saber', $saber);
+        $dimension = json_decode($dimension, true);
+        
+        return view('carreras.aprendizajes')->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje)->with('dimension', $dimension);
     }
 
     /**
@@ -42,17 +46,19 @@ class AprendizajeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id_carrera, $id_plan, Request $request)
+    public function create($id_carrera, Request $request)
     {
         $request->validate([
-            'desc_aprendizaje'=>'required'
+            'aprendizaje_desc'=>'required',
         ]);
 
 
         $query = DB::table('aprendizajes')->insert([
-            'Descripcion_aprendizaje'=>$request->input('desc_aprendizaje'),
-            'refCompetencia'=>$request->input('refComp'),
-            'refPlan'=>$id_plan,
+            'Descripcion_aprendizaje'=>$request->input('aprendizaje_desc'),
+            'refCompetencia'=>$request->input('refCompCrear'),
+            'refDimension'=>$request->input('dimension'),
+            'Nivel_aprend'=>$request->input('nivel'),
+            'refCarrera'=>$id_carrera,
         ]);
 
         return back()->withSuccess('Aprendizaje creado con éxito');
@@ -75,19 +81,33 @@ class AprendizajeController extends Controller
      * @param  \App\Models\Aprendizaje  $aprendizaje
      * @return \Illuminate\Http\Response
      */
-    public function show($id_carrera, $id_plan)
+    public function show($id_carrera, $id_competencia)
     {
-        $plan = DB::table('plans')->where('id', $id_plan)->get();
+
+        $dim =  DB::table('dimensions')->where('dimensions.refCompetencia', '=', $id_competencia)->get();
+
+        return response()->json($dim);
+    }
+
+       /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Aprendizaje  $aprendizaje
+     * @return \Illuminate\Http\Response
+     */
+    public function show_Tempo($id_carrera)
+    {
         $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
-        $plan = json_decode($plan, true);
         $carrera = json_decode($carrera, true);
-        $competencia = DB::table('competencias')->where('refPlan', $id_plan)->get();
-        $aprendizaje = DB::table('aprendizajes')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refPlan', '=', $id_plan)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden')->get();
+        $competencia = DB::table('competencias')->where('refCarrera', $id_carrera)->get();
+        $aprendizaje = DB::table('aprendizajes')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden')->get();
         $competencia = json_decode($competencia, true);
         $aprendizaje = json_decode($aprendizaje, true);
-        return view('planes.tempo_aprendizajes')->with('plan', $plan)->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje);
+        return view('carreras.tempo_aprendizajes')->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje);
 
     }
+
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -107,19 +127,63 @@ class AprendizajeController extends Controller
      * @param  \App\Models\Aprendizaje  $aprendizaje
      * @return \Illuminate\Http\Response
      */
-    public function update($id_carrera, $id_plan, Request $request, $id_aprend)
+    public function update($id_carrera, Request $request, $id_aprend)
     {
-        $request->validate([
-            'desc_aprendizaje'=>'required'
-        ]);
 
 
-        $query = DB::table('aprendizajes')->where('id', $id_aprend)->update([
-            'Descripcion_aprendizaje'=>$request->input('desc_aprendizaje'),
-            'refCompetencia'=>$request->input('refComp'),
-        ]);
+        //Aprendizaje inicial
+        if ($request->input('Nivel') == 'Inicial') {
+            $request->validate([
+                'aprendizaje_inicial'=>'required',
+            ]);
 
-        return back()->withSuccess('Aprendizaje actualizado con éxito');
+            $query = DB::table('aprendizajes')->where('id', $id_aprend)->update([
+                'Descripcion_aprendizaje'=>$request->input('aprendizaje_inicial'),
+            ]);
+
+            return back()->withSuccess('Aprendizaje actualizado con éxito');
+        }
+
+        //Aprendizaje en desarrollo
+        else if ($request->input('Nivel') == 'En desarrollo') {
+            $request->validate([
+                'aprendizaje_desarrollo'=>'required',
+            ]);
+
+            $query = DB::table('aprendizajes')->where('id', $id_aprend)->update([
+                'Descripcion_aprendizaje'=>$request->input('aprendizaje_desarrollo'),
+            ]);
+
+            return back()->withSuccess('Aprendizaje actualizado con éxito');
+        }
+
+        //Aprendizaje logrado
+        else if ($request->input('Nivel') == 'Logrado') {
+            $request->validate([
+                'aprendizaje_logrado'=>'required',
+            ]);
+
+            $query = DB::table('aprendizajes')->where('id', $id_aprend)->update([
+                'Descripcion_aprendizaje'=>$request->input('aprendizaje_logrado'),
+            ]);
+
+            return back()->withSuccess('Aprendizaje actualizado con éxito');
+        }
+
+        //Aprendizaje especializacion
+        else if ($request->input('Nivel') == 'Especializacion') {
+            $request->validate([
+                'aprendizaje_especializacion'=>'required',
+            ]);
+
+            $query = DB::table('aprendizajes')->where('id', $id_aprend)->update([
+                'Descripcion_aprendizaje'=>$request->input('aprendizaje_especializacion'),
+            ]);
+
+            return back()->withSuccess('Aprendizaje actualizado con éxito');
+        }
+
+        return back()->withAlert('No se pudo modificar el aprendizaje');
     }
 
     /**
@@ -128,7 +192,7 @@ class AprendizajeController extends Controller
      * @param  \App\Models\Aprendizaje  $aprendizaje
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_carrera, $id_plan, $id_aprend)
+    public function destroy($id_carrera, $id_aprend)
     {
         $query = DB::table('aprendizajes')->where('id', $id_aprend)->delete();
         

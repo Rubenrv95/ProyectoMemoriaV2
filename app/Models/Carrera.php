@@ -9,6 +9,10 @@ class Carrera extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nombre',
+    ];
+
     function getData() {
         $query = $this->db->get('carreras');
         return $query->result();

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Datatables;
 use App\Http\Controllers\PlanController;
+use PDF;
+
 
 class CarreraController extends Controller
 {
@@ -43,6 +45,8 @@ class CarreraController extends Controller
         $query = DB::table('carreras')->insert([
             'nombre'=>$request->input('nombre_carrera'),
             'facultad'=>$request->input('facultad'),
+            'formacion'=>$request->input('formacion'),
+            'tipo'=>$request->input('tipo'),
         ]);
 
 
@@ -64,6 +68,42 @@ class CarreraController extends Controller
     {
         //
     }
+
+    public function copy(Request $request, $carrera)
+    {
+        $carrera = Carrera::find($carrera);
+
+        //$carrera= json_encode($carrera, true);
+
+        $newCarrera = $carrera->replicate()->fill(
+            [
+                'nombre' => $request->input('nombre_carrera_nueva'),
+                'facultad' => $request->input('facultad_nueva'),
+                'formacion' => $request->input('formacion_nueva'),
+                'tipo' => $request->input('tipo_nuevo'),
+            ]
+        );
+        //$newTask->project_id = 16; // the new project_id
+        $newCarrera->save();
+
+        
+
+
+        return back();
+    }
+
+    public function createPDF($carrera) {
+        $competencia = DB::table('competencias')->where('refCarrera', $carrera)->get();
+        $aprendizaje = DB::table('aprendizajes')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden', 'dimensions.id as idDim')->get();
+        $saber_conocer = DB::table('saber_conocers')->leftJoin('aprendizajes', 'saber_conocers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $carrera)->select('saber_conocers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refCarrera')->get();
+        $saber_hacer = DB::table('saber_hacers')->leftJoin('aprendizajes', 'saber_hacers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $carrera)->select('saber_hacers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refCarrera')->get();
+        $competencia = json_decode($competencia, true);
+        $aprendizaje = json_decode($aprendizaje, true);
+        $saber_conocer = json_decode($saber_conocer, true);
+        $saber_hacer = json_decode($saber_hacer, true);
+        $pdf = PDF::loadView('descargas.reporte', compact('carrera', 'competencia', 'aprendizaje', 'saber_conocer', 'saber_hacer'));
+        return $pdf->download('reporte.pdf');
+      }
 
     /**
      * Display the specified resource.
@@ -109,6 +149,8 @@ class CarreraController extends Controller
         $query = DB::table('carreras')->where('id', $id)->update([
             'nombre'=>$request->input('nombre_carrera'),
             'facultad'=>$request->input('facultad'),
+            'formacion'=>$request->input('formacion'),
+            'tipo'=>$request->input('tipo'),
         ]);
         
 
@@ -125,18 +167,13 @@ class CarreraController extends Controller
      */
     public function destroy($id)
     {
-
-
-        $planes = DB::table('plans')->where('Carrera_asociada', $id)->get();
-
-        $controlador = new PlanController;
-
-        foreach ($planes as $plan) {
-            $id_plan = $plan->id;
-            $controlador->destroy($id, $id_plan);    
-        }
-
         $query = DB::table('carreras')->where('id', $id)->delete();
+
+        $query2= 'DELETE competencias, dimensions FROM competencias 
+          INNER JOIN dimensions ON dimensions.refCompetencia = competencias.id
+          WHERE competencias.refCarrera = ?';
+
+        $status = \DB::delete($query2, array($id));
         
         return back()->withSuccess('Carrera eliminada con éxito');
     }
