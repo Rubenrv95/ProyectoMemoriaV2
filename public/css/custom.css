@@ -118,17 +118,24 @@ header {
     border-radius: 6px;
 }
 
-.boton_login:focus, .boton_login.focus {
+.button-login:focus, .button-login.focus {
     background-color: #525252;
     border-color: rgb(87, 87, 87);
     border-radius: 6px;
-    box-shadow: 0 0 0 0.2rem #999999;;
+    box-shadow: 0 0 0 0.2rem #999999;
 }
 
-.boton_login.disabled, .boton_login:disabled {
+.button-login.disabled, .button-login:disabled {
     color: #fff;
     background-color: #333333;
     border-color: #333333;
+  }
+
+  .button-login:not(:disabled):not(.disabled):active, .button-login:not(:disabled):not(.disabled).active,
+  .show > .button-login.dropdown-toggle {
+    color: #fff;
+    background-color: #636363;
+    border-color: #585858;
   }
 
 .button-login:active {
@@ -227,7 +234,7 @@ header {
     background-color: #525252;
     border-color: rgb(87, 87, 87);
     border-radius: 6px;
-    box-shadow: 0 0 0 0.2rem #999999;;
+    box-shadow: 0 0 0 0.2rem #999999;
 }
 
 .boton_gestionar.disabled, .boton_gestionar:disabled {
@@ -445,16 +452,29 @@ header {
     background-color: #929292;
 }
 
+.three-dots {
+  width: 30px;
+}
+
+
 .three-dots:after {
     cursor: pointer;
     color: rgb(0, 0, 0);
     content: '\2807';
     font-size: 20px;
     padding: 0 5px;
+    width: 30px;
+  }
+
+  .three-dots:hover {
+    background-color: rgb(68, 68, 68);
+    border-radius: 10px;
+    width: 30px;
   }
 
 
-.dropdown {
+
+.dropdown-table {
     position: absolute;
     right: 10px;
     background-color: #ddd;

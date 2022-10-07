@@ -53,11 +53,6 @@ class CarreraController extends Controller
         return back()->withSuccess('Carrera creada con éxito');
     }
 
-    public function createForm()
-    {
-        return view('crearCarrera');
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -94,14 +89,16 @@ class CarreraController extends Controller
 
     public function createPDF($carrera) {
         $competencia = DB::table('competencias')->where('refCarrera', $carrera)->get();
-        $aprendizaje = DB::table('aprendizajes')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden', 'dimensions.id as idDim')->get();
-        $saber_conocer = DB::table('saber_conocers')->leftJoin('aprendizajes', 'saber_conocers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $carrera)->select('saber_conocers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refCarrera')->get();
-        $saber_hacer = DB::table('saber_hacers')->leftJoin('aprendizajes', 'saber_hacers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $carrera)->select('saber_hacers.*', 'aprendizajes.Descripcion_aprendizaje', 'competencias.refCarrera')->get();
+        $aprendizaje = DB::table('aprendizajes')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden', 'dimensions.id as idDim')->get();
+        $saber = DB::table('saberes')->leftJoin('aprendizajes', 'saberes.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $carrera)->select('saberes.*', 'aprendizajes.Descripcion_aprendizaje', 'dimensions.Descripcion_dimension', 'dimensions.Orden as OrdenDim', 'competencias.Orden as OrdenComp', 'competencias.Descripcion')->get();
+
+        $carrera_seleccionada = DB::table('carreras')->where('id', $carrera)->get();
         $competencia = json_decode($competencia, true);
         $aprendizaje = json_decode($aprendizaje, true);
-        $saber_conocer = json_decode($saber_conocer, true);
-        $saber_hacer = json_decode($saber_hacer, true);
-        $pdf = PDF::loadView('descargas.reporte', compact('carrera', 'competencia', 'aprendizaje', 'saber_conocer', 'saber_hacer'));
+        $saber = json_decode($saber, true);
+        
+        $carrera_seleccionada = json_decode($carrera_seleccionada, true);
+        $pdf = PDF::loadView('descargas.reporte', compact('carrera_seleccionada', 'competencia', 'aprendizaje', 'saber'));
         return $pdf->download('reporte.pdf');
       }
 

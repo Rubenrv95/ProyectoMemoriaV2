@@ -29,8 +29,8 @@
                 <hr class="solid" style="border-width: 1px; background-color: black">
                 <a href="/carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
                 <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/saber_conocer"><button type="button" class="boton_gestionar">Saberes</button></a> 
-                <a href="/carreras/{{$c['id']}}/malla"><button type="button" class="boton_gestionar">Módulos</button></a> 
+                <a href="/carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
+                <a href="/carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
@@ -41,7 +41,7 @@
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
         </div>
-        <div class="container-fluid">   
+        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
             <h3 class="mb-0 text-gray-800">Gestión de Competencias</h3>
             @if (Auth::user()->rol != 'Dirección de docencia')
                 <button class="agregar" data-bs-toggle="modal" data-bs-target="#modal_crear_competencia" style="margin-bottom: 1%; margin-top: 1%">
@@ -53,11 +53,11 @@
                         <thead>
                                 <tr style="font-weight: bold; color: white">
                                     <th style="display: none">ID⇵</th>
-                                    <th>Número/Orden⇵</th>
-                                    <th>Competencia⇵</th>
-                                    <th>Fecha de creación⇵</th>
-                                    <th>Fecha de actualización⇵</th>
-                                    <th></th>
+                                    <th style="width: 8%">Número/Orden⇵</th>
+                                    <th style="width: 54%">Competencia⇵</th>
+                                    <th style="width: 15%">Fecha de creación⇵</th>
+                                    <th style="width: 15%">Fecha de actualización⇵</th>
+                                    <th style="width: 8%"></th>
                                 </tr>
                         </thead>
                         
@@ -66,11 +66,11 @@
                             @foreach ($competencia as $comp)   
                                 <tr>
                                     <td style="display: none">{{$comp['id']}}</td>
-                                    <td rowspan="1">{{$comp['Orden']}}</td>
-                                    <td rowspan="1">{{$comp['Descripcion']}}</td>
-                                    <td rowspan="1">{{$comp['Fecha_creacion']}}</td>
-                                    <td>{{$comp['updated_at']}}</td>
-                                    <td rowspan="1">
+                                    <td rowspan="1" style="text-align: center">{{$comp['Orden']}}</td>
+                                    <td rowspan="1" style="text-align: center">{{$comp['Descripcion']}}</td>
+                                    <td rowspan="1" style="text-align: center">{{$comp['created_at']}}</td>
+                                    <td style="text-align: center">{{$comp['updated_at']}}</td>
+                                    <td rowspan="1" style="text-align: center">
                                         @if (Auth::user()->rol != 'Dirección de docencia')
                                             <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_competencia" class="edit"> </button>
                                             <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_competencia" class="delete"> </button>
@@ -237,7 +237,7 @@
                     "decimal": "",
                     "emptyTable": "No hay información",
                     "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
                     "infoFiltered": "(Filtrado de _MAX_ total entradas)",
                     "infoPostFix": "",
                     "thousands": ",",

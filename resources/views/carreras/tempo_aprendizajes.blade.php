@@ -5,13 +5,11 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        @foreach ($plan as $p)
-        @endforeach
 
         @foreach ($carrera as $c)
         @endforeach
 
-        <title>Perfil de Egreso {{$p['Nombre']}} - {{$c['nombre']}}</title>
+        <title>Aprendizajes {{$c['nombre']}}</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
         <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
@@ -24,70 +22,51 @@
                 
                 <a href="/carreras/{{$c['id']}}"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="mb-0 text-gray-800">Aprendizajes {{$p['Nombre']}} - {{$c['nombre']}} </h1>
+                        <h1 class="mb-0 text-gray-800">Aprendizajes {{$c['nombre']}} </h1>
                 </div>
 
-                <hr class="solid">
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/saber_conocer"><button type="button" class="boton_gestionar">Saberes</button></a> 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/malla"><button type="button" class="boton_gestionar">Módulos</button></a> 
+                <hr class="solid" style="border-width: 1px; background-color: black">
+                <a href="/carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
+                <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
+                <a href="/carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
+                <a href="/carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
 
-                <hr class="solid">
+                <hr class="solid" style="border-width: 1px; background-color: black">
 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/aprendizajes"><button type="button" class="btn btn-secondary">Gestión de Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/{{$p['id']}}/tempo_aprendizajes"><button type="button" class="btn btn-secondary">Temporalización de Aprendizajes</button></a> 
+                <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="btn btn-secondary">Gestión de Aprendizajes</button></a> 
+                <a href="/carreras/{{$c['id']}}/tempo_aprendizajes"><button type="button" class="btn btn-secondary">Temporalización de Aprendizajes</button></a> 
 
-                <hr class="solid">
+                <hr class="solid" style="border-width: 1px; background-color: black">
 
         </div>
-        <div class="container-fluid">   
+        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
             <h3 class="mb-0 text-gray-800">Temporalización de Aprendizajes</h3>
 
 
             <form action="" method="post">
                 <table id="lista" class="table table-striped table-bordered" width="100%">
                     <thead>
-                        <th>Competencia Asociada</th>
-                        <th>Aprendizaje</th>
-                        <th>Nivel 1</th>
-                        <th>Nivel 2</th>
-                        <th>Nivel 3</th>
-                        <th>Nivel 4</th>
-                        <th>Nivel 5</th>
-                        <th>Nivel 6</th>
-                        <th>Nivel 7</th>
-                        <th>Nivel 8</th>
-                        <th>Nivel 9</th>
-                        <th>Nivel 10</th>
-                        <th>Nivel 11</th>
-                        <th>Nivel 12</th>
-                        <th>Nivel 13</th>
-                        <th>Nivel 14</th>
-                        <th>Nivel 15</th>
-                        <th>Nivel 16</th>
+                        <tr style="font-weight: bold; color: white">
+                            <th style="width: 20%; text-align: center">Competencia Asociada⇵</th>
+                            <th style="width: 20%; text-align: center">Nivel de Aprendizaje⇵</th>
+                            <th style="width: 20%; text-align: center">Aprendizaje⇵</th>
+                            <th style="width: 20%; text-align: center">Dimension⇵</th>
+                            @for ($i = 1; $i <= 16; $i++)
+                                <th style="text-align: center">Nivel {{$i}}</th>
+                            @endfor
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach ($aprendizaje as $a)
                         <tr>
                             <td>{{$a['Orden']}}. {{$a['Descripcion']}}</td>
+                            <td>{{$a['Nivel_aprend']}}</td>
                             <td>{{$a['Descripcion_aprendizaje']}}</td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
+                            <td>{{$a['Descripcion_dimension']}}</td>
+
+                            @for ($i = 1; $i <= 16; $i++)
+                            <td> <input type="checkbox" style="width: 30px; height: 30px; text-align: center"></td>
+                            @endfor
                         </tr>
                         @endforeach
                     </tbody>
@@ -110,7 +89,7 @@
                 <div class ="col-md-12">
                     <div tabIndex="-1"  class="modal fade" id="modal_crear_competencia" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form action="/carreras/{{$c['id']}}/{{$p['id']}}/competencias" method="POST" class="form-group">
+                            <form action="/carreras/{{$c['id']}}/competencias" method="POST" class="form-group">
                             @csrf
                                 <div class="modal-content">
 
@@ -171,7 +150,7 @@
                     <div class="modal fade" id="modal_modificar_competencia" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
 
-                            <form method = "POST" action = "/carreras/{{$c['id']}}/{{$p['id']}}/competencias" class="form-group" id = "editForm">
+                            <form method = "POST" action = "/carreras/{{$c['id']}}/competencias" class="form-group" id = "editForm">
 
                             @csrf
                             @method('PUT')
@@ -235,7 +214,7 @@
                 <div class ="col-md-12">
                     <div class="modal fade" id="modal_eliminar_competencia" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form method = "POST" action = "/carreras/{{$c['id']}}/{{$p['id']}}/competencias" class="form-group" id = "deleteForm">
+                            <form method = "POST" action = "/carreras/{{$c['id']}}/competencias" class="form-group" id = "deleteForm">
 
                                 @csrf
                                 @method('DELETE')
@@ -271,7 +250,28 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]]
+                "order": [[ 1, "asc" ]],
+
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
             });
 
             

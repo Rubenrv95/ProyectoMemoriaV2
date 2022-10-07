@@ -29,8 +29,8 @@
 
                 <a href="/carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
                 <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/saber_conocer"><button type="button" class="boton_gestionar">Saberes</button></a> 
-                <a href="/carreras/{{$c['id']}}/malla"><button type="button" class="boton_gestionar">Módulos</button></a> 
+                <a href="/carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
+                <a href="/carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
@@ -41,7 +41,7 @@
 
         </div>
 
-        <div class="container-fluid">   
+        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
             <h3 class="mb-0 text-gray-800">Gestión de Aprendizajes</h3>
 
             @if (Auth::user()->rol != 'Dirección de docencia')
@@ -55,23 +55,23 @@
                                 <tr style="font-weight: bold; color: white">
                                     <th rowspan="2" style="display: none">ID Competencia</th>
                                     <th rowspan="2" style="display: none">ID Dimension</th>
-                                    <th rowspan="2">Competencia⇵</th>
-                                    <th rowspan="2">Dimensión⇵</th>
-                                    <th colspan="4" >Aprendizajes</th>
+                                    <th rowspan="2" style="width: 20%; text-align: center">Competencia⇵</th>
+                                    <th rowspan="2" style="width: 20%; text-align: center">Dimensión⇵</th>
+                                    <th colspan="4" style="text-align: center">Aprendizajes</th>
                                 </tr>
                                 <tr style="font-weight: bold; color: white">
                                     <th style="display: none">ID Inicial</th>
                                     <th style="display: none">Inicial</th>
-                                    <th>Inicial⇵</th>
+                                    <th style="width: 15%">Inicial⇵</th>
                                     <th style="display: none">ID Desarrollo</th>
                                     <th style="display: none">Desarrollo</th>
-                                    <th>En desarrollo⇵</th>
+                                    <th style="width: 15%">En desarrollo⇵</th>
                                     <th style="display: none">ID Logrado</th>
                                     <th style="display: none">Logrado</th>
-                                    <th>Logrado⇵</th>
+                                    <th style="width: 15%">Logrado⇵</th>
                                     <th style="display: none">ID Especializacion</th>
                                     <th style="display: none">Especializacion</th>
-                                    <th>Especialización⇵</th>
+                                    <th style="width: 15%">Especialización⇵</th>
                                 </tr>
                         </thead>
                         
@@ -83,101 +83,93 @@
                                     <td style="display: none">{{$aprend['idDim']}}</td>
 
 
-                                    <td>{{$aprend['OrdenComp']}}. {{$aprend['Descripcion']}}</td>
-                                    <td>{{$aprend['Orden']}}. {{$aprend['Descripcion_dimension']}}</td>
+                                    <td style="text-align: center">{{$aprend['OrdenComp']}}. {{$aprend['Descripcion']}}</td>
+                                    <td style="text-align: center">{{$aprend['Orden']}}. {{$aprend['Descripcion_dimension']}}</td>
 
+                                    <!--APRENDIZAJE INICIAL -->
 
-                                    @if ($aprend['Nivel_aprend'] == 'Inicial')
                                     <td style="text-align: center;display: none ">         
                                         {{$aprend['id']}}                 
                                     </td>  
                                     <td style="display: none">{{$aprend['Descripcion_aprendizaje']}}</td>
                                     <td style="text-align: center">  
-                                        @if (Auth::user()->rol != 'Dirección de docencia')
-                                        <div class="dropdown-container" tabindex="-1" style="float:right;">
-                                            <div class="three-dots"></div>
-                                            <div class="dropdown">
-                                                <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_inicial" class="edit1"> </button>
-                                                <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete1"> </button>
+                                        @if ($aprend['Nivel_aprend'] == 'Inicial')
+                                            @if (Auth::user()->rol != 'Dirección de docencia')
+                                            <div class="dropdown-container" tabindex="-1" style="float:right;">
+                                                <div class="three-dots"></div>
+                                                <div class="dropdown dropdown-table">
+                                                    <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_inicial" class="edit1"> </button>
+                                                    <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete1"> </button>
+                                                </div>
                                             </div>
-                                        </div>
-                                        @endif         
-                                        {{$aprend['Descripcion_aprendizaje']}}                       
+                                            @endif       
+                                        {{$aprend['Descripcion_aprendizaje']}}    
+                                        @endif                     
                                     </td>
-                                    @else 
-                                    <td style="text-align: center;display: none"></td>  
-                                    <td style="display: none"></td>
-                                    <td style="text-align: center"></td> 
-                                    @endif
+                                
 
-                                    @if ($aprend['Nivel_aprend'] == 'En desarrollo')
+                                    <!--APRENDIZAJE EN DESARROLLO-->
+
                                     <td style="text-align: center;display: none">         
                                         {{$aprend['id']}}                 
                                     </td> 
                                     <td style="display: none">{{$aprend['Descripcion_aprendizaje']}}  </td>
                                     <td style="text-align: center">   
-                                        @if (Auth::user()->rol != 'Dirección de docencia')
-                                        <div class="dropdown-container" tabindex="-1" style="float:right;">
-                                            <div class="three-dots"></div>
-                                            <div class="dropdown">
-                                                <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_desarrollo" class="edit2"> </button>
-                                                <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete2"> </button>
+                                        @if ($aprend['Nivel_aprend'] == 'En desarrollo')
+                                            @if (Auth::user()->rol != 'Dirección de docencia')
+                                            <div class="dropdown-container" tabindex="-1" style="float:right;">
+                                                <div class="three-dots"></div>
+                                                <div class="dropdown dropdown-table">
+                                                    <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_desarrollo" class="edit2"> </button>
+                                                    <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete2"> </button>
+                                                </div>
                                             </div>
-                                        </div>
-                                        @endif    
-                                        {{$aprend['Descripcion_aprendizaje']}}                                    
+                                            @endif    
+                                            {{$aprend['Descripcion_aprendizaje']}}          
+                                        @endif                          
                                     </td>
-                                    @else 
-                                    <td style="text-align: center;display: none"></td>  
-                                    <td style="display: none"> </td>
-                                    <td style="text-align: center"></td> 
-                                    @endif
 
-                                    @if ($aprend['Nivel_aprend'] == 'Logrado')
+                                    <!--APRENDIZAJE LOGRADO-->
                                     <td style="text-align: center;display: none">         
                                         {{$aprend['id']}}                 
                                     </td> 
                                     <td style="display: none">{{$aprend['Descripcion_aprendizaje']}}  </td>
                                     <td style="text-align: center"> 
-                                        @if (Auth::user()->rol != 'Dirección de docencia')
-                                        <div class="dropdown-container" tabindex="-1" style="float:right;">
-                                            <div class="three-dots"></div>
-                                            <div class="dropdown">
-                                                <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_logrado" class="edit3"> </button>
-                                                <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete3"> </button>
+                                        @if ($aprend['Nivel_aprend'] == 'Logrado')
+                                            @if (Auth::user()->rol != 'Dirección de docencia')
+                                            <div class="dropdown-container" tabindex="-1" style="float:right;">
+                                                <div class="three-dots"></div>
+                                                <div class="dropdown dropdown-table">
+                                                    <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_logrado" class="edit3"> </button>
+                                                    <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete3"> </button>
+                                                </div>
                                             </div>
-                                        </div>
-                                        @endif            
-                                        {{$aprend['Descripcion_aprendizaje']}}                             
+                                            @endif            
+                                            {{$aprend['Descripcion_aprendizaje']}}      
+                                        @endif                       
                                     </td>
-                                    @else 
-                                    <td style="text-align: center;display: none"></td>
-                                    <td style="display: none"></td>  
-                                    <td style="text-align: center"></td>  
-                                    @endif
 
-                                    @if ($aprend['Nivel_aprend'] == 'Especialización')
+                                    <!--APRENDIZAJE ESPECIALIZACIÓN-->
                                     <td style="text-align: center;display: none">         
                                         {{$aprend['id']}}                 
                                     </td> 
                                     <td style="display: none">{{$aprend['Descripcion_aprendizaje']}}  </td>
                                     <td style="text-align: center">
-                                        @if (Auth::user()->rol != 'Dirección de docencia')
-                                            <div class="dropdown-container" tabindex="-1" style="float:right;">
-                                                <div class="three-dots"></div>
-                                                <div class="dropdown">
-                                                    <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_especializacion" class="edit4"> </button>
-                                                    <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete4"> </button>
+                                        @if ($aprend['Nivel_aprend'] == 'Especialización')
+                                            @if (Auth::user()->rol != 'Dirección de docencia')
+                                                <div class="dropdown-container" tabindex="-1" style="float:right;">
+                                                    <div class="three-dots"></div>
+                                                    <div class="dropdown dropdown-table">
+                                                        <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_especializacion" class="edit4"> </button>
+                                                        <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete4"> </button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @endif  
-                                        {{$aprend['Descripcion_aprendizaje']}}  
+                                            @endif  
+                                            {{$aprend['Descripcion_aprendizaje']}}  
+                                        @endif
                                     </td>      
-                                    @else 
-                                    <td style="text-align: center;display: none"></td>  
-                                    <td style="display: none"></td>
-                                    <td style="text-align: center"></td>        
-                                    @endif
+                                    
+
                                 </tr>
                             @endforeach   
                                                       
@@ -557,7 +549,7 @@
                     "decimal": "",
                     "emptyTable": "No hay información",
                     "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
                     "infoFiltered": "(Filtrado de _MAX_ total entradas)",
                     "infoPostFix": "",
                     "thousands": ",",
