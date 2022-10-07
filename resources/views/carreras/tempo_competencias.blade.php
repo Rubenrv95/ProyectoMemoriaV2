@@ -25,66 +25,42 @@
                         <h1 class="mb-0 text-gray-800">Competencias {{$c['nombre']}} </h1>
                 </div>
 
-                <hr class="solid">
+                <hr class="solid" style="border-width: 1px; background-color: black">
                 <a href="/carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
                 <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/saber_conocer"><button type="button" class="boton_gestionar">Saberes</button></a> 
-                <a href="/carreras/{{$c['id']}}/malla"><button type="button" class="boton_gestionar">Módulos</button></a> 
+                <a href="/carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
+                <a href="/carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
 
-                <hr class="solid">
+                <hr class="solid" style="border-width: 1px; background-color: black">
 
                 <a href="/carreras/{{$c['id']}}/competencias"><button type="button" class="btn btn-secondary">Gestión de Competencias</button></a> 
                 <a href="/carreras/{{$c['id']}}/dimensiones"><button type="button" class="btn btn-secondary">Gestión de Dimensiones</button></a> 
                 <a href="/carreras/{{$c['id']}}/competencias"><button type="button" class="btn btn-secondary">Temporalización de Competencias</button></a> 
 
-                <hr class="solid">
+                <hr class="solid" style="border-width: 1px; background-color: black">
 
         </div>
-        <div class="container-fluid">   
+        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
             <h3 class="mb-0 text-gray-800">Temporalización de Competencias</h3>
 
 
             <form action="" method="post">
                 <table id="lista" class="table table-striped table-bordered" width="100%">
                     <thead>
-                        <th>Competencia <img src="/images/arrows.png" alt="" srcset=""></th>
-                        <th>Nivel 1</th>
-                        <th>Nivel 2</th>
-                        <th>Nivel 3</th>
-                        <th>Nivel 4</th>
-                        <th>Nivel 5</th>
-                        <th>Nivel 6</th>
-                        <th>Nivel 7</th>
-                        <th>Nivel 8</th>
-                        <th>Nivel 9</th>
-                        <th>Nivel 10</th>
-                        <th>Nivel 11</th>
-                        <th>Nivel 12</th>
-                        <th>Nivel 13</th>
-                        <th>Nivel 14</th>
-                        <th>Nivel 15</th>
-                        <th>Nivel 16</th>
+                        <tr style="font-weight: bold; color: white">
+                            <th style="width: 20%; text-align: center">Competencia⇵</th>
+                            @for ($i = 1; $i <= 16; $i++)
+                                <th style="text-align: center">Nivel {{$i}}</th>
+                            @endfor
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach ($competencia as $c)
                         <tr>
                             <td>{{$c['Orden']}}. {{$c['Descripcion']}}</td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
-                            <td> <input type="checkbox"></td>
+                            @for ($i = 1; $i <= 16; $i++)
+                            <td style=""> <input type="checkbox" style="width: 30px; height: 30px; text-align: center"></td>
+                            @endfor
                         </tr>
                         @endforeach
                     </tbody>
@@ -268,7 +244,28 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]]
+                "order": [[ 1, "asc" ]],
+
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
             });
 
             

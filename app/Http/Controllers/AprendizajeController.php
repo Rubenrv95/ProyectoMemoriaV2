@@ -30,10 +30,8 @@ class AprendizajeController extends Controller
         $competencia = DB::table('competencias')->where('refCarrera', $id_carrera)->get();
         $dimension =  DB::table('dimensions')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('dimensions.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp')->get();
         $aprendizaje = DB::table('aprendizajes')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden', 'dimensions.id as idDim')->get();
-        
-        $dimension = $dimension->sortByDesc('Orden');
-        $aprendizaje = $aprendizaje->sortByDesc('Orden');
-        
+
+
         $competencia = json_decode($competencia, true);
         $aprendizaje = json_decode($aprendizaje, true);
         $dimension = json_decode($dimension, true);
@@ -55,7 +53,6 @@ class AprendizajeController extends Controller
 
         $query = DB::table('aprendizajes')->insert([
             'Descripcion_aprendizaje'=>$request->input('aprendizaje_desc'),
-            'refCompetencia'=>$request->input('refCompCrear'),
             'refDimension'=>$request->input('dimension'),
             'Nivel_aprend'=>$request->input('nivel'),
             'refCarrera'=>$id_carrera,
@@ -99,11 +96,10 @@ class AprendizajeController extends Controller
     {
         $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
         $carrera = json_decode($carrera, true);
-        $competencia = DB::table('competencias')->where('refCarrera', $id_carrera)->get();
-        $aprendizaje = DB::table('aprendizajes')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden')->get();
-        $competencia = json_decode($competencia, true);
+        $aprendizaje = DB::table('aprendizajes')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden', 'dimensions.id as idDim')->get();
+
         $aprendizaje = json_decode($aprendizaje, true);
-        return view('carreras.tempo_aprendizajes')->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje);
+        return view('carreras.tempo_aprendizajes')->with('carrera', $carrera)->with('aprendizaje', $aprendizaje);
 
     }
 

@@ -8,9 +8,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CompetenciaController;
 use App\Http\Controllers\DimensionController;
 use App\Http\Controllers\AprendizajeController;
-use App\Http\Controllers\Saber_conocerController;
-use App\Http\Controllers\Saber_hacerController;
-use App\Http\Controllers\Saber_serController;
+use App\Http\Controllers\SaberController;
+use App\Http\Controllers\ModuloController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,20 +63,18 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/inicio', function() {
     Route::delete('/carreras/{id}/aprendizajes/{aprend}', [AprendizajeController::class, 'destroy']);
     Route::get('/carreras/{id}/tempo_aprendizajes', [AprendizajeController::class, 'show_Tempo']);
 
-    Route::get('/carreras/{id}/saber_conocer', [Saber_conocerController::class, 'index']);
-    Route::post('/carreras/{id}/saber_conocer', [Saber_conocerController::class, 'create']);
-    Route::put('/carreras/{id}/saber_conocer/{saber}', [Saber_conocerController::class, 'update']);
-    Route::delete('/carreras/{id}/saber_conocer/{saber}', [Saber_conocerController::class, 'destroy']);
+    Route::get('/carreras/{id}/saberes', [SaberController::class, 'index']);
+    Route::post('/carreras/{id}/saberes', [SaberController::class, 'create']);
+    Route::put('/carreras/{id}/saberes/{saber}', [SaberController::class, 'update']);
+    Route::delete('/carreras/{id}/saberes/{saber}', [SaberController::class, 'destroy']);
+    Route::get('/carreras/{id}/ver_saberes/', [SaberController::class, 'show']);
 
-    Route::get('/carreras/{id}/saber_hacer', [Saber_hacerController::class, 'index']);
-    Route::post('/carreras/{id}/saber_hacer', [Saber_hacerController::class, 'create']);
-    Route::put('/carreras/{id}/saber_hacer/{saber}', [Saber_hacerController::class, 'update']);
-    Route::delete('/carreras/{id}/saber_hacer/{saber}', [Saber_hacerController::class, 'destroy']);
+    Route::get('/carreras/{id}/modulos', [ModuloController::class, 'index']);
+    Route::post('/carreras/{id}/modulos', [ModuloController::class, 'create']);
+    Route::put('/carreras/{id}/modulos/{modulo}', [ModuloController::class, 'update']);
+    Route::delete('/carreras/{id}/modulos/{modulo}', [ModuloController::class, 'destroy']);
 
-    Route::get('/carreras/{id}/saber_ser', [Saber_serController::class, 'index']);
-    Route::post('/carreras/{id}/saber_ser', [Saber_serController::class, 'create']);
-    Route::put('/carreras/{id}/saber_ser/{saber}', [Saber_serController::class, 'update']);
-    Route::delete('/carreras/{id}/saber_ser/{saber}', [Saber_serController::class, 'destroy']);
+
 
     Auth::routes();
     Route::get('/home', [HomeController::class, 'index']);

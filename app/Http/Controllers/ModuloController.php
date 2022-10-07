@@ -15,14 +15,24 @@ use Datatables;
 
 class ModuloController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id_carrera)
     {
-        //
+        $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
+        $carrera = json_decode($carrera, true);
+        $saber = DB::table('saberes')->leftJoin('aprendizajes', 'saberes.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('saberes.*', 'aprendizajes.Descripcion_aprendizaje', 'dimensions.Descripcion_dimension', 'dimensions.Orden as OrdenDim', 'competencias.Orden as OrdenComp', 'competencias.Descripcion')->get();
+        $saber = json_decode($saber, true);
+        return view('carreras.modulos')->with('carrera', $carrera)->with('saber', $saber);
     }
 
     /**

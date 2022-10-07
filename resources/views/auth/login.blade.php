@@ -70,14 +70,7 @@
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" placeholder="Contraseña" name="password" style="width: 650px; margin: auto" required> 
                                         </div>
-                                        <div class="form-group" style="text-align: center;">
-                                            <div class="custom-control custom-checkbox small">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                Recordarme
-                                            </label>
-                                            </div>
-                                        </div>
+                                        
                                         <div style=" text-align: center;">
                                             <button type="submit" class="button-login" name="login" value="Login" style=" text-align: center; width: 200px">Conectarse</button>
                                         </div>

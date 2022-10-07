@@ -26,10 +26,8 @@ class CompetenciaController extends Controller
         $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
         $carrera = json_decode($carrera, true);
         $competencia = DB::table('competencias')->where('refCarrera', $id_carrera)->get();
-        $aprendizaje = DB::table('aprendizajes')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden')->get();
         $competencia = json_decode($competencia, true);
-        $aprendizaje = json_decode($aprendizaje, true);
-        return view('carreras.competencias')->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje);
+        return view('carreras.competencias')->with('carrera', $carrera)->with('competencia', $competencia);
     }
 
     /**
@@ -130,7 +128,6 @@ class CompetenciaController extends Controller
     {
         $query = DB::table('competencias')->where('id', $id_comp)->delete();
         $query2 = DB::table('dimensions')->where('refCompetencia', $id_comp)->delete();
-        $query3 = DB::table('aprendizajes')->where('refCompetencia', $id_comp)->delete();
         
         return back()->withSuccess('Competencia eliminada con éxito');
     }
