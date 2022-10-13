@@ -74,10 +74,8 @@ class CompetenciaController extends Controller
         $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
         $carrera = json_decode($carrera, true);
         $competencia = DB::table('competencias')->where('refCarrera', $id_carrera)->get();
-        $aprendizaje = DB::table('aprendizajes')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden')->get();
         $competencia = json_decode($competencia, true);
-        $aprendizaje = json_decode($aprendizaje, true);
-        return view('carreras.tempo_competencias')->with('carrera', $carrera)->with('competencia', $competencia)->with('aprendizaje', $aprendizaje);
+        return view('carreras.tempo_competencias')->with('carrera', $carrera)->with('competencia', $competencia);
 
     }
 
@@ -127,7 +125,15 @@ class CompetenciaController extends Controller
     public function destroy($id, $id_comp)
     {
         $query = DB::table('competencias')->where('id', $id_comp)->delete();
-        $query2 = DB::table('dimensions')->where('refCompetencia', $id_comp)->delete();
+
+        $query2= 'DELETE dimensions, aprendizajes, saberes, propuesta_modulos, propuesta_tiene_saber FROM dimensions 
+          INNER JOIN aprendizajes ON aprendizajes.refDimension = dimensions.id
+          INNER JOIN saberes ON saberes.refAprendizaje = aprendizajes.id
+          INNER JOIN propuesta_tiene_saber ON saberes.id = propuesta_tiene_saber.saber
+          INNER JOIN propuesta_modulos  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
+          WHERE dimensions.refCompetencia = ?';
+
+        $status = \DB::delete($query2, array($id_comp));
         
         return back()->withSuccess('Competencia eliminada con éxito');
     }

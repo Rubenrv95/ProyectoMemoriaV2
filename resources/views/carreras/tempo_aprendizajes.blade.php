@@ -9,7 +9,7 @@
         @foreach ($carrera as $c)
         @endforeach
 
-        <title>Aprendizajes {{$c['nombre']}}</title>
+        <title>Temporalización de aprendizajes {{$c['nombre']}}</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
         <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
@@ -20,7 +20,7 @@
 <body >
         <div class="container-fluid">   
                 
-                <a href="/carreras/{{$c['id']}}"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
+                <a href="/carreras"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Aprendizajes {{$c['nombre']}} </h1>
                 </div>
@@ -64,7 +64,7 @@
                             <td>{{$a['Descripcion_aprendizaje']}}</td>
                             <td>{{$a['Descripcion_dimension']}}</td>
 
-                            @for ($i = 1; $i <= 16; $i++)
+                            @for ($i = 1; $i <= 14; $i++)
                             <td> <input type="checkbox" style="width: 30px; height: 30px; text-align: center"></td>
                             @endfor
                         </tr>
@@ -79,168 +79,6 @@
                
 
         </div>
-
-
-        <!-- MODALS COMPETENCIA -->
-
-        <!-- Modal crear competencia   -->
-        <div class="container">
-            <div class="row">
-                <div class ="col-md-12">
-                    <div tabIndex="-1"  class="modal fade" id="modal_crear_competencia" aria-hidden="true">
-                        <div class="modal-dialog modal-md" >
-                            <form action="/carreras/{{$c['id']}}/competencias" method="POST" class="form-group">
-                            @csrf
-                                <div class="modal-content">
-
-                                    <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Agregar competencia</h1>
-                                    </div>
-                                    <div class="modal-body">
-
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Nombre de la competencia</label>
-                                                <input class="form-control form-control-lg" name="nombre_competencia" style="width:100%"  placeholder="Ingrese el nombre de la competencia" maxlength="40000" required/>        
-                                                <span style="color: red">@error('desc_competencia')  Debe ingresar un nombre para la competencia  @enderror</span>
-                                            </div>
-
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Descripción de la competencia</label>
-                                                <textarea class="form-control" name="desc_competencia" type="text"  placeholder="Ingrese la descripción de la competencia" rows="3" cols="50"  required></textarea>
-                                                <span style="color: red">@error('desc_competencia')  Debe ingresar una descripción para la competencia  @enderror</span>
-                                            </div>
-
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Nivel Básico</label>
-                                                <input class="form-control form-control-lg" name="basico_competencia" style="width:100%"  placeholder="Ingrese el nivel básico de la competencia" maxlength="40000" required/>        
-                                                <span style="color: red">@error('desc_competencia')  Debe ingresar un nombre para la competencia  @enderror</span>
-                                            </div>
-
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Nivel Intermedio</label>
-                                                <input class="form-control form-control-lg" name="intermedio_competencia" style="width:100%"  placeholder="Ingrese el nivel intermedio de la competencia" maxlength="40000" required/>        
-                                                <span style="color: red">@error('desc_competencia')  Debe ingresar un nombre para la competencia  @enderror</span>
-                                            </div>
-
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Nivel Avanzado</label>
-                                                <input class="form-control form-control-lg" name="avanzado_competencia" style="width:100%"  placeholder="Ingrese el nivel avanzado de la competencia" maxlength="40000" required/>        
-                                                <span style="color: red">@error('desc_competencia')  Debe ingresar un nombre para la competencia  @enderror</span>
-                                            </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-success" type="submit"> Guardar</button>
-                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button"> Cancelar</button>
-                                    </div> 
-                                
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Modal modificar competencia   -->
-        <div class="container">
-            <div class="row">
-                <div class ="col-md-12">
-                    <div class="modal fade" id="modal_modificar_competencia" aria-hidden="true">
-                        <div class="modal-dialog modal-md" >
-
-                            <form method = "POST" action = "/carreras/{{$c['id']}}/competencias" class="form-group" id = "editForm">
-
-                            @csrf
-                            @method('PUT')
-
-                                <div class="modal-content">
-
-                                    <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Modificar competencia</h1>
-                                    </div>
-                                    <div class="modal-body">
-
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Nombre de la competencia</label>
-                                                <input class="form-control form-control-lg" id="nombre_competencia" name="nombre_competencia" style="width:100%"  placeholder="Ingrese el nombre de la competencia" maxlength="40000" required/>        
-                                                <span style="color: red">@error('desc_competencia')  Debe ingresar un nombre para la competencia  @enderror</span>
-                                            </div>
-
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Descripción de la competencia</label>
-                                                <textarea class="form-control" id="desc_competencia" name="desc_competencia" type="text"  placeholder="Ingrese la descripción de la competencia" rows="3" cols="50"  required></textarea>
-                                                <span style="color: red">@error('desc_competencia')  Debe ingresar una descripción para la competencia  @enderror</span>
-                                            </div>
-
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Nivel Básico</label>
-                                                <input class="form-control form-control-lg" id="basico_competencia" name="basico_competencia" style="width:100%"  placeholder="Ingrese el nivel básico de la competencia" maxlength="40000" required/>        
-                                                <span style="color: red">@error('desc_competencia')  Debe ingresar un nombre para la competencia  @enderror</span>
-                                            </div>
-
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Nivel Intermedio</label>
-                                                <input class="form-control form-control-lg" id="intermedio_competencia" name="intermedio_competencia" style="width:100%"  placeholder="Ingrese el nivel intermedio de la competencia" maxlength="40000" required/>        
-                                                <span style="color: red">@error('desc_competencia')  Debe ingresar un nombre para la competencia  @enderror</span>
-                                            </div>
-
-                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Nivel Avanzado</label>
-                                                <input class="form-control form-control-lg" id="avanzado_competencia" name="avanzado_competencia" style="width:100%"  placeholder="Ingrese el nivel avanzado de la competencia" maxlength="40000" required/>        
-                                                <span style="color: red">@error('desc_competencia')  Debe ingresar un nombre para la competencia  @enderror</span>
-                                            </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-success">Guardar</button>
-                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button"> Cancelar</button>
-                                    </div> 
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-        <!-- Modal eliminar competencia   -->
-        <div class="container">
-            <div class="row">
-                <div class ="col-md-12">
-                    <div class="modal fade" id="modal_eliminar_competencia" aria-hidden="true">
-                        <div class="modal-dialog modal-md" >
-                            <form method = "POST" action = "/carreras/{{$c['id']}}/competencias" class="form-group" id = "deleteForm">
-
-                                @csrf
-                                @method('DELETE')
-
-                                <div class="modal-content">
-
-                                    <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Eliminar competencia</h1>
-                                    </div>
-                                    <div class="modal-body">
-                                        <input type="hidden" name="method" value="DELETE"> 
-                                        <p style="font-size: 18">¿Está seguro de que desea eliminar ésta competencia? Se eliminarán todos los aprendizajes y saberes vinculados.</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button"> Cancelar</button>
-                                    </div> 
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>

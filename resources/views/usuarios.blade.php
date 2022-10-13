@@ -25,10 +25,10 @@
                         <thead>
                                 <tr style="font-weight: bold; color: white">
                                 <th style="display: none">ID <img src="/images/arrows.png" alt="" srcset=""></th>
-                                <th>Nombre de usuario⇵</th>
-                                <th>Correo Electrónico⇵</th>
-                                <th>Rol⇵</th>
-                                <th style="width: 150px"></th>
+                                <th style="text-align: center">Nombre de usuario⇵</th>
+                                <th style="text-align: center">Correo Electrónico⇵</th>
+                                <th style="text-align: center">Rol⇵</th>
+                                <th style="text-align: center; width: 10%"></th>
                                 </tr>
                         </thead>
                         
@@ -37,10 +37,10 @@
                                 @foreach($user as $u)
                                 <tr>
                                 <td style="display: none"> {{$u['id']}}</td>
-                                <td> {{$u['nombre']}}</td>
-                                <td>{{$u['email']}}</td>
-                                <td>{{$u['rol']}}</td>
-                                <td>
+                                <td style="text-align: center"> {{$u['nombre']}}</td>
+                                <td style="text-align: center">{{$u['email']}}</td>
+                                <td style="text-align: center">{{$u['rol']}}</td>
+                                <td style="text-align: center">
                                         <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_carrera" class="edit"> </button>
                                         <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_carrera" class="delete"> </button>
                                 </td>

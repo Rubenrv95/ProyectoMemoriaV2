@@ -53,7 +53,6 @@ class DimensionController extends Controller
             'Descripcion_dimension'=>$request->input('desc_dimension'),
             'Orden'=>$request->input('orden_dimension'),
             'refCompetencia'=>$request->input('refComp'),
-            'refCarrera'=>$id_carrera,
         ]);
 
         return back()->withSuccess('Dimensión creada con éxito');
@@ -128,7 +127,14 @@ class DimensionController extends Controller
     public function destroy($id_carrera, $id_dim)
     {
         $query = DB::table('dimensions')->where('id', $id_dim)->delete();
-        $query2 = DB::table('aprendizajes')->where('refDimension', $id_dim)->delete();
+
+        $query2= 'DELETE aprendizajes, saberes, propuesta_modulos, propuesta_tiene_saber FROM aprendizajes 
+        INNER JOIN saberes ON saberes.refAprendizaje = aprendizajes.id
+        INNER JOIN propuesta_tiene_saber ON saberes.id = propuesta_tiene_saber.saber
+        INNER JOIN propuesta_modulos  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
+        WHERE aprendizajes.refDimension = ?';
+
+        $status = \DB::delete($query2, array($id_dim));
         
         return back()->withSuccess('Dimensión eliminada con éxito');
     }

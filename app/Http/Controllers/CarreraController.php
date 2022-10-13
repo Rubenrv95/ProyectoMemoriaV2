@@ -66,31 +66,13 @@ class CarreraController extends Controller
 
     public function copy(Request $request, $carrera)
     {
-        $carrera = Carrera::find($carrera);
-
-        //$carrera= json_encode($carrera, true);
-
-        $newCarrera = $carrera->replicate()->fill(
-            [
-                'nombre' => $request->input('nombre_carrera_nueva'),
-                'facultad' => $request->input('facultad_nueva'),
-                'formacion' => $request->input('formacion_nueva'),
-                'tipo' => $request->input('tipo_nuevo'),
-            ]
-        );
-        //$newTask->project_id = 16; // the new project_id
-        $newCarrera->save();
-
         
-
-
-        return back();
     }
 
     public function createPDF($carrera) {
         $competencia = DB::table('competencias')->where('refCarrera', $carrera)->get();
         $aprendizaje = DB::table('aprendizajes')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden', 'dimensions.id as idDim')->get();
-        $saber = DB::table('saberes')->leftJoin('aprendizajes', 'saberes.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'aprendizajes.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $carrera)->select('saberes.*', 'aprendizajes.Descripcion_aprendizaje', 'dimensions.Descripcion_dimension', 'dimensions.Orden as OrdenDim', 'competencias.Orden as OrdenComp', 'competencias.Descripcion')->get();
+        $saber = DB::table('saberes')->leftJoin('aprendizajes', 'saberes.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $carrera)->select('saberes.*', 'aprendizajes.Descripcion_aprendizaje', 'dimensions.Descripcion_dimension', 'dimensions.Orden as OrdenDim', 'competencias.Orden as OrdenComp', 'competencias.Descripcion')->get();
 
         $carrera_seleccionada = DB::table('carreras')->where('id', $carrera)->get();
         $competencia = json_decode($competencia, true);
@@ -166,8 +148,12 @@ class CarreraController extends Controller
     {
         $query = DB::table('carreras')->where('id', $id)->delete();
 
-        $query2= 'DELETE competencias, dimensions FROM competencias 
+        $query2= 'DELETE competencias, dimensions, aprendizajes, saberes, propuesta_modulos, propuesta_tiene_saber FROM competencias 
           INNER JOIN dimensions ON dimensions.refCompetencia = competencias.id
+          INNER JOIN aprendizajes ON aprendizajes.refDimension = dimensions.id
+          INNER JOIN saberes ON saberes.refAprendizaje = aprendizajes.id
+          INNER JOIN propuesta_tiene_saber ON saberes.id = propuesta_tiene_saber.saber
+          INNER JOIN propuesta_modulos  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
           WHERE competencias.refCarrera = ?';
 
         $status = \DB::delete($query2, array($id));

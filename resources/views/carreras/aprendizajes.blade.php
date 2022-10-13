@@ -98,6 +98,7 @@
                                             <div class="dropdown-container" tabindex="-1" style="float:right;">
                                                 <div class="three-dots"></div>
                                                 <div class="dropdown dropdown-table">
+                                                    <button type="button" id="info" data-bs-toggle="modal" data-bs-target="" class=""> </button>
                                                     <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_inicial" class="edit1"> </button>
                                                     <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete1"> </button>
                                                 </div>
@@ -120,6 +121,7 @@
                                             <div class="dropdown-container" tabindex="-1" style="float:right;">
                                                 <div class="three-dots"></div>
                                                 <div class="dropdown dropdown-table">
+                                                    <button type="button" id="info" data-bs-toggle="modal" data-bs-target="" class=""> </button>
                                                     <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_desarrollo" class="edit2"> </button>
                                                     <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete2"> </button>
                                                 </div>
@@ -140,6 +142,7 @@
                                             <div class="dropdown-container" tabindex="-1" style="float:right;">
                                                 <div class="three-dots"></div>
                                                 <div class="dropdown dropdown-table">
+                                                    <button type="button" id="info" data-bs-toggle="modal" data-bs-target="" class=""> </button>
                                                     <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_logrado" class="edit3"> </button>
                                                     <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete3"> </button>
                                                 </div>
@@ -160,6 +163,7 @@
                                                 <div class="dropdown-container" tabindex="-1" style="float:right;">
                                                     <div class="three-dots"></div>
                                                     <div class="dropdown dropdown-table">
+                                                        <button type="button" id="info" data-bs-toggle="modal" data-bs-target="" class=""> </button>
                                                         <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_especializacion" class="edit4"> </button>
                                                         <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete4"> </button>
                                                     </div>
@@ -197,12 +201,12 @@
                                     <div class="modal-body">
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Descripción de Aprendizaje</label>
+                                                <label style="font-size: 20; font-weight: bold">Descripción de Aprendizaje</label>
                                                 <textarea class="form-control form-control-lg" name="aprendizaje_desc" type="text" style="color: black" placeholder="Ingrese la descripción del aprendizaje" rows="2" cols="50" maxlength="1000" required></textarea>
                                             </div>
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Nivel de Aprendizaje</label>
+                                                <label style="font-size: 20; font-weight: bold">Nivel de Aprendizaje</label>
                                                 <select class="form-select form-select-lg" name="nivel" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
                                                     <option selected disabled="true" value="">Seleccione el nivel de aprendizaje</option>                                     
                                                     <option value="Inicial">Inicial</option>           
@@ -213,7 +217,7 @@
                                             </div>
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Competencia asociada</label>
+                                                <label style="font-size: 20; font-weight: bold">Competencia asociada</label>
                                                 <select class="form-select form-select-lg" name="refCompCrear" id="refCompCrear" onchange="addDimension()" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
                                                     <option selected disabled="true" value="">Seleccione la competencia asociada</option>          
                                                     @foreach ($competencia as $comp)                           
@@ -260,7 +264,7 @@
                                     <div class="modal-body">
 
                                         <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                            <label style="font-size: 20">Descripción de Aprendizaje</label>
+                                            <label style="font-size: 20; font-weight: bold">Descripción de Aprendizaje</label>
                                             <textarea class="form-control form-control-lg" id="aprendizaje_inicial" name="aprendizaje_inicial" type="text" style="color: black" placeholder="Ingrese la descripción del aprendizaje" rows="2" cols="50" maxlength="200" required></textarea>
                                         </div>
 
@@ -299,7 +303,7 @@
                                     <div class="modal-body">
 
                                         <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                            <label style="font-size: 20">Descripción de Aprendizaje</label>
+                                            <label style="font-size: 20; font-weight: bold">Descripción de Aprendizaje</label>
                                             <textarea class="form-control form-control-lg" id="aprendizaje_desarrollo" name="aprendizaje_desarrollo" type="text" style="color: black" placeholder="Ingrese la descripción del aprendizaje" rows="2" cols="50" maxlength="200" required></textarea>
                                         </div>
 
@@ -338,7 +342,7 @@
                                     <div class="modal-body">
 
                                         <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                            <label style="font-size: 20">Descripción de Aprendizaje</label>
+                                            <label style="font-size: 20; font-weight: bold">Descripción de Aprendizaje</label>
                                             <textarea class="form-control form-control-lg" id="aprendizaje_logrado" name="aprendizaje_logrado" type="text" style="color: black" placeholder="Ingrese la descripción del aprendizaje" rows="2" cols="50" maxlength="200" required></textarea>
                                         </div>
 
@@ -377,7 +381,7 @@
                                     <div class="modal-body">
 
                                         <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                            <label style="font-size: 20">Descripción de Aprendizaje</label>
+                                            <label style="font-size: 20; font-weight: bold">Descripción de Aprendizaje</label>
                                             <textarea class="form-control form-control-lg" id="aprendizaje_especializacion" name="aprendizaje_especializacion" type="text" style="color: black" placeholder="Ingrese la descripción del aprendizaje" rows="2" cols="50" maxlength="200" required></textarea>
                                         </div>
 
@@ -483,7 +487,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <input type="hidden" name="method" value="DELETE"> 
-                                        <p style="font-size: 18">¿Está seguro de que desea eliminar éste aprendizaje? Se eliminarán todos los saberes vinculados.</p>
+                                        <p style="font-size: 18">¿Está seguro de que desea eliminar éste aprendizaje? Se eliminarán todos los saberes y módulos vinculados.</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -735,7 +739,7 @@
                 }).done(function(response) {
                     //string del codigo html que se inyectará en el div
                     var lista = '<div class="form-group" style="margin: auto">' +
-                            '<label style="font-size: 20">Dimension asociada</label>'+
+                            '<label style="font-size: 20; font-weight: bold">Dimension asociada</label>'+
                             '<select class="form-select form-select-lg" name="dimension" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required> '+
                                 '<option selected disabled="true" value="">Seleccione una dimensión</option>';          
                     

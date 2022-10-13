@@ -20,7 +20,7 @@
 <body >
         <div class="container-fluid">   
                 
-                <a href="/carreras/{{$c['id']}}"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
+                <a href="/carreras"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Saberes {{$c['nombre']}} </h1>
                 </div>
@@ -61,7 +61,7 @@
                                 <th colspan="16" style="text-align: center">Niveles</th>
                             </tr>
                             <tr style="font-weight: bold; color: white">
-                                @for ($i = 1; $i <= 16; $i++)
+                                @for ($i = 1; $i <= 14; $i++)
                                     <th style="display: none"> id</th>
                                     <th style="display: none"> Descripcion saber</th>
                                     <th style="display: none"> Tipo</th>
@@ -80,7 +80,7 @@
                                 <td style="text-align: center; display: none">{{$s['idAprend']}}</td>
                                 <td style="text-align: center">{{$s['Descripcion_aprendizaje']}}</td>
 
-                                @for ($i = 1; $i <= 16; $i++)
+                                @for ($i = 1; $i <= 14; $i++)
                                     <td style="display: none">{{$s['id']}}</td>
                                     <td style="display: none">{{$s['Descripcion_saber']}}</td>
                                     <td style="display: none">{{$s['Tipo']}}</td>
@@ -91,6 +91,7 @@
                                             <div class="dropdown-container" tabindex="-1" style="float:right;">
                                                 <div class="three-dots"></div>
                                                 <div class="dropdown dropdown-table">
+                                                    <button type="button" id="info" data-bs-toggle="modal" data-bs-target="" class=""> </button>
                                                     <button type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_saber" class="edit"> </button>
                                                     <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_saber" class="delete"> </button>
                                                 </div>
@@ -130,12 +131,12 @@
                                     <div class="modal-body">
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Descripción del saber</label>
+                                                <label style="font-size: 20; font-weight: bold">Descripción del saber</label>
                                                 <textarea class="form-control form-control-lg" name="desc-saber" type="text" style="color: black"  placeholder="Ingrese la descripción del saber" rows="3" cols="50" maxlength="200" required></textarea>
                                             </div>
 
                                             <div class="form-group" style="margin: auto">
-                                                <label style="font-size: 20">Tipo de Saber</label>
+                                                <label style="font-size: 20; font-weight: bold">Tipo de Saber</label>
                                                 <select class="form-select form-select-lg" name="tipo" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required>
                                                         <option selected disabled="true" value="">Seleccione el tipo de saber</option>                                                    
                                                         <option value="Cognitivo">Cognitivo</option>
@@ -145,17 +146,17 @@
                                             </div>
 
                                             <div class="form-group" style="margin: auto">
-                                                <label style="font-size: 20">Nivel</label>
+                                                <label style="font-size: 20; font-weight: bold">Nivel</label>
                                                 <select class="form-select form-select-lg" name="nivel" aria-label=".form-select-lg example" style="width:23%; margin-bottom: 20px; font-size: 18" required>
                                                         <option selected disabled="true" value="">Nivel</option>      
-                                                        @for ($i = 1; $i <= 16; $i++)
+                                                        @for ($i = 1; $i <= 14; $i++)
                                                             <option value="{{$i}}">{{$i}}</option>
                                                         @endfor                                              
                                                 </select>
                                             </div>
 
                                             <div class="form-group" style="margin: auto">
-                                                <label style="font-size: 20">Aprendizaje asociado </label>
+                                                <label style="font-size: 20; font-weight: bold">Aprendizaje asociado </label>
                                                 <select class="form-select form-select-lg" name="refAprend" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required>
                                                     <option selected disabled="true" value="">Seleccione el aprendizaje</option>  
                                                     @foreach ($aprendizaje as $a)                                                      
@@ -195,12 +196,12 @@
                                     <div class="modal-body">
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Descripción del saber</label>
+                                                <label style="font-size: 20; font-weight: bold">Descripción del saber</label>
                                                 <textarea class="form-control form-control-lg" id="desc-saber" name="desc-saber" type="text" style="color: black"  placeholder="Ingrese la descripción del saber" rows="3" cols="50" maxlength="200"></textarea>
                                             </div>
 
                                             <div class="form-group" style="margin: auto">
-                                                <label style="font-size: 20">Tipo de Saber</label>
+                                                <label style="font-size: 20; font-weight: bold">Tipo de Saber</label>
                                                 <select class="form-select form-select-lg" id="tipo" name="tipo" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required>
                                                         <option selected disabled="true" value="">Seleccione el tipo de saber</option>                                                    
                                                         <option value="Cognitivo">Cognitivo</option>
@@ -210,17 +211,17 @@
                                             </div>
 
                                             <div class="form-group" style="margin: auto">
-                                                <label style="font-size: 20">Nivel</label>
+                                                <label style="font-size: 20; font-weight: bold">Nivel</label>
                                                 <select class="form-select form-select-lg" id="nivel" name="nivel" aria-label=".form-select-lg example" style="width:23%; margin-bottom: 20px; font-size: 18" required>
                                                         <option selected disabled="true" value="">Nivel</option>      
-                                                        @for ($i = 1; $i <= 16; $i++)
+                                                        @for ($i = 1; $i <= 14; $i++)
                                                             <option value="{{$i}}">{{$i}}</option>
                                                         @endfor                                              
                                                 </select>
                                             </div>
 
                                             <div class="form-group" style="margin: auto">
-                                                <label style="font-size: 20">Aprendizaje asociado </label>
+                                                <label style="font-size: 20; font-weight: bold">Aprendizaje asociado </label>
                                                 <select class="form-select form-select-lg" id="refAprend" name="refAprend" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required>
                                                     <option selected disabled="true" value="">Seleccione el aprendizaje</option>  
                                                     @foreach ($aprendizaje as $a)                                                      
@@ -230,8 +231,8 @@
                                             </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-success" type="submit"> Guardar</button>
-                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button"> Cancelar</button>
+                                        <button class="btn btn-success" type="submit">Guardar</button>
+                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancelar</button>
                                     </div> 
                                 
                                 </div>
@@ -260,7 +261,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <input type="hidden" name="method" value="DELETE"> 
-                                        <p style="font-size: 18">¿Está seguro de que desea eliminar éste saber?</p>
+                                        <p style="font-size: 18">¿Está seguro de que desea eliminar éste saber? Se desvincularán todos los módulos asociados a éste.</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>

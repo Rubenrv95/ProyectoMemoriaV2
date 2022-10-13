@@ -55,7 +55,6 @@ class AprendizajeController extends Controller
             'Descripcion_aprendizaje'=>$request->input('aprendizaje_desc'),
             'refDimension'=>$request->input('dimension'),
             'Nivel_aprend'=>$request->input('nivel'),
-            'refCarrera'=>$id_carrera,
         ]);
 
         return back()->withSuccess('Aprendizaje creado con éxito');
@@ -191,6 +190,14 @@ class AprendizajeController extends Controller
     public function destroy($id_carrera, $id_aprend)
     {
         $query = DB::table('aprendizajes')->where('id', $id_aprend)->delete();
+
+        $query2= 'DELETE saberes, propuesta_modulos, propuesta_tiene_saber FROM saberes
+        INNER JOIN propuesta_tiene_saber ON saberes.id = propuesta_tiene_saber.saber
+        INNER JOIN propuesta_modulos  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
+        WHERE saberes.refAprendizaje = ?';
+
+        $status = \DB::delete($query2, array($id_aprend));
+
         
         return back()->withSuccess('Aprendizaje eliminado con éxito');
     }

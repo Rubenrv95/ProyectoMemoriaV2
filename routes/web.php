@@ -39,7 +39,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/inicio', function() {
 
     Route::post('changepassword', [ChangePasswordController::class, 'store'])->name('change.password');
     Route::get('/carreras/{id}/descargar_reporte', [CarreraController::class, 'createPDF']);
-    Route::post('/carreras/{id}/{}/modulo', [ModuloController::class, 'create']);
     Route::post('/carreras/{id}/copiar', [CarreraController::class, 'copy']);
 
 
@@ -70,6 +69,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/inicio', function() {
     Route::get('/carreras/{id}/ver_saberes/', [SaberController::class, 'show']);
 
     Route::get('/carreras/{id}/modulos', [ModuloController::class, 'index']);
+    Route::get('/carreras/{id}/carga_academica', [ModuloController::class, 'show']);
+    Route::get('/carreras/{id}/modulos/{modulo}', [ModuloController::class, 'show_saberes'])->name('modulos.show_saberes');
     Route::post('/carreras/{id}/modulos', [ModuloController::class, 'create']);
     Route::put('/carreras/{id}/modulos/{modulo}', [ModuloController::class, 'update']);
     Route::delete('/carreras/{id}/modulos/{modulo}', [ModuloController::class, 'destroy']);

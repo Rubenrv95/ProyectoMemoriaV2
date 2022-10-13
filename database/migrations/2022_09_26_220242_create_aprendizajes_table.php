@@ -18,7 +18,6 @@ class CreateAprendizajesTable extends Migration
             $table->longText('Descripcion_aprendizaje');
             $table->string('Nivel')->nullable();
             $table->string('Nivel_aprend');
-            $table->bigInteger('refCarrera');
             $table->bigInteger('refDimension');
             $table->timestamp('created_at')->nullable('false')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));

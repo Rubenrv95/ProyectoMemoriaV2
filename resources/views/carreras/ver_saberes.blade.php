@@ -9,7 +9,7 @@
         @foreach ($carrera as $c)
         @endforeach
 
-        <title>Saberes {{$c['nombre']}}</title>
+        <title>Visualización de saberes {{$c['nombre']}}</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
         <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
@@ -20,7 +20,7 @@
 <body >
         <div class="container-fluid">   
                 
-                <a href="/carreras/{{$c['id']}}"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
+                <a href="/carreras"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Saberes {{$c['nombre']}} </h1>
                 </div>
@@ -50,8 +50,8 @@
                             <tr style="font-weight: bold; color: white">
                                 <th style="text-align: center; width: 20%">Competencia⇵</th>
                                 <th style="text-align: center; width: 20%">Dimensión⇵</th>
-                                <th style="text-align: center; width: 20%">Aprendizajes⇵</th>
-                                <th style="text-align: center; width: 20%">Saberes⇵</th>
+                                <th style="text-align: center; width: 20%">Aprendizaje⇵</th>
+                                <th style="text-align: center; width: 20%">Saber⇵</th>
                                 <th style="text-align: center; width: 20%">Tipo de Saber⇵</th>
                             </tr>
 
