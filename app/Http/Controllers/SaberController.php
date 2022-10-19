@@ -87,6 +87,7 @@ class SaberController extends Controller
 
         return view('carreras.ver_saberes')->with('carrera', $carrera)->with('saber', $saber);
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -133,8 +134,8 @@ class SaberController extends Controller
     {
         $query = DB::table('saberes')->where('id', $id_saber)->delete();
 
-        $query2= 'DELETE propuesta_modulos, propuesta_tiene_saber FROM saberes
-        INNER JOIN propuesta_modulos  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
+        $query2= 'DELETE propuesta_modulos, propuesta_tiene_saber FROM propuesta_modulos
+        INNER JOIN propuesta_tiene_saber  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
         WHERE propuesta_tiene_saber.saber = ?';
 
         $status = \DB::delete($query2, array($id_saber));

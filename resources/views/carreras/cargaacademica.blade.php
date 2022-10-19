@@ -140,7 +140,7 @@
 
                                             <div class="form-group" style="margin: auto">
                                                 <label style="font-size: 20; font-weight: bold">Tipo de Curso</label>
-                                                <select class="form-select form-select-lg" name="semestre" aria-label=".form-select-lg example" style="width:40%; margin-bottom: 20px; font-size: 18; color: black" required>
+                                                <select class="form-select form-select-lg" name="curso" aria-label=".form-select-lg example" style="width:40%; margin-bottom: 20px; font-size: 18; color: black" required>
                                                         <option selected disabled="true" value="">Tipo de curso</option>      
                                                         <option value="FB">FB</option>  
                                                         <option value="FF">FF</option> 
@@ -151,34 +151,34 @@
                                             </div>
 
                                             <div class="form-group" style="margin-left: 5%">
-                                                <input class="form-check-input" type="checkbox" value="" id="" >
+                                                <input class="form-check-input" type="checkbox" value="1" name="clases" >
                                                 <label style="font-size: 14; color: black">Clases</label> 
-                                                <input class="form-check-input" type="checkbox" value="" id="" style="margin-left: 2%" >
+                                                <input class="form-check-input" type="checkbox" value="1"name="seminario" style="margin-left: 2%" >
                                                 <label style="font-size: 14; color: black; margin-left: 7%">Seminario</label>                                         
                                             </div>
 
                                             <div class="form-group" style="margin-left: 5%">
-                                                <input class="form-check-input" type="checkbox" value="" id="" >
+                                                <input class="form-check-input" type="checkbox" value="1" name="practicas" >
                                                 <label style="font-size: 14; color: black">Actividades prácticas</label> 
-                                                <input class="form-check-input" type="checkbox" value="" id="" style="margin-left: 2%" >
+                                                <input class="form-check-input" type="checkbox" value="1" name="labs" style="margin-left: 2%" >
                                                 <label style="font-size: 14; color: black; margin-left: 7%">Laboratorio</label>  
-                                                <input class="form-check-input" type="checkbox" value="" id="" style="margin-left: 2%" >
+                                                <input class="form-check-input" type="checkbox" value="1" name="talleres" style="margin-left: 2%" >
                                                 <label style="font-size: 14; color: black; margin-left: 7%">Talleres</label>                                        
                                             </div>
 
                                             <div class="form-group" style="margin-left: 5%">
-                                                <input class="form-check-input" type="checkbox" value="" id="" >
+                                                <input class="form-check-input" type="checkbox" value="1" name="clinicas">
                                                 <label style="font-size: 14; color: black">Actividades clínicas</label> 
-                                                <input class="form-check-input" type="checkbox" value="" id="" style="margin-left: 2%" >
+                                                <input class="form-check-input" type="checkbox" value="1" name="terreno" style="margin-left: 2%" >
                                                 <label style="font-size: 14; color: black; margin-left: 7%">Actividades de terreno</label>                                       
                                             </div>
 
                                             <div class="form-group" style="margin-left: 5%">
-                                                <input class="form-check-input" type="checkbox" value="" id="" >
+                                                <input class="form-check-input" type="checkbox" value="1" name="ayudantias" >
                                                 <label style="font-size: 14; color: black">Ayudantías</label> 
-                                                <input class="form-check-input" type="checkbox" value="" id="" style="margin-left: 2%" >
+                                                <input class="form-check-input" type="checkbox" value="1" name="tareas" style="margin-left: 2%" >
                                                 <label style="font-size: 14; color: black; margin-left: 7%">Tareas</label>          
-                                                <input class="form-check-input" type="checkbox" value="" id="" style="margin-left: 2%" >
+                                                <input class="form-check-input" type="checkbox" value="1" name="estudio" style="margin-left: 2%" >
                                                 <label style="font-size: 14; color: black; margin-left: 7%">Estudio</label>                                 
                                             </div>
 
@@ -201,7 +201,8 @@
                                             </div>
 
                                             <div id="dynamicAdd" class="form-group" style="margin: auto">
-                                                <label style="font-size: 20; font-weight: bold">Requisitos <button type="button" name="add" id="add" class="btn btn-info">+</button></label>  
+                                                <label style="font-size: 20; font-weight: bold">Requisitos <button type="button" name="add" id="add" class="btn btn-info">+</button></label> 
+
                                             </div>
 
                                     </div>
@@ -387,8 +388,8 @@
 <script type="text/javascript">
         var i = 0;
         $("#add").click(function () {
-            i++;
-            if (i<7) {
+            if (i<9) {
+                i++;
                 $("#dynamicAdd").append(
                 '<div id="fila' + i + '" class="dynamic-added" style="position: relative; margin-bottom: 2%">' +
                     '<select class="form-select form-select-lg lista_saberes" name="saber[' + i + ']" aria-label=".form-select-lg example" style= "font-size: 18; width: 90%" required>' +
@@ -403,7 +404,7 @@
         $(document).on('click', '.btn_remove', function(){  
 
             var button_id = $(this).attr("id");   
-
+            i--;
             $('#fila'+button_id+'').remove();  
 
         });
@@ -440,9 +441,8 @@
 
                     }else{
 
-                        i=1;
+                        i=0;
 
-                        
 
                         $('.dynamic-added').remove();
 

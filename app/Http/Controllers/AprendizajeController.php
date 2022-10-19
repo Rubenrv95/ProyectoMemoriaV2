@@ -84,6 +84,7 @@ class AprendizajeController extends Controller
 
         return response()->json($dim);
     }
+    
 
        /**
      * Display the specified resource.

@@ -59,16 +59,25 @@ class UserController extends Controller
             'password_confirmation'  => ['same:password'],
         ]);
 
+        $user = User::where('email', '=', $request->input('email'))->first();
 
-        $query = DB::table('users')->insert([
-            'nombre'=>$request->input('nombre'),
-            'email'=>$request->input('email'),
-            'rol'=>$request->input('rol'),
-            'password' => Hash::make($request->input('password')),
-            'remember_token' => Str::random(10)
-        ]);
+        if ($user === null) {
+            $query = DB::table('users')->insert([
+                'nombre'=>$request->input('nombre'),
+                'email'=>$request->input('email'),
+                'rol'=>$request->input('rol'),
+                'password' => Hash::make($request->input('password')),
+                'remember_token' => Str::random(10)
+            ]);
+    
+            return back()->withSuccess('Usuario creado con éxito');
+        }
 
-        return back()->withSuccess('Usuario creado con éxito');
+        else {
+            return back()->withErrors('El correo electrónico ingresado ya existe en la base de datos');
+        }
+
+        return back()->withErrors('El correo electrónico ingresado ya existe en la base de datos');
     }
 
     /**

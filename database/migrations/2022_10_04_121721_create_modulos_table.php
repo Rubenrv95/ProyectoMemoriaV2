@@ -14,8 +14,7 @@ class CreateModulosTable extends Migration
     public function up()
     {
         Schema::create('modulos', function (Blueprint $table) {
-            $table->string('Nombre_modulo');
-            $table->Integer('Semestre');
+            $table->id();
             $table->string('Tipo');
             $table->Integer('Creditos');
             $table->Integer('Horas_semanales');

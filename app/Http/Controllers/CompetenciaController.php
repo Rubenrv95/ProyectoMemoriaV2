@@ -78,6 +78,7 @@ class CompetenciaController extends Controller
         return view('carreras.tempo_competencias')->with('carrera', $carrera)->with('competencia', $competencia);
 
     }
+    
 
     /**
      * Show the form for editing the specified resource.

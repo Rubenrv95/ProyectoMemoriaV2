@@ -70,9 +70,9 @@
                             <tr>
                                 <td style="display: none">{{$m['id']}}</td>
                                 <td style="text-align: center">{{$m['Semestre']}}</td>
-                                <td style="text-align: center"><button type="button" id="info" data-bs-toggle="modal" data-bs-target="#modal_saberes" data-url=""> </button></td>
-                                <td style="text-align: center">{{$m['Descripcion_aprendizaje']}}</td>
-                                <td style="text-align: center">{{$m['Descripcion']}}</td>
+                                <td style="text-align: center"><button type="button" id="info" class="info_sab" data-url="{{ route('modulos.show_datos', [ $c['id'] , $m['id'] ]) }}"> </button></td>
+                                <td style="text-align: center"><button type="button" id="info" class="info_aprend" data-url="{{ route('modulos.show_datos', [ $c['id'] , $m['id'] ]) }}">  </button> </td>
+                                <td style="text-align: center"><button type="button" id="info" class="info_comp" data-url="{{ route('modulos.show_datos', [ $c['id'] , $m['id'] ]) }}">  </button> </td>
                                 <td style="text-align: center">{{$m['Nombre_modulo']}}</td>
                                 <td style="text-align: center">
                                     @if (Auth::user()->rol != 'Dirección de docencia')
@@ -90,12 +90,66 @@
                                                     <div class="modal-content">
 
                                                         <div class="modal-header">
-                                                            <h1 class="justify-content-center" style="margin: auto">Saberes de {{$m['Nombre_modulo']}}</h1>
+                                                            <h1 class="justify-content-center" style="margin: auto; text-align: center">Saberes de {{$m['Nombre_modulo']}}</h1>
                                                         </div>
                                                         <div class="modal-body">
 
                                                                 <div class="form-group" style="margin: auto; margin-bottom: 20px; text-align: center">
-                                                                    <li style="color: black">{{$m['Descripcion_saber']}} ({{$m['Tipo']}})</li>
+                                                                    <span id="saber_desc"></span>
+                                                                </div>
+                                                            
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cerrar</button>
+                                                        </div> 
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class ="col-md-12">
+                                        <div class="modal fade" id="modal_aprendizajes" aria-hidden="true">
+                                            <div class="modal-dialog modal-md" >
+                                                    <div class="modal-content">
+
+                                                        <div class="modal-header">
+                                                            <h1 class="justify-content-center" style="margin: auto; text-align: center">Aprendizajes de {{$m['Nombre_modulo']}}</h1>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                                <div class="form-group" style="margin: auto; margin-bottom: 20px; text-align: center">
+                                                                    <span id="aprendizaje_desc"></span>
+                                                                </div>
+                                                            
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cerrar</button>
+                                                        </div> 
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class ="col-md-12">
+                                        <div class="modal fade" id="modal_competencias" aria-hidden="true">
+                                            <div class="modal-dialog modal-md" >
+                                                    <div class="modal-content">
+
+                                                        <div class="modal-header">
+                                                            <h1 class="justify-content-center" style="margin: auto; text-align: center">Competencias de {{$m['Nombre_modulo']}}</h1>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                                <div class="form-group" style="margin: auto; margin-bottom: 20px; text-align: center">
+                                                                    <span id="competencia_desc"></span>
                                                                 </div>
                                                             
                                                         </div>
@@ -340,10 +394,10 @@
     </script>
 
     <script type="text/javascript">
-        var i = 1;
+        var i = 0;
         $("#add").click(function () {
-            i++;
-            if (i<7) {
+            if (i<5) {
+                i++;
                 $("#dynamicAdd").append(
                 '<div id="fila' + i + '" class="dynamic-added" style="position: relative; margin-bottom: 2%">' +
                     '<select class="form-select form-select-lg lista_saberes" name="saber[' + i + ']" aria-label=".form-select-lg example" style= "font-size: 18; width: 90%" required>' +
@@ -398,7 +452,7 @@
 
                     }else{
 
-                        i=1;
+                        i=0;
 
                         
 
@@ -418,27 +472,70 @@
 
     <script type="text/javascript">
 
-        
 
         $(document).ready(function () {
 
-        
 
         /* When click show user */
 
-            $('body').on('click', '#info', function () {
+            $('#lista').on('click', '.info_sab', function () {
 
-                var userURL = $(this).data('url');
+                var sabURL = $(this).data('url');
 
-                $.get(userURL, function (data) {
+                $.get(sabURL, function (data) {
 
-                    $('#userShowModal').modal('show');
+                    var lista = "";
 
-                    $('#user-id').text(data.id);
+                    for (const prop in data) {         
+                        lista +=    '<li style="color: black">' + data[prop]['Descripcion_saber'] + " (" + data[prop]['Tipo'] +")" + '</li>';        
+                    } 
+                        
+                    document.getElementById("saber_desc").innerHTML = lista;
 
-                    $('#user-name').text(data.name);
 
-                    $('#user-email').text(data.email);
+                    $('#modal_saberes').modal('show');
+
+                })
+
+            });
+
+            $('#lista').on('click', '.info_aprend', function () {
+
+                var aprendURL = $(this).data('url');
+
+                $.get(aprendURL, function (data) {
+
+                    var lista = "";
+
+                    for (const prop in data) {         
+                        lista +=    '<li style="color: black">' + data[prop]['Descripcion_aprendizaje'] + " (" + data[prop]['Nivel_aprend'] +")" + '</li>';        
+                    } 
+                        
+                    document.getElementById("aprendizaje_desc").innerHTML = lista;
+
+
+                    $('#modal_aprendizajes').modal('show');
+
+                })
+
+            });
+
+            $('#lista').on('click', '.info_comp', function () {
+
+                var compURL = $(this).data('url');
+
+                $.get(compURL, function (data) {
+
+                    var lista = "";
+
+                    for (const prop in data) {         
+                        lista +=    '<li style="color: black">' + data[prop]['Descripcion'] + '</li>';        
+                    } 
+                        
+                    document.getElementById("competencia_desc").innerHTML = lista;
+
+
+                    $('#modal_competencias').modal('show');
 
                 })
 
