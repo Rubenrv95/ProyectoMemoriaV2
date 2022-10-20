@@ -57,20 +57,20 @@
                                 <th style="display: none">id⇵</th>
                                 <th style="width: 10%; text-align: center">Semestre⇵</th>
                                 <th style="width: 10%; text-align: center">Saberes⇵</th>
-                                <th style="width: 25%; text-align: center">Aprendizajes⇵</th>
-                                <th style="width: 25%; text-align: center">Competencias⇵</th>
-                                <th style="text-align: center; width: 20%">Propuesta de módulo</th>
+                                <th style="width: 10%; text-align: center">Aprendizajes⇵</th>
+                                <th style="width: 10%; text-align: center">Competencias⇵</th>
+                                <th style="text-align: center; width: 50%">Propuesta de módulo⇵</th>
                                 <th style="width: 10%;"></th>
                             </tr>
 
                         </thead>
                         
                         <tbody> 
-                            @foreach ($modulo as $m)
+                            @foreach ($propuestas as $m)
                             <tr>
                                 <td style="display: none">{{$m['id']}}</td>
                                 <td style="text-align: center">{{$m['Semestre']}}</td>
-                                <td style="text-align: center"><button type="button" id="info" class="info_sab" data-url="{{ route('modulos.show_datos', [ $c['id'] , $m['id'] ]) }}"> </button></td>
+                                <td style="text-align: center"><button type="button" id="info" value="{{$m['Nombre_modulo']}}" class="info_sab" data-url="{{ route('modulos.show_datos', [ $c['id'] , $m['id'] ]) }}"> </button></td>
                                 <td style="text-align: center"><button type="button" id="info" class="info_aprend" data-url="{{ route('modulos.show_datos', [ $c['id'] , $m['id'] ]) }}">  </button> </td>
                                 <td style="text-align: center"><button type="button" id="info" class="info_comp" data-url="{{ route('modulos.show_datos', [ $c['id'] , $m['id'] ]) }}">  </button> </td>
                                 <td style="text-align: center">{{$m['Nombre_modulo']}}</td>
@@ -81,93 +81,92 @@
                                     @endif
                                 </td>
                             </tr>
-
-                            <div class="container">
-                                <div class="row">
-                                    <div class ="col-md-12">
-                                        <div class="modal fade" id="modal_saberes" aria-hidden="true">
-                                            <div class="modal-dialog modal-md" >
-                                                    <div class="modal-content">
-
-                                                        <div class="modal-header">
-                                                            <h1 class="justify-content-center" style="margin: auto; text-align: center">Saberes de {{$m['Nombre_modulo']}}</h1>
-                                                        </div>
-                                                        <div class="modal-body">
-
-                                                                <div class="form-group" style="margin: auto; margin-bottom: 20px; text-align: center">
-                                                                    <span id="saber_desc"></span>
-                                                                </div>
-                                                            
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cerrar</button>
-                                                        </div> 
-                                                    </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="container">
-                                <div class="row">
-                                    <div class ="col-md-12">
-                                        <div class="modal fade" id="modal_aprendizajes" aria-hidden="true">
-                                            <div class="modal-dialog modal-md" >
-                                                    <div class="modal-content">
-
-                                                        <div class="modal-header">
-                                                            <h1 class="justify-content-center" style="margin: auto; text-align: center">Aprendizajes de {{$m['Nombre_modulo']}}</h1>
-                                                        </div>
-                                                        <div class="modal-body">
-
-                                                                <div class="form-group" style="margin: auto; margin-bottom: 20px; text-align: center">
-                                                                    <span id="aprendizaje_desc"></span>
-                                                                </div>
-                                                            
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cerrar</button>
-                                                        </div> 
-                                                    </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="container">
-                                <div class="row">
-                                    <div class ="col-md-12">
-                                        <div class="modal fade" id="modal_competencias" aria-hidden="true">
-                                            <div class="modal-dialog modal-md" >
-                                                    <div class="modal-content">
-
-                                                        <div class="modal-header">
-                                                            <h1 class="justify-content-center" style="margin: auto; text-align: center">Competencias de {{$m['Nombre_modulo']}}</h1>
-                                                        </div>
-                                                        <div class="modal-body">
-
-                                                                <div class="form-group" style="margin: auto; margin-bottom: 20px; text-align: center">
-                                                                    <span id="competencia_desc"></span>
-                                                                </div>
-                                                            
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cerrar</button>
-                                                        </div> 
-                                                    </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             @endforeach
                         </tbody>
                 </table> 
 
 
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class ="col-md-12">
+                    <div class="modal fade" id="modal_saberes" aria-hidden="true">
+                        <div class="modal-dialog modal-md" >
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <span id="saber_modulo" style="margin: auto; text-align: center"></span>
+                                    </div>
+                                    <div class="modal-body">
+
+                                            <div class="form-group" style="margin: auto; margin-bottom: 20px; text-align: center">
+                                                <span id="saber_desc"></span>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cerrar</button>
+                                    </div> 
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class ="col-md-12">
+                    <div class="modal fade" id="modal_aprendizajes" aria-hidden="true">
+                        <div class="modal-dialog modal-md" >
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <span id="aprendizaje_modulo" style="margin: auto; text-align: center"></span>
+                                    </div>
+                                    <div class="modal-body">
+
+                                            <div class="form-group" style="margin: auto; margin-bottom: 20px; text-align: center">
+                                                <span id="aprendizaje_desc"></span>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cerrar</button>
+                                    </div> 
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class ="col-md-12">
+                    <div class="modal fade" id="modal_competencias" aria-hidden="true">
+                        <div class="modal-dialog modal-md" >
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <span id="competencia_modulo" style="margin: auto; text-align: center"></span>
+                                    </div>
+                                    <div class="modal-body">
+
+                                            <div class="form-group" style="margin: auto; margin-bottom: 20px; text-align: center">
+                                                <span id="competencia_desc"></span>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cerrar</button>
+                                    </div> 
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- MODALS PROPUESTA DE MÓDULO -->
@@ -476,11 +475,12 @@
         $(document).ready(function () {
 
 
-        /* When click show user */
+            // al hacer click, se mostrará la información solicitada asociada al módulo
 
             $('#lista').on('click', '.info_sab', function () {
 
                 var sabURL = $(this).data('url');
+
 
                 $.get(sabURL, function (data) {
 
@@ -491,6 +491,8 @@
                     } 
                         
                     document.getElementById("saber_desc").innerHTML = lista;
+
+                    document.getElementById("saber_modulo").innerHTML = '<h1 class="justify-content-center">Saberes de ' + data[0]['Nombre_modulo'] + '</h1>';
 
 
                     $('#modal_saberes').modal('show');
@@ -513,6 +515,8 @@
                         
                     document.getElementById("aprendizaje_desc").innerHTML = lista;
 
+                    document.getElementById("aprendizaje_modulo").innerHTML = '<h1 class="justify-content-center">Aprendizajes de ' + data[0]['Nombre_modulo'] + '</h1>';
+
 
                     $('#modal_aprendizajes').modal('show');
 
@@ -529,10 +533,12 @@
                     var lista = "";
 
                     for (const prop in data) {         
-                        lista +=    '<li style="color: black">' + data[prop]['Descripcion'] + '</li>';        
+                        lista +=    '<li style="color: black">' + data[prop]['Orden'] + '. ' + data[prop]['Descripcion'] + '</li>';        
                     } 
                         
                     document.getElementById("competencia_desc").innerHTML = lista;
+
+                    document.getElementById("competencia_modulo").innerHTML = '<h1 class="justify-content-center">Competencias de ' + data[0]['Nombre_modulo'] + '</h1>';
 
 
                     $('#modal_competencias').modal('show');

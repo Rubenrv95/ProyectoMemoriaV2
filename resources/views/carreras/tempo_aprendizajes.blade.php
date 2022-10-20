@@ -51,7 +51,7 @@
                             <th style="width: 20%; text-align: center">Nivel de Aprendizaje⇵</th>
                             <th style="width: 20%; text-align: center">Aprendizaje⇵</th>
                             <th style="width: 20%; text-align: center">Dimension⇵</th>
-                            @for ($i = 1; $i <= 16; $i++)
+                            @for ($i = 1; $i <= 14; $i++)
                                 <th style="text-align: center">Nivel {{$i}}</th>
                             @endfor
                         </tr>

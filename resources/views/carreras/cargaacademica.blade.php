@@ -54,62 +54,160 @@
                         <thead style="text-align: center">
 
                             <tr style="font-weight: bold; color: white">
+                                <th rowspan="2"style="text-align: center; display: none">id⇵</th>
                                 <th rowspan="2"style="text-align: center">Semestre⇵</th>
+                                <th rowspan="2"style="text-align: center; display: none">id prop⇵</th>
                                 <th rowspan="2"style="text-align: center">Módulo⇵</th>
                                 <th rowspan="2"style="text-align: center">Tipo Curso⇵</th>
                                 <th rowspan="2"style="text-align: center">Requisitos⇵</th>
-                                <th rowspan="2"style="text-align: center;">Clases</th>
-                                <th rowspan="2"style="text-align: center;">Seminario</th>
-                                <th rowspan="2" style="text-align: center;">Ayudantias</th>
+                                <th rowspan="2"style="text-align: center;">Clases⇵</th>
+                                <th rowspan="2"style="text-align: center;">Seminario⇵</th>
+                                <th rowspan="2" style="text-align: center;">Ayudantias⇵</th>
                                 <th colspan="3">Actividades Prácticas, de Laboratorio</th>
                                 <th colspan="2">Actividades Clínicas o terreno</th>
                                 <th colspan="2">Trabajo Autónomo</th>
-                                <th rowspan="2" style="text-align: center;">Horas semanales</th>
-                                <th rowspan="2" style="text-align: center;">Total horas del módulo</th>
-                                <th rowspan="2" style="text-align: center;">SCT-Chile</th>
+                                <th rowspan="2" style="text-align: center;">Horas semanales⇵</th>
+                                <th rowspan="2" style="text-align: center;">Total horas del módulo⇵</th>
+                                <th rowspan="2" style="text-align: center;">SCT-Chile⇵</th>
                                 <th rowspan="2" style="text-align: center;"></th>
                                 
                             </tr>
 
                             <tr style="font-weight: bold; color: white">
-                                <th style="text-align: center;">AP</th>
-                                <th style="text-align: center;">LAB</th>
-                                <th style="text-align: center;">TALL</th>
-                                <th style="text-align: center;">AC</th>
-                                <th style="text-align: center;">TE</th>
-                                <th style="text-align: center;">Tareas</th>
-                                <th style="text-align: center;">Estudio</th>
+                                <th style="text-align: center;">AP⇵</th>
+                                <th style="text-align: center;">LAB⇵</th>
+                                <th style="text-align: center;">TALL⇵</th>
+                                <th style="text-align: center;">AC⇵</th>
+                                <th style="text-align: center;">TE⇵</th>
+                                <th style="text-align: center;">Tareas⇵</th>
+                                <th style="text-align: center;">Estudio⇵</th>
                             </tr>
 
                         </thead>
                         
                         <tbody> 
                             
-                            <tr>                                     
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>       
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                            @foreach ($modulo as $m)
+                            <tr>     
+                                <td style="display: none">{{$m['id']}}</td>                                
+                                <td style="text-align: center">{{$m['Semestre']}}</td>
+                                <td style="display: none">{{$m['idprop']}}</td>     
+                                <td style="text-align: center">{{$m['Nombre_modulo']}}</td>
+                                <td style="text-align: center">{{$m['Tipo']}}</td>
+                                <td style="text-align: center"><button type="button" id="info" class="info_req" data-url="{{ route('carga_academica.show_requisitos', [ $c['id'] , $m['id'] ]) }}"> </button></td>     
+                                <td style="text-align: center">
+                                    @if ($m['Clases'] == 1)
+                                        SI
+                                    @else
+                                        NO
+                                    @endif                          
+                                </td>
+
+                                <td style="text-align: center">
+                                    @if ($m['Seminario'] == 1)
+                                        SI
+                                    @else
+                                        NO
+                                    @endif                          
+                                </td>
+                                <td style="text-align: center">
+                                    @if ($m['Ayudantias'] == 1)
+                                        SI
+                                    @else
+                                        NO
+                                    @endif                          
+                                </td>
+                                <td style="text-align: center">
+                                    @if ($m['Actividades_practicas'] == 1)
+                                        SI
+                                    @else
+                                        NO
+                                    @endif                          
+                                </td>
+                                <td style="text-align: center">
+                                    @if ($m['Laboratorios'] == 1)
+                                        SI
+                                    @else
+                                        NO
+                                    @endif                          
+                                </td>
+                                <td style="text-align: center">
+                                    @if ($m['Talleres'] == 1)
+                                        SI
+                                    @else
+                                        NO
+                                    @endif                          
+                                </td>
+                                <td style="text-align: center">
+                                    @if ($m['Actividades_clinicas'] == 1)
+                                        SI
+                                    @else
+                                        NO
+                                    @endif                          
+                                </td>
+                                <td style="text-align: center">
+                                    @if ($m['Actividades_terreno'] == 1)
+                                        SI
+                                    @else
+                                        NO
+                                    @endif                          
+                                </td>
+                                <td style="text-align: center">
+                                    @if ($m['Tareas'] == 1)
+                                        SI
+                                    @else
+                                        NO
+                                    @endif                          
+                                </td>
+                                <td style="text-align: center">
+                                    @if ($m['Estudios'] == 1)
+                                        SI
+                                    @else
+                                        NO
+                                    @endif                          
+                                </td>
+                                <td style="text-align: center">{{$m['Horas_semanales']}}</td>
+                                <td style="text-align: center">{{$m['Horas_totales']}}</td>
+                                <td style="text-align: center">{{$m['Creditos']}}</td>
+                                <td style="text-align: center">
+                                    @if (Auth::user()->rol != 'Dirección de docencia')
+                                        <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_modulo" class="edit"> </button>
+                                        <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_modulo" class="delete"> </button>
+                                    @endif
+                                </td>
                             </tr>
+
+                            @endforeach
                         </tbody>
                 </table> 
 
 
         </div>
+
+        <div class="container">
+            <div class="row">
+                <div class ="col-md-12">
+                    <div class="modal fade" id="modal_requisitos" aria-hidden="true">
+                        <div class="modal-dialog modal-md" >
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="justify-content-center" style="margin: auto; text-align: center">Prerrequisitos</h1>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group" style="margin: auto; margin-bottom: 20px; text-align: center">
+                                            <span id="modulo_req"></span>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cerrar</button>
+                                    </div> 
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <!-- MODALS PROPUESTA DE MÓDULO -->
 
@@ -119,7 +217,7 @@
                 <div class ="col-md-12">
                     <div tabIndex="-1"  class="modal fade" id="modal_crear_modulo" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form action="/carreras/{{$c['id']}}/modulos" method="POST" class="form-group" name="crear_saber" id="crear_saber">
+                            <form action="/carreras/{{$c['id']}}/carga_academica" method="POST" class="form-group" name="crear_modulo" id="crear_modulo">
                             @csrf
                                 <div class="modal-content">
 
@@ -131,22 +229,22 @@
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
                                                 <label style="font-size: 20; font-weight: bold">Nombre del módulo</label>
                                                 <select class="form-select form-select-lg" name="modulo" aria-label=".form-select-lg example" style="width:90%; margin-bottom: 20px; font-size: 18; color: black" required>
-                                                        <option selected disabled="true" value="">Seleccionar módulo</option>      
-                                                        @foreach ($modulo as $m)
-                                                            <option value="{{$m['id']}}">{{$m['Nombre_modulo']}}</option>
+                                                        <option selected disabled="true" value="">Seleccionar propuesta de módulo</option>      
+                                                        @foreach ($propuestas as $p)
+                                                            <option value="{{$p['id']}}">{{$p['Nombre_modulo']}}</option>
                                                         @endforeach                                         
                                                 </select>
                                             </div>
 
                                             <div class="form-group" style="margin: auto">
                                                 <label style="font-size: 20; font-weight: bold">Tipo de Curso</label>
-                                                <select class="form-select form-select-lg" name="curso" aria-label=".form-select-lg example" style="width:40%; margin-bottom: 20px; font-size: 18; color: black" required>
+                                                <select class="form-select form-select-lg" name="curso" aria-label=".form-select-lg example" style="margin-bottom: 20px; font-size: 18; color: black" required>
                                                         <option selected disabled="true" value="">Tipo de curso</option>      
-                                                        <option value="FB">FB</option>  
-                                                        <option value="FF">FF</option> 
-                                                        <option value="FD">FD</option>          
-                                                        <option value="MIC">MIC</option>    
-                                                        <option value="DIC">DIC</option>                                  
+                                                        <option value="FB">Formación Básica (FB)</option>  
+                                                        <option value="FF">Formación Fundamental (FF)</option> 
+                                                        <option value="FD">Formación Disciplinar (FD)</option>          
+                                                        <option value="MIC">Módulo integrador de competencias (MIC)</option>    
+                                                        <option value="DIC">Desempeño integrado de competencias (DIC)</option>                                  
                                                 </select>
                                             </div>
 
@@ -229,37 +327,94 @@
 
                             <form method = "POST" action = "/carreras/{{$c['id']}}/modulos" class="form-group" id = "editForm">
 
-                            {{ csrf_field() }}
-                            {{ method_field('PUT') }}
+                                {{ csrf_field() }}
+                                {{ method_field('PUT') }}
 
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto">Modificar módulo</h1>
+                                        <h1 class="justify-content-center" style="margin: auto">Agregar módulo</h1>
                                     </div>
                                     <div class="modal-body">
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
                                                 <label style="font-size: 20; font-weight: bold">Nombre del módulo</label>
-                                                <input class="form-control form-control-lg" name="nombre_modulo" id="nombre_modulo" type="text"  placeholder="Ingrese el nombre del módulo" style="color: black"  maxlength="255" required/>
-                                                <span style="color: red">@error('nombre_modulo')  Debe ingresar un nombre para el módulo  @enderror</span>
+                                                <select class="form-select form-select-lg" name="modulo" id="modulo" aria-label=".form-select-lg example" style="width:90%; margin-bottom: 20px; font-size: 18; color: black" required>
+                                                        <option selected disabled="true" value="">Seleccionar propuesta de módulo</option>      
+                                                        @foreach ($propuestas as $p)
+                                                            <option value="{{$p['id']}}">{{$p['Nombre_modulo']}}</option>
+                                                        @endforeach                                         
+                                                </select>
                                             </div>
 
                                             <div class="form-group" style="margin: auto">
-                                                <label style="font-size: 20; font-weight: bold">Semestre</label>
-                                                <select class="form-select form-select-lg" name="semestre" id="semestre" aria-label=".form-select-lg example" style="color: black; width:30%; margin-bottom: 20px; font-size: 18" required>
-                                                        <option selected disabled="true" value="">Semestre</option>      
-                                                        @for ($i = 1; $i <= 16; $i++)
-                                                            <option value="{{$i}}">{{$i}}</option>
-                                                        @endfor                                              
+                                                <label style="font-size: 20; font-weight: bold">Tipo de Curso</label>
+                                                <select class="form-select form-select-lg" name="curso" id="curso" aria-label=".form-select-lg example" style="margin-bottom: 20px; font-size: 18; color: black" required>
+                                                        <option selected disabled="true" value="">Tipo de curso</option>      
+                                                        <option value="FB">Formación Básica (FB)</option>  
+                                                        <option value="FF">Formación Fundamental (FF)</option> 
+                                                        <option value="FD">Formación Disciplinar (FD)</option>          
+                                                        <option value="MIC">Módulo integrador de competencias (MIC)</option>    
+                                                        <option value="DIC">Desempeño integrado de competencias (DIC)</option>                                  
                                                 </select>
                                             </div>
-                                        
+
+                                            <div class="form-group" style="margin-left: 5%">
+                                                <input class="form-check-input" type="checkbox" value="1" name="clases" id="clases">
+                                                <label style="font-size: 14; color: black">Clases</label> 
+                                                <input class="form-check-input" type="checkbox" value="1" name="seminario" id="seminario" style="margin-left: 2%" >
+                                                <label style="font-size: 14; color: black; margin-left: 7%">Seminario</label>                                         
+                                            </div>
+
+                                            <div class="form-group" style="margin-left: 5%">
+                                                <input class="form-check-input" type="checkbox" value="1" name="practicas" id="practicas">
+                                                <label style="font-size: 14; color: black">Actividades prácticas</label> 
+                                                <input class="form-check-input" type="checkbox" value="1" name="labs" id="labs" style="margin-left: 2%" >
+                                                <label style="font-size: 14; color: black; margin-left: 7%">Laboratorio</label>  
+                                                <input class="form-check-input" type="checkbox" value="1" name="talleres" id="talleres" style="margin-left: 2%" >
+                                                <label style="font-size: 14; color: black; margin-left: 7%">Talleres</label>                                        
+                                            </div>
+
+                                            <div class="form-group" style="margin-left: 5%">
+                                                <input class="form-check-input" type="checkbox" value="1" name="clinicas" id="clinicas">
+                                                <label style="font-size: 14; color: black">Actividades clínicas</label> 
+                                                <input class="form-check-input" type="checkbox" value="1" name="terreno" id="terreno" style="margin-left: 2%" >
+                                                <label style="font-size: 14; color: black; margin-left: 7%">Actividades de terreno</label>                                       
+                                            </div>
+
+                                            <div class="form-group" style="margin-left: 5%">
+                                                <input class="form-check-input" type="checkbox" value="1" name="ayudantias" id="ayudantias">
+                                                <label style="font-size: 14; color: black">Ayudantías</label> 
+                                                <input class="form-check-input" type="checkbox" value="1" name="tareas" id="tareas" style="margin-left: 2%" >
+                                                <label style="font-size: 14; color: black; margin-left: 7%">Tareas</label>          
+                                                <input class="form-check-input" type="checkbox" value="1" name="estudio" id="estudio" style="margin-left: 2%" >
+                                                <label style="font-size: 14; color: black; margin-left: 7%">Estudio</label>                                 
+                                            </div>
+
+                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
+                                                <label style="font-size: 20; font-weight: bold">Horas semanales</label>
+                                                <input class="form-control form-control-lg" name="horas_semanales" id="horas_semanales" style="width:20%; color: black" type="number"  min="0" max="100" required/>        
+                                                <span style="color: red">@error('orden_competencia')  Debe ingresar un número de orden para la competencia  @enderror</span>
+                                            </div>
+
+                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
+                                                <label style="font-size: 20; font-weight: bold">Horas totales</label>
+                                                <input class="form-control form-control-lg" name="horas_totales" id="horas_totales" style="width:20%; color: black" type="number"  min="0" max="999" required/>        
+                                                <span style="color: red">@error('orden_competencia')  Debe ingresar un número de orden para la competencia  @enderror</span>
+                                            </div>
+
+                                            <div class="form-group" style="margin: auto; margin-bottom: 20px">
+                                                <label style="font-size: 20; font-weight: bold">SCT-Chile</label>
+                                                <input class="form-control form-control-lg" name="creditos" id="creditos" style="width:20%; color: black" type="number"  min="0" max="100" required/>        
+                                                <span style="color: red">@error('orden_competencia')  Debe ingresar un número de orden para la competencia  @enderror</span>
+                                            </div>
+
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-success">Guardar</button>
+                                        <button class="btn btn-success" type="submit" name="submit" id="submit"> Guardar</button>
                                         <button class="btn btn-secondary" data-bs-dismiss="modal" type="button"> Cancelar</button>
                                     </div> 
+
                                 </div>
                             </form>
                         </div>
@@ -289,7 +444,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <input type="hidden" name="method" value="DELETE"> 
-                                        <p style="font-size: 18">¿Está seguro de que desea eliminar éste módulo? Se eliminará también de la carga académica</p>
+                                        <p style="font-size: 18">¿Está seguro de que desea eliminar éste módulo de la carga académica?</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -315,6 +470,37 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     <script>    
         $(document).ready(function() {
+
+            $('#lista').on('click', '.info_req', function () {
+
+
+                var reqURL = $(this).data('url');
+
+                $.get(reqURL, function (data) {
+
+                    var lista = "";
+
+
+                    if(!data.length){
+                        lista =    '<h6 style="color:black"> Éste módulo no tiene prerrequisitos </h6>';     
+                    }
+
+                    else {
+                        for (const prop in data) {         
+                            lista +=    '<li style="color: black">' + data[prop]['Nombre_modulo'] + '</li>';        
+                        } 
+                    }
+               
+                    document.getElementById("modulo_req").innerHTML = lista;
+
+
+                    $('#modal_requisitos').modal('show');
+
+                })
+
+            });
+
+
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
@@ -356,10 +542,53 @@
                 var data = table.row($tr).data();
                 console.log(data);
 
-                $('#nombre_modulo').val(data[5]);
-                $('#semestre').val(data[1]);
+                $('#modulo').val(data[2]);
+                $('#curso').val(data[4]);
+                $('#horas_semanales').val(data[16]);
+                $('#horas_totales').val(data[17]);
+                $('#creditos').val(data[18]);
 
-                $('#editForm').attr('action', '/carreras/{{$c['id']}}/modulos/'+data[0]);
+                if (data[6] == "SI") {
+                    document.getElementById("clases").checked = true;
+                }
+
+                if (data[7] == "SI") {
+                    document.getElementById("seminario").checked = true;
+                }
+
+                if (data[8] == "SI") {
+                    document.getElementById("ayudantias").checked = true;
+                }
+
+                if (data[9] == "SI") {
+                    document.getElementById("practicas").checked = true;
+                }
+
+                if (data[10] == "SI") {
+                    document.getElementById("labs").checked = true;
+                }
+
+                if (data[11] == "SI") {
+                    document.getElementById("talleres").checked = true;
+                }
+
+                if (data[12] == "SI") {
+                    document.getElementById("clinicas").checked = true;
+                }
+
+                if (data[13] == "SI") {
+                    document.getElementById("terreno").checked = true;
+                }
+
+                if (data[14] == "SI") {
+                    document.getElementById("tareas").checked = true;
+                }
+
+                if (data[15] == "SI") {
+                    document.getElementById("estudio").checked = true;
+                }
+
+                $('#editForm').attr('action', '/carreras/{{$c['id']}}/carga_academica/'+data[0]);
                 $('#modal_modificar_modulo').modal('show');
 
             });
@@ -377,7 +606,7 @@
                 console.log(data);
 
 
-                $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/modulos/'+data[0]);
+                $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/carga_academica/'+data[0]);
                 $('#modal_eliminar_modulo').modal('show');
 
             }  );
@@ -385,16 +614,18 @@
 
     </script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
         var i = 0;
         $("#add").click(function () {
-            if (i<9) {
+            if (i<10) {
                 i++;
                 $("#dynamicAdd").append(
                 '<div id="fila' + i + '" class="dynamic-added" style="position: relative; margin-bottom: 2%">' +
-                    '<select class="form-select form-select-lg lista_saberes" name="saber[' + i + ']" aria-label=".form-select-lg example" style= "font-size: 18; width: 90%" required>' +
+                    '<select class="form-select form-select-lg lista_requisitos" name="requisito[' + i + ']" aria-label=".form-select-lg example" style= "font-size: 18; width: 90%" required>' +
                     '<option selected disabled="true" value="">Seleccionar un módulo</option>' +
-                        '<option value="">Introducción a las Matemáticas</option>' +
+                        '@foreach ($modulo as $m)' +
+                            '<option value="{{$m['id']}}">{{$m['Nombre_modulo']}}</option>' +
+                        '@endforeach' +
                     '</select>' +
                     '<button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove" style="position: absolute; top: 0; margin: 0; right: 0">X</button>' +
                 '</div>' 
@@ -427,7 +658,7 @@
 
                 method:"POST",  
 
-                data:$('#crear_saber').serialize(),
+                data:$('#crear_modulo').serialize(),
 
                 type:'json',
 
@@ -446,7 +677,7 @@
 
                         $('.dynamic-added').remove();
 
-                        $('#crear_saber')[0].reset();
+                        $('#crear_modulo')[0].reset();
 
                     }
 
@@ -457,6 +688,7 @@
         });  
 
     </script>
+
 
 
 </body>
