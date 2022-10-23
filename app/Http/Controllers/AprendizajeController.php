@@ -137,7 +137,7 @@ class AprendizajeController extends Controller
         $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
         $carrera = json_decode($carrera, true);
 
-        $tempo_aprendizaje = DB::table('tempo_aprendizajes')->leftJoin('aprendizajes', 'aprendizajes.id', '=', 'tempo_aprendizajes.aprendizaje')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('aprendizajes.*', 'tempo_aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden')->get();
+        $tempo_aprendizaje = DB::table('tempo_aprendizajes')->leftJoin('aprendizajes', 'aprendizajes.id', '=', 'tempo_aprendizajes.aprendizaje')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('aprendizajes.id', '=', $id_aprend)->select('aprendizajes.*', 'tempo_aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden')->get();
         $tempo_aprendizaje = json_decode($tempo_aprendizaje, true);
 
         return view('carreras.editar_tempo_aprend')->with('carrera', $carrera)->with('tempo', $tempo_aprendizaje);
