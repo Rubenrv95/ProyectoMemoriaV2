@@ -486,13 +486,13 @@
 
                     var lista = "";
 
-                    for (const prop in data) {         
-                        lista +=    '<li style="color: black">' + data[prop]['Descripcion_saber'] + " (" + data[prop]['Tipo'] +")" + '</li>';        
+                    for (const prop in data[0]) {       
+                        lista +=    '<li style="color: black">' + data[0][prop]['Descripcion_saber'] + " (" + data[0][prop]['Tipo'] +")" + '</li>';        
                     } 
                         
                     document.getElementById("saber_desc").innerHTML = lista;
 
-                    document.getElementById("saber_modulo").innerHTML = '<h1 class="justify-content-center">Saberes de ' + data[0]['Nombre_modulo'] + '</h1>';
+                    document.getElementById("saber_modulo").innerHTML = '<h1 class="justify-content-center">Saberes de ' + data[0][0]['Nombre_modulo'] + '</h1>';
 
 
                     $('#modal_saberes').modal('show');
@@ -509,13 +509,13 @@
 
                     var lista = "";
 
-                    for (const prop in data) {         
-                        lista +=    '<li style="color: black">' + data[prop]['Descripcion_aprendizaje'] + " (" + data[prop]['Nivel_aprend'] +")" + '</li>';        
+                    for (const prop in data[1]) {         
+                        lista +=    '<li style="color: black">' + data[1][prop]['Descripcion_aprendizaje'] + " (" + data[1][prop]['Nivel_aprend'] +")" + '</li>';        
                     } 
                         
                     document.getElementById("aprendizaje_desc").innerHTML = lista;
 
-                    document.getElementById("aprendizaje_modulo").innerHTML = '<h1 class="justify-content-center">Aprendizajes de ' + data[0]['Nombre_modulo'] + '</h1>';
+                    document.getElementById("aprendizaje_modulo").innerHTML = '<h1 class="justify-content-center">Aprendizajes de ' + data[0][0]['Nombre_modulo'] + '</h1>';
 
 
                     $('#modal_aprendizajes').modal('show');
@@ -532,13 +532,13 @@
 
                     var lista = "";
 
-                    for (const prop in data) {         
-                        lista +=    '<li style="color: black">' + data[prop]['Orden'] + '. ' + data[prop]['Descripcion'] + '</li>';        
+                    for (const prop in data[2]) {         
+                        lista +=    '<li style="color: black">' + data[2][prop]['Orden'] + '. ' + data[2][prop]['Descripcion'] + '</li>';        
                     } 
                         
                     document.getElementById("competencia_desc").innerHTML = lista;
 
-                    document.getElementById("competencia_modulo").innerHTML = '<h1 class="justify-content-center">Competencias de ' + data[0]['Nombre_modulo'] + '</h1>';
+                    document.getElementById("competencia_modulo").innerHTML = '<h1 class="justify-content-center">Competencias de ' + data[0][0]['Nombre_modulo'] + '</h1>';
 
 
                     $('#modal_competencias').modal('show');

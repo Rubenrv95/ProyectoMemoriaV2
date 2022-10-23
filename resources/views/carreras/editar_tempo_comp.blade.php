@@ -9,7 +9,7 @@
         @foreach ($carrera as $c)
         @endforeach
 
-        <title>Temporalización de aprendizajes {{$c['nombre']}}</title>
+        <title>Temporalización de competencias {{$c['nombre']}}</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
         <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
@@ -20,9 +20,9 @@
 <body >
         <div class="container-fluid">   
                 
-                <a href="/carreras"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
+                <a href="/carreras/"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="mb-0 text-gray-800">Aprendizajes {{$c['nombre']}} </h1>
+                        <h1 class="mb-0 text-gray-800">Competencias {{$c['nombre']}} </h1>
                 </div>
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
@@ -33,57 +33,52 @@
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
-                <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="btn btn-secondary">Gestión de Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/tempo_aprendizajes"><button type="button" class="btn btn-secondary">Temporalización de Aprendizajes</button></a> 
+                <a href="/carreras/{{$c['id']}}/competencias"><button type="button" class="btn btn-secondary">Gestión de Competencias</button></a> 
+                <a href="/carreras/{{$c['id']}}/dimensiones"><button type="button" class="btn btn-secondary">Gestión de Dimensiones</button></a> 
+                <a href="/carreras/{{$c['id']}}/tempo_competencias"><button type="button" class="btn btn-secondary">Temporalización de Competencias</button></a> 
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
         </div>
         <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
-            <h3 class="mb-0 text-gray-800">Temporalización de Aprendizajes</h3>
+            <a href="/carreras/{{$c['id']}}/tempo_competencias"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
+            <h3 class="mb-0 text-gray-800">Editar temporalización</h3>
 
-
-            <form action="" method="post">
+            @foreach ($tempo as $t)
+            <form action="/carreras/{{$c['id']}}/tempo_competencias/{{$t['aprendizaje']}}" method="POST">
+                @csrf
+                @method('PUT')
                 <table id="lista" class="table table-striped table-bordered" width="100%">
                     <thead>
                         <tr style="font-weight: bold; color: white">
-                            <th style="width: 20%; text-align: center">Competencia Asociada⇵</th>
-                            <th style="width: 20%; text-align: center">Nivel de Aprendizaje⇵</th>
-                            <th style="width: 20%; text-align: center">Aprendizaje⇵</th>
-                            <th style="width: 20%; text-align: center">Dimension⇵</th>
+                            <th style="width: 20%; text-align: center">Competencia</th>
                             @for ($i = 1; $i <= 14; $i++)
                                 <th style="text-align: center">Nivel {{$i}}</th>
                             @endfor
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($tempo as $t)
                         <tr>
-                            <td style="text-align: center">{{$t['Orden']}}. {{$t['Descripcion']}}</td>
-                            <td style="text-align: center">{{$t['Nivel_aprend']}}</td>
-                            <td style="text-align: center">{{$t['Descripcion_aprendizaje']}}</td>
-                            <td style="text-align: center">{{$t['Descripcion_dimension']}}</td>
-
+                            <td  style="text-align: center">{{$t['Orden']}}. {{$t['Descripcion']}}</td>
                             @for ($i = 1; $i <= 14; $i++)
-                            <td style="text-align: center"> 
+                            <td  style="text-align: center"> 
                                 @if ($t[$i]== 1) 
-                                <input type="checkbox" class="form-check-input" value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center;" checked onclick="return false;">
+                                    <input type="checkbox" value="1" id="nivel_{{$i}}" name="nivel_{{$i}}" style="width: 30px; height: 30px; text-align: center" checked>
                                 @else
-                                <input type="checkbox" class="form-check-input" value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center" onclick="return false;">
+                                    <input type="checkbox" value="1" id="nivel_{{$i}}" name="nivel_{{$i}}" style="width: 30px; height: 30px; text-align: center">
                                 @endif
                             </td>
-                            @endfor
-                            <td  style="text-align: center">
-                                <a href="/carreras/{{$c['id']}}/tempo_aprendizajes/{{$t['aprendizaje']}}"><button type="button" id="mod" class="edit"> </button> </a> 
-                            </td>
+                            @endfor                          
                         </tr>
-                        @endforeach
+                        
                     </tbody>
                 </table>
-                    
+
+                <div class="col text-center">
+                    <button class="btn btn-success" id="save" type="submit" name="submit" id="submit"> Guardar</button>
+                </div>
             </form>
-               
+            @endforeach
 
         </div>
 
@@ -96,11 +91,13 @@
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
                 "order": [[ 1, "asc" ]],
+                "bFilter": false,
+                "bPaginate": false,
 
                 language: {
                     "decimal": "",
                     "emptyTable": "No hay información",
-                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "info": "",
                     "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
                     "infoFiltered": "(Filtrado de _MAX_ total entradas)",
                     "infoPostFix": "",

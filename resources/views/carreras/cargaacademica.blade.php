@@ -191,7 +191,7 @@
                         <div class="modal-dialog modal-md" >
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto; text-align: center">Prerrequisitos</h1>
+                                        <span id="titulo_modulo" style="margin: auto; text-align: center"></span>
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group" style="margin: auto; margin-bottom: 20px; text-align: center">
@@ -333,7 +333,7 @@
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto">Agregar módulo</h1>
+                                        <h1 class="justify-content-center" style="margin: auto">Modificar módulo</h1>
                                     </div>
                                     <div class="modal-body">
 
@@ -341,8 +341,8 @@
                                                 <label style="font-size: 20; font-weight: bold">Nombre del módulo</label>
                                                 <select class="form-select form-select-lg" name="modulo" id="modulo" aria-label=".form-select-lg example" style="width:90%; margin-bottom: 20px; font-size: 18; color: black" required>
                                                         <option selected disabled="true" value="">Seleccionar propuesta de módulo</option>      
-                                                        @foreach ($propuestas as $p)
-                                                            <option value="{{$p['id']}}">{{$p['Nombre_modulo']}}</option>
+                                                        @foreach ($propuesta_mod as $pm)
+                                                            <option value="{{$pm['id']}}">{{$pm['Nombre_modulo']}}</option>
                                                         @endforeach                                         
                                                 </select>
                                             </div>
@@ -480,7 +480,6 @@
 
                     var lista = "";
 
-
                     if(!data.length){
                         lista =    '<h6 style="color:black"> Éste módulo no tiene prerrequisitos </h6>';     
                     }
@@ -491,7 +490,11 @@
                         } 
                     }
                
+                    document.getElementById("titulo_modulo").innerHTML = '<h1 class="justify-content-center">Prerrequisitos</h1>';
+
                     document.getElementById("modulo_req").innerHTML = lista;
+
+                    
 
 
                     $('#modal_requisitos').modal('show');
@@ -541,6 +544,7 @@
 
                 var data = table.row($tr).data();
                 console.log(data);
+                
 
                 $('#modulo').val(data[2]);
                 $('#curso').val(data[4]);

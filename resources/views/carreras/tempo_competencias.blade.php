@@ -35,7 +35,7 @@
 
                 <a href="/carreras/{{$c['id']}}/competencias"><button type="button" class="btn btn-secondary">Gestión de Competencias</button></a> 
                 <a href="/carreras/{{$c['id']}}/dimensiones"><button type="button" class="btn btn-secondary">Gestión de Dimensiones</button></a> 
-                <a href="/carreras/{{$c['id']}}/competencias"><button type="button" class="btn btn-secondary">Temporalización de Competencias</button></a> 
+                <a href="/carreras/{{$c['id']}}/tempo_competencias"><button type="button" class="btn btn-secondary">Temporalización de Competencias</button></a> 
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
@@ -43,35 +43,85 @@
         <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
             <h3 class="mb-0 text-gray-800">Temporalización de Competencias</h3>
 
+            <table id="lista" class="table table-striped table-bordered" width="100%">
+                <thead>
+                    <tr style="font-weight: bold; color: white">
+                        <th style="width: 20%; text-align: center">Competencia⇵</th>
+                        @for ($i = 1; $i <= 14; $i++)
+                            <th style="text-align: center">Nivel {{$i}}</th>
+                        @endfor
+                        <th  style="text-align: center"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($tempo as $t)
+                    <tr>
+                        <td  style="text-align: center">{{$t['Orden']}}. {{$t['Descripcion']}}</td>
+                        @for ($i = 1; $i <= 14; $i++)
+                        <td  style="text-align: center"> 
+                            @if ($t[$i]== 1) 
+                                <input type="checkbox" class="form-check-input" value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center;" checked onclick="return false;">
+                            @else
+                                <input type="checkbox" class="form-check-input" value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center" onclick="return false;">
+                            @endif
+                        </td>
+                        @endfor
+                        <td  style="text-align: center">
+                        <a href="/carreras/{{$c['id']}}/tempo_competencias/{{$t['competencia']}}"><button type="button" id="mod" class="edit"> </button> </a> </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
 
-            <form action="" method="post">
-                <table id="lista" class="table table-striped table-bordered" width="100%">
-                    <thead>
-                        <tr style="font-weight: bold; color: white">
-                            <th style="width: 20%; text-align: center">Competencia⇵</th>
-                            @for ($i = 1; $i <= 14; $i++)
-                                <th style="text-align: center">Nivel {{$i}}</th>
-                            @endfor
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($competencia as $c)
-                        <tr>
-                            <td>{{$c['Orden']}}. {{$c['Descripcion']}}</td>
-                            @for ($i = 1; $i <= 14; $i++)
-                            <td style=""> <input type="checkbox" style="width: 30px; height: 30px; text-align: center"></td>
-                            @endfor
-                        </tr>
-                        @endforeach
-                    </tbody>
-               </table>
+        </div>
 
-               <div class="col text-center">
-                    <button type="submit" class="btn btn-success">Guardar</button>
-               </div>
-                
-            </form>
+         <!-- Modal modificar temporalización  -->
+         <div class="container">
+            <div class="row">
+                <div class ="col-md-12">
+                    <div tabIndex="-1"  class="modal fade" id="modal_modificar_tempo" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" style="width: 200%">
+                            <form action="/carreras/{{$c['id']}}/carga_academica" method="POST" class="form-group" name="tempo" id="tempo">
+                            @csrf
+                                <div class="modal-content">
 
+                                    <div class="modal-header">
+                                        <h1 class="justify-content-center" style="margin: auto; text-align: center">Temporalización de Competencia</h1>
+                                    </div>
+                                    <div class="modal-body">
+
+                                            <div class="form-group" style="margin-left: 5%">
+                                                <input class="form-check-input" type="checkbox" value="1" name="clases" >
+                                                <label style="font-size: 14; color: black">Nivel 1</label> 
+                                                <input class="form-check-input" type="checkbox" value="1"name="seminario" style="margin-left: 2%" >
+                                                <label style="font-size: 14; color: black; margin-left: 5%">Nivel 2</label>         
+                                                <input class="form-check-input" type="checkbox" value="1"name="seminario" style="margin-left: 2%" >
+                                                <label style="font-size: 14; color: black; margin-left: 5%">Nivel 3</label>          
+                                                <input class="form-check-input" type="checkbox" value="1"name="seminario" style="margin-left: 2%" >
+                                                <label style="font-size: 14; color: black; margin-left: 5%">Nivel 4</label>          
+                                                <input class="form-check-input" type="checkbox" value="1"name="seminario" style="margin-left: 2%" >
+                                                <label style="font-size: 14; color: black; margin-left: 5%">Nivel 5</label>          
+                                                <input class="form-check-input" type="checkbox" value="1"name="seminario" style="margin-left: 2%" >
+                                                <label style="font-size: 14; color: black; margin-left: 5%">Nivel 6</label>          
+                                                <input class="form-check-input" type="checkbox" value="1"name="seminario" style="margin-left: 2%" >
+                                                <label style="font-size: 14; color: black; margin-left: 5%">Nivel 7</label>          
+                                                <input class="form-check-input" type="checkbox" value="1"name="seminario" style="margin-left: 2%" >
+                                                <label style="font-size: 14; color: black;">Nivel 8</label>                                          
+                                            </div>
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-success" type="submit" name="submit" id="submit"> Guardar</button>
+                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button"> Cancelar</button>
+                                    </div> 
+                                
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
 

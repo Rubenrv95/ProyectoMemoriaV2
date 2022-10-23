@@ -49,6 +49,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/home', function() {
     Route::post('/carreras/{id}/competencias', [CompetenciaController::class, 'create']);
     Route::put('/carreras/{id}/competencias/{competencia}', [CompetenciaController::class, 'update']);
     Route::delete('/carreras/{id}/competencias/{competencia}', [CompetenciaController::class, 'destroy']);
+    Route::get('/carreras/{id}/tempo_competencias/{competencia}', [CompetenciaController::class, 'edit']);
+    Route::put('/carreras/{id}/tempo_competencias/{competencia}', [CompetenciaController::class, 'update_tempo']);
 
     Route::get('/carreras/{id}/dimensiones', [DimensionController::class, 'index']);
     Route::post('/carreras/{id}/dimensiones', [DimensionController::class, 'create']);
@@ -61,6 +63,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/home', function() {
     Route::put('/carreras/{id}/aprendizajes/{aprend}', [AprendizajeController::class, 'update']);
     Route::delete('/carreras/{id}/aprendizajes/{aprend}', [AprendizajeController::class, 'destroy']);
     Route::get('/carreras/{id}/tempo_aprendizajes', [AprendizajeController::class, 'show_Tempo']);
+    Route::get('/carreras/{id}/tempo_aprendizajes/{competencia}', [AprendizajeController::class, 'edit']);
+    Route::put('/carreras/{id}/tempo_aprendizajes/{competencia}', [AprendizajeController::class, 'update_tempo']);
 
     Route::get('/carreras/{id}/saberes', [SaberController::class, 'index']);
     Route::post('/carreras/{id}/saberes', [SaberController::class, 'create']);
