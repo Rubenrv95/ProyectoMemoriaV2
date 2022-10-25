@@ -54,10 +54,10 @@
                         <thead style="text-align: center">
 
                             <tr style="font-weight: bold; color: white">
-                                <th rowspan="2"style="width: 10%; text-align: center">Competencia⇵</th>
-                                <th rowspan="2"style="width: 10%; text-align: center">Dimensión⇵</th>
-                                <th rowspan="2" style="width: 10%; text-align: center; display: none">id aprendizaje</th>
-                                <th rowspan="2" style="width: 10%; text-align: center">Aprendizajes⇵</th>
+                                <th rowspan="2"style="width: 20%; text-align: center">Competencia⇵</th>
+                                <th rowspan="2"style="width: 20%; text-align: center">Dimensión⇵</th>
+                                <th rowspan="2" style="text-align: center; display: none">id aprendizaje</th>
+                                <th rowspan="2" style="width: 20%; text-align: center">Aprendizajes⇵</th>
                                 <th colspan="16" style="text-align: center">Niveles</th>
                             </tr>
                             <tr style="font-weight: bold; color: white">
@@ -66,7 +66,7 @@
                                     <th style="display: none"> Descripcion saber</th>
                                     <th style="display: none"> Tipo</th>
                                     <th style="display: none"> Nivel</th>
-                                    <th style="text-align: center; width: 1%">{{$i}}</th>
+                                    <th style="text-align: center; width: 15%">{{$i}}</th>
                                 @endfor
                             </tr>
 
@@ -75,10 +75,10 @@
                         <tbody> 
                             @foreach ($saber as $s) 
                                 <tr>
-                                <td style="text-align: center">{{$s['OrdenComp']}}. {{$s['Descripcion']}}</td>
+                                <td style="text-align: center;">{{$s['OrdenComp']}}. {{$s['Descripcion']}}</td>
                                 <td style="text-align: center">{{$s['OrdenDim']}}. {{$s['Descripcion_dimension']}}</td>
-                                <td style="text-align: center; display: none">{{$s['idAprend']}}</td>
-                                <td style="text-align: center">{{$s['Descripcion_aprendizaje']}}</td>
+                                <td style="text-align: center; display: none;">{{$s['idAprend']}}</td>
+                                <td style="text-align: center;">{{$s['Descripcion_aprendizaje']}}</td>
 
                                 @for ($i = 1; $i <= 14; $i++)
                                     <td style="display: none">{{$s['id']}}</td>
@@ -88,16 +88,15 @@
                                     <td style="text-align: center">
                                         @if ($s['Nivel'] == $i)
                                             @if (Auth::user()->rol != 'Dirección de docencia')
-                                            <div class="dropdown-container" tabindex="-1" style="float:right;">
+                                            <div class="dropdown-container" tabindex="-1" style="float: right;">
                                                 <div class="three-dots"></div>
                                                 <div class="dropdown dropdown-table">
-                                                    <button type="button" id="info" data-bs-toggle="modal" data-bs-target="" class=""> </button>
                                                     <button type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_saber" class="edit"> </button>
                                                     <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_saber" class="delete"> </button>
                                                 </div>
                                             </div>
-                                            @endif         
-                                            {{$s['Descripcion_saber']}} ({{$s['Tipo']}})  
+                                            @endif 
+                                            {{$s['Descripcion_saber']}} ({{$s['Tipo']}})                                 
                                         @endif      
                                     </td>
                                 @endfor
@@ -259,7 +258,7 @@
                                     <div class="modal-header">
                                         <h1 class="justify-content-center" style="margin: auto"> Eliminar saber </h1>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" style="text-align: center">
                                         <input type="hidden" name="method" value="DELETE"> 
                                         <p style="font-size: 18">¿Está seguro de que desea eliminar éste saber? Se desvincularán todos los módulos asociados a éste.</p>
                                     </div>

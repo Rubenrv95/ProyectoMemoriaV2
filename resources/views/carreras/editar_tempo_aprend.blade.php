@@ -35,6 +35,7 @@
 
                 
                 <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="btn btn-secondary">Gestión de Aprendizajes</button></a> 
+                <a href="/carreras/{{$c['id']}}/ver_aprendizajes"><button type="button" class="btn btn-secondary">Visualización de Aprendizajes</button></a> 
                 <a href="/carreras/{{$c['id']}}/tempo_aprendizajes"><button type="button" class="btn btn-secondary">Temporalización de Aprendizajes</button></a> 
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
@@ -81,7 +82,9 @@
                 </table>
 
                 <div class="col text-center">
-                    <button class="btn btn-success" id="save" type="submit" name="submit" id="submit"> Guardar</button>
+                    @if (Auth::user()->rol != 'Dirección de docencia')
+                        <button class="btn btn-success" id="save" type="submit" name="submit" id="submit"> Guardar</button>
+                    @endif
                 </div>
             </form>
             @endforeach

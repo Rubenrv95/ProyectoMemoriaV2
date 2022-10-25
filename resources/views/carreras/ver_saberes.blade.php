@@ -53,6 +53,8 @@
                                 <th style="text-align: center; width: 20%">Aprendizaje⇵</th>
                                 <th style="text-align: center; width: 20%">Saber⇵</th>
                                 <th style="text-align: center; width: 20%">Tipo de Saber⇵</th>
+                                <th style="text-align: center; width: 20%">Fecha de Creación⇵</th>
+                                <th style="text-align: center; width: 20%">Fecha de Actualización⇵</th>
                             </tr>
 
                         </thead>
@@ -65,6 +67,8 @@
                                 <td style="text-align: center">{{$s['Descripcion_aprendizaje']}}</td>
                                 <td style="text-align: center">{{$s['Descripcion_saber']}}</td>
                                 <td style="text-align: center">{{$s['Tipo']}}</td>
+                                <td style="text-align: center">{{$s['created_at']}}</td>
+                                <td style="text-align: center">{{$s['updated_at']}}</td>
                                 </tr>
                             @endforeach
 
@@ -106,46 +110,6 @@
                     }
                 },
             });
-
-            //TABLA DE SABERES
-
-            //modificar
-            table.on('click', '.edit', function() {
-
-                $tr = $(this).closest('tr');
-                if ($($tr).hasClass('child')) {
-                    $tr = $tr.prev('.parent');
-                }
-
-
-                var data = table.row($tr).data();
-                console.log(data);
-
-                $('#desc_saber').val(data[1]);
-                $('#refAprend').val(data[2]);
-
-                $('#editForm').attr('action', '/carreras/{{$c['id']}}/saber_conocer/'+data[0]);
-                $('#modal_modificar_saber').modal('show');
-
-            });
-
-
-            //eliminar
-            table.on('click', '.delete', function() {
-
-                $tr = $(this).closest('tr');
-                if ($($tr).hasClass('child')) {
-                    $tr = $tr.prev('.parent');
-                }
-
-                var data = table.row($tr).data();
-                console.log(data);
-
-
-                $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/saber_conocer/'+data[0]);
-                $('#modal_eliminar_saber').modal('show');
-
-            }  );
         });
 
     </script>

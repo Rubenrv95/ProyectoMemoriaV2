@@ -294,7 +294,7 @@
                                     <div class="modal-header">
                                         <h1 class="justify-content-center" style="margin: auto">Eliminar módulo</h1>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" style="text-align: center">
                                         <input type="hidden" name="method" value="DELETE"> 
                                         <p style="font-size: 18">¿Está seguro de que desea eliminar éste módulo? Se eliminará también de la carga académica</p>
                                     </div>

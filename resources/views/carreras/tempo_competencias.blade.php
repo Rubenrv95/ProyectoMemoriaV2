@@ -60,14 +60,16 @@
                         @for ($i = 1; $i <= 14; $i++)
                         <td  style="text-align: center"> 
                             @if ($t[$i]== 1) 
-                                <input type="checkbox" class="form-check-input" value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center;" checked onclick="return false;">
+                                <input type="checkbox" value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center;" checked onclick="return false;">
                             @else
-                                <input type="checkbox" class="form-check-input" value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center" onclick="return false;">
+                                <input type="checkbox"  value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center" onclick="return false;">
                             @endif
                         </td>
                         @endfor
                         <td  style="text-align: center">
+                        @if (Auth::user()->rol != 'Dirección de docencia')
                         <a href="/carreras/{{$c['id']}}/tempo_competencias/{{$t['competencia']}}"><button type="button" id="mod" class="edit"> </button> </a> </td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>
@@ -75,54 +77,6 @@
 
         </div>
 
-         <!-- Modal modificar temporalización  -->
-         <div class="container">
-            <div class="row">
-                <div class ="col-md-12">
-                    <div tabIndex="-1"  class="modal fade" id="modal_modificar_tempo" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" style="width: 200%">
-                            <form action="/carreras/{{$c['id']}}/carga_academica" method="POST" class="form-group" name="tempo" id="tempo">
-                            @csrf
-                                <div class="modal-content">
-
-                                    <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto; text-align: center">Temporalización de Competencia</h1>
-                                    </div>
-                                    <div class="modal-body">
-
-                                            <div class="form-group" style="margin-left: 5%">
-                                                <input class="form-check-input" type="checkbox" value="1" name="clases" >
-                                                <label style="font-size: 14; color: black">Nivel 1</label> 
-                                                <input class="form-check-input" type="checkbox" value="1"name="seminario" style="margin-left: 2%" >
-                                                <label style="font-size: 14; color: black; margin-left: 5%">Nivel 2</label>         
-                                                <input class="form-check-input" type="checkbox" value="1"name="seminario" style="margin-left: 2%" >
-                                                <label style="font-size: 14; color: black; margin-left: 5%">Nivel 3</label>          
-                                                <input class="form-check-input" type="checkbox" value="1"name="seminario" style="margin-left: 2%" >
-                                                <label style="font-size: 14; color: black; margin-left: 5%">Nivel 4</label>          
-                                                <input class="form-check-input" type="checkbox" value="1"name="seminario" style="margin-left: 2%" >
-                                                <label style="font-size: 14; color: black; margin-left: 5%">Nivel 5</label>          
-                                                <input class="form-check-input" type="checkbox" value="1"name="seminario" style="margin-left: 2%" >
-                                                <label style="font-size: 14; color: black; margin-left: 5%">Nivel 6</label>          
-                                                <input class="form-check-input" type="checkbox" value="1"name="seminario" style="margin-left: 2%" >
-                                                <label style="font-size: 14; color: black; margin-left: 5%">Nivel 7</label>          
-                                                <input class="form-check-input" type="checkbox" value="1"name="seminario" style="margin-left: 2%" >
-                                                <label style="font-size: 14; color: black;">Nivel 8</label>                                          
-                                            </div>
-
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-success" type="submit" name="submit" id="submit"> Guardar</button>
-                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button"> Cancelar</button>
-                                    </div> 
-                                
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

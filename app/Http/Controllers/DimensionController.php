@@ -128,9 +128,9 @@ class DimensionController extends Controller
     {
         $query = DB::table('dimensions')->where('id', $id_dim)->delete();
 
-        $query2= 'DELETE aprendizajes, saberes, propuesta_modulos, propuesta_tiene_saber, modulos, modulo_tiene_prerrequisito FROM aprendizajes 
-        INNER JOIN saberes ON saberes.refAprendizaje = aprendizajes.id
-        INNER JOIN propuesta_tiene_saber ON saberes.id = propuesta_tiene_saber.saber
+        $query2= 'DELETE aprendizajes, sabers, propuesta_modulos, propuesta_tiene_saber, modulos, modulo_tiene_prerrequisito FROM aprendizajes 
+        INNER JOIN sabers ON sabers.refAprendizaje = aprendizajes.id
+        INNER JOIN propuesta_tiene_saber ON sabers.id = propuesta_tiene_saber.saber
         INNER JOIN propuesta_modulos  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
         INNER JOIN modulos  ON  propuesta_modulos.id = modulos.refPropuesta
         INNER JOIN modulo_tiene_prerrequisito  ON  modulo.id = modulo_tiene_prerrequisito.modulo

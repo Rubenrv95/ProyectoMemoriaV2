@@ -13,7 +13,7 @@ class CreateSaberesTable extends Migration
      */
     public function up()
     {
-        Schema::create('saberes', function (Blueprint $table) {
+        Schema::create('sabers', function (Blueprint $table) {
             $table->id();
             $table->longText('Descripcion_saber');
             $table->string('Tipo');

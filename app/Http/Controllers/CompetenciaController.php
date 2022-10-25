@@ -194,12 +194,12 @@ class CompetenciaController extends Controller
     {
         $query = DB::table('competencias')->where('id', $id_comp)->delete();
 
-        $query2= 'DELETE tempo_competencias, dimensions, aprendizajes, tempo_aprendizajes, saberes, propuesta_modulos, propuesta_tiene_saber, modulos, modulo_tiene_prerrequisito FROM tempo_competencias
+        $query2= 'DELETE tempo_competencias, dimensions, aprendizajes, tempo_aprendizajes, sabers, propuesta_modulos, propuesta_tiene_saber, modulos, modulo_tiene_prerrequisito FROM tempo_competencias
             INNER JOIN dimensions ON tempo_competencias.competencia = dimensions.refCompetencia
             INNER JOIN aprendizajes ON aprendizajes.refDimension = dimensions.id
             INNER JOIN tempo_aprendizajes ON aprendizajes.id = tempo_aprendizajes.aprendizaje
-            INNER JOIN saberes ON saberes.refAprendizaje = aprendizajes.id
-            INNER JOIN propuesta_tiene_saber ON saberes.id = propuesta_tiene_saber.saber
+            INNER JOIN sabers ON sabers.refAprendizaje = aprendizajes.id
+            INNER JOIN propuesta_tiene_saber ON sabers.id = propuesta_tiene_saber.saber
             INNER JOIN propuesta_modulos  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
             INNER JOIN modulos  ON  propuesta_modulos.id = modulos.refPropuesta
             INNER JOIN modulo_tiene_prerrequisito  ON  modulos.id = modulo_tiene_prerrequisito.modulo

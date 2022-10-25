@@ -35,6 +35,7 @@
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
                 <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="btn btn-secondary">Gestión de Aprendizajes</button></a> 
+                <a href="/carreras/{{$c['id']}}/ver_aprendizajes"><button type="button" class="btn btn-secondary">Visualización de Aprendizajes</button></a> 
                 <a href="/carreras/{{$c['id']}}/tempo_aprendizajes"><button type="button" class="btn btn-secondary">Temporalización de Aprendizajes</button></a> 
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
@@ -63,15 +64,19 @@
                                     <th style="display: none">ID Inicial</th>
                                     <th style="display: none">Inicial</th>
                                     <th style="width: 15%">Inicial⇵</th>
+                                    <th style="display: none">Nivel inicial</th>
                                     <th style="display: none">ID Desarrollo</th>
                                     <th style="display: none">Desarrollo</th>
                                     <th style="width: 15%">En desarrollo⇵</th>
+                                    <th style="display: none">Nivel desarrollo</th>
                                     <th style="display: none">ID Logrado</th>
                                     <th style="display: none">Logrado</th>
                                     <th style="width: 15%">Logrado⇵</th>
+                                    <th style="display: none">Nivel logrado</th>
                                     <th style="display: none">ID Especializacion</th>
                                     <th style="display: none">Especializacion</th>
                                     <th style="width: 15%">Especialización⇵</th>
+                                    <th style="display: none">Nivel especializacion</th>
                                 </tr>
                         </thead>
                         
@@ -98,7 +103,6 @@
                                             <div class="dropdown-container" tabindex="-1" style="float:right;">
                                                 <div class="three-dots"></div>
                                                 <div class="dropdown dropdown-table">
-                                                    <button type="button" id="info" data-bs-toggle="modal" data-bs-target="" class=""> </button>
                                                     <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_inicial" class="edit1"> </button>
                                                     <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete1"> </button>
                                                 </div>
@@ -107,6 +111,7 @@
                                         {{$aprend['Descripcion_aprendizaje']}}    
                                         @endif                     
                                     </td>
+                                    <td style="display: none">{{$aprend['Nivel_aprend']}}</td>
                                 
 
                                     <!--APRENDIZAJE EN DESARROLLO-->
@@ -121,7 +126,7 @@
                                             <div class="dropdown-container" tabindex="-1" style="float:right;">
                                                 <div class="three-dots"></div>
                                                 <div class="dropdown dropdown-table">
-                                                    <button type="button" id="info" data-bs-toggle="modal" data-bs-target="" class=""> </button>
+                                                    <button type="button" id="info" data-bs-toggle="modal" data-bs-target="#modal_ver_datos" class="info"> </button>
                                                     <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_desarrollo" class="edit2"> </button>
                                                     <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete2"> </button>
                                                 </div>
@@ -130,6 +135,7 @@
                                             {{$aprend['Descripcion_aprendizaje']}}          
                                         @endif                          
                                     </td>
+                                    <td style="display: none">{{$aprend['Nivel_aprend']}}</td>
 
                                     <!--APRENDIZAJE LOGRADO-->
                                     <td style="text-align: center;display: none">         
@@ -142,7 +148,7 @@
                                             <div class="dropdown-container" tabindex="-1" style="float:right;">
                                                 <div class="three-dots"></div>
                                                 <div class="dropdown dropdown-table">
-                                                    <button type="button" id="info" data-bs-toggle="modal" data-bs-target="" class=""> </button>
+                                                    <button type="button" id="info" data-bs-toggle="modal" data-bs-target="#modal_ver_datos" class="info"> </button>
                                                     <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_logrado" class="edit3"> </button>
                                                     <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete3"> </button>
                                                 </div>
@@ -151,6 +157,7 @@
                                             {{$aprend['Descripcion_aprendizaje']}}      
                                         @endif                       
                                     </td>
+                                    <td style="display: none">{{$aprend['Nivel_aprend']}}</td>
 
                                     <!--APRENDIZAJE ESPECIALIZACIÓN-->
                                     <td style="text-align: center;display: none">         
@@ -163,7 +170,7 @@
                                                 <div class="dropdown-container" tabindex="-1" style="float:right;">
                                                     <div class="three-dots"></div>
                                                     <div class="dropdown dropdown-table">
-                                                        <button type="button" id="info" data-bs-toggle="modal" data-bs-target="" class=""> </button>
+                                                        <button type="button" id="info" data-bs-toggle="modal" data-bs-target="#modal_ver_datos" class="info"> </button>
                                                         <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_especializacion" class="edit4"> </button>
                                                         <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete4"> </button>
                                                     </div>
@@ -172,8 +179,7 @@
                                             {{$aprend['Descripcion_aprendizaje']}}  
                                         @endif
                                     </td>      
-                                    
-
+                                    <td style="display: none">{{$aprend['Nivel_aprend']}}</td>
                                 </tr>
                             @endforeach   
                                                       
@@ -268,7 +274,18 @@
                                             <textarea class="form-control form-control-lg" id="aprendizaje_inicial" name="aprendizaje_inicial" type="text" style="color: black" placeholder="Ingrese la descripción del aprendizaje" rows="2" cols="50" maxlength="200" required></textarea>
                                         </div>
 
-                                            <input style="display: none" name="Nivel" id="Nivel" value="Inicial" type="text">
+                                        <div class="form-group" style="margin: auto; margin-bottom: 20px">
+                                            <label style="font-size: 20; font-weight: bold">Nivel de Aprendizaje</label>
+                                            <select class="form-select form-select-lg" name="nivel_inicial" id="nivel_inicial" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
+                                                <option selected disabled="true" value="">Seleccione el nivel de aprendizaje</option>                                     
+                                                <option value="Inicial">Inicial</option>           
+                                                <option value="En desarrollo">En desarrollo</option>   
+                                                <option value="Logrado">Logrado</option>   
+                                                <option value="Especialización">Especialización</option>                               
+                                            </select>
+                                        </div>
+
+                                        <input type="text" style="display:none" value="Inicial" name="Nivel">
 
                                     </div>
                                     <div class="modal-footer">
@@ -307,7 +324,19 @@
                                             <textarea class="form-control form-control-lg" id="aprendizaje_desarrollo" name="aprendizaje_desarrollo" type="text" style="color: black" placeholder="Ingrese la descripción del aprendizaje" rows="2" cols="50" maxlength="200" required></textarea>
                                         </div>
 
-                                            <input style="display: none" name="Nivel" id="Nivel" value="En desarrollo" type="text">
+                                        <div class="form-group" style="margin: auto; margin-bottom: 20px">
+                                            <label style="font-size: 20; font-weight: bold">Nivel de Aprendizaje</label>
+                                            <select class="form-select form-select-lg" name="nivel_desarrollo" id="nivel_desarrollo" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
+                                                <option selected disabled="true" value="">Seleccione el nivel de aprendizaje</option>                                     
+                                                <option value="Inicial">Inicial</option>           
+                                                <option value="En desarrollo">En desarrollo</option>   
+                                                <option value="Logrado">Logrado</option>   
+                                                <option value="Especialización">Especialización</option>                               
+                                            </select>
+                                        </div>
+
+                                        <input type="text" style="display:none" value="En desarrollo" name="Nivel">
+
 
                                     </div>
                                     <div class="modal-footer">
@@ -346,7 +375,18 @@
                                             <textarea class="form-control form-control-lg" id="aprendizaje_logrado" name="aprendizaje_logrado" type="text" style="color: black" placeholder="Ingrese la descripción del aprendizaje" rows="2" cols="50" maxlength="200" required></textarea>
                                         </div>
 
-                                            <input style="display: none" name="Nivel" id="Nivel" value="Logrado" type="text">
+                                        <div class="form-group" style="margin: auto; margin-bottom: 20px">
+                                            <label style="font-size: 20; font-weight: bold">Nivel de Aprendizaje</label>
+                                            <select class="form-select form-select-lg" name="nivel_logrado" id="nivel_logrado" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
+                                                <option selected disabled="true" value="">Seleccione el nivel de aprendizaje</option>                                     
+                                                <option value="Inicial">Inicial</option>           
+                                                <option value="En desarrollo">En desarrollo</option>   
+                                                <option value="Logrado">Logrado</option>   
+                                                <option value="Especialización">Especialización</option>                               
+                                            </select>
+                                        </div>
+
+                                        <input type="text" style="display:none" value="Logrado" name="Nivel">
 
                                     </div>
                                     <div class="modal-footer">
@@ -385,7 +425,19 @@
                                             <textarea class="form-control form-control-lg" id="aprendizaje_especializacion" name="aprendizaje_especializacion" type="text" style="color: black" placeholder="Ingrese la descripción del aprendizaje" rows="2" cols="50" maxlength="200" required></textarea>
                                         </div>
 
-                                            <input style="display: none" name="Nivel" id="Nivel" value="Especializacion" type="text">
+                                        <div class="form-group" style="margin: auto; margin-bottom: 20px">
+                                            <label style="font-size: 20; font-weight: bold">Nivel de Aprendizaje</label>
+                                            <select class="form-select form-select-lg" name="nivel_especializacion" id="nivel_especializacion" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
+                                                <option selected disabled="true" value="">Seleccione el nivel de aprendizaje</option>                                     
+                                                <option value="Inicial">Inicial</option>           
+                                                <option value="En desarrollo">En desarrollo</option>   
+                                                <option value="Logrado">Logrado</option>   
+                                                <option value="Especialización">Especialización</option>                               
+                                            </select>
+                                        </div>
+
+                                        <input type="text" style="display:none" value="Especialización" name="Nivel">
+
 
                                     </div>
                                     <div class="modal-footer">
@@ -574,6 +626,27 @@
 
             //TABLA DE APRENDIZAJES
 
+            //ver datos
+            table.on('click', '.info', function() {
+
+                $tr = $(this).closest('tr');
+                if ($($tr).hasClass('child')) {
+                    $tr = $tr.prev('.parent');
+                }
+
+                var data = table.row($tr).data();
+                console.log(data);
+
+
+
+
+                document.getElementById("#created_at").innerHTML ='<h6>' + 'xd' + '</h6>';
+                document.getElementById("#updated_at").innerHTML = '<h6>' + 'xd' + '</h6>';
+
+                $('#modal_ver_datos').modal('show');
+
+            });
+
             //modificar inicial
             table.on('click', '.edit1', function() {
 
@@ -587,6 +660,7 @@
 
 
                 $('#aprendizaje_inicial').val(data[5]);
+                $('#nivel_inicial').val(data[7]);
 
 
                 $('#editFormInicial').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[4]);
@@ -606,9 +680,10 @@
                 console.log(data);
 
 
-                $('#aprendizaje_desarrollo').val(data[8]);
+                $('#aprendizaje_desarrollo').val(data[9]);
+                $('#nivel_desarrollo').val(data[11]);
 
-                $('#editFormDesarrollo').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[7]);
+                $('#editFormDesarrollo').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[8]);
                 $('#modal_modificar_aprendizaje_desarrollo').modal('show');
 
             });
@@ -625,9 +700,10 @@
                 console.log(data);
 
 
-                $('#aprendizaje_logrado').val(data[11]);
+                $('#aprendizaje_logrado').val(data[13]);
+                $('#nivel_logrado').val(data[15]);
 
-                $('#editFormLogrado').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[10]);
+                $('#editFormLogrado').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[12]);
                 $('#modal_modificar_aprendizaje_logrado').modal('show');
 
             });
@@ -644,9 +720,10 @@
                 console.log(data);
 
 
-                $('#aprendizaje_especializacion').val(data[14]);
+                $('#aprendizaje_especializacion').val(data[17]);
+                $('#nivel_logrado').val(data[19]);
 
-                $('#editFormEspecializacion').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[13]);
+                $('#editFormEspecializacion').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[16]);
                 $('#modal_modificar_aprendizaje_especializacion').modal('show');
 
             });
@@ -681,7 +758,7 @@
                 console.log(data);
 
 
-                $('#deleteFormDesarrollo').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[7]);
+                $('#deleteFormDesarrollo').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[8]);
                 $('#modal_eliminar_aprendizaje_desarrollo').modal('show');
 
             }  );
@@ -698,7 +775,7 @@
                 console.log(data);
 
 
-                $('#deleteFormLogrado').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[10]);
+                $('#deleteFormLogrado').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[12]);
                 $('#modal_eliminar_aprendizaje_logrado').modal('show');
 
             }  );
@@ -715,7 +792,7 @@
                 console.log(data);
 
 
-                $('#deleteFormEspecializacion').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[13]);
+                $('#deleteFormEspecializacion').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[16]);
                 $('#modal_eliminar_aprendizaje_especializacion').modal('show');
 
             }  );

@@ -75,7 +75,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                 Módulos totales</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">9</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$modulos}}</div>
                                         </div>
                                     </div>
                                 </div>

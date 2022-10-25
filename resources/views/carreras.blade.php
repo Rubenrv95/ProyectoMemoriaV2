@@ -54,6 +54,7 @@
                                         <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_carrera" class="delete"> </button>
                                         @endif
                                         <a href="/carreras/{{ $item['id'] }}/descargar_reporte"><button type="button" id="download"  style="margin-left: 2%" > </button></a>
+                                        <a href="/carreras/{{ $item['id'] }}/descargar_reporte"><button type="button" id="excel"  style="margin-left: 2%" > </button></a>
                                         
                                 </td>
                                 
@@ -212,7 +213,7 @@
                                     <div class="modal-header">
                                         <h1 class="justify-content-center" style="margin: auto"> Eliminar Carrera</h1>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" style="text-align: center">
                                         <input type="hidden" name="method" value="DELETE"> 
                                         <p style="font-size: 18">
                                         ¿Está seguro de que desea eliminar ésta carrera? Se eliminarán también todos los elementos vinculados a ésta.

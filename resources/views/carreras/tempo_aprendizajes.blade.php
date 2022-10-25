@@ -34,6 +34,7 @@
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
                 <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="btn btn-secondary">Gestión de Aprendizajes</button></a> 
+                <a href="/carreras/{{$c['id']}}/ver_aprendizajes"><button type="button" class="btn btn-secondary">Visualización de Aprendizajes</button></a> 
                 <a href="/carreras/{{$c['id']}}/tempo_aprendizajes"><button type="button" class="btn btn-secondary">Temporalización de Aprendizajes</button></a> 
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
@@ -68,14 +69,16 @@
                             @for ($i = 1; $i <= 14; $i++)
                             <td style="text-align: center"> 
                                 @if ($t[$i]== 1) 
-                                <input type="checkbox" class="form-check-input" value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center;" checked onclick="return false;">
+                                <input type="checkbox" value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center;" checked onclick="return false;">
                                 @else
-                                <input type="checkbox" class="form-check-input" value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center" onclick="return false;">
+                                <input type="checkbox" value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center" onclick="return false;">
                                 @endif
                             </td>
                             @endfor
                             <td  style="text-align: center">
+                            @if (Auth::user()->rol != 'Dirección de docencia')
                                 <a href="/carreras/{{$c['id']}}/tempo_aprendizajes/{{$t['aprendizaje']}}"><button type="button" id="mod" class="edit"> </button> </a> 
+                            @endif
                             </td>
                         </tr>
                         @endforeach

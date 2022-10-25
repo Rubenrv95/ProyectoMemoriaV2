@@ -191,12 +191,12 @@
                                             <h1 class="justify-content-center"  style="margin: auto">Perfil de Usuario</h1>
                                         </div>
                                         <div class="modal-body">
-                                            <h4 style="color: black; font-weight: bold">Nombre</h4>
-                                            <h6 style="color: black">{{Auth::user()->nombre}}</h6>      
-                                            <h4 style="color: black; font-weight: bold">Correo Electrónico</h4>
-                                            <h6 style="color: black">{{Auth::user()->email}}</h6>      
-                                            <h4 style="color: black; font-weight: bold">Rol</h4>
-                                            <h6 style="color: black">{{Auth::user()->rol}}</h6>                    
+                                            <h4 style="color: black; font-weight: bold; text-align: center">Nombre</h4>
+                                            <h6 style="color: black; text-align: center">{{Auth::user()->nombre}}</h6>      
+                                            <h4 style="color: black; font-weight: bold; text-align: center">Correo Electrónico</h4>
+                                            <h6 style="color: black; text-align: center">{{Auth::user()->email}}</h6>      
+                                            <h4 style="color: black; font-weight: bold; text-align: center">Rol</h4>
+                                            <h6 style="color: black; text-align: center">{{Auth::user()->rol}}</h6>                    
                                         </div>
                                         <div class="modal-footer">
                                             <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cerrar</button>
@@ -273,7 +273,7 @@
                                         <div class="modal-header">
                                             <h1 class="justify-content-center"  style="margin: auto">Cerrar sesión</h1>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body" style="text-align: center">
                                             ¿Está seguro que desea finalizar la sesión?          
                                         </div>
                                         <div class="modal-footer">

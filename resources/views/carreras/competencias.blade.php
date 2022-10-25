@@ -196,7 +196,7 @@
                                     <div class="modal-header">
                                         <h1 class="justify-content-center" style="margin: auto"> Eliminar competencia</h1>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" style="text-align: center">
                                         <input type="hidden" name="method" value="DELETE"> 
                                         <p style="font-size: 18">¿Está seguro de que desea eliminar ésta competencia? Se eliminarán todas las dimensiones, aprendizajes, saberes y módulos vinculados.</p>
                                     </div>

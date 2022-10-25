@@ -341,8 +341,8 @@
                                                 <label style="font-size: 20; font-weight: bold">Nombre del módulo</label>
                                                 <select class="form-select form-select-lg" name="modulo" id="modulo" aria-label=".form-select-lg example" style="width:90%; margin-bottom: 20px; font-size: 18; color: black" required>
                                                         <option selected disabled="true" value="">Seleccionar propuesta de módulo</option>      
-                                                        @foreach ($propuesta_mod as $pm)
-                                                            <option value="{{$pm['id']}}">{{$pm['Nombre_modulo']}}</option>
+                                                        @foreach ($propuestas as $p)
+                                                            <option value="{{$p['id']}}">{{$p['Nombre_modulo']}}</option>
                                                         @endforeach                                         
                                                 </select>
                                             </div>
@@ -442,7 +442,7 @@
                                     <div class="modal-header">
                                         <h1 class="justify-content-center" style="margin: auto">Eliminar módulo</h1>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" style="text-align: center">
                                         <input type="hidden" name="method" value="DELETE"> 
                                         <p style="font-size: 18">¿Está seguro de que desea eliminar éste módulo de la carga académica?</p>
                                     </div>
@@ -480,17 +480,17 @@
 
                     var lista = "";
 
-                    if(!data.length){
+                    if(!data[0].length){
                         lista =    '<h6 style="color:black"> Éste módulo no tiene prerrequisitos </h6>';     
                     }
 
                     else {
-                        for (const prop in data) {         
-                            lista +=    '<li style="color: black">' + data[prop]['Nombre_modulo'] + '</li>';        
+                        for (const prop in data[0]) {         
+                            lista +=    '<li style="color: black">' + data[0][prop]['Nombre_modulo'] + '</li>';        
                         } 
                     }
                
-                    document.getElementById("titulo_modulo").innerHTML = '<h1 class="justify-content-center">Prerrequisitos</h1>';
+                    document.getElementById("titulo_modulo").innerHTML = '<h1 class="justify-content-center">Prerrequisitos de ' + data[1][0]['Nombre_modulo'] + '</h1>';
 
                     document.getElementById("modulo_req").innerHTML = lista;
 

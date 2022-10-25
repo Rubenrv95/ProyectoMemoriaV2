@@ -72,7 +72,7 @@ class CarreraController extends Controller
     public function createPDF($carrera) {
         $competencia = DB::table('competencias')->where('refCarrera', $carrera)->get();
         $aprendizaje = DB::table('aprendizajes')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden', 'dimensions.id as idDim')->get();
-        $saber = DB::table('saberes')->leftJoin('aprendizajes', 'saberes.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $carrera)->select('saberes.*', 'aprendizajes.Descripcion_aprendizaje', 'dimensions.Descripcion_dimension', 'dimensions.Orden as OrdenDim', 'competencias.Orden as OrdenComp', 'competencias.Descripcion')->get();
+        $saber = DB::table('sabers')->leftJoin('aprendizajes', 'sabers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $carrera)->select('sabers.*', 'aprendizajes.Descripcion_aprendizaje', 'dimensions.Descripcion_dimension', 'dimensions.Orden as OrdenDim', 'competencias.Orden as OrdenComp', 'competencias.Descripcion')->get();
 
         $carrera_seleccionada = DB::table('carreras')->where('id', $carrera)->get();
         $competencia = json_decode($competencia, true);
@@ -148,11 +148,13 @@ class CarreraController extends Controller
     {
         $query = DB::table('carreras')->where('id', $id)->delete();
 
-        $query2= 'DELETE competencias, dimensions, aprendizajes, saberes, propuesta_modulos, propuesta_tiene_saber, modulos, modulo_tiene_prerrequisito FROM competencias 
+        $query2= 'DELETE competencias, dimensions, aprendizajes, sabers, propuesta_modulos, propuesta_tiene_saber, modulos, modulo_tiene_prerrequisito, tempo_competencias, tempo_aprendizajes FROM competencias 
+          INNER JOIN tempo_competencias ON tempo_competencias.competencia = competencias.id
           INNER JOIN dimensions ON dimensions.refCompetencia = competencias.id
           INNER JOIN aprendizajes ON aprendizajes.refDimension = dimensions.id
-          INNER JOIN saberes ON saberes.refAprendizaje = aprendizajes.id
-          INNER JOIN propuesta_tiene_saber ON saberes.id = propuesta_tiene_saber.saber
+          INNER JOIN tempo_aprendizajes ON tempo_aprendizajes.aprendizaje = aprendizaje.id
+          INNER JOIN sabers ON sabers.refAprendizaje = aprendizajes.id
+          INNER JOIN propuesta_tiene_saber ON sabers.id = propuesta_tiene_saber.saber
           INNER JOIN propuesta_modulos  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
           INNER JOIN modulos  ON  propuesta_modulos.id = modulos.refPropuesta
           INNER JOIN modulo_tiene_prerrequisito  ON  modulo.id = modulo_tiene_prerrequisito.modulo

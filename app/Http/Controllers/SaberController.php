@@ -30,7 +30,7 @@ class SaberController extends Controller
         $carrera = json_decode($carrera, true);
         
         $aprendizaje = DB::table('aprendizajes')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('aprendizajes.*')->get();
-        $saber = DB::table('saberes')->leftJoin('aprendizajes', 'saberes.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('saberes.*', 'aprendizajes.Descripcion_aprendizaje', 'aprendizajes.id as idAprend', 'dimensions.Descripcion_dimension', 'dimensions.Orden as OrdenDim', 'competencias.Orden as OrdenComp', 'competencias.Descripcion')->get();
+        $saber = DB::table('sabers')->leftJoin('aprendizajes', 'sabers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('sabers.*', 'aprendizajes.Descripcion_aprendizaje', 'aprendizajes.id as idAprend', 'dimensions.Descripcion_dimension', 'dimensions.Orden as OrdenDim', 'competencias.Orden as OrdenComp', 'competencias.Descripcion')->get();
         
         $aprendizaje = json_decode($aprendizaje, true);
         $saber = json_decode($saber, true);
@@ -50,7 +50,7 @@ class SaberController extends Controller
         ]);
 
 
-        $query = DB::table('saberes')->insert([
+        $query = DB::table('sabers')->insert([
             'Descripcion_saber'=>$request->input('desc-saber'),
             'Tipo'=>$request->input('tipo'),
             'Nivel'=>$request->input('nivel'),
@@ -82,7 +82,7 @@ class SaberController extends Controller
         $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
         $carrera = json_decode($carrera, true);
 
-        $saber = DB::table('saberes')->leftJoin('aprendizajes', 'saberes.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('saberes.*', 'aprendizajes.Descripcion_aprendizaje', 'dimensions.Descripcion_dimension', 'dimensions.Orden as OrdenDim', 'competencias.Orden as OrdenComp', 'competencias.Descripcion')->get();
+        $saber = DB::table('sabers')->leftJoin('aprendizajes', 'sabers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('sabers.*', 'aprendizajes.Descripcion_aprendizaje', 'dimensions.Descripcion_dimension', 'dimensions.Orden as OrdenDim', 'competencias.Orden as OrdenComp', 'competencias.Descripcion')->get();
         $saber = json_decode($saber, true);
 
         return view('carreras.ver_saberes')->with('carrera', $carrera)->with('saber', $saber);
@@ -114,12 +114,15 @@ class SaberController extends Controller
         ]);
 
 
-        $query = DB::table('saberes')->where('id', $id_saber)->update([
+        $query = DB::table('sabers')->where('id', $id_saber)->update([
             'Descripcion_saber'=>$request->input('desc-saber'),
             'Tipo'=>$request->input('tipo'),
             'Nivel'=>$request->input('nivel'),
             'refAprendizaje'=>$request->input('refAprend'),
         ]);
+
+        $saber = Saber::find($id_saber);
+        $saber -> touch();
 
         return back()->withSuccess('Saber actualizado con éxito');
     }
@@ -132,7 +135,7 @@ class SaberController extends Controller
      */
     public function destroy($id_carrera, $id_saber)
     {
-        $query = DB::table('saberes')->where('id', $id_saber)->delete();
+        $query = DB::table('sabers')->where('id', $id_saber)->delete();
 
         $query2= 'DELETE propuesta_modulos, propuesta_tiene_saber, modulos, modulo_tiene_prerrequisito FROM propuesta_modulos
         INNER JOIN propuesta_tiene_saber  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
