@@ -39,6 +39,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/home', function() {
 
     Route::post('changepassword', [ChangePasswordController::class, 'store'])->name('change.password');
     Route::get('/carreras/{id}/descargar_reporte', [CarreraController::class, 'createPDF']);
+    Route::get('/carreras/{id}/descargar_tabla', [CarreraController::class, 'exportExcel']);
     Route::post('/carreras/{id}/copiar', [CarreraController::class, 'copy']);
 
 

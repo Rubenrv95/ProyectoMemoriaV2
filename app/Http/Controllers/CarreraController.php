@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carrera;
+use App\Exports\CarreraExport;
 use App\Models\Plan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Datatables;
 use App\Http\Controllers\PlanController;
 use PDF;
+use  Maatwebsite\Excel\Facades\Excel;
 
 
 class CarreraController extends Controller
@@ -71,17 +73,74 @@ class CarreraController extends Controller
 
     public function createPDF($carrera) {
         $competencia = DB::table('competencias')->where('refCarrera', $carrera)->get();
-        $aprendizaje = DB::table('aprendizajes')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden', 'dimensions.id as idDim')->get();
-        $saber = DB::table('sabers')->leftJoin('aprendizajes', 'sabers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $carrera)->select('sabers.*', 'aprendizajes.Descripcion_aprendizaje', 'dimensions.Descripcion_dimension', 'dimensions.Orden as OrdenDim', 'competencias.Orden as OrdenComp', 'competencias.Descripcion')->get();
+        $tempo_competencia = DB::table('tempo_competencias')
+        ->leftJoin('competencias', 'competencias.id', '=', 'tempo_competencias.competencia')
+        ->select('tempo_competencias.*', 'competencias.Orden', 'competencias.Descripcion')
+        ->where('competencias.refCarrera', $carrera)
+        ->get();
+        
+        $aprendizaje = DB::table('aprendizajes')
+        ->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')
+        ->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')
+        ->where('competencias.refCarrera', '=', $carrera)
+        ->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden', 'dimensions.id as idDim')
+        ->get();
+        $tempo_aprendizaje = DB::table('tempo_aprendizajes')
+        ->leftJoin('aprendizajes', 'aprendizajes.id', '=', 'tempo_aprendizajes.aprendizaje')
+        ->leftJoin('dimensions', 'dimensions.id', '=', 'aprendizajes.refDimension')
+        ->leftJoin('competencias', 'competencias.id', '=', 'dimensions.refCompetencia')
+        ->select('tempo_aprendizajes.*', 'aprendizajes.Descripcion_aprendizaje', 'aprendizajes.Nivel_aprend', 'dimensions.Descripcion_dimension', 'dimensions.Orden', 'competencias.Orden as OrdenComp', 'competencias.Descripcion')
+        ->where('competencias.refCarrera', $carrera)->get();
+        
+        $saber = DB::table('sabers')
+        ->leftJoin('aprendizajes', 'sabers.refAprendizaje', '=', 'aprendizajes.id')
+        ->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')
+        ->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')
+        ->where('competencias.refCarrera', '=', $carrera)
+        ->select('sabers.*', 'aprendizajes.Descripcion_aprendizaje', 'dimensions.Descripcion_dimension', 'dimensions.Orden as OrdenDim', 'competencias.Orden as OrdenComp', 'competencias.Descripcion')
+        ->get();
+
+        $coleccion= collect(
+            DB::table('modulos')
+           ->leftJoin('propuesta_modulos', 'modulos.refPropuesta', '=', 'propuesta_modulos.id')
+           ->leftJoin('propuesta_tiene_saber', 'propuesta_tiene_saber.propuesta_modulo', '=', 'propuesta_modulos.id')
+           ->leftJoin('sabers', 'propuesta_tiene_saber.saber', '=', 'sabers.id')
+           ->leftJoin('aprendizajes', 'sabers.refAprendizaje', '=', 'aprendizajes.id')
+           ->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')
+           ->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')
+           ->where('competencias.refCarrera', '=', $carrera)
+           ->select('modulos.*', 'propuesta_modulos.Nombre_modulo', 'propuesta_modulos.Semestre')
+           ->orderBy('propuesta_modulos.Semestre')
+           ->get()
+       );
+
+        $modulo = $coleccion->unique('id');
+        $modulo->values()->all();
 
         $carrera_seleccionada = DB::table('carreras')->where('id', $carrera)->get();
+
         $competencia = json_decode($competencia, true);
+        $tempo_competencia = json_decode($tempo_competencia, true);
         $aprendizaje = json_decode($aprendizaje, true);
+        $tempo_aprendizaje = json_decode($tempo_aprendizaje, true);
         $saber = json_decode($saber, true);
-        
+        $modulo = json_decode($modulo, true);
         $carrera_seleccionada = json_decode($carrera_seleccionada, true);
-        $pdf = PDF::loadView('descargas.reporte', compact('carrera_seleccionada', 'competencia', 'aprendizaje', 'saber'));
+
+        $pdf = PDF::loadView('descargas.reporte', compact('carrera_seleccionada', 'competencia', 'aprendizaje', 'saber', 'tempo_competencia', 'tempo_aprendizaje', 'modulo'));
         return $pdf->download('reporte.pdf');
+      }
+
+      public function exportExcel($carrera) {
+
+        Excel::create('tablas', function($excel) {
+            $excel->sheet('Competencias', function($sheet) {
+                $competencia = DB::table('competencias')->where('refCarrera', $carrera)->get();
+                $sheet->fromArray($competencia);
+
+            });
+
+        })->export('xls');
       }
 
     /**
@@ -92,12 +151,7 @@ class CarreraController extends Controller
      */
     public function show($id) {
 
-        $carrera = DB::table('carreras')->where('id', $id)->get(); //carrera
-        $result = DB::table('plans')->where('Carrera_asociada', $id)->get(); //los planes de la carrera
-        $data = json_decode($result, true);
-        $name = json_decode($carrera, true);
-        return view ('planes.planes')->with('data', $data)->with('id', $id)->with('name', $name); //se envian los datos de los planes mas el nombre de la carrera y su id
-
+  
     }
     /**
      * Show the form for editing the specified resource.

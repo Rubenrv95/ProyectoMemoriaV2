@@ -54,7 +54,7 @@
                                         <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_carrera" class="delete"> </button>
                                         @endif
                                         <a href="/carreras/{{ $item['id'] }}/descargar_reporte"><button type="button" id="download"  style="margin-left: 2%" > </button></a>
-                                        <a href="/carreras/{{ $item['id'] }}/descargar_reporte"><button type="button" id="excel"  style="margin-left: 2%" > </button></a>
+                                        <a href="/carreras/{{ $item['id'] }}/descargar_tabla"><button type="button" id="excel"  style="margin-left: 2%" > </button></a>
                                         
                                 </td>
                                 
