@@ -9,7 +9,7 @@
 </head>
 <body>
     
-    <h3 style="text-align: center">UniverXdad de Talca</h3>
+    <h3 style="text-align: center">Universidad de Talca</h3>
     @foreach ($carrera_seleccionada as $car)
     <h1 style="text-align: center">Resumen Plan de Estudio {{$car['nombre']}}</h1>
     @endforeach
@@ -172,7 +172,7 @@
                 <th rowspan="2"style="text-align: center;">Clases</th>
                 <th rowspan="2"style="text-align: center;">SEM</th>
                 <th rowspan="2" style="text-align: center;">AYU</th>
-                <th colspan="3">Act. Prácticas, de Laboratorio</th>
+                <th colspan="3">Act. Prácticas o Laboratorio</th>
                 <th colspan="2">Act. Clínicas o terreno</th>
                 <th colspan="2">Trabajo Autónomo</th>
                 <th rowspan="2" style="text-align: center;">Horas semanales</th>

@@ -133,14 +133,7 @@ class CarreraController extends Controller
 
       public function exportExcel($carrera) {
 
-        Excel::create('tablas', function($excel) {
-            $excel->sheet('Competencias', function($sheet) {
-                $competencia = DB::table('competencias')->where('refCarrera', $carrera)->get();
-                $sheet->fromArray($competencia);
-
-            });
-
-        })->export('xls');
+        return (new CarreraExport($carrera))->download('tablas.xlsx');
       }
 
     /**
