@@ -18,9 +18,7 @@ class UserController extends Controller
         $this->middleware('auth');
     }
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Se muestra la vista de usuarios
      */
     public function index()
     {
@@ -45,10 +43,7 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Se crea y almacena un usuario
      */
     public function store(Request $request)
     {
@@ -59,16 +54,25 @@ class UserController extends Controller
             'password_confirmation'  => ['same:password'],
         ]);
 
+        $user = User::where('email', '=', $request->input('email'))->first();
 
-        $query = DB::table('users')->insert([
-            'nombre'=>$request->input('nombre'),
-            'email'=>$request->input('email'),
-            'rol'=>$request->input('rol'),
-            'password' => Hash::make($request->input('password')),
-            'remember_token' => Str::random(10)
-        ]);
+        if ($user === null) {
+            $query = DB::table('users')->insert([
+                'nombre'=>$request->input('nombre'),
+                'email'=>$request->input('email'),
+                'rol'=>$request->input('rol'),
+                'password' => Hash::make($request->input('password')),
+                'remember_token' => Str::random(10)
+            ]);
+    
+            return back()->withSuccess('Usuario creado con éxito');
+        }
 
-        return back()->withSuccess('Usuario creado con éxito');
+        else {
+            return back()->withErrors('El correo electrónico ingresado ya existe en la base de datos');
+        }
+
+        return back()->withErrors('El correo electrónico ingresado ya existe en la base de datos');
     }
 
     /**
@@ -94,11 +98,8 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * Se actualiza un usuario
+     * @param id del usuario
      */
     public function update(Request $request, $id)
     {
@@ -119,10 +120,8 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * Se elimina un usuario
+     * @param id del usuario
      */
     public function destroy($id)
     {

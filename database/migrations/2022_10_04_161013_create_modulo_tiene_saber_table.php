@@ -13,8 +13,8 @@ class CreateModuloTieneSaberTable extends Migration
      */
     public function up()
     {
-        Schema::create('modulo_tiene_saber', function (Blueprint $table) {
-            $table->bigInteger('modulo');
+        Schema::create('propuesta_tiene_saber', function (Blueprint $table) {
+            $table->bigInteger('propuesta_modulo');
             $table->bigInteger('saber');
         });
     }
@@ -26,6 +26,6 @@ class CreateModuloTieneSaberTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('modulo_tiene_saber');
+        Schema::dropIfExists('propuesta_tiene_saber');
     }
 }

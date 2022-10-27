@@ -31,6 +31,8 @@
                 <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
                 <a href="/carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
                 <a href="/carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
+                <a href="/carreras/{{$c['id']}}/archivos"><button type="button" class="boton_gestionar">Archivos</button></a> 
+
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
@@ -107,13 +109,13 @@
                                     <div class="modal-body">
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Descripción de la competencia</label>
+                                                <label style="font-size: 20; font-weight: bold">Descripción de la competencia</label>
                                                 <textarea class="form-control form-control-lg" style="color: black" name="desc_competencia" type="text"  placeholder="Ingrese la descripción de la competencia" rows="3" cols="50"  required></textarea>
                                                 <span style="color: red">@error('desc_competencia')  Debe ingresar una descripción para la competencia  @enderror</span>
                                             </div>
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Número/Orden</label>
+                                                <label style="font-size: 20; font-weight: bold">Número/Orden</label>
                                                 <input class="form-control form-control-lg" name="orden_competencia" style="width:20%; color: black" type="number"  min="0" max="100" required/>        
                                                 <span style="color: red">@error('orden_competencia')  Debe ingresar un número de orden para la competencia  @enderror</span>
                                             </div>
@@ -153,13 +155,13 @@
                                     <div class="modal-body">
 
                                     <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Descripción de la competencia</label>
+                                                <label style="font-size: 20; font-weight: bold">Descripción de la competencia</label>
                                                 <textarea class="form-control form-control-lg" style="color: black" name="desc_competencia" id="desc_competencia" type="text"  placeholder="Ingrese la descripción de la competencia" rows="3" cols="50"  required></textarea>
                                                 <span style="color: red">@error('desc_competencia')  Debe ingresar una descripción para la competencia  @enderror</span>
                                             </div>
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Número/Orden</label>
+                                                <label style="font-size: 20; font-weight: bold">Número/Orden</label>
                                                 <input class="form-control form-control-lg" name="orden_competencia" id="orden_competencia" style="width:20%; color: black" type="number" min="0" max="100" required/>        
                                                 <span style="color: red">@error('orden_competencia')  Debe ingresar un número de orden para la competencia  @enderror</span>
                                             </div>
@@ -196,9 +198,9 @@
                                     <div class="modal-header">
                                         <h1 class="justify-content-center" style="margin: auto"> Eliminar competencia</h1>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" style="text-align: center">
                                         <input type="hidden" name="method" value="DELETE"> 
-                                        <p style="font-size: 18">¿Está seguro de que desea eliminar ésta competencia? Se eliminarán todos los aprendizajes y saberes vinculados.</p>
+                                        <p style="font-size: 18">¿Está seguro de que desea eliminar ésta competencia? Se eliminarán todas las dimensiones, aprendizajes, saberes y módulos vinculados.</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -218,14 +220,7 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
-    <script>
-        $(document).ready(function(){
-            $('#b1').on('click',function(){
-                var v=$('</tr><tr id="row11" colspan=3><td>text</td>'); 
-                $('#row1').after(v);
-            });
-        });
-    </script>
+
     <script>    
         $(document).ready(function() {
             var table = $('#lista').DataTable({
@@ -270,7 +265,6 @@
 
 
                 var data = table.row($tr).data();
-                console.log(data);
 
                 $('#desc_competencia').val(data[2]);
                 $('#orden_competencia').val(data[1]);
@@ -290,7 +284,6 @@
                 }
 
                 var data = table.row($tr).data();
-                console.log(data);
 
 
                 $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/competencias/'+data[0]);

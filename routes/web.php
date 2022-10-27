@@ -10,6 +10,7 @@ use App\Http\Controllers\DimensionController;
 use App\Http\Controllers\AprendizajeController;
 use App\Http\Controllers\SaberController;
 use App\Http\Controllers\ModuloController;
+use App\Http\Controllers\ArchivoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/inicio', function() {
+Route::middleware(['auth:sanctum', 'verified'])->get('/home', function() {
     
 });
 
@@ -39,7 +40,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/inicio', function() {
 
     Route::post('changepassword', [ChangePasswordController::class, 'store'])->name('change.password');
     Route::get('/carreras/{id}/descargar_reporte', [CarreraController::class, 'createPDF']);
-    Route::post('/carreras/{id}/{}/modulo', [ModuloController::class, 'create']);
+    Route::get('/carreras/{id}/descargar_tabla', [CarreraController::class, 'exportExcel']);
     Route::post('/carreras/{id}/copiar', [CarreraController::class, 'copy']);
 
 
@@ -50,6 +51,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/inicio', function() {
     Route::post('/carreras/{id}/competencias', [CompetenciaController::class, 'create']);
     Route::put('/carreras/{id}/competencias/{competencia}', [CompetenciaController::class, 'update']);
     Route::delete('/carreras/{id}/competencias/{competencia}', [CompetenciaController::class, 'destroy']);
+    Route::get('/carreras/{id}/tempo_competencias/{competencia}', [CompetenciaController::class, 'edit']);
+    Route::put('/carreras/{id}/tempo_competencias/{competencia}', [CompetenciaController::class, 'update_tempo']);
 
     Route::get('/carreras/{id}/dimensiones', [DimensionController::class, 'index']);
     Route::post('/carreras/{id}/dimensiones', [DimensionController::class, 'create']);
@@ -61,7 +64,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/inicio', function() {
     Route::post('/carreras/{id}/aprendizajes', [AprendizajeController::class, 'create']);
     Route::put('/carreras/{id}/aprendizajes/{aprend}', [AprendizajeController::class, 'update']);
     Route::delete('/carreras/{id}/aprendizajes/{aprend}', [AprendizajeController::class, 'destroy']);
+    Route::get('/carreras/{id}/ver_aprendizajes', [AprendizajeController::class, 'show_aprendizajes']);
     Route::get('/carreras/{id}/tempo_aprendizajes', [AprendizajeController::class, 'show_Tempo']);
+    Route::get('/carreras/{id}/tempo_aprendizajes/{aprendizaje}', [AprendizajeController::class, 'edit']);
+    Route::put('/carreras/{id}/tempo_aprendizajes/{aprendizaje}', [AprendizajeController::class, 'update_tempo']);
 
     Route::get('/carreras/{id}/saberes', [SaberController::class, 'index']);
     Route::post('/carreras/{id}/saberes', [SaberController::class, 'create']);
@@ -70,9 +76,24 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/inicio', function() {
     Route::get('/carreras/{id}/ver_saberes/', [SaberController::class, 'show']);
 
     Route::get('/carreras/{id}/modulos', [ModuloController::class, 'index']);
+    Route::get('/carreras/{id}/carga_academica', [ModuloController::class, 'show']);
+
+    Route::post('/carreras/{id}/carga_academica', [ModuloController::class, 'create_carga']);
+    Route::put('/carreras/{id}/carga_academica/{modulo}', [ModuloController::class, 'update_carga']);
+    Route::delete('/carreras/{id}/carga_academica/{modulo}', [ModuloController::class, 'destroy_carga']);
+
+    Route::get('/carreras/{id}/carga_academica/{modulo}', [ModuloController::class, 'show_requisitos'])->name('carga_academica.show_requisitos');
+    Route::get('/carreras/{id}/modulos/{modulo}', [ModuloController::class, 'show_datos'])->name('modulos.show_datos');
+    
     Route::post('/carreras/{id}/modulos', [ModuloController::class, 'create']);
     Route::put('/carreras/{id}/modulos/{modulo}', [ModuloController::class, 'update']);
     Route::delete('/carreras/{id}/modulos/{modulo}', [ModuloController::class, 'destroy']);
+
+    Route::get('/carreras/{id}/archivos', [ArchivoController::class, 'index']);
+    Route::post('/carreras/{id}/archivos/subir', [ArchivoController::class, 'store']);
+    Route::get('/carreras/{id}/archivos/{file}', [ArchivoController::class, 'download']);
+    Route::delete('/carreras/{id}/archivos/{file}', [ArchivoController::class, 'destroy']);
+    
 
 
 

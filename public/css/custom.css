@@ -355,6 +355,31 @@ header {
     border-radius: 10px;
 }
 
+#excel {
+
+  background-image: url('/images/excel_logo.png');
+  background-repeat: no-repeat;
+  background-color: transparent;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  border: none;
+
+
+}
+
+#excel:hover {
+  background-color: rgb(68, 68, 68);
+  border-radius: 10px;
+}
+
+#excel:active {
+  background-color: rgb(43, 43, 43);
+  border-radius: 10px;
+}
+
 #mod {
     background-image: url('/images/edit_icon.png');
     background-repeat: no-repeat;

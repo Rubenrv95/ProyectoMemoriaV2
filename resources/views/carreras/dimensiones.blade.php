@@ -33,6 +33,8 @@
                 <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
                 <a href="/carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
                 <a href="/carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
+                <a href="/carreras/{{$c['id']}}/archivos"><button type="button" class="boton_gestionar">Archivos</button></a> 
+
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
@@ -112,19 +114,19 @@
                                     <div class="modal-body">
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 1%">
-                                                <label style="font-size: 20">Descripción de la dimension</label>
+                                                <label style="font-size: 20; font-weight: bold">Descripción de la dimension</label>
                                                 <textarea class="form-control form-control-lg" name="desc_dimension" type="text"  style="color: black" placeholder="Ingrese la descripción de la dimension" rows="3" cols="50"  required></textarea>
                                                 <span style="color: red">@error('desc_dimension')  Debe ingresar una descripción para la dimensión @enderror</span>
                                             </div>
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Número/Orden</label>
+                                                <label style="font-size: 20; font-weight: bold">Número/Orden</label>
                                                 <input class="form-control form-control-lg" name="orden_dimension" style="width:20%; color: black" type="number" min="0" max="100" required/>        
                                                 <span style="color: red">@error('orden_dimension')  Debe ingresar un número de orden para la competencia  @enderror</span>
                                             </div>
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 1%">
-                                                <label style="font-size: 20">Competencia asociada</label>
+                                                <label style="font-size: 20; font-weight: bold">Competencia asociada</label>
                                                 <select class="form-select form-select-lg" name="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required> 
                                                     <option selected disabled="true" value="">Seleccione una competencia</option>
                                                     @foreach ($competencia as $comp) 
@@ -168,19 +170,19 @@
                                     <div class="modal-body">
 
                                         <div class="form-group" style="margin: auto; margin-bottom: 1%">
-                                            <label style="font-size: 20">Descripción de la dimension</label>
+                                            <label style="font-size: 20; font-weight: bold">Descripción de la dimension</label>
                                             <textarea class="form-control form-control-lg" name="desc_dimension" id="desc_dimension" type="text"  style="color: black" placeholder="Ingrese la descripción de la dimension" rows="3" cols="50"  required></textarea>
                                             <span style="color: red">@error('desc_dimension')  Debe ingresar una descripción para la dimensión @enderror</span>
                                         </div>
 
                                         <div class="form-group" style="margin: auto; margin-bottom: 20px">
-                                                <label style="font-size: 20">Número/Orden</label>
+                                                <label style="font-size: 20; font-weight: bold">Número/Orden</label>
                                                 <input class="form-control form-control-lg" name="orden_dimension" id="orden_dimension" style="width:20%; color: black" type="number" min="0" max="100" required/>        
                                                 <span style="color: red">@error('orden_dimension')  Debe ingresar un número de orden para la competencia  @enderror</span>
                                         </div>
 
                                         <div class="form-group" style="margin: auto; margin-bottom: 1%">
-                                            <label style="font-size: 20">Competencia asociada</label>
+                                            <label style="font-size: 20; font-weight: bold">Competencia asociada</label>
                                             <select class="form-select form-select-lg" name="refComp" id="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required> 
                                                 <option selected disabled="true" value="">Seleccione una competencia</option>
                                                 @foreach ($competencia as $comp) 
@@ -222,9 +224,9 @@
                                     <div class="modal-header">
                                         <h1 class="justify-content-center" style="margin: auto"> Eliminar dimensión</h1>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" style="text-align: center">
                                         <input type="hidden" name="method" value="DELETE"> 
-                                        <p style="font-size: 18">¿Está seguro de que desea eliminar ésta dimensión?</p>
+                                        <p style="font-size: 18">¿Está seguro de que desea eliminar ésta dimensión? Se eliminarán todos los aprendizajes, saberes y módulos vinculados</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -288,7 +290,6 @@
 
 
                 var data = table.row($tr).data();
-                console.log(data);
 
 
                 $('#refComp').val(data[1]);
@@ -311,7 +312,6 @@
                 }
 
                 var data = table.row($tr).data();
-                console.log(data);
 
 
                 $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/dimensiones/'+data[0]);

@@ -9,7 +9,7 @@
         @foreach ($carrera as $c)
         @endforeach
 
-        <title>Saberes {{$c['nombre']}}</title>
+        <title>Visualización de saberes {{$c['nombre']}}</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
         <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
@@ -20,7 +20,7 @@
 <body >
         <div class="container-fluid">   
                 
-                <a href="/carreras/{{$c['id']}}"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
+                <a href="/carreras"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Saberes {{$c['nombre']}} </h1>
                 </div>
@@ -31,6 +31,8 @@
                 <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
                 <a href="/carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
                 <a href="/carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
+                <a href="/carreras/{{$c['id']}}/archivos"><button type="button" class="boton_gestionar">Archivos</button></a> 
+
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
@@ -50,9 +52,11 @@
                             <tr style="font-weight: bold; color: white">
                                 <th style="text-align: center; width: 20%">Competencia⇵</th>
                                 <th style="text-align: center; width: 20%">Dimensión⇵</th>
-                                <th style="text-align: center; width: 20%">Aprendizajes⇵</th>
-                                <th style="text-align: center; width: 20%">Saberes⇵</th>
+                                <th style="text-align: center; width: 20%">Aprendizaje⇵</th>
+                                <th style="text-align: center; width: 20%">Saber⇵</th>
                                 <th style="text-align: center; width: 20%">Tipo de Saber⇵</th>
+                                <th style="text-align: center; width: 20%">Fecha de Creación⇵</th>
+                                <th style="text-align: center; width: 20%">Fecha de Actualización⇵</th>
                             </tr>
 
                         </thead>
@@ -65,6 +69,8 @@
                                 <td style="text-align: center">{{$s['Descripcion_aprendizaje']}}</td>
                                 <td style="text-align: center">{{$s['Descripcion_saber']}}</td>
                                 <td style="text-align: center">{{$s['Tipo']}}</td>
+                                <td style="text-align: center">{{$s['created_at']}}</td>
+                                <td style="text-align: center">{{$s['updated_at']}}</td>
                                 </tr>
                             @endforeach
 
@@ -83,48 +89,29 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]]
+                "order": [[ 1, "asc" ]],
+
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
             });
-
-            //TABLA DE SABERES
-
-            //modificar
-            table.on('click', '.edit', function() {
-
-                $tr = $(this).closest('tr');
-                if ($($tr).hasClass('child')) {
-                    $tr = $tr.prev('.parent');
-                }
-
-
-                var data = table.row($tr).data();
-                console.log(data);
-
-                $('#desc_saber').val(data[1]);
-                $('#refAprend').val(data[2]);
-
-                $('#editForm').attr('action', '/carreras/{{$c['id']}}/saber_conocer/'+data[0]);
-                $('#modal_modificar_saber').modal('show');
-
-            });
-
-
-            //eliminar
-            table.on('click', '.delete', function() {
-
-                $tr = $(this).closest('tr');
-                if ($($tr).hasClass('child')) {
-                    $tr = $tr.prev('.parent');
-                }
-
-                var data = table.row($tr).data();
-                console.log(data);
-
-
-                $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/saber_conocer/'+data[0]);
-                $('#modal_eliminar_saber').modal('show');
-
-            }  );
         });
 
     </script>

@@ -16,7 +16,6 @@ class CreateCompetenciasTable extends Migration
         Schema::create('competencias', function (Blueprint $table) {
             $table->id();
             $table->longText('Descripcion');
-            $table->string('Nivel')->nullable();
             $table->integer('Orden');
             $table->bigInteger('refCarrera');
             $table->timestamp('created_at')->nullable('false')->default(DB::raw('CURRENT_TIMESTAMP'));

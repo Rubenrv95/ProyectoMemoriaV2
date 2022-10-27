@@ -78,9 +78,6 @@
                                         <hr>
                                     </form>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Olvidé mi contraseña</a>
-                                    </div>
-                                    <div class="text-center">
                                         <img src="/images/utalca_icon.png" alt="">
                                     </div>
                                 </div>

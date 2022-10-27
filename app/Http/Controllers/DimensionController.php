@@ -20,9 +20,7 @@ class DimensionController extends Controller
         $this->middleware('auth');
     }
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Se muestra la vista de dimensiones
      */
     public function index($id_carrera)
     {
@@ -37,9 +35,7 @@ class DimensionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Se crea una dimensión
      */
     public function create($id_carrera, Request $request)
     {
@@ -53,7 +49,6 @@ class DimensionController extends Controller
             'Descripcion_dimension'=>$request->input('desc_dimension'),
             'Orden'=>$request->input('orden_dimension'),
             'refCompetencia'=>$request->input('refComp'),
-            'refCarrera'=>$id_carrera,
         ]);
 
         return back()->withSuccess('Dimensión creada con éxito');
@@ -93,11 +88,7 @@ class DimensionController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Dimension  $dimension
-     * @return \Illuminate\Http\Response
+     * Se actualiza una dimensión
      */
     public function update($id_carrera, Request $request, $id_dim)
     {
@@ -120,15 +111,23 @@ class DimensionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Dimension  $dimension
-     * @return \Illuminate\Http\Response
+     * Se borra una dimensión
+     * @param id_carrera, id de la carrera
+     * @param id_dim, id de la dimensión
      */
     public function destroy($id_carrera, $id_dim)
     {
         $query = DB::table('dimensions')->where('id', $id_dim)->delete();
-        $query2 = DB::table('aprendizajes')->where('refDimension', $id_dim)->delete();
+
+        $query2= 'DELETE aprendizajes, sabers, propuesta_modulos, propuesta_tiene_saber, modulos, modulo_tiene_prerrequisito FROM aprendizajes 
+        INNER JOIN sabers ON sabers.refAprendizaje = aprendizajes.id
+        INNER JOIN propuesta_tiene_saber ON sabers.id = propuesta_tiene_saber.saber
+        INNER JOIN propuesta_modulos  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
+        INNER JOIN modulos  ON  propuesta_modulos.id = modulos.refPropuesta
+        INNER JOIN modulo_tiene_prerrequisito  ON  modulo.id = modulo_tiene_prerrequisito.modulo
+        WHERE aprendizajes.refDimension = ?';
+
+        $status = \DB::delete($query2, array($id_dim));
         
         return back()->withSuccess('Dimensión eliminada con éxito');
     }

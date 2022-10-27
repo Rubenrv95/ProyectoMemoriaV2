@@ -33,9 +33,9 @@ class ChangePasswordController extends Controller
     } 
    
     /**
-     * Show the application dashboard.
+     * Se modifica la contraseña del usuario
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return 
      */
     public function store(Request $request)
     {

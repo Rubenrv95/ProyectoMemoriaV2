@@ -25,10 +25,10 @@
                         <thead>
                                 <tr style="font-weight: bold; color: white">
                                 <th style="display: none">ID <img src="/images/arrows.png" alt="" srcset=""></th>
-                                <th>Nombre de usuario⇵</th>
-                                <th>Correo Electrónico⇵</th>
-                                <th>Rol⇵</th>
-                                <th style="width: 150px"></th>
+                                <th style="text-align: center">Nombre de usuario⇵</th>
+                                <th style="text-align: center">Correo Electrónico⇵</th>
+                                <th style="text-align: center">Rol⇵</th>
+                                <th style="text-align: center; width: 10%"></th>
                                 </tr>
                         </thead>
                         
@@ -37,10 +37,10 @@
                                 @foreach($user as $u)
                                 <tr>
                                 <td style="display: none"> {{$u['id']}}</td>
-                                <td> {{$u['nombre']}}</td>
-                                <td>{{$u['email']}}</td>
-                                <td>{{$u['rol']}}</td>
-                                <td>
+                                <td style="text-align: center"> {{$u['nombre']}}</td>
+                                <td style="text-align: center">{{$u['email']}}</td>
+                                <td style="text-align: center">{{$u['rol']}}</td>
+                                <td style="text-align: center">
                                         <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_carrera" class="edit"> </button>
                                         <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_carrera" class="delete"> </button>
                                 </td>
@@ -192,7 +192,7 @@
                                     <div class="modal-header">
                                         <h1 class="justify-content-center" style="margin: auto"> Eliminar Usuario</h1>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" style="text-align: center">
                                         <input type="hidden" name="method" value="DELETE"> 
                                         <p style="font-size: 18">¿Está seguro de que desea eliminar a éste usuario?</p>
                                     </div>
@@ -253,7 +253,6 @@
 
 
                 var data = table.row($tr).data();
-                console.log(data);
 
                 $('#nombre').val(data[1]);
                 $('#email').val(data[2]);
@@ -274,7 +273,6 @@
                 }
 
                 var data = table.row($tr).data();
-                console.log(data);
 
 
                 $('#deleteForm').attr('action', '/usuarios/'+data[0]);
