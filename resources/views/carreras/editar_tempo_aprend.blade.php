@@ -67,6 +67,7 @@
                             <td style="text-align: center">{{$t['Nivel_aprend']}}</td>
                             <td style="text-align: center">{{$t['Descripcion_aprendizaje']}}</td>
                             <td style="text-align: center">{{$t['Descripcion_dimension']}}</td>
+                            <!--Se marcan las casillas para indicar la temporalización del aprendizaje en un nivel -->
                             @for ($i = 1; $i <= 14; $i++)
                             <td style="text-align: center"> 
                                 @if ($t[$i]== 1) 

@@ -288,7 +288,6 @@
 
 
                 var data = table.row($tr).data();
-                console.log(data);
 
 
                 $('#refComp').val(data[1]);
@@ -311,7 +310,6 @@
                 }
 
                 var data = table.row($tr).data();
-                console.log(data);
 
 
                 $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/dimensiones/'+data[0]);

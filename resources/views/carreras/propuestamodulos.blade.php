@@ -70,6 +70,7 @@
                             <tr>
                                 <td style="display: none">{{$m['id']}}</td>
                                 <td style="text-align: center">{{$m['Semestre']}}</td>
+                                <!--Los saberes, aprendizajes y competencias se muestran en modals -->
                                 <td style="text-align: center"><button type="button" id="info" value="{{$m['Nombre_modulo']}}" class="info_sab" data-url="{{ route('modulos.show_datos', [ $c['id'] , $m['id'] ]) }}"> </button></td>
                                 <td style="text-align: center"><button type="button" id="info" class="info_aprend" data-url="{{ route('modulos.show_datos', [ $c['id'] , $m['id'] ]) }}">  </button> </td>
                                 <td style="text-align: center"><button type="button" id="info" class="info_comp" data-url="{{ route('modulos.show_datos', [ $c['id'] , $m['id'] ]) }}">  </button> </td>
@@ -361,7 +362,6 @@
 
 
                 var data = table.row($tr).data();
-                console.log(data);
 
                 $('#nombre_modulo').val(data[5]);
                 $('#semestre').val(data[1]);
@@ -381,7 +381,6 @@
                 }
 
                 var data = table.row($tr).data();
-                console.log(data);
 
 
                 $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/modulos/'+data[0]);
@@ -393,7 +392,10 @@
     </script>
 
     <script type="text/javascript">
+
+        //Función para ir añadiendo saberes a una propuesta de módulo creada
         var i = 0;
+        //con el botón se añade una menú de selección más conteniendo los saberes de la carrera
         $("#add").click(function () {
             if (i<5) {
                 i++;
@@ -410,6 +412,7 @@
                 );
             }
         });
+        //con el botón eliminar se elimina uno por uno los menús con saberes
         $(document).on('click', '.btn_remove', function(){  
 
             i--;
@@ -429,6 +432,8 @@
 
         });
 
+
+        //al presionar el botón Guardar, se crea la propuesta de modulo
         $('#submit').click(function(){            
 
             $.ajax({  
@@ -477,6 +482,8 @@
 
             // al hacer click, se mostrará la información solicitada asociada al módulo
 
+
+            //saberes
             $('#lista').on('click', '.info_sab', function () {
 
                 var sabURL = $(this).data('url');
@@ -501,6 +508,8 @@
 
             });
 
+
+            //aprendizajes
             $('#lista').on('click', '.info_aprend', function () {
 
                 var aprendURL = $(this).data('url');
@@ -524,6 +533,8 @@
 
             });
 
+
+            //competencias
             $('#lista').on('click', '.info_comp', function () {
 
                 var compURL = $(this).data('url');

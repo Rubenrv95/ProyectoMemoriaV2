@@ -253,7 +253,6 @@
 
 
                 var data = table.row($tr).data();
-                console.log(data);
 
                 $('#nombre').val(data[1]);
                 $('#email').val(data[2]);
@@ -274,7 +273,6 @@
                 }
 
                 var data = table.row($tr).data();
-                console.log(data);
 
 
                 $('#deleteForm').attr('action', '/usuarios/'+data[0]);

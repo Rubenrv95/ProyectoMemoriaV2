@@ -22,20 +22,17 @@ class CarreraController extends Controller
         $this->middleware('auth');
     }
     /**
-     * Display a listing of the resource.
+     * Se muestra la vista de carreras
      *
-     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $data = Carrera::orderBy('nombre')->get(); 
         return view ('/carreras', ['carrera'=>$data]);
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Se crea una carrera
      */
     public function create(Request $request)
     {
@@ -71,6 +68,9 @@ class CarreraController extends Controller
         
     }
 
+    /**
+     * Se crea un documento PDF con la información solicitada
+     */
     public function createPDF($carrera) {
         $competencia = DB::table('competencias')->where('refCarrera', $carrera)->get();
         $tempo_competencia = DB::table('tempo_competencias')
@@ -131,6 +131,9 @@ class CarreraController extends Controller
         return $pdf->download('reporte.pdf');
       }
 
+      /**
+       * Se crea un Excel con la información solicitada
+       */
       public function exportExcel($carrera) {
 
         return (new CarreraExport($carrera))->download('tablas.xlsx');
@@ -158,11 +161,8 @@ class CarreraController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Carrera  $carrera
-     * @return \Illuminate\Http\Response
+     * Se actualiza una carrera
+     * @param id, id de la carrera
      */
     public function update(Request $request, $id)
     {
@@ -186,10 +186,8 @@ class CarreraController extends Controller
 
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Carrera  $carrera
-     * @return \Illuminate\Http\Response
+     * Se elimina una carrera
+     * @param id, id de la carrera
      */
     public function destroy($id)
     {

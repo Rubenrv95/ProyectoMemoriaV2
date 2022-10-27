@@ -68,6 +68,7 @@
 
                             @for ($i = 1; $i <= 14; $i++)
                             <td style="text-align: center"> 
+                                <!-- Se muestran las temporalizaciones, pero no se pueden editar-->
                                 @if ($t[$i]== 1) 
                                 <input type="checkbox" value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center;" checked onclick="return false;">
                                 @else

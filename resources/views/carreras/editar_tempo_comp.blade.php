@@ -61,6 +61,7 @@
                         <tr>
                             <td  style="text-align: center">{{$t['Orden']}}. {{$t['Descripcion']}}</td>
                             @for ($i = 1; $i <= 14; $i++)
+                            <!--Se marcan las casillas para indicar la temporalización de la competencia en un nivel -->
                             <td  style="text-align: center"> 
                                 @if ($t[$i]== 1) 
                                     <input type="checkbox" value="1" id="nivel_{{$i}}" name="nivel_{{$i}}" style="width: 30px; height: 30px; text-align: center" checked>

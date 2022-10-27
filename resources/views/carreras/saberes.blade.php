@@ -316,6 +316,7 @@
             });
 
 
+            //modificar
             table.on('click', '.edit', function() {
                 $tr = $(this).closest('tr');
                 if ($($tr).hasClass('child')) {
@@ -324,7 +325,6 @@
 
 
                 var data = table.row($tr).data();
-                console.log(data);
 
                 $('#desc-saber').val(data[5]);
                 $('#tipo').val(data[6]);
@@ -344,7 +344,6 @@
                 }
 
                 var data = table.row($tr).data();
-                console.log(data);
 
 
                 $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/saberes/'+data[4]);

@@ -626,27 +626,6 @@
 
             //TABLA DE APRENDIZAJES
 
-            //ver datos
-            table.on('click', '.info', function() {
-
-                $tr = $(this).closest('tr');
-                if ($($tr).hasClass('child')) {
-                    $tr = $tr.prev('.parent');
-                }
-
-                var data = table.row($tr).data();
-                console.log(data);
-
-
-
-
-                document.getElementById("#created_at").innerHTML ='<h6>' + 'xd' + '</h6>';
-                document.getElementById("#updated_at").innerHTML = '<h6>' + 'xd' + '</h6>';
-
-                $('#modal_ver_datos').modal('show');
-
-            });
-
             //modificar inicial
             table.on('click', '.edit1', function() {
 
@@ -772,7 +751,6 @@
                 }
 
                 var data = table.row($tr).data();
-                console.log(data);
 
 
                 $('#deleteFormLogrado').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[12]);
@@ -789,7 +767,6 @@
                 }
 
                 var data = table.row($tr).data();
-                console.log(data);
 
 
                 $('#deleteFormEspecializacion').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[16]);
@@ -806,6 +783,8 @@
 
     <script>
 
+
+        //con esta función se muestra el menú de selección de dimensiones luego de elegir una competencia
         function addDimension() {
 
                 var x = document.getElementById("refCompCrear").value;
@@ -830,6 +809,7 @@
                     lista += '</select>'+
                         '</div>';                 
                     
+                    //Se añade la lista al HTML del modal
                     document.getElementById("dimension-crear").innerHTML = lista;
                 });                  
         }

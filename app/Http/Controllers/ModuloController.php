@@ -23,9 +23,7 @@ class ModuloController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Vista de propuesta de módulos
      */
     public function index($id_carrera)
     {
@@ -45,9 +43,7 @@ class ModuloController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Se crea una propuesta de módulo
      */
     public function create($id_carrera, Request $request)
     {
@@ -94,9 +90,7 @@ class ModuloController extends Controller
 
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Se crea un módulo en la tabla de carga académica
      */
     public function create_carga($id_carrera, Request $request)
     {
@@ -184,12 +178,6 @@ class ModuloController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Modulo  $modulo
-     * @return \Illuminate\Http\Response
-     */
 
      /**Función para retornar las competencias, aprendizajes y saberes asociados al módulo */
     public function show_datos($id_carrera, $id_modulo)
@@ -236,12 +224,7 @@ class ModuloController extends Controller
         return response()->json([$saber, $aprendizajes, $competencias]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Modulo  $modulo
-     * @return \Illuminate\Http\Response
-     */
+
      /**Función para retornar las competencias, aprendizajes y sabers asociados al módulo */
      public function show_requisitos($id_carrera, $id_modulo)
      {
@@ -335,11 +318,7 @@ class ModuloController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Modulo  $modulo
-     * @return \Illuminate\Http\Response
+     * Se actualiza la propuesta de módulo
      */
     public function update(Request $request, $id_carrera, $id_modulo)
     {
@@ -353,11 +332,7 @@ class ModuloController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Modulo  $modulo
-     * @return \Illuminate\Http\Response
+     * Se actualiza el módulo de la carga
      */
     public function update_carga(Request $request, $id_carrera, $id_modulo)
     {
@@ -384,10 +359,7 @@ class ModuloController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Modulo  $modulo
-     * @return \Illuminate\Http\Response
+     * Se elimina la propuesta de módulo
      */
     public function destroy($id_carrera, $id_modulo)
     {
@@ -406,10 +378,7 @@ class ModuloController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Modulo  $modulo
-     * @return \Illuminate\Http\Response
+     * Se elimina el módulo de la carga académica
      */
     public function destroy_carga($id_carrera, $id_modulo)
     {

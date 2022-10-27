@@ -184,6 +184,7 @@
 
         </div>
 
+        <!--Modal para mostrar los prerrequisitos de un módulo seleccionado -->
         <div class="container">
             <div class="row">
                 <div class ="col-md-12">
@@ -471,6 +472,8 @@
     <script>    
         $(document).ready(function() {
 
+
+            //se muestran los requisitos de un módulo
             $('#lista').on('click', '.info_req', function () {
 
 
@@ -620,6 +623,7 @@
 
     <script type="text/javascript">
         var i = 0;
+        //al presionar el botón, se añade un menú de selección de módulos para seleccionar los prerrequisitos de un módulo creado
         $("#add").click(function () {
             if (i<10) {
                 i++;
@@ -636,6 +640,7 @@
                 );
             }
         });
+        //Al presionar el boton, se eliminan uno por uno los menús de los prerrequisitos de un módulo
         $(document).on('click', '.btn_remove', function(){  
 
             var button_id = $(this).attr("id");   
@@ -654,6 +659,8 @@
 
         });
 
+
+        //se guarda y crea el módulo en la tabla
         $('#submit').click(function(){            
 
             $.ajax({  

@@ -279,7 +279,6 @@
 
 
                 var data = table.row($tr).data();
-                console.log(data);
 
                 $('#nombre_carrera').val(data[1]);
                 $('#facultad').val(data[2]);
@@ -301,7 +300,6 @@
                 }
 
                 var data = table.row($tr).data();
-                console.log(data);
 
 
                 $('#deleteForm').attr('action', '/carreras/'+data[0]);

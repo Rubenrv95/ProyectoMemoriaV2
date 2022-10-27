@@ -16,9 +16,8 @@ class CompetenciaController extends Controller
         $this->middleware('auth');
     }
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Se muestran las competencias
+     *@param id_carrera, id de la carrera
      */
     public function index($id_carrera)
     {
@@ -31,9 +30,8 @@ class CompetenciaController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Se crea una competencia
+     *@param id_carrera, id de la carrera
      */
     public function create($id_carrera, Request $request)
     {
@@ -90,10 +88,9 @@ class CompetenciaController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Competencia  $competencia
-     * @return \Illuminate\Http\Response
+     * Mostrar las temporalizaciones de las competencias 
+     *@param id_carrera, id de la carrera
+     * 
      */
     public function show($id_carrera)
     {
@@ -112,10 +109,9 @@ class CompetenciaController extends Controller
     
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Competencia  $competencia
-     * @return \Illuminate\Http\Response
+     * Vista para editar la temporalización de una competencia
+     *@param id_carrera, id de la carrera
+     *@param id_comp, id de la competencia
      */
     public function edit($id_carrera, $id_comp)
     {
@@ -129,10 +125,9 @@ class CompetenciaController extends Controller
     }
 
     /**
-     * Editar tempo de competencia seleccionada
-     *
-     * @param  \App\Models\Competencia  $competencia
-     * @return \Illuminate\Http\Response
+     * Actualizar tempo de competencia seleccionada
+     *@param id_carrera, id de la carrera
+     *@param id_comp, id de la competencia
      */
     public function update_tempo($id_carrera, $id_comp, Request $request)
     {
@@ -159,11 +154,9 @@ class CompetenciaController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Competencia  $competencia
-     * @return \Illuminate\Http\Response
+     * Actualizar competencia
+     *@param id_carrera, id de la carrera
+     * @param id_comp, id de la competencia
      */
     public function update($id_carrera, Request $request, $id_comp)
     {
@@ -185,10 +178,9 @@ class CompetenciaController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Competencia  $competencia
-     * @return \Illuminate\Http\Response
+     * eliminar competencia y todo elemento asociado
+     *@param id, id de la carrera
+     * @param id_comp, id de la competencia
      */
     public function destroy($id, $id_comp)
     {

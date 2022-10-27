@@ -218,14 +218,7 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
-    <script>
-        $(document).ready(function(){
-            $('#b1').on('click',function(){
-                var v=$('</tr><tr id="row11" colspan=3><td>text</td>'); 
-                $('#row1').after(v);
-            });
-        });
-    </script>
+
     <script>    
         $(document).ready(function() {
             var table = $('#lista').DataTable({
@@ -270,7 +263,6 @@
 
 
                 var data = table.row($tr).data();
-                console.log(data);
 
                 $('#desc_competencia').val(data[2]);
                 $('#orden_competencia').val(data[1]);
@@ -290,7 +282,6 @@
                 }
 
                 var data = table.row($tr).data();
-                console.log(data);
 
 
                 $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/competencias/'+data[0]);

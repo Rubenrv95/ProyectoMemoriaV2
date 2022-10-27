@@ -18,18 +18,28 @@ class AprendizajeController extends Controller
         $this->middleware('auth');
     }
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Se muestran los aprendizajes en la vista de gestión
+     * @param id_carrera, id de la carrera
      */
     public function index($id_carrera)
     {
         $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
         $carrera = json_decode($carrera, true);
         
-        $competencia = DB::table('competencias')->where('refCarrera', $id_carrera)->get();
-        $dimension =  DB::table('dimensions')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('dimensions.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp')->get();
-        $aprendizaje = DB::table('aprendizajes')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden', 'dimensions.id as idDim')->get();
+        $competencia = DB::table('competencias')
+        ->where('refCarrera', $id_carrera)
+        ->get();
+        $dimension =  DB::table('dimensions')
+        ->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')
+        ->where('competencias.refCarrera', '=', $id_carrera)
+        ->select('dimensions.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp')
+        ->get();
+        $aprendizaje = DB::table('aprendizajes')
+        ->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')
+        ->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')
+        ->where('competencias.refCarrera', '=', $id_carrera)
+        ->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden', 'dimensions.id as idDim')
+        ->get();
 
 
         $competencia = json_decode($competencia, true);
@@ -40,9 +50,8 @@ class AprendizajeController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Se crea un aprendizaje
+     * @param id_carrera, id de la carrera
      */
     public function create($id_carrera, Request $request)
     {
@@ -93,10 +102,9 @@ class AprendizajeController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Aprendizaje  $aprendizaje
-     * @return \Illuminate\Http\Response
+     * Se muestran las dimensiones de una competencia seleccionada en el modal de creación
+     * @param id_carrera, id de la carrera
+     *@param id_comp, id de la competencia
      */
     public function show($id_carrera, $id_competencia)
     {
@@ -107,12 +115,21 @@ class AprendizajeController extends Controller
     }
 
 
+    /**
+     * Se retornan los aprendizajes ya creados en una tabla
+     * @param id_carrera, id de la carrera
+     */
     public function show_aprendizajes($id_carrera)
     {
         $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
         $carrera = json_decode($carrera, true);
 
-        $aprendizaje =  DB::table('aprendizajes')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'competencias.id', '=', 'dimensions.refCompetencia')->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden as OrdenDim', 'dimensions.id as idDim')->where('competencias.refCarrera', '=', $id_carrera)->get();
+        $aprendizaje =  DB::table('aprendizajes')
+        ->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')
+        ->leftJoin('competencias', 'competencias.id', '=', 'dimensions.refCompetencia')
+        ->select('aprendizajes.*', 'competencias.Descripcion', 'competencias.Orden as OrdenComp', 'competencias.id as idComp', 'dimensions.Descripcion_dimension', 'dimensions.Orden as OrdenDim', 'dimensions.id as idDim')
+        ->where('competencias.refCarrera', '=', $id_carrera)
+        ->get();
         $aprendizaje = json_decode($aprendizaje, true);
         
         return view('carreras.ver_aprendizajes')->with('carrera', $carrera)->with('aprendizaje', $aprendizaje);
@@ -121,10 +138,8 @@ class AprendizajeController extends Controller
     
 
        /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Aprendizaje  $aprendizaje
-     * @return \Illuminate\Http\Response
+     * Vista de temporalización de aprendizajes
+     * @param id_carrera, id de la carrera
      */
     public function show_Tempo($id_carrera)
     {
@@ -141,9 +156,9 @@ class AprendizajeController extends Controller
     
 
    /**
-     * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Vista para editar la temporalización de un aprendizaje
+     * @param id_carrera, id de la carrera
+     *@param id_aprend, id del aprendizaje
      */
     public function edit($id_carrera, $id_aprend)
     {
@@ -157,9 +172,9 @@ class AprendizajeController extends Controller
     }
 
     /**
-     * Editar tempo de competencia seleccionada
-     *
-     * @return \Illuminate\Http\Response
+     * Actualizar tempo de aprendizaje seleccionada
+     * @param id_carrera, id de la carrera
+     *@param id_aprend, id del aprendizaje
      */
     public function update_tempo($id_carrera,  $id_aprend, Request $request)
     {
@@ -186,11 +201,9 @@ class AprendizajeController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Aprendizaje  $aprendizaje
-     * @return \Illuminate\Http\Response
+     * Actualizar aprendizaje
+     * @param id_carrera, id de la carrera
+     *@param id_aprend, id del aprendizaje
      */
     public function update($id_carrera, Request $request, $id_aprend)
     {
@@ -263,10 +276,9 @@ class AprendizajeController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Aprendizaje  $aprendizaje
-     * @return \Illuminate\Http\Response
+     * Eliminar aprendizaje y todo elemento asociado
+     * @param id_carrera, id de la carrera
+     *@param id_aprend, id del aprendizaje
      */
     public function destroy($id_carrera, $id_aprend)
     {

@@ -51,21 +51,19 @@
             <!-- Sidebar -->
             <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: #333333">
 
-                <!-- Sidebar - Brand -->
+                <!-- Sidebar - Logo -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home" style="height: 100px; ">
                     <div class="sidebar-brand-text mx-3"><img src="/images/logo.png" alt="" style="width: 130px; height: 100px"></div>
                 </a>
 
-                <!-- Divider -->
                 <hr class="sidebar-divider my-0">
 
-                <!-- Nav Item - Dashboard -->
+                <!-- Dashboard -->
                 <li class="text-center" style="font-size: 15px; color: white; font-weight: bold">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span>
                 </li>
 
-                <!-- Divider -->
                 <hr class="sidebar-divider">
 
                 <!-- Header -->
@@ -79,7 +77,6 @@
                         <span>Inicio</span></a>
                 </li>
                 
-                <!-- Divider -->
                 <hr class="sidebar-divider">
 
                 <!-- Header -->
@@ -101,9 +98,9 @@
                         <span>Usuarios</span></a>
                 </li>
                 @endif
-                <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
-                <!-- Sidebar Message -->
+
+                <!-- Mensaje -->
                 <div class="sidebar-card d-none d-lg-flex">
                     <p class="text-center mb-2">Sitio Web desarrollado por <strong>Rubén Ramírez</strong> para la Universidad de Talca</p>
                 </div>
@@ -301,6 +298,8 @@
         });
     </script>
     <script>
+
+        //Función para mostrar u ocultar la contraseña para cada uno de los 3 input
         $(document).ready(function() {
             $("#show_hide_password a").on('click', function(event) {
                 event.preventDefault();

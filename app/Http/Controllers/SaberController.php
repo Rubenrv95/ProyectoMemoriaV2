@@ -20,9 +20,8 @@ class SaberController extends Controller
     }
     
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Vista de saberes
+     * @param id_carrera, id de la carrera
      */
     public function index($id_carrera)
     {
@@ -39,9 +38,8 @@ class SaberController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Se crea un saber
+     * @param id_carrera, id de la carrera
      */
     public function create($id_carrera, Request $request)
     {
@@ -72,10 +70,8 @@ class SaberController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Saber  $saber
-     * @return \Illuminate\Http\Response
+     * Se muestra la tabla de saberes
+     * @param id_carrera, id de la carrera
      */
     public function show($id_carrera)
     {
@@ -101,11 +97,9 @@ class SaberController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Saber  $saber
-     * @return \Illuminate\Http\Response
+     * Se actualiza un saber
+     * @param id_carrera, id de la carrera
+     * @param id_saber, id del saber seleccionado
      */
     public function update($id_carrera, Request $request, $id_saber)
     {
@@ -128,10 +122,9 @@ class SaberController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Saber  $saber
-     * @return \Illuminate\Http\Response
+     * Se elimina un saber
+     * @param id_carrera, id de la carrera
+     * @param id_saber, id del saber seleccionado
      */
     public function destroy($id_carrera, $id_saber)
     {

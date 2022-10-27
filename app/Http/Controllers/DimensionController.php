@@ -20,9 +20,7 @@ class DimensionController extends Controller
         $this->middleware('auth');
     }
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Se muestra la vista de dimensiones
      */
     public function index($id_carrera)
     {
@@ -37,9 +35,7 @@ class DimensionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Se crea una dimensión
      */
     public function create($id_carrera, Request $request)
     {
@@ -92,11 +88,7 @@ class DimensionController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Dimension  $dimension
-     * @return \Illuminate\Http\Response
+     * Se actualiza una dimensión
      */
     public function update($id_carrera, Request $request, $id_dim)
     {
@@ -119,10 +111,9 @@ class DimensionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Dimension  $dimension
-     * @return \Illuminate\Http\Response
+     * Se borra una dimensión
+     * @param id_carrera, id de la carrera
+     * @param id_dim, id de la dimensión
      */
     public function destroy($id_carrera, $id_dim)
     {
