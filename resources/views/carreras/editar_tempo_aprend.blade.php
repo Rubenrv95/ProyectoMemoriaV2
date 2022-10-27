@@ -30,6 +30,8 @@
                 <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
                 <a href="/carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
                 <a href="/carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
+                <a href="/carreras/{{$c['id']}}/archivos"><button type="button" class="boton_gestionar">Archivos</button></a> 
+
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 

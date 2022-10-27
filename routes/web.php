@@ -10,6 +10,7 @@ use App\Http\Controllers\DimensionController;
 use App\Http\Controllers\AprendizajeController;
 use App\Http\Controllers\SaberController;
 use App\Http\Controllers\ModuloController;
+use App\Http\Controllers\ArchivoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +88,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/home', function() {
     Route::post('/carreras/{id}/modulos', [ModuloController::class, 'create']);
     Route::put('/carreras/{id}/modulos/{modulo}', [ModuloController::class, 'update']);
     Route::delete('/carreras/{id}/modulos/{modulo}', [ModuloController::class, 'destroy']);
+
+    Route::get('/carreras/{id}/archivos', [ArchivoController::class, 'index']);
+    Route::post('/carreras/{id}/archivos/subir', [ArchivoController::class, 'store']);
+    Route::get('/carreras/{id}/archivos/{file}', [ArchivoController::class, 'download']);
+    Route::delete('/carreras/{id}/archivos/{file}', [ArchivoController::class, 'destroy']);
+    
 
 
 
