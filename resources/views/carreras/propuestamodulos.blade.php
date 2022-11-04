@@ -20,24 +20,24 @@
 <body >
         <div class="container-fluid">   
                 
-                <a href="/carreras"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
+                <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Módulos {{$c['nombre']}} </h1>
                 </div>
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
-                <a href="/carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
-                <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
-                <a href="/carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
-                <a href="/carreras/{{$c['id']}}/archivos"><button type="button" class="boton_gestionar">Archivos</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/archivos"><button type="button" class="boton_gestionar">Archivos</button></a> 
 
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
-                <a href="/carreras/{{$c['id']}}/modulos"><button type="button" class="btn btn-secondary">Propuesta de Módulos</button></a> 
-                <a href="/carreras/{{$c['id']}}/carga_academica"><button type="button" class="btn btn-secondary">Carga Académica</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/modulos"><button type="button" class="btn btn-secondary">Propuesta de Módulos</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/carga_academica"><button type="button" class="btn btn-secondary">Carga Académica</button></a> 
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
@@ -180,7 +180,7 @@
                 <div class ="col-md-12">
                     <div tabIndex="-1"  class="modal fade" id="modal_crear_modulo" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form action="/carreras/{{$c['id']}}/modulos" method="POST" class="form-group" name="crear_saber" id="crear_saber">
+                            <form action="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/modulos" method="POST" class="form-group" name="crear_saber" id="crear_saber">
                             @csrf
                                 <div class="modal-content">
 
@@ -237,7 +237,7 @@
                     <div class="modal fade" id="modal_modificar_modulo" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
 
-                            <form method = "POST" action = "/carreras/{{$c['id']}}/modulos" class="form-group" id = "editForm">
+                            <form method = "POST" action = "<?=ENV('APP_URL')?>carreras/{{$c['id']}}/modulos" class="form-group" id = "editForm">
 
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
@@ -368,7 +368,7 @@
                 $('#nombre_modulo').val(data[5]);
                 $('#semestre').val(data[1]);
 
-                $('#editForm').attr('action', '/carreras/{{$c['id']}}/modulos/'+data[0]);
+                $('#editForm').attr('action', '<?=ENV('APP_URL')?>carreras/{{$c['id']}}/modulos/'+data[0]);
                 $('#modal_modificar_modulo').modal('show');
 
             });
@@ -385,7 +385,7 @@
                 var data = table.row($tr).data();
 
 
-                $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/modulos/'+data[0]);
+                $('#deleteForm').attr('action', '<?=ENV('APP_URL')?>carreras/{{$c['id']}}/modulos/'+data[0]);
                 $('#modal_eliminar_modulo').modal('show');
 
             }  );

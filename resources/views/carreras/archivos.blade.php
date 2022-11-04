@@ -20,18 +20,18 @@
 <body >
         <div class="container-fluid">   
                 
-                <a href="/carreras"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
+                <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Archivos {{$c['nombre']}} </h1>
                 </div>
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
-                <a href="/carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
-                <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
-                <a href="/carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
-                <a href="/carreras/{{$c['id']}}/archivos"><button type="button" class="boton_gestionar">Archivos</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/archivos"><button type="button" class="boton_gestionar">Archivos</button></a> 
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
@@ -85,7 +85,7 @@
                 <div class ="col-md-12">
                     <div tabIndex="-1"  class="modal fade" id="modal_subir_archivo" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form action="/carreras/{{$c['id']}}/archivos/subir" method="POST" enctype="multipart/form-data">                            
+                            <form action="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/archivos/subir" method="POST" enctype="multipart/form-data">                            
                             @csrf
                                 <div class="modal-content">
 
@@ -125,7 +125,7 @@
                 <div class ="col-md-12">
                     <div class="modal fade" id="modal_eliminar_archivo" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form method = "POST" action = "/carreras/{{$c['id']}}/archivos/" class="form-group" id = "deleteForm">
+                            <form method = "POST" action = "<?=ENV('APP_URL')?>carreras/{{$c['id']}}/archivos/" class="form-group" id = "deleteForm">
 
                                 @csrf
                                 @method('DELETE')
@@ -196,7 +196,7 @@
                 var data = table.row($tr).data();
 
 
-                $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/archivos/'+data[0]);
+                $('#deleteForm').attr('action', '<?=ENV('APP_URL')?>carreras/{{$c['id']}}/archivos/'+data[0]);
                 $('#modal_eliminar_archivo').modal('show');
 
             }  );

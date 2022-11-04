@@ -45,7 +45,7 @@
                                 <td style="display: none">{{$item['id']}}</td>
                                 <td style="display: none">{{$item['nombre']}}</td>
                                 <td style="text-align: center">{{$item['facultad']}}</td>
-                                <td style="text-align: center"><a href="/carreras/{{$item['id']}}/competencias">{{$item['nombre']}} </a> </td>
+                                <td style="text-align: center"><a href="<?=ENV('APP_URL')?>carreras/{{$item['id']}}/competencias">{{$item['nombre']}} </a> </td>
                                 <td style="text-align: center">{{$item['formacion']}}</td>
                                 <td style="text-align: center">{{$item['tipo']}}</td>
                                 <td style="text-align: center">
@@ -53,8 +53,8 @@
                                         <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_carrera" class="edit"> </button>
                                         <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_carrera" class="delete"> </button>
                                         @endif
-                                        <a href="/carreras/{{ $item['id'] }}/descargar_reporte"><button type="button" id="download"  style="margin-left: 2%" > </button></a>
-                                        <a href="/carreras/{{ $item['id'] }}/descargar_tabla"><button type="button" id="excel"  style="margin-left: 2%" > </button></a>
+                                        <a href="<?=ENV('APP_URL')?>carreras/{{ $item['id'] }}/descargar_reporte"><button type="button" id="download"  style="margin-left: 2%" > </button></a>
+                                        <a href="<?=ENV('APP_URL')?>carreras/{{ $item['id'] }}/descargar_tabla"><button type="button" id="excel"  style="margin-left: 2%" > </button></a>
                                         
                                 </td>
                                 
@@ -136,7 +136,7 @@
                     <div class="modal fade" id="modal_modificar_carrera" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
 
-                            <form method = "post" action = "/carreras" class="form-group" id = "editForm">
+                            <form method = "post" action = "<?=ENV('APP_URL')?>carreras" class="form-group" id = "editForm">
 
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
@@ -203,7 +203,7 @@
                 <div class ="col-md-12">
                     <div class="modal fade" id="modal_eliminar_carrera" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form method = "post" action = "/carreras" class="form-group" id = "deleteForm">
+                            <form method = "post" action = "<?=ENV('APP_URL')?>carreras" class="form-group" id = "deleteForm">
 
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE')}}
@@ -285,7 +285,7 @@
                 $('#formacion').val(data[4]);
                 $('#tipo').val(data[5]);
 
-                $('#editForm').attr('action', '/carreras/'+data[0]);
+                $('#editForm').attr('action', '<?=ENV('APP_URL')?>carreras/'+data[0]);
                 $('#modal_modificar_carrera').modal('show');
 
             });
@@ -302,7 +302,7 @@
                 var data = table.row($tr).data();
 
 
-                $('#deleteForm').attr('action', '/carreras/'+data[0]);
+                $('#deleteForm').attr('action', '<?=ENV('APP_URL')?>carreras/'+data[0]);
                 $('#modal_eliminar_carrera').modal('show');
 
             }  );

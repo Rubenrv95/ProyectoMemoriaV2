@@ -20,35 +20,35 @@
 <body >
         <div class="container-fluid">   
                 
-                <a href="/carreras/"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
+                <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Aprendizajes {{$c['nombre']}} </h1>
                 </div>
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
-                <a href="/carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
-                <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
-                <a href="/carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
-                <a href="/carreras/{{$c['id']}}/archivos"><button type="button" class="boton_gestionar">Archivos</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/archivos"><button type="button" class="boton_gestionar">Archivos</button></a> 
 
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
                 
-                <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="btn btn-secondary">Gestión de Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/ver_aprendizajes"><button type="button" class="btn btn-secondary">Visualización de Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/tempo_aprendizajes"><button type="button" class="btn btn-secondary">Temporalización de Aprendizajes</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes"><button type="button" class="btn btn-secondary">Gestión de Aprendizajes</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/ver_aprendizajes"><button type="button" class="btn btn-secondary">Visualización de Aprendizajes</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/tempo_aprendizajes"><button type="button" class="btn btn-secondary">Temporalización de Aprendizajes</button></a> 
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
         </div>
         <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
-            <a href="/carreras/{{$c['id']}}/tempo_aprendizajes"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
+            <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/tempo_aprendizajes"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
             <h3 class="mb-0 text-gray-800">Editar temporalización</h3>
 
             @foreach ($tempo as $t)
-            <form action="/carreras/{{$c['id']}}/tempo_aprendizajes/{{$t['aprendizaje']}}" method="POST">
+            <form action="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/tempo_aprendizajes/{{$t['aprendizaje']}}" method="POST">
                 @csrf
                 @method('PUT')
                 <table id="lista" class="table table-striped table-bordered" width="100%">

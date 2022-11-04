@@ -20,25 +20,25 @@
 <body >
         <div class="container-fluid">   
                 
-                <a href="/carreras"><img src="/images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
+                <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Aprendizajes {{$c['nombre']}} </h1>
                 </div>
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
-                <a href="/carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
-                <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
-                <a href="/carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
-                <a href="/carreras/{{$c['id']}}/archivos"><button type="button" class="boton_gestionar">Archivos</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/archivos"><button type="button" class="boton_gestionar">Archivos</button></a> 
 
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
-                <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="btn btn-secondary">Gestión de Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/ver_aprendizajes"><button type="button" class="btn btn-secondary">Visualización de Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/tempo_aprendizajes"><button type="button" class="btn btn-secondary">Temporalización de Aprendizajes</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes"><button type="button" class="btn btn-secondary">Gestión de Aprendizajes</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/ver_aprendizajes"><button type="button" class="btn btn-secondary">Visualización de Aprendizajes</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/tempo_aprendizajes"><button type="button" class="btn btn-secondary">Temporalización de Aprendizajes</button></a> 
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
@@ -199,7 +199,7 @@
                 <div class ="col-md-12">
                     <div tabIndex="-1"  class="modal fade" id="modal_crear_aprendizaje" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form action="/carreras/{{$c['id']}}/aprendizajes" method="POST" class="form-group" id="createForm">
+                            <form action="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes" method="POST" class="form-group" id="createForm">
                             @csrf
                                 <div class="modal-content">
 
@@ -259,7 +259,7 @@
                     <div class="modal fade" id="modal_modificar_aprendizaje_inicial" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
 
-                            <form method = "post" action = "/carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "editFormInicial">
+                            <form method = "post" action = "<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "editFormInicial">
 
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
@@ -309,7 +309,7 @@
                     <div class="modal fade" id="modal_modificar_aprendizaje_desarrollo" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
 
-                            <form method = "post" action = "/carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "editFormDesarrollo">
+                            <form method = "post" action = "<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "editFormDesarrollo">
 
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
@@ -360,7 +360,7 @@
                     <div class="modal fade" id="modal_modificar_aprendizaje_logrado" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
 
-                            <form method = "post" action = "/carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "editFormLogrado">
+                            <form method = "post" action = "<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "editFormLogrado">
 
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
@@ -410,7 +410,7 @@
                     <div class="modal fade" id="modal_modificar_aprendizaje_especializacion" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
 
-                            <form method = "post" action = "/carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "editFormEspecializacion">
+                            <form method = "post" action = "<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "editFormEspecializacion">
 
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
@@ -463,7 +463,7 @@
                 <div class ="col-md-12">
                     <div class="modal fade" id="modal_eliminar_aprendizaje_inicial" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form method = "post" action = "/carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "deleteFormInicial">
+                            <form method = "post" action = "<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "deleteFormInicial">
 
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE')}}
@@ -496,7 +496,7 @@
                 <div class ="col-md-12">
                     <div class="modal fade" id="modal_eliminar_aprendizaje_desarrollo" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form method = "post" action = "/carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "deleteFormDesarrollo">
+                            <form method = "post" action = "<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "deleteFormDesarrollo">
 
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE')}}
@@ -529,7 +529,7 @@
                 <div class ="col-md-12">
                     <div class="modal fade" id="modal_eliminar_aprendizaje_logrado" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form method = "post" action = "/carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "deleteFormLogrado">
+                            <form method = "post" action = "<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "deleteFormLogrado">
 
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE')}}
@@ -562,7 +562,7 @@
                 <div class ="col-md-12">
                     <div class="modal fade" id="modal_eliminar_aprendizaje_especializacion" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form method = "post" action = "/carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "deleteFormEspecializacion">
+                            <form method = "post" action = "<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes" class="form-group" id = "deleteFormEspecializacion">
 
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE')}}
@@ -644,7 +644,7 @@
                 $('#nivel_inicial').val(data[7]);
 
 
-                $('#editFormInicial').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[4]);
+                $('#editFormInicial').attr('action', '<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes/'+data[4]);
                 $('#modal_modificar_aprendizaje_inicial').modal('show');
 
             });
@@ -664,7 +664,7 @@
                 $('#aprendizaje_desarrollo').val(data[9]);
                 $('#nivel_desarrollo').val(data[11]);
 
-                $('#editFormDesarrollo').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[8]);
+                $('#editFormDesarrollo').attr('action', '<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes/'+data[8]);
                 $('#modal_modificar_aprendizaje_desarrollo').modal('show');
 
             });
@@ -684,7 +684,7 @@
                 $('#aprendizaje_logrado').val(data[13]);
                 $('#nivel_logrado').val(data[15]);
 
-                $('#editFormLogrado').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[12]);
+                $('#editFormLogrado').attr('action', '<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes/'+data[12]);
                 $('#modal_modificar_aprendizaje_logrado').modal('show');
 
             });
@@ -704,7 +704,7 @@
                 $('#aprendizaje_especializacion').val(data[17]);
                 $('#nivel_logrado').val(data[19]);
 
-                $('#editFormEspecializacion').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[16]);
+                $('#editFormEspecializacion').attr('action', '<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes/'+data[16]);
                 $('#modal_modificar_aprendizaje_especializacion').modal('show');
 
             });
@@ -722,7 +722,7 @@
                 console.log(data);
 
 
-                $('#deleteFormInicial').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[4]);
+                $('#deleteFormInicial').attr('action', '<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes/'+data[4]);
                 $('#modal_eliminar_aprendizaje_inicial').modal('show');
 
             }  );
@@ -739,7 +739,7 @@
                 console.log(data);
 
 
-                $('#deleteFormDesarrollo').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[8]);
+                $('#deleteFormDesarrollo').attr('action', '<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes/'+data[8]);
                 $('#modal_eliminar_aprendizaje_desarrollo').modal('show');
 
             }  );
@@ -755,7 +755,7 @@
                 var data = table.row($tr).data();
 
 
-                $('#deleteFormLogrado').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[12]);
+                $('#deleteFormLogrado').attr('action', '<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes/'+data[12]);
                 $('#modal_eliminar_aprendizaje_logrado').modal('show');
 
             }  );
@@ -771,7 +771,7 @@
                 var data = table.row($tr).data();
 
 
-                $('#deleteFormEspecializacion').attr('action', '/carreras/{{$c['id']}}/aprendizajes/'+data[16]);
+                $('#deleteFormEspecializacion').attr('action', '<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes/'+data[16]);
                 $('#modal_eliminar_aprendizaje_especializacion').modal('show');
 
             }  );
@@ -792,7 +792,7 @@
                 var x = document.getElementById("refCompCrear").value;
                 $.ajax({
                     type: "GET",
-                    url: '/carreras/{{$c['id']}}/aprendizajes/' + x, 
+                    url: '<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes/' + x, 
                     data: { id: x },
                 }).done(function(response) {
                     //string del codigo html que se inyectará en el div
