@@ -197,15 +197,17 @@ class CarreraController extends Controller
           INNER JOIN tempo_competencias ON tempo_competencias.competencia = competencias.id
           INNER JOIN dimensions ON dimensions.refCompetencia = competencias.id
           INNER JOIN aprendizajes ON aprendizajes.refDimension = dimensions.id
-          INNER JOIN tempo_aprendizajes ON tempo_aprendizajes.aprendizaje = aprendizaje.id
+          INNER JOIN tempo_aprendizajes ON tempo_aprendizajes.aprendizaje = aprendizajes.id
           INNER JOIN sabers ON sabers.refAprendizaje = aprendizajes.id
           INNER JOIN propuesta_tiene_saber ON sabers.id = propuesta_tiene_saber.saber
           INNER JOIN propuesta_modulos  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
           INNER JOIN modulos  ON  propuesta_modulos.id = modulos.refPropuesta
-          INNER JOIN modulo_tiene_prerrequisito  ON  modulo.id = modulo_tiene_prerrequisito.modulo
+          INNER JOIN modulo_tiene_prerrequisito  ON  modulos.id = modulo_tiene_prerrequisito.modulo
           WHERE competencias.refCarrera = ?';
 
         $status = \DB::delete($query2, array($id));
+
+        $query3 = DB::table('archivos')->where('refCarrera', $id)->delete();
         
         return back()->withSuccess('Carrera eliminada con éxito');
     }

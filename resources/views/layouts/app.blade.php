@@ -300,7 +300,7 @@
     <script>
 
 
-        //href="<?=ENV('APP_URL')?>/home"
+        //href="<?=ENV('APP_URL')?>home"
 
         //Función para mostrar u ocultar la contraseña para cada uno de los 3 input
         $(document).ready(function() {

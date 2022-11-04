@@ -35,8 +35,6 @@
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
-                <hr class="solid" style="border-width: 1px; background-color: black">
-
         </div>
 
         <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
