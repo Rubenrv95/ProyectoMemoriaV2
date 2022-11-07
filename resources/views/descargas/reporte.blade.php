@@ -14,6 +14,11 @@
     <h1 style="text-align: center">Resumen Plan de Estudio {{$car['nombre']}}</h1>
     @endforeach
 
+    <p style="font-weight: bold">Nombre de la carrera: {{$car['nombre']}}</p>
+    <p style="font-weight: bold">Facultad: {{$car['facultad']}}</p>
+    <p style="font-weight: bold">Formación: {{$car['formacion']}}</p>
+    <p style="font-weight: bold">Planificación: {{$car['formacion']}}</p>
+    <p></p>
     <p>A continuación, se presenta un reporte de toda la información de la carrera de {{$car['nombre']}}, incluyendo
         competencias, aprendizajes, saberes y módulos asociados.
     </p>

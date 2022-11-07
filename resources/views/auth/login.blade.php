@@ -61,7 +61,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4" style="font-size: 30px">¡Bienvenido!</h1>
                                     </div>
-                                    <form method="post" action="/login">
+                                    <form method="post" action="<?=ENV('APP_URL')?>login">
                                         
                                         {{ csrf_field() }}
                                         <div class="form-group">
@@ -78,7 +78,7 @@
                                         <hr>
                                     </form>
                                     <div class="text-center">
-                                        <img src="/images/utalca_icon.png" alt="">
+                                        <img src="<?=ENV('APP_URL')?>images/utalca_icon.png" alt="">
                                     </div>
                                 </div>
                     </div>

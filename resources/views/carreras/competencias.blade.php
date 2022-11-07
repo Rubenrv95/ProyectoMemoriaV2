@@ -21,24 +21,24 @@
 <body >
         <div class="container-fluid">   
                 
-                <a href="/carreras/"><img src="/images/back.png" alt="" srcset="" style="margin-top: 1%; margin-bottom: 1%;"></a>
+                <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Competencias {{$c['nombre']}} </h1>
                 </div>
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
-                <a href="/carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
-                <a href="/carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
-                <a href="/carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
-                <a href="/carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
-                <a href="/carreras/{{$c['id']}}/archivos"><button type="button" class="boton_gestionar">Archivos</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/archivos"><button type="button" class="boton_gestionar">Archivos</button></a> 
 
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
-                <a href="/carreras/{{$c['id']}}/competencias"><button type="button" class="btn btn-secondary">Gestión de Competencias</button></a> 
-                <a href="/carreras/{{$c['id']}}/dimensiones"><button type="button" class="btn btn-secondary">Gestión de Dimensiones</button></a> 
-                <a href="/carreras/{{$c['id']}}/tempo_competencias"><button type="button" class="btn btn-secondary">Temporalización de Competencias</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/competencias"><button type="button" class="btn btn-secondary">Gestión de Competencias</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/dimensiones"><button type="button" class="btn btn-secondary">Gestión de Dimensiones</button></a> 
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/tempo_competencias"><button type="button" class="btn btn-secondary">Temporalización de Competencias</button></a> 
 
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
@@ -99,7 +99,7 @@
                 <div class ="col-md-12">
                     <div tabIndex="-1"  class="modal fade" id="modal_crear_competencia" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form action="/carreras/{{$c['id']}}/competencias" method="POST" class="form-group">
+                            <form action="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/competencias" method="POST" class="form-group">
                             @csrf
                                 <div class="modal-content">
 
@@ -142,7 +142,7 @@
                     <div class="modal fade" id="modal_modificar_competencia" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
 
-                            <form method = "POST" action = "/carreras/{{$c['id']}}/competencias" class="form-group" id = "editForm">
+                            <form method = "POST" action = "<?=ENV('APP_URL')?>carreras/{{$c['id']}}/competencias" class="form-group" id = "editForm">
 
                             @csrf
                             @method('PUT')
@@ -188,7 +188,7 @@
                 <div class ="col-md-12">
                     <div class="modal fade" id="modal_eliminar_competencia" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form method = "POST" action = "/carreras/{{$c['id']}}/competencias" class="form-group" id = "deleteForm">
+                            <form method = "POST" action = "<?=ENV('APP_URL')?>carreras/{{$c['id']}}/competencias" class="form-group" id = "deleteForm">
 
                                 @csrf
                                 @method('DELETE')
@@ -269,7 +269,7 @@
                 $('#desc_competencia').val(data[2]);
                 $('#orden_competencia').val(data[1]);
 
-                $('#editForm').attr('action', '/carreras/{{$c['id']}}/competencias/'+data[0]);
+                $('#editForm').attr('action', '<?=ENV('APP_URL')?>carreras/{{$c['id']}}/competencias/'+data[0]);
                 $('#modal_modificar_competencia').modal('show');
 
             });
@@ -286,7 +286,7 @@
                 var data = table.row($tr).data();
 
 
-                $('#deleteForm').attr('action', '/carreras/{{$c['id']}}/competencias/'+data[0]);
+                $('#deleteForm').attr('action', '<?=ENV('APP_URL')?>carreras/{{$c['id']}}/competencias/'+data[0]);
                 $('#modal_eliminar_competencia').modal('show');
 
             }  );

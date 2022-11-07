@@ -144,7 +144,7 @@ header {
 }
 
 .agregar {
-    background-image: url('/images/add_icon.png');
+    background-image: url("../images/add_icon.png");
     background-repeat: no-repeat; 
     display: inline-block;
     font-weight: 400;
@@ -293,21 +293,9 @@ header {
     border-radius: 8px;
 }
 
-#busc_carrera {
-    background-image: url('/images/search_icon.png'); /* Add a search icon to input */
-    background-position: 10px 12px; /* Position the search icon */
-    background-repeat: no-repeat; /* Do not repeat the icon image */
-    width: 100%; /* Full-width */
-    font-size: 16px; /* Increase font-size */
-    padding: 12px 20px 12px 40px; /* Add some padding */
-    border: 2px solid #ddd; /* Add a grey border */
-    margin-bottom: 12px; /* Add some space below the input */
-}
-
-
 #info {
 
-    background-image: url('/images/info_icon.png');
+    background-image: url('../images/info_icon.png');
     background-repeat: no-repeat;
     background-color: transparent;
     width: 28px;
@@ -332,7 +320,7 @@ header {
 
 #download {
 
-    background-image: url('/images/download_icon.png');
+    background-image: url('../images/download_icon.png');
     background-repeat: no-repeat;
     background-color: transparent;
     width: 25px;
@@ -357,7 +345,7 @@ header {
 
 #excel {
 
-  background-image: url('/images/excel_logo.png');
+  background-image: url('../images/excel_logo.png');
   background-repeat: no-repeat;
   background-color: transparent;
   width: 25px;
@@ -381,7 +369,7 @@ header {
 }
 
 #mod {
-    background-image: url('/images/edit_icon.png');
+    background-image: url('../images/edit_icon.png');
     background-repeat: no-repeat;
     background-color: transparent;
     width: 28px;
@@ -401,7 +389,7 @@ header {
     border-radius: 10px;
 }
 #del {
-    background-image: url('/images/delete_icon.png');
+    background-image: url('../images/delete_icon.png');
     background-repeat: no-repeat;
     background-color: transparent;
     width: 28px;
@@ -427,7 +415,7 @@ header {
 }
 
 #copy {
-    background-image: url('/images/copy_icon.png');
+    background-image: url('../images/copy_icon.png');
     background-repeat: no-repeat;
     background-color: transparent;
     width: 28px;

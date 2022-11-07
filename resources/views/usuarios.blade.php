@@ -24,7 +24,7 @@
                 <table id="lista" class="table table-striped table-bordered" style="text-align: center" width="100%">
                         <thead>
                                 <tr style="font-weight: bold; color: white">
-                                <th style="display: none">ID <img src="/images/arrows.png" alt="" srcset=""></th>
+                                <th style="display: none">ID</th>
                                 <th style="text-align: center">Nombre de usuario⇵</th>
                                 <th style="text-align: center">Correo Electrónico⇵</th>
                                 <th style="text-align: center">Rol⇵</th>
@@ -61,7 +61,7 @@
                 <div class ="col-md-12">
                     <div tabIndex="-1" class="modal fade" id="modal_user" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form action="/usuarios" method="POST" class="form-group">
+                            <form action="<?=ENV('APP_URL')?>usuarios" method="POST" class="form-group">
                                 @csrf
                                 <div class="modal-content">
 
@@ -129,7 +129,7 @@
                     <div class="modal fade" id="modal_modificar_usuario" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
 
-                            <form method = "post" action = "/usuarios" class="form-group" id = "editForm">
+                            <form method = "post" action = "<?=ENV('APP_URL')?>usuarios" class="form-group" id = "editForm">
 
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
@@ -182,7 +182,7 @@
                 <div class ="col-md-12">
                     <div class="modal fade" id="modal_eliminar_usuario" aria-hidden="true">
                         <div class="modal-dialog modal-md" >
-                            <form method = "post" action = "/usuarios" class="form-group" id = "deleteForm">
+                            <form method = "post" action = "<?=ENV('APP_URL')?>usuarios" class="form-group" id = "deleteForm">
 
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE')}}
@@ -258,7 +258,7 @@
                 $('#email').val(data[2]);
                 $('#rol').val(data[3]);
 
-                $('#editForm').attr('action', '/usuarios/'+data[0]);
+                $('#editForm').attr('action', '<?=ENV('APP_URL')?>usuarios/'+data[0]);
                 $('#modal_modificar_usuario').modal('show');
 
             });
@@ -275,7 +275,7 @@
                 var data = table.row($tr).data();
 
 
-                $('#deleteForm').attr('action', '/usuarios/'+data[0]);
+                $('#deleteForm').attr('action', '<?=ENV('APP_URL')?>usuarios/'+data[0]);
                 $('#modal_eliminar_usuario').modal('show');
 
             }  );

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarreraController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CompetenciaController;
 use App\Http\Controllers\DimensionController;

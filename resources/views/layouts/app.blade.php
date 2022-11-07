@@ -52,8 +52,8 @@
             <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: #333333">
 
                 <!-- Sidebar - Logo -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home" style="height: 100px; ">
-                    <div class="sidebar-brand-text mx-3"><img src="/images/logo.png" alt="" style="width: 130px; height: 100px"></div>
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=ENV('APP_URL')?>home" style="height: 100px; ">
+                    <div class="sidebar-brand-text mx-3"><img src="<?=ENV('APP_URL')?>images/logo.png" alt="" style="width: 130px; height: 100px"></div>
                 </a>
 
                 <hr class="sidebar-divider my-0">
@@ -70,9 +70,9 @@
                 <div class="sidebar-heading">
                     Principal
                 </div>
-
+                
                 <li class="nav-item">
-                    <a class="nav-link" href="/home">
+                    <a class="nav-link" href="<?=ENV('APP_URL')?>home">
                         <i class="fas fa-fw fa-home"></i>
                         <span>Inicio</span></a>
                 </li>
@@ -85,7 +85,7 @@
                 </div>
                <!--Listado de carreras -->
                 <li class="nav-item">
-                    <a class="nav-link" href="/carreras">
+                    <a class="nav-link" href="<?=ENV('APP_URL')?>carreras">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Carreras</span></a>
                 </li>
@@ -93,7 +93,7 @@
                 @if (Auth::user()->rol == 'Administrador')
                 <!-- Listado de Usuarios -->
                 <li class="nav-item">
-                    <a class="nav-link" href="/usuarios">
+                    <a class="nav-link" href="<?=ENV('APP_URL')?>usuarios">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Usuarios</span></a>
                 </li>
@@ -274,7 +274,7 @@
                                             ¿Está seguro que desea finalizar la sesión?          
                                         </div>
                                         <div class="modal-footer">
-                                            <a href="/logout"><button class="btn btn-danger" style="width: 120%;">Cerrar sesión</button></a>
+                                            <a href="<?=ENV('APP_URL')?>logout"><button class="btn btn-danger" style="width: 120%;">Cerrar sesión</button></a>
                                             <button class="btn btn-secondary" data-bs-dismiss="modal" type="button" style="margin-left: 25px">Cancelar</button>
                                         </div> 
                                         
@@ -298,6 +298,9 @@
         });
     </script>
     <script>
+
+
+        //href="<?=ENV('APP_URL')?>home"
 
         //Función para mostrar u ocultar la contraseña para cada uno de los 3 input
         $(document).ready(function() {
