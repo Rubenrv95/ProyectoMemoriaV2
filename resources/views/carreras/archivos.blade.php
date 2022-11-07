@@ -66,7 +66,7 @@
                                     <td style="text-align: center">{{$a['nombre']}}</td>
                                     <td style="text-align: center">{{$a['created_at']}}</td>
                                     <td style="text-align: center">
-                                        <a href="/carreras/{{$c['id']}}/archivos/{{$a['file']}}"><button type="button" id="download" > </button></a>
+                                        <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/archivos/{{$a['file']}}"><button type="button" id="download" > </button></a>
                                         @if (Auth::user()->rol != 'Dirección de docencia')
                                             <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_archivo" class="delete"> </button>
                                         @endif

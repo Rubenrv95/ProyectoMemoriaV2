@@ -128,7 +128,6 @@
                                             <div class="dropdown-container" tabindex="-1" style="float:right;">
                                                 <div class="three-dots"></div>
                                                 <div class="dropdown dropdown-table">
-                                                    <button type="button" id="info" data-bs-toggle="modal" data-bs-target="#modal_ver_datos" class="info"> </button>
                                                     <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_desarrollo" class="edit2"> </button>
                                                     <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete2"> </button>
                                                 </div>
@@ -150,7 +149,6 @@
                                             <div class="dropdown-container" tabindex="-1" style="float:right;">
                                                 <div class="three-dots"></div>
                                                 <div class="dropdown dropdown-table">
-                                                    <button type="button" id="info" data-bs-toggle="modal" data-bs-target="#modal_ver_datos" class="info"> </button>
                                                     <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_logrado" class="edit3"> </button>
                                                     <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete3"> </button>
                                                 </div>
@@ -172,7 +170,6 @@
                                                 <div class="dropdown-container" tabindex="-1" style="float:right;">
                                                     <div class="three-dots"></div>
                                                     <div class="dropdown dropdown-table">
-                                                        <button type="button" id="info" data-bs-toggle="modal" data-bs-target="#modal_ver_datos" class="info"> </button>
                                                         <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_especializacion" class="edit4"> </button>
                                                         <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje" class="delete4"> </button>
                                                     </div>

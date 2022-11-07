@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://localhost/ProyectoMemoriaV2/public/'),
 
     'asset_url' => env('ASSET_URL', null),
 
