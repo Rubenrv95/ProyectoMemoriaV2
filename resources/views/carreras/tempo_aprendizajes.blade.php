@@ -42,7 +42,7 @@
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
         </div>
-        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
+        <div class="container-fluid">   
             <h3 class="mb-0 text-gray-800">Temporalización de Aprendizajes</h3>
 
 
@@ -63,15 +63,18 @@
                     <tbody>
                         @foreach ($tempo as $t)
                         <tr>
-                            <td style="text-align: center">{{$t['Orden']}}. {{$t['Descripcion']}}</td>
-                            <td style="text-align: center">{{$t['Nivel_aprend']}}</td>
-                            <td style="text-align: center">{{$t['Descripcion_aprendizaje']}}</td>
-                            <td style="text-align: center">{{$t['Descripcion_dimension']}}</td>
+                            <td style="text-align: center; font-size: 80%" >{{$t['orden']}}. {{$t['descripcion']}}</td>
+                            <td style="text-align: center; font-size: 80%">{{$t['nivel_aprend']}}</td>
+                            <td style="text-align: center; font-size: 80%">{{$t['descripcion_aprendizaje']}}</td>
+                            <td style="text-align: center; font-size: 80%">{{$t['descripcion_dimension']}}</td>
 
                             @for ($i = 1; $i <= 14; $i++)
                             <td style="text-align: center"> 
                                 <!-- Se muestran las temporalizaciones, pero no se pueden editar-->
-                                @if ($t[$i]== 1) 
+                                @php
+                                $var = 'nivel_'.$i;
+                                @endphp
+                                @if ($t[$var]== 1) 
                                 <input type="checkbox" value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center;" checked onclick="return false;">
                                 @else
                                 <input type="checkbox" value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center" onclick="return false;">

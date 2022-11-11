@@ -35,8 +35,8 @@
         <tbody>
         @foreach ($competencia as $c)
             <tr>
-                <td>{{$c['Orden']}}</td>
-                <td>{{$c['Descripcion']}}</td>
+                <td>{{$c['orden']}}</td>
+                <td>{{$c['descripcion']}}</td>
             </tr>
         @endforeach
         </tbody>
@@ -58,10 +58,10 @@
         <tbody>
         @foreach ($tempo_competencia as $tc)
             <tr>
-                <td>{{$tc['Orden']}}. {{$tc['Descripcion']}}</td>
+                <td>{{$tc['orden']}}. {{$tc['descripcion']}}</td>
                 @for ($i = 1; $i <= 14; $i++)
                     <td  style="text-align: center"> 
-                        @if ($tc[$i]== 1) 
+                        @if ($tc['nivel_'.$i]== 1) 
                             X
                         @else
 
@@ -89,10 +89,10 @@
         <tbody>
         @foreach ($aprendizaje as $a)
             <tr>
-                <td rowspan="1">{{$a['OrdenComp']}}. {{$a['Descripcion']}}</td>
-                <td rowspan="1">{{$a['Descripcion_dimension']}}</td>
-                <td rowspan="1">{{$a['Descripcion_aprendizaje']}}</td>
-                <td rowspan="1">{{$a['Nivel_aprend']}}</td>
+                <td rowspan="1">{{$a['OrdenComp']}}. {{$a['descripcion']}}</td>
+                <td rowspan="1">{{$a['descripcion_dimension']}}</td>
+                <td rowspan="1">{{$a['descripcion_aprendizaje']}}</td>
+                <td rowspan="1">{{$a['nivel_aprend']}}</td>
             </tr>
         @endforeach
         </tbody>
@@ -117,13 +117,13 @@
         <tbody>
         @foreach ($tempo_aprendizaje as $ta)
             <tr>
-                <td >{{$ta['OrdenComp']}}. {{$ta['Descripcion']}}</td>
-                <td >{{$ta['Nivel_aprend']}}</td>
-                <td>{{$ta['Descripcion_aprendizaje']}}</td>
-                <td>{{$ta['Orden']}}. {{$ta['Descripcion_dimension']}}</td>
+                <td >{{$ta['OrdenComp']}}. {{$ta['descripcion']}}</td>
+                <td >{{$ta['nivel_aprend']}}</td>
+                <td>{{$ta['descripcion_aprendizaje']}}</td>
+                <td>{{$ta['orden']}}. {{$ta['descripcion_dimension']}}</td>
                 @for ($i = 1; $i <= 14; $i++)
                     <td  style="text-align: center"> 
-                        @if ($ta[$i]== 1) 
+                        @if ($ta['nivel_'.$i]== 1) 
                             X
                         @else
 
@@ -153,11 +153,11 @@
         <tbody>
         @foreach ($saber as $s)
             <tr>
-                <td rowspan="1">{{$s['OrdenComp']}}. {{$s['Descripcion']}}</td>
-                <td rowspan="1">{{$s['Descripcion_dimension']}}</td>
-                <td rowspan="1">{{$s['Descripcion_aprendizaje']}}</td>
-                <td rowspan="1">{{$s['Descripcion_saber']}}</td>
-                <td rowspan="1">{{$s['Tipo']}}</td>
+                <td rowspan="1">{{$s['OrdenComp']}}. {{$s['descripcion']}}</td>
+                <td rowspan="1">{{$s['descripcion_dimension']}}</td>
+                <td rowspan="1">{{$s['descripcion_aprendizaje']}}</td>
+                <td rowspan="1">{{$s['descripcion_saber']}}</td>
+                <td rowspan="1">{{$s['tipo']}}</td>
             </tr>
         @endforeach
         </tbody>
@@ -202,11 +202,11 @@
 
             @foreach ($modulo as $m)
             <tr>                                 
-                <td style="text-align: center">{{$m['Semestre']}}</td>
-                <td style="text-align: center">{{$m['Nombre_modulo']}}</td>
-                <td style="text-align: center">{{$m['Tipo']}}</td>
+                <td style="text-align: center">{{$m['semestre']}}</td>
+                <td style="text-align: center">{{$m['nombre_modulo']}}</td>
+                <td style="text-align: center">{{$m['tipo']}}</td>
                 <td style="text-align: center">
-                    @if ($m['Clases'] == 1)
+                    @if ($m['clases'] == 1)
                         X
                     @else
                         
@@ -214,71 +214,71 @@
                 </td>
 
                 <td style="text-align: center">
-                    @if ($m['Seminario'] == 1)
+                    @if ($m['seminario'] == 1)
                         X
                     @else
                         
                     @endif                          
                 </td>
                 <td style="text-align: center">
-                    @if ($m['Ayudantias'] == 1)
+                    @if ($m['ayudantias'] == 1)
                         X
                     @else
                         
                     @endif                          
                 </td>
                 <td style="text-align: center">
-                    @if ($m['Actividades_practicas'] == 1)
+                    @if ($m['actividades_practicas'] == 1)
                         X
                     @else
                         
                     @endif                          
                 </td>
                 <td style="text-align: center">
-                    @if ($m['Laboratorios'] == 1)
+                    @if ($m['laboratorios'] == 1)
                         X
                     @else
                         
                     @endif                          
                 </td>
                 <td style="text-align: center">
-                    @if ($m['Talleres'] == 1)
+                    @if ($m['talleres'] == 1)
                         X
                     @else
                         
                     @endif                          
                 </td>
                 <td style="text-align: center">
-                    @if ($m['Actividades_clinicas'] == 1)
+                    @if ($m['actividades_clinicas'] == 1)
                         X
                     @else
                         
                     @endif                          
                 </td>
                 <td style="text-align: center">
-                    @if ($m['Actividades_terreno'] == 1)
+                    @if ($m['actividades_terreno'] == 1)
                         X
                     @else
                         
                     @endif                          
                 </td>
                 <td style="text-align: center">
-                    @if ($m['Tareas'] == 1)
+                    @if ($m['tareas'] == 1)
                         X
                     @else
                         
                     @endif                          
                 </td>
                 <td style="text-align: center">
-                    @if ($m['Estudios'] == 1)
+                    @if ($m['estudios'] == 1)
                         X
                     @else
                         
                     @endif                          
                 </td>
-                <td style="text-align: center">{{$m['Horas_semanales']}}</td>
-                <td style="text-align: center">{{$m['Horas_totales']}}</td>
-                <td style="text-align: center">{{$m['Creditos']}}</td>
+                <td style="text-align: center">{{$m['horas_semanales']}}</td>
+                <td style="text-align: center">{{$m['horas_totales']}}</td>
+                <td style="text-align: center">{{$m['creditos']}}</td>
 
             </tr>
 

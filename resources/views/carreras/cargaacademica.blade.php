@@ -43,7 +43,7 @@
 
         </div>
 
-        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
+        <div class="container-fluid">   
 
             <h3 class="mb-0 text-gray-800">Carga académica</h3>
 
@@ -92,13 +92,13 @@
                             @foreach ($modulo as $m)
                             <tr>     
                                 <td style="display: none">{{$m['id']}}</td>                                
-                                <td style="text-align: center">{{$m['Semestre']}}</td>
+                                <td style="text-align: center">{{$m['semestre']}}</td>
                                 <td style="display: none">{{$m['idprop']}}</td>     
-                                <td style="text-align: center">{{$m['Nombre_modulo']}}</td>
-                                <td style="text-align: center">{{$m['Tipo']}}</td>
+                                <td style="text-align: center">{{$m['nombre_modulo']}}</td>
+                                <td style="text-align: center">{{$m['tipo']}}</td>
                                 <td style="text-align: center"><button type="button" id="info" class="info_req" data-url="{{ route('carga_academica.show_requisitos', [ $c['id'] , $m['id'] ]) }}"> </button></td>     
                                 <td style="text-align: center">
-                                    @if ($m['Clases'] == 1)
+                                    @if ($m['clases'] == 1)
                                         SI
                                     @else
                                         NO
@@ -106,71 +106,71 @@
                                 </td>
 
                                 <td style="text-align: center">
-                                    @if ($m['Seminario'] == 1)
+                                    @if ($m['seminario'] == 1)
                                         SI
                                     @else
                                         NO
                                     @endif                          
                                 </td>
                                 <td style="text-align: center">
-                                    @if ($m['Ayudantias'] == 1)
+                                    @if ($m['ayudantias'] == 1)
                                         SI
                                     @else
                                         NO
                                     @endif                          
                                 </td>
                                 <td style="text-align: center">
-                                    @if ($m['Actividades_practicas'] == 1)
+                                    @if ($m['actividades_practicas'] == 1)
                                         SI
                                     @else
                                         NO
                                     @endif                          
                                 </td>
                                 <td style="text-align: center">
-                                    @if ($m['Laboratorios'] == 1)
+                                    @if ($m['laboratorios'] == 1)
                                         SI
                                     @else
                                         NO
                                     @endif                          
                                 </td>
                                 <td style="text-align: center">
-                                    @if ($m['Talleres'] == 1)
+                                    @if ($m['talleres'] == 1)
                                         SI
                                     @else
                                         NO
                                     @endif                          
                                 </td>
                                 <td style="text-align: center">
-                                    @if ($m['Actividades_clinicas'] == 1)
+                                    @if ($m['actividades_clinicas'] == 1)
                                         SI
                                     @else
                                         NO
                                     @endif                          
                                 </td>
                                 <td style="text-align: center">
-                                    @if ($m['Actividades_terreno'] == 1)
+                                    @if ($m['actividades_terreno'] == 1)
                                         SI
                                     @else
                                         NO
                                     @endif                          
                                 </td>
                                 <td style="text-align: center">
-                                    @if ($m['Tareas'] == 1)
+                                    @if ($m['tareas'] == 1)
                                         SI
                                     @else
                                         NO
                                     @endif                          
                                 </td>
                                 <td style="text-align: center">
-                                    @if ($m['Estudios'] == 1)
+                                    @if ($m['estudios'] == 1)
                                         SI
                                     @else
                                         NO
                                     @endif                          
                                 </td>
-                                <td style="text-align: center">{{$m['Horas_semanales']}}</td>
-                                <td style="text-align: center">{{$m['Horas_totales']}}</td>
-                                <td style="text-align: center">{{$m['Creditos']}}</td>
+                                <td style="text-align: center">{{$m['horas_semanales']}}</td>
+                                <td style="text-align: center">{{$m['horas_totales']}}</td>
+                                <td style="text-align: center">{{$m['creditos']}}</td>
                                 <td style="text-align: center">
                                     @if (Auth::user()->rol != 'Dirección de docencia')
                                         <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_modulo" class="edit"> </button>
@@ -234,7 +234,7 @@
                                                 <select class="form-select form-select-lg" name="modulo" aria-label=".form-select-lg example" style="width:90%; margin-bottom: 20px; font-size: 18; color: black" required>
                                                         <option selected disabled="true" value="">Seleccionar propuesta de módulo</option>      
                                                         @foreach ($propuestas as $p)
-                                                            <option value="{{$p['id']}}">{{$p['Nombre_modulo']}}</option>
+                                                            <option value="{{$p['id']}}">{{$p['nombre_modulo']}}</option>
                                                         @endforeach                                         
                                                 </select>
                                             </div>
@@ -336,7 +336,7 @@
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto">Modificar módulo</h1>
+                                        <h1 class="justify-content-center" style="margin: auto">Editar módulo</h1>
                                     </div>
                                     <div class="modal-body">
 
@@ -345,7 +345,7 @@
                                                 <select class="form-select form-select-lg" name="modulo" id="modulo" aria-label=".form-select-lg example" style="width:90%; margin-bottom: 20px; font-size: 18; color: black" required>
                                                         <option selected disabled="true" value="">Seleccionar propuesta de módulo</option>      
                                                         @foreach ($propuestas as $p)
-                                                            <option value="{{$p['id']}}">{{$p['Nombre_modulo']}}</option>
+                                                            <option value="{{$p['id']}}">{{$p['nombre_modulo']}}</option>
                                                         @endforeach                                         
                                                 </select>
                                             </div>
@@ -491,11 +491,11 @@
 
                     else {
                         for (const prop in data[0]) {         
-                            lista +=    '<li style="color: black">' + data[0][prop]['Nombre_modulo'] + '</li>';        
+                            lista +=    '<li style="color: black">' + data[0][prop]['nombre_modulo'] + '</li>';        
                         } 
                     }
                
-                    document.getElementById("titulo_modulo").innerHTML = '<h1 class="justify-content-center">Prerrequisitos de ' + data[1][0]['Nombre_modulo'] + '</h1>';
+                    document.getElementById("titulo_modulo").innerHTML = '<h1 class="justify-content-center">Prerrequisitos de ' + data[1][0]['nombre_modulo'] + '</h1>';
 
                     document.getElementById("modulo_req").innerHTML = lista;
 
@@ -634,7 +634,7 @@
                     '<select class="form-select form-select-lg lista_requisitos" name="requisito[' + i + ']" aria-label=".form-select-lg example" style= "font-size: 18; width: 90%" required>' +
                     '<option selected disabled="true" value="">Seleccionar un módulo</option>' +
                         '@foreach ($modulo as $m)' +
-                            '<option value="{{$m['id']}}">{{$m['Nombre_modulo']}}</option>' +
+                            '<option value="{{$m['id']}}">{{$m['nombre_modulo']}}</option>' +
                         '@endforeach' +
                     '</select>' +
                     '<button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove" style="position: absolute; top: 0; margin: 0; right: 0">X</button>' +

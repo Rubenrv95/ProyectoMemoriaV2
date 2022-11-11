@@ -61,7 +61,7 @@
                 <!-- Dashboard -->
                 <li class="text-center" style="font-size: 15px; color: white; font-weight: bold">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
+                        <span>Arquitectura Curricular</span>
                 </li>
 
                 <hr class="sidebar-divider">
@@ -159,7 +159,9 @@
                 <div class="loader-wrapper">
                     <span class="loader"><span class="loader-inner"></span></span>
                 </div>
+                <div style="overflow-x:scroll; height: 92vh">
                     @yield('content')
+                </div>
                 </div>
 
             </div>
@@ -298,9 +300,6 @@
         });
     </script>
     <script>
-
-
-        //href="<?=ENV('APP_URL')?>home"
 
         //Función para mostrar u ocultar la contraseña para cada uno de los 3 input
         $(document).ready(function() {

@@ -14,8 +14,10 @@ class CreateModuloTienePrerrequisitoTable extends Migration
     public function up()
     {
         Schema::create('modulo_tiene_prerrequisito', function (Blueprint $table) {
-            $table->string('modulo');
-            $table->string('prerrequisito');
+            $table->unsignedbigInteger('modulo');
+            $table->unsignedbigInteger('prerrequisito');
+            $table->foreign('modulo')->references('id')->on('modulos')->onDelete('cascade');
+            $table->foreign('prerrequisito')->references('id')->on('modulos')->onDelete('cascade');
         });
     }
 

@@ -45,7 +45,7 @@
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
         </div>
-        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
+        <div class="container-fluid">   
             <h3 class="mb-0 text-gray-800">Gestión de Dimensiones</h3>
             @if (Auth::user()->rol != 'Dirección de docencia')
                 <button class="agregar" data-bs-toggle="modal" data-bs-target="#modal_crear_dimension" style="margin-bottom: 1%; margin-top: 1%">
@@ -73,9 +73,9 @@
                                 <tr>
                                     <td style="display: none">{{$dim['id']}}</td>
                                     <td style="display: none">{{$dim['idComp']}}</td>
-                                    <td style="text-align: center">{{$dim['Orden_comp']}}. {{$dim['Descripcion']}}</td>
-                                    <td style="text-align: center">{{$dim['Orden']}}</td>
-                                    <td style="text-align: center">{{$dim['Descripcion_dimension']}}</td>
+                                    <td style="text-align: center">{{$dim['Orden_comp']}}. {{$dim['descripcion']}}</td>
+                                    <td style="text-align: center">{{$dim['orden']}}</td>
+                                    <td style="text-align: center">{{$dim['descripcion_dimension']}}</td>
                                     <td style="text-align: center">{{$dim['created_at']}}</td>
                                     <td style="text-align: center">{{$dim['updated_at']}}</td>
                                     <td style="text-align: center">
@@ -130,7 +130,7 @@
                                                 <select class="form-select form-select-lg" name="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required> 
                                                     <option selected disabled="true" value="">Seleccione una competencia</option>
                                                     @foreach ($competencia as $comp) 
-                                                    <option value="{{$comp['id']}}" required>{{$comp['Descripcion']}}</option>
+                                                    <option value="{{$comp['id']}}" required>{{$comp['descripcion']}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -165,7 +165,7 @@
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Modificar dimensión</h1>
+                                        <h1 class="justify-content-center" style="margin: auto"> Editar dimensión</h1>
                                     </div>
                                     <div class="modal-body">
 
@@ -186,7 +186,7 @@
                                             <select class="form-select form-select-lg" name="refComp" id="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required> 
                                                 <option selected disabled="true" value="">Seleccione una competencia</option>
                                                 @foreach ($competencia as $comp) 
-                                                <option value="{{$comp['id']}}" required>{{$comp['Descripcion']}}</option>
+                                                <option value="{{$comp['id']}}" required>{{$comp['descripcion']}}</option>
                                                 @endforeach
                                             </select>
                                         </div>

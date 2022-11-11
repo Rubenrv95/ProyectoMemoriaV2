@@ -42,10 +42,10 @@
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
         </div>
-        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
+        <div class="container-fluid">   
             <h3 class="mb-0 text-gray-800">Temporalización de Competencias</h3>
 
-            <table id="lista" class="table table-striped table-bordered" width="100%">
+            <table id="lista" class="table table-striped table-bordered center" width="100%">
                 <thead>
                     <tr style="font-weight: bold; color: white">
                         <th style="width: 20%; text-align: center">Competencia⇵</th>
@@ -58,11 +58,14 @@
                 <tbody>
                     @foreach ($tempo as $t)
                     <tr>
-                        <td  style="text-align: center">{{$t['Orden']}}. {{$t['Descripcion']}}</td>
+                        <td  style="text-align: center; font-size: 80%">{{$t['orden']}}. {{$t['descripcion']}}</td>
                         @for ($i = 1; $i <= 14; $i++)
                         <td  style="text-align: center"> 
                              <!-- Se muestran las temporalizaciones, pero no se pueden editar-->
-                            @if ($t[$i]== 1) 
+                             @php
+                            $var = 'nivel_'.$i;
+                            @endphp
+                            @if ($t[$var]== 1) 
                                 <input type="checkbox" value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center;" checked onclick="return false;">
                             @else
                                 <input type="checkbox"  value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center" onclick="return false;">
@@ -70,9 +73,10 @@
                         </td>
                         @endfor
                         <td  style="text-align: center">
-                        @if (Auth::user()->rol != 'Dirección de docencia')
-                        <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/tempo_competencias/{{$t['competencia']}}"><button type="button" id="mod" class="edit"> </button> </a> </td>
-                        @endif
+                            @if (Auth::user()->rol != 'Dirección de docencia')
+                            <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/tempo_competencias/{{$t['competencia']}}"><button type="button" id="mod" class="edit"> </button> </a> 
+                            @endif
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

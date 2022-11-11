@@ -33,7 +33,7 @@
                                 <th style="text-align: center">Facultad⇵</th>
                                 <th style="text-align: center">Carrera⇵</th>
                                 <th style="text-align: center">Formación⇵</th>
-                                <th style="text-align: center">Planificación⇵</th>
+                                <th style="text-align: center">Tipo⇵</th>
                                 <th style="width: 10%; text-align: center"></th>
                                 </tr>
                         </thead>
@@ -85,10 +85,15 @@
                                                 <label style="font-size: 20; font-weight: bold">Facultad</label>
                                                 <select class="form-select form-select-lg" name="facultad" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
                                                     <option selected disabled="true" value="">Seleccione una facultad</option>
-                                                    <option value="Linares">Linares</option>
-                                                    <option value="Los Niches">Los Niches</option>       
-                                                    <option value="Santiago">Santiago</option>      
-                                                    <option value="Talca">Talca</option>                                                 
+                                                    <option value="Facultad de Arquitectura, Música y Diseño">Facultad de Arquitectura, Música y Diseño</option>   
+                                                    <option value="Facultad de Ciencias Agrarias">Facultad de Ciencias Agrarias</option>   
+                                                    <option value="Facultad de Ciencias de la Educación">Facultad de Ciencias de la Educación</option>  
+                                                    <option value="Facultad de Ciencias de la Salud">Facultad de Ciencias de la Salud</option>                                                        
+                                                    <option value="Facultad de Ciencias Jurídicas y Sociales">Facultad de Ciencias Jurídicas y Sociales</option> 
+                                                    <option value="Facultad de Economía y Negocios">Facultad de Economía y Negocios</option>        
+                                                    <option value="Facultad de Ingeniería">Facultad de Ingeniería</option>      
+                                                    <option value="Facultad de Odontología">Facultad de Odontología</option>   
+                                                    <option value="Facultad de Psicología">Facultad de Psicología</option>                                               
                                                 </select>
                                             </div>
 
@@ -144,7 +149,7 @@
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Modificar carrera</h1>
+                                        <h1 class="justify-content-center" style="margin: auto"> Editar carrera</h1>
                                     </div>
                                     <div class="modal-body">
 
@@ -152,10 +157,15 @@
                                             <label style="font-size: 20; font-weight: bold">Facultad</label>
                                             <select class="form-select form-select-lg" name="facultad" id = "facultad" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
                                                     <option selected disabled="true" value="">Seleccione una facultad</option>
-                                                    <option value="Linares">Linares</option>
-                                                    <option value="Los Niches">Los Niches</option>       
-                                                    <option value="Santiago">Santiago</option>      
-                                                    <option value="Talca">Talca</option>      
+                                                    <option value="Facultad de Arquitectura, Música y Diseño">Facultad de Arquitectura, Música y Diseño</option>   
+                                                    <option value="Facultad de Ciencias Agrarias">Facultad de Ciencias Agrarias</option>   
+                                                    <option value="Facultad de Ciencias de la Educación">Facultad de Ciencias de la Educación</option>  
+                                                    <option value="Facultad de Ciencias de la Salud">Facultad de Ciencias de la Salud</option>                                                        
+                                                    <option value="Facultad de Ciencias Jurídicas y Sociales">Facultad de Ciencias Jurídicas y Sociales</option> 
+                                                    <option value="Facultad de Economía y Negocios">Facultad de Economía y Negocios</option>        
+                                                    <option value="Facultad de Ingeniería">Facultad de Ingeniería</option>      
+                                                    <option value="Facultad de Odontología">Facultad de Odontología</option>   
+                                                    <option value="Facultad de Psicología">Facultad de Psicología</option>       
                                             </select>
                                         </div>
                                         

@@ -14,8 +14,10 @@ class CreateModuloTieneSaberTable extends Migration
     public function up()
     {
         Schema::create('propuesta_tiene_saber', function (Blueprint $table) {
-            $table->bigInteger('propuesta_modulo');
-            $table->bigInteger('saber');
+            $table->unsignedbigInteger('propuesta_modulo');
+            $table->unsignedbigInteger('saber');
+            $table->foreign('propuesta_modulo')->references('id')->on('propuesta_modulos')->onDelete('cascade');
+            $table->foreign('saber')->references('id')->on('sabers')->onDelete('cascade');
         });
     }
 

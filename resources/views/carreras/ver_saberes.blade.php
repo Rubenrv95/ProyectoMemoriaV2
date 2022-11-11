@@ -43,7 +43,7 @@
 
         </div>
 
-        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
+        <div class="container-fluid">   
 
             <h3 class="mb-0 text-gray-800">Visualización de Saberes</h3>
                 <table id="lista" class="table table-striped table-bordered" width="100%">
@@ -64,11 +64,11 @@
                         <tbody> 
                             @foreach ($saber as $s) 
                                 <tr>
-                                <td style="text-align: center">{{$s['OrdenComp']}}. {{$s['Descripcion']}}</td>
-                                <td style="text-align: center">{{$s['OrdenDim']}}. {{$s['Descripcion_dimension']}}</td>
-                                <td style="text-align: center">{{$s['Descripcion_aprendizaje']}}</td>
-                                <td style="text-align: center">{{$s['Descripcion_saber']}}</td>
-                                <td style="text-align: center">{{$s['Tipo']}}</td>
+                                <td style="text-align: center">{{$s['OrdenComp']}}. {{$s['descripcion']}}</td>
+                                <td style="text-align: center">{{$s['OrdenDim']}}. {{$s['descripcion_dimension']}}</td>
+                                <td style="text-align: center">{{$s['descripcion_aprendizaje']}}</td>
+                                <td style="text-align: center">{{$s['descripcion_saber']}}</td>
+                                <td style="text-align: center">{{$s['tipo']}}</td>
                                 <td style="text-align: center">{{$s['created_at']}}</td>
                                 <td style="text-align: center">{{$s['updated_at']}}</td>
                                 </tr>

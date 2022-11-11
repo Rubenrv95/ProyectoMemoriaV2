@@ -148,14 +148,12 @@ header {
     background-repeat: no-repeat; 
     display: inline-block;
     font-weight: 400;
-    color: #858796;
     text-align: center;
     vertical-align: middle;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    background-color: transparent;
     border: 1px solid transparent;
     padding: 0.125rem 1.75rem;
     font-size: 1rem;
@@ -169,16 +167,16 @@ header {
 }
 
 .agregar:hover {
-    background-color: #636363;
-    border-color: rgb(87, 87, 87);
+    background-color: #7c7c7c;
+    border-color: rgb(138, 138, 138);
     border-radius: 6px;
 }
 
 .agregar:focus, .agregar.focus  {
-    background-color: #525252;
-    border-color: rgb(87, 87, 87);
+    background-color: #555555;
+    border-color: rgb(83, 83, 83);
     border-radius: 6px;
-    box-shadow: 0 0 0 0.2rem #999999;;
+    box-shadow: 0 0 0 0.2rem #818181;
 }
 
 .agregar.disabled, .agregar:disabled {
@@ -190,15 +188,16 @@ header {
   .agregar:not(:disabled):not(.disabled):active, .agregar:not(:disabled):not(.disabled).active,
   .show > .agregar.dropdown-toggle {
     color: #fff;
-    background-color: #636363;
-    border-color: #585858;
+    background-color: #555555;
+    border-radius: 6px;
+    border-color: rgb(83, 83, 83);
   }
 
-
-.agregar:active {
-    background-color: #999999;
-    border-radius: 6px;
+  .agregar:not(:disabled):not(.disabled):active:focus, .agregar:not(:disabled):not(.disabled).active:focus,
+.show > .agregar.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem #818181;
 }
+
 
 .boton_gestionar {
 
@@ -225,16 +224,16 @@ header {
 }
 
 .boton_gestionar:hover {
-    background-color: #636363;
-    border-color: rgb(87, 87, 87);
+    background-color: #7c7c7c;
+    border-color: rgb(138, 138, 138);
     border-radius: 6px;
 }
 
 .boton_gestionar:focus, .boton_gestionar.focus {
-    background-color: #525252;
-    border-color: rgb(87, 87, 87);
+    background-color: #555555;
+    border-color: rgb(83, 83, 83);
     border-radius: 6px;
-    box-shadow: 0 0 0 0.2rem #999999;
+    box-shadow: 0 0 0 0.2rem #818181;
 }
 
 .boton_gestionar.disabled, .boton_gestionar:disabled {
@@ -246,15 +245,16 @@ header {
   .boton_gestionar:not(:disabled):not(.disabled):active, .boton_gestionar:not(:disabled):not(.disabled).active,
   .show > .boton_gestionar.dropdown-toggle {
     color: #fff;
-    background-color: #636363;
-    border-color: #585858;
+    background-color: #555555;
+    border-radius: 6px;
+    border-color: rgb(83, 83, 83);
   }
 
-.boton_gestionar:active {
-    background-color: #999999;
-    border-radius: 8px;
-}
+  .boton_gestionar:not(:disabled):not(.disabled):active:focus, .boton_gestionar:not(:disabled):not(.disabled).active:focus,
+.show > .boton_gestionar.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem #818181;
 
+}
 .segundo_boton_gestionar {
     background-repeat: no-repeat; 
     background-repeat: no-repeat; 
@@ -473,14 +473,20 @@ header {
 .three-dots:after {
     cursor: pointer;
     color: rgb(0, 0, 0);
-    content: '\2807';
+    content: '...';
     font-size: 20px;
     padding: 0 5px;
     width: 30px;
   }
 
   .three-dots:hover {
-    background-color: rgb(68, 68, 68);
+    background-color: rgb(75, 75, 75);
+    border-radius: 10px;
+    width: 30px;
+  }
+
+  .three-dots:active {
+    background-color: rgb(36, 35, 35);
     border-radius: 10px;
     width: 30px;
   }

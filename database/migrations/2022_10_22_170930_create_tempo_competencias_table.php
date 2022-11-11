@@ -14,21 +14,22 @@ class CreateTempoCompetenciasTable extends Migration
     public function up()
     {
         Schema::create('tempo_competencias', function (Blueprint $table) {
-            $table->id('competencia');
-            $table->boolean('1')->nullable();
-            $table->boolean('2')->nullable();
-            $table->boolean('3')->nullable();
-            $table->boolean('4')->nullable();
-            $table->boolean('5')->nullable();
-            $table->boolean('6')->nullable();
-            $table->boolean('7')->nullable();
-            $table->boolean('8')->nullable();
-            $table->boolean('9')->nullable();
-            $table->boolean('10')->nullable();
-            $table->boolean('11')->nullable();
-            $table->boolean('12')->nullable();
-            $table->boolean('13')->nullable();
-            $table->boolean('14')->nullable();
+            $table->unsignedbigInteger('competencia');
+            $table->foreign('competencia')->references('id')->on('competencias')->onDelete('cascade');
+            $table->boolean('nivel_1')->nullable();
+            $table->boolean('nivel_2')->nullable();
+            $table->boolean('nivel_3')->nullable();
+            $table->boolean('nivel_4')->nullable();
+            $table->boolean('nivel_5')->nullable();
+            $table->boolean('nivel_6')->nullable();
+            $table->boolean('nivel_7')->nullable();
+            $table->boolean('nivel_8')->nullable();
+            $table->boolean('nivel_9')->nullable();
+            $table->boolean('nivel_10')->nullable();
+            $table->boolean('nivel_11')->nullable();
+            $table->boolean('nivel_12')->nullable();
+            $table->boolean('nivel_13')->nullable();
+            $table->boolean('nivel_14')->nullable();
         });
     }
 

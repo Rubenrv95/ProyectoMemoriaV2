@@ -44,7 +44,7 @@
 
         </div>
 
-        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
+        <div class="container-fluid">   
 
             <h3 class="mb-0 text-gray-800">Visualización de Aprendizajes</h3>
                 <table id="lista" class="table table-striped table-bordered" width="100%">
@@ -64,10 +64,10 @@
                         <tbody> 
                             @foreach ($aprendizaje as $a) 
                                 <tr>
-                                <td style="text-align: center">{{$a['OrdenComp']}}. {{$a['Descripcion']}}</td>
-                                <td style="text-align: center">{{$a['OrdenDim']}}. {{$a['Descripcion_dimension']}}</td>
-                                <td style="text-align: center">{{$a['Descripcion_aprendizaje']}}</td>
-                                <td style="text-align: center">{{$a['Nivel_aprend']}}</td>
+                                <td style="text-align: center">{{$a['OrdenComp']}}. {{$a['descripcion']}}</td>
+                                <td style="text-align: center">{{$a['OrdenDim']}}. {{$a['descripcion_dimension']}}</td>
+                                <td style="text-align: center">{{$a['descripcion_aprendizaje']}}</td>
+                                <td style="text-align: center">{{$a['nivel_aprend']}}</td>
                                 <td style="text-align: center">{{$a['created_at']}}</td>
                                 <td style="text-align: center">{{$a['updated_at']}}</td>
                                 </tr>

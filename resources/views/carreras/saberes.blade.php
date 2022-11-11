@@ -43,7 +43,7 @@
 
         </div>
 
-        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
+        <div class="container-fluid">   
 
             <h3 class="mb-0 text-gray-800">Gestión de Saberes</h3>
 
@@ -60,12 +60,12 @@
                                 <th rowspan="2"style="width: 20%; text-align: center">Dimensión⇵</th>
                                 <th rowspan="2" style="text-align: center; display: none">id aprendizaje</th>
                                 <th rowspan="2" style="width: 20%; text-align: center">Aprendizajes⇵</th>
-                                <th colspan="16" style="text-align: center">Niveles</th>
+                                <th colspan="15" style="text-align: center">Niveles</th>
                             </tr>
                             <tr style="font-weight: bold; color: white">
-                                @for ($i = 1; $i <= 14; $i++)
+                                @for ($i = 0; $i <= 14; $i++)
                                     <th style="display: none"> id</th>
-                                    <th style="display: none"> Descripcion saber</th>
+                                    <th style="display: none"> descripcion saber</th>
                                     <th style="display: none"> Tipo</th>
                                     <th style="display: none"> Nivel</th>
                                     <th style="text-align: center; width: 15%">{{$i}}</th>
@@ -77,28 +77,28 @@
                         <tbody> 
                             @foreach ($saber as $s) 
                                 <tr>
-                                <td style="text-align: center;">{{$s['OrdenComp']}}. {{$s['Descripcion']}}</td>
-                                <td style="text-align: center">{{$s['OrdenDim']}}. {{$s['Descripcion_dimension']}}</td>
+                                <td style="text-align: center;">{{$s['OrdenComp']}}. {{$s['descripcion']}}</td>
+                                <td style="text-align: center">{{$s['OrdenDim']}}. {{$s['descripcion_dimension']}}</td>
                                 <td style="text-align: center; display: none;">{{$s['idAprend']}}</td>
-                                <td style="text-align: center;">{{$s['Descripcion_aprendizaje']}}</td>
+                                <td style="text-align: center;">{{$s['descripcion_aprendizaje']}}</td>
 
-                                @for ($i = 1; $i <= 14; $i++)
+                                @for ($i = 0; $i <= 14; $i++)
                                     <td style="display: none">{{$s['id']}}</td>
-                                    <td style="display: none">{{$s['Descripcion_saber']}}</td>
-                                    <td style="display: none">{{$s['Tipo']}}</td>
-                                    <td style="display: none">{{$s['Nivel']}}</td>
-                                    <td style="text-align: center">
-                                        @if ($s['Nivel'] == $i)
+                                    <td style="display: none">{{$s['descripcion_saber']}}</td>
+                                    <td style="display: none">{{$s['tipo']}}</td>
+                                    <td style="display: none">{{$s['nivel']}}</td>
+                                    <td style="text-align: center;">
+                                        @if ($s['nivel'] == $i)
+                                            {{$s['descripcion_saber']}} ({{$s['tipo']}})         
                                             @if (Auth::user()->rol != 'Dirección de docencia')
-                                            <div class="dropdown-container" tabindex="-1" style="float: right;">
-                                                <div class="three-dots"></div>
+                                            <div class="dropdown-container" tabindex="-1" style="margin-left: auto; margin-right: auto">
+                                                <div class="three-dots" style="margin-left: auto; margin-right: auto"></div>
                                                 <div class="dropdown dropdown-table">
                                                     <button type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_saber" class="edit"> </button>
                                                     <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_saber" class="delete"> </button>
                                                 </div>
                                             </div>
-                                            @endif 
-                                            {{$s['Descripcion_saber']}} ({{$s['Tipo']}})                                 
+                                            @endif                         
                                         @endif      
                                     </td>
                                 @endfor
@@ -150,7 +150,7 @@
                                                 <label style="font-size: 20; font-weight: bold">Nivel</label>
                                                 <select class="form-select form-select-lg" name="nivel" aria-label=".form-select-lg example" style="width:23%; margin-bottom: 20px; font-size: 18" required>
                                                         <option selected disabled="true" value="">Nivel</option>      
-                                                        @for ($i = 1; $i <= 14; $i++)
+                                                        @for ($i = 0; $i <= 14; $i++)
                                                             <option value="{{$i}}">{{$i}}</option>
                                                         @endfor                                              
                                                 </select>
@@ -161,7 +161,7 @@
                                                 <select class="form-select form-select-lg" name="refAprend" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required>
                                                     <option selected disabled="true" value="">Seleccione el aprendizaje</option>  
                                                     @foreach ($aprendizaje as $a)                                                      
-                                                        <option value="{{$a['id']}}">{{$a['Descripcion_aprendizaje']}} ({{$a['Nivel_aprend']}})</option>
+                                                        <option value="{{$a['id']}}">{{$a['descripcion_aprendizaje']}} ({{$a['nivel_aprend']}})</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -192,7 +192,7 @@
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Modificar saber</h1>
+                                        <h1 class="justify-content-center" style="margin: auto"> Editar saber</h1>
                                     </div>
                                     <div class="modal-body">
 
@@ -215,7 +215,7 @@
                                                 <label style="font-size: 20; font-weight: bold">Nivel</label>
                                                 <select class="form-select form-select-lg" id="nivel" name="nivel" aria-label=".form-select-lg example" style="width:23%; margin-bottom: 20px; font-size: 18" required>
                                                         <option selected disabled="true" value="">Nivel</option>      
-                                                        @for ($i = 1; $i <= 14; $i++)
+                                                        @for ($i = 0; $i <= 14; $i++)
                                                             <option value="{{$i}}">{{$i}}</option>
                                                         @endfor                                              
                                                 </select>
@@ -226,7 +226,7 @@
                                                 <select class="form-select form-select-lg" id="refAprend" name="refAprend" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required>
                                                     <option selected disabled="true" value="">Seleccione el aprendizaje</option>  
                                                     @foreach ($aprendizaje as $a)                                                      
-                                                        <option value="{{$a['id']}}">{{$a['Descripcion_aprendizaje']}} ({{$a['Nivel_aprend']}})</option>
+                                                        <option value="{{$a['id']}}">{{$a['descripcion_aprendizaje']}} ({{$a['nivel_aprend']}})</option>
                                                     @endforeach
                                                 </select>
                                             </div>

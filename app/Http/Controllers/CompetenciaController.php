@@ -24,7 +24,7 @@ class CompetenciaController extends Controller
 
         $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
         $carrera = json_decode($carrera, true);
-        $competencia = DB::table('competencias')->where('refCarrera', $id_carrera)->get();
+        $competencia = DB::table('competencias')->where('refcarrera', $id_carrera)->get();
         $competencia = json_decode($competencia, true);
         return view('carreras.competencias')->with('carrera', $carrera)->with('competencia', $competencia);
     }
@@ -48,9 +48,9 @@ class CompetenciaController extends Controller
 
         $query = DB::table('competencias')->insert([
             'id' => $random,
-            'Descripcion'=>$request->input('desc_competencia'),
-            'Orden'=>$request->input('orden_competencia'),
-            'refCarrera'=>$id_carrera,
+            'descripcion'=>$request->input('desc_competencia'),
+            'orden'=>$request->input('orden_competencia'),
+            'refcarrera'=>$id_carrera,
         ]);
 
 
@@ -97,10 +97,10 @@ class CompetenciaController extends Controller
         $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
         $carrera = json_decode($carrera, true);
 
-        $competencia = DB::table('competencias')->where('refCarrera', $id_carrera)->get();
+        $competencia = DB::table('competencias')->where('refcarrera', $id_carrera)->get();
         $competencia = json_decode($competencia, true);
 
-        $tempo_competencia = DB::table('tempo_competencias')->leftJoin('competencias', 'competencias.id', '=', 'tempo_competencias.competencia')->where('competencias.refCarrera', $id_carrera)->get();;
+        $tempo_competencia = DB::table('tempo_competencias')->leftJoin('competencias', 'competencias.id', '=', 'tempo_competencias.competencia')->where('competencias.refcarrera', $id_carrera)->get();;
         $tempo_competencia = json_decode($tempo_competencia, true);
         
         return view('carreras.tempo_competencias')->with('carrera', $carrera)->with('competencia', $competencia)->with('tempo', $tempo_competencia);
@@ -133,20 +133,20 @@ class CompetenciaController extends Controller
     {
 
         $query = DB::table('tempo_competencias')->where('competencia', $id_comp)->update([
-            '1' =>$request->input('nivel_1'),
-            '2' =>$request->input('nivel_2'),
-            '3' =>$request->input('nivel_3'),
-            '4' =>$request->input('nivel_4'),
-            '5' =>$request->input('nivel_5'),
-            '6' =>$request->input('nivel_6'),
-            '7' =>$request->input('nivel_7'),
-            '8' =>$request->input('nivel_8'),
-            '9' =>$request->input('nivel_9'),
-            '10' =>$request->input('nivel_10'),
-            '11' =>$request->input('nivel_11'),
-            '12' =>$request->input('nivel_12'),
-            '13' =>$request->input('nivel_13'),
-            '14' =>$request->input('nivel_14'),
+            'nivel_1' =>$request->input('nivel_1'),
+            'nivel_2' =>$request->input('nivel_2'),
+            'nivel_3' =>$request->input('nivel_3'),
+            'nivel_4' =>$request->input('nivel_4'),
+            'nivel_5' =>$request->input('nivel_5'),
+            'nivel_6' =>$request->input('nivel_6'),
+            'nivel_7' =>$request->input('nivel_7'),
+            'nivel_8' =>$request->input('nivel_8'),
+            'nivel_9' =>$request->input('nivel_9'),
+            'nivel_10' =>$request->input('nivel_10'),
+            'nivel_11' =>$request->input('nivel_11'),
+            'nivel_12' =>$request->input('nivel_12'),
+            'nivel_13' =>$request->input('nivel_13'),
+            'nivel_14' =>$request->input('nivel_14'),
         ]);
 
 
@@ -167,8 +167,8 @@ class CompetenciaController extends Controller
 
 
         $query = DB::table('competencias')->where('id', $id_comp)->update([
-            'Descripcion'=>$request->input('desc_competencia'),
-            'Orden'=>$request->input('orden_competencia'),
+            'descripcion'=>$request->input('desc_competencia'),
+            'orden'=>$request->input('orden_competencia'),
         ]);
 
         $competencia = Competencia::find($id_comp);
@@ -187,15 +187,15 @@ class CompetenciaController extends Controller
         $query = DB::table('competencias')->where('id', $id_comp)->delete();
 
         $query2= 'DELETE tempo_competencias, dimensions, aprendizajes, tempo_aprendizajes, sabers, propuesta_modulos, propuesta_tiene_saber, modulos, modulo_tiene_prerrequisito FROM tempo_competencias
-            INNER JOIN dimensions ON tempo_competencias.competencia = dimensions.refCompetencia
-            INNER JOIN aprendizajes ON aprendizajes.refDimension = dimensions.id
+            INNER JOIN dimensions ON tempo_competencias.competencia = dimensions.refcompetencia
+            INNER JOIN aprendizajes ON aprendizajes.refdimension = dimensions.id
             INNER JOIN tempo_aprendizajes ON aprendizajes.id = tempo_aprendizajes.aprendizaje
-            INNER JOIN sabers ON sabers.refAprendizaje = aprendizajes.id
+            INNER JOIN sabers ON sabers.refaprendizaje = aprendizajes.id
             INNER JOIN propuesta_tiene_saber ON sabers.id = propuesta_tiene_saber.saber
             INNER JOIN propuesta_modulos  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
-            INNER JOIN modulos  ON  propuesta_modulos.id = modulos.refPropuesta
+            INNER JOIN modulos  ON  propuesta_modulos.id = modulos.refpropuesta
             INNER JOIN modulo_tiene_prerrequisito  ON  modulos.id = modulo_tiene_prerrequisito.modulo
-            WHERE dimensions.refCompetencia = ?';
+            WHERE dimensions.refcompetencia = ?';
 
 
 

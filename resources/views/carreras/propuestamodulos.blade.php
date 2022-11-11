@@ -43,7 +43,7 @@
 
         </div>
 
-        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
+        <div class="container-fluid">   
 
             <h3 class="mb-0 text-gray-800">Propuesta de Módulos</h3>
 
@@ -71,12 +71,12 @@
                             @foreach ($propuestas as $m)
                             <tr>
                                 <td style="display: none">{{$m['id']}}</td>
-                                <td style="text-align: center">{{$m['Semestre']}}</td>
+                                <td style="text-align: center">{{$m['semestre']}}</td>
                                 <!--Los saberes, aprendizajes y competencias se muestran en modals -->
-                                <td style="text-align: center"><button type="button" id="info" value="{{$m['Nombre_modulo']}}" class="info_sab" data-url="{{ route('modulos.show_datos', [ $c['id'] , $m['id'] ]) }}"> </button></td>
+                                <td style="text-align: center"><button type="button" id="info" value="{{$m['nombre_modulo']}}" class="info_sab" data-url="{{ route('modulos.show_datos', [ $c['id'] , $m['id'] ]) }}"> </button></td>
                                 <td style="text-align: center"><button type="button" id="info" class="info_aprend" data-url="{{ route('modulos.show_datos', [ $c['id'] , $m['id'] ]) }}">  </button> </td>
                                 <td style="text-align: center"><button type="button" id="info" class="info_comp" data-url="{{ route('modulos.show_datos', [ $c['id'] , $m['id'] ]) }}">  </button> </td>
-                                <td style="text-align: center">{{$m['Nombre_modulo']}}</td>
+                                <td style="text-align: center">{{$m['nombre_modulo']}}</td>
                                 <td style="text-align: center">
                                     @if (Auth::user()->rol != 'Dirección de docencia')
                                         <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_modulo" class="edit"> </button>
@@ -210,7 +210,7 @@
                                                 <select class="form-select form-select-lg lista_saberes" name="saber[0]" aria-label=".form-select-lg example" style= "font-size: 18; width: 90%; margin-bottom: 2%" required>
                                                     <option selected disabled="true" value="">Seleccionar un saber</option>
                                                     @foreach ($saber as $s)
-                                                        <option value="{{$s['id']}}">{{$s['Descripcion_saber']}}</option>
+                                                        <option value="{{$s['id']}}">{{$s['descripcion_saber']}} (Nivel {{$s['nivel']}})</option>
                                                     @endforeach
                                                 </select> 
                                             </div>
@@ -245,7 +245,7 @@
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto">Modificar módulo</h1>
+                                        <h1 class="justify-content-center" style="margin: auto">Editar módulo</h1>
                                     </div>
                                     <div class="modal-body">
 
@@ -406,7 +406,7 @@
                     '<select class="form-select form-select-lg lista_saberes" name="saber[' + i + ']" aria-label=".form-select-lg example" style= "font-size: 18; width: 90%" required>' +
                     '<option selected disabled="true" value="">Seleccionar un saber</option>' +
                     '@foreach ($saber as $s)' +
-                        '<option value="{{$s['id']}}">{{$s['Descripcion_saber']}}</option>' +
+                        '<option value="{{$s['id']}}">{{$s['descripcion_saber']}}</option>' +
                     '@endforeach' +
                     '</select>' +
                     '<button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove" style="position: absolute; top: 0; margin: 0; right: 0">X</button>' +
@@ -496,12 +496,12 @@
                     var lista = "";
 
                     for (const prop in data[0]) {       
-                        lista +=    '<li style="color: black">' + data[0][prop]['Descripcion_saber'] + " (" + data[0][prop]['Tipo'] +")" + '</li>';        
+                        lista +=    '<li style="color: black">' + data[0][prop]['descripcion_saber'] + " (" + data[0][prop]['tipo'] +")" + '</li>';        
                     } 
                         
                     document.getElementById("saber_desc").innerHTML = lista;
 
-                    document.getElementById("saber_modulo").innerHTML = '<h1 class="justify-content-center">Saberes de ' + data[0][0]['Nombre_modulo'] + '</h1>';
+                    document.getElementById("saber_modulo").innerHTML = '<h1 class="justify-content-center">Saberes de ' + data[0][0]['nombre_modulo'] + '</h1>';
 
 
                     $('#modal_saberes').modal('show');
@@ -521,12 +521,12 @@
                     var lista = "";
 
                     for (const prop in data[1]) {         
-                        lista +=    '<li style="color: black">' + data[1][prop]['Descripcion_aprendizaje'] + " (" + data[1][prop]['Nivel_aprend'] +")" + '</li>';        
+                        lista +=    '<li style="color: black">' + data[1][prop]['descripcion_aprendizaje'] + " (" + data[1][prop]['nivel_aprend'] +")" + '</li>';        
                     } 
                         
                     document.getElementById("aprendizaje_desc").innerHTML = lista;
 
-                    document.getElementById("aprendizaje_modulo").innerHTML = '<h1 class="justify-content-center">Aprendizajes de ' + data[0][0]['Nombre_modulo'] + '</h1>';
+                    document.getElementById("aprendizaje_modulo").innerHTML = '<h1 class="justify-content-center">Aprendizajes de ' + data[0][0]['nombre_modulo'] + '</h1>';
 
 
                     $('#modal_aprendizajes').modal('show');
@@ -546,12 +546,12 @@
                     var lista = "";
 
                     for (const prop in data[2]) {         
-                        lista +=    '<li style="color: black">' + data[2][prop]['Orden'] + '. ' + data[2][prop]['Descripcion'] + '</li>';        
+                        lista +=    '<li style="color: black">' + data[2][prop]['orden'] + '. ' + data[2][prop]['descripcion'] + '</li>';        
                     } 
                         
                     document.getElementById("competencia_desc").innerHTML = lista;
 
-                    document.getElementById("competencia_modulo").innerHTML = '<h1 class="justify-content-center">Competencias de ' + data[0][0]['Nombre_modulo'] + '</h1>';
+                    document.getElementById("competencia_modulo").innerHTML = '<h1 class="justify-content-center">Competencias de ' + data[0][0]['nombre_modulo'] + '</h1>';
 
 
                     $('#modal_competencias').modal('show');

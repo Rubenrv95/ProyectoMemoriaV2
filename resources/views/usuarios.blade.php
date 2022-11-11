@@ -137,7 +137,7 @@
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Modificar Usuario</h1>
+                                        <h1 class="justify-content-center" style="margin: auto"> Editar Usuario</h1>
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group" style="margin: auto;">

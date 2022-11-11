@@ -21,10 +21,10 @@ class AprendizajesSheets implements FromCollection, WithTitle
     public function collection()
     {
         return DB::table('aprendizajes')
-        ->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')
-        ->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')
-        ->where('competencias.refCarrera', '=',  $this->id)
-        ->select('competencias.Descripcion', 'dimensions.Descripcion_dimension', 'aprendizajes.Descripcion_aprendizaje', 'aprendizajes.Nivel_aprend')
+        ->leftJoin('dimensions', 'aprendizajes.refdimension', '=', 'dimensions.id')
+        ->leftJoin('competencias', 'dimensions.refcompetencia', '=', 'competencias.id')
+        ->where('competencias.refcarrera', '=',  $this->id)
+        ->select('competencias.descripcion', 'dimensions.descripcion_dimension', 'aprendizajes.descripcion_aprendizaje', 'aprendizajes.nivel_aprend')
         ->get();
     }
 

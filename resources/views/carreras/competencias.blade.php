@@ -43,7 +43,7 @@
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
         </div>
-        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
+        <div class="container-fluid">   
             <h3 class="mb-0 text-gray-800">Gestión de Competencias</h3>
             @if (Auth::user()->rol != 'Dirección de docencia')
                 <button class="agregar" data-bs-toggle="modal" data-bs-target="#modal_crear_competencia" style="margin-bottom: 1%; margin-top: 1%">
@@ -68,8 +68,8 @@
                             @foreach ($competencia as $comp)   
                                 <tr>
                                     <td style="display: none">{{$comp['id']}}</td>
-                                    <td rowspan="1" style="text-align: center">{{$comp['Orden']}}</td>
-                                    <td rowspan="1" style="text-align: center">{{$comp['Descripcion']}}</td>
+                                    <td rowspan="1" style="text-align: center">{{$comp['orden']}}</td>
+                                    <td rowspan="1" style="text-align: center">{{$comp['descripcion']}}</td>
                                     <td rowspan="1" style="text-align: center">{{$comp['created_at']}}</td>
                                     <td style="text-align: center">{{$comp['updated_at']}}</td>
                                     <td rowspan="1" style="text-align: center">
@@ -150,7 +150,7 @@
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Modificar competencia</h1>
+                                        <h1 class="justify-content-center" style="margin: auto"> Editar competencia</h1>
                                     </div>
                                     <div class="modal-body">
 

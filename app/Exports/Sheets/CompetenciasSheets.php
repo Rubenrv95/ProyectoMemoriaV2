@@ -20,7 +20,7 @@ class CompetenciasSheets implements FromCollection, WithTitle
 
     public function collection()
     {
-        return DB::table('competencias')->select('competencias.Orden', 'competencias.Descripcion')->where('refCarrera', $this->id)->get();
+        return DB::table('competencias')->select('competencias.orden', 'competencias.descripcion')->where('refcarrera', $this->id)->get();
     }
 
     public function title(): string
