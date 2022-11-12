@@ -339,7 +339,7 @@ header {
 }
 
 #download:active {
-    background-color: rgb(43, 43, 43);
+    background-color: rgb(29, 29, 29);
     border-radius: 10px;
 }
 
@@ -364,7 +364,7 @@ header {
 }
 
 #excel:active {
-  background-color: rgb(43, 43, 43);
+  background-color: rgb(23, 23, 23);
   border-radius: 10px;
 }
 

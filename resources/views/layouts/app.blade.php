@@ -52,8 +52,8 @@
             <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: #333333">
 
                 <!-- Sidebar - Logo -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=ENV('APP_URL')?>home" style="height: 100px; ">
-                    <div class="sidebar-brand-text mx-3"><img src="<?=ENV('APP_URL')?>images/logo.png" alt="" style="width: 130px; height: 100px"></div>
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" style="height: 100px; margin-top: 5%; margin-bottom: 5%">
+                    <div class="sidebar-brand-text mx-3"><img src="<?=ENV('APP_URL')?>images/logo.png" alt="" style="width: 130px; height: 120px;"></div>
                 </a>
 
                 <hr class="sidebar-divider my-0">
@@ -102,7 +102,7 @@
 
                 <!-- Mensaje -->
                 <div class="sidebar-card d-none d-lg-flex">
-                    <p class="text-center mb-2">Sitio Web desarrollado por <strong>Rubén Ramírez</strong> para la Universidad de Talca</p>
+                    <p class="text-center mb-2">Sitio Web desarrollado para la <strong>Universidad de Talca</strong></p>
                 </div>
 
             </ul>
