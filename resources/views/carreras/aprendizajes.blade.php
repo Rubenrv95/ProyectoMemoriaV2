@@ -90,8 +90,8 @@
                                     <td style="display: none">{{$aprend['idDim']}}</td>
 
 
-                                    <td style="text-align: center">{{$aprend['OrdenComp']}}. {{$aprend['descripcion']}}</td>
-                                    <td style="text-align: center">{{$aprend['orden']}}. {{$aprend['descripcion_dimension']}}</td>
+                                    <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$aprend['OrdenComp']}}. {{$aprend['descripcion']}}</td>
+                                    <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$aprend['orden']}}. {{$aprend['descripcion_dimension']}}</td>
 
                                     <!--APRENDIZAJE INICIAL -->
 
@@ -99,15 +99,15 @@
                                         {{$aprend['id']}}                 
                                     </td>  
                                     <td style="display: none">{{$aprend['descripcion_aprendizaje']}}</td>
-                                    <td style="text-align: center">  
+                                    <td style="text-align: center; word-wrap: break-word; max-width:0;">  
                                         @if ($aprend['nivel_aprend'] == 'Inicial')   
                                             {{$aprend['descripcion_aprendizaje']}}    
                                             @if (Auth::user()->rol != 'Dirección de docencia')
                                                 <div class="dropdown-container" tabindex="-1" style="margin-left: auto; margin-right: auto">
                                                     <div class="three-dots" style="margin-left: auto; margin-right: auto"></div>
                                                     <div class="dropdown dropdown-table">
-                                                        <button type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_saber" class="edit"> </button>
-                                                        <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_saber" class="delete"> </button>
+                                                        <button type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_inicial" class="edit1"> </button>
+                                                        <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje_inicial" class="delete1"> </button>
                                                     </div>
                                                 </div>
                                             @endif                   
@@ -122,15 +122,15 @@
                                         {{$aprend['id']}}                 
                                     </td> 
                                     <td style="display: none">{{$aprend['descripcion_aprendizaje']}}  </td>
-                                    <td style="text-align: center">   
+                                    <td style="text-align: center; word-wrap: break-word; max-width:0;">   
                                         @if ($aprend['nivel_aprend'] == 'En desarrollo')
                                             {{$aprend['descripcion_aprendizaje']}}   
                                             @if (Auth::user()->rol != 'Dirección de docencia')
                                             <div class="dropdown-container" tabindex="-1" style="margin-left: auto; margin-right: auto">
                                                 <div class="three-dots" style="margin-left: auto; margin-right: auto"></div>
                                                 <div class="dropdown dropdown-table">
-                                                    <button type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_saber" class="edit"> </button>
-                                                    <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_saber" class="delete"> </button>
+                                                    <button type="button" id="mod"  data-bs-toggle="modal" data-bs-target="modal_modificar_aprendizaje_desarrollo" class="edit2"> </button>
+                                                    <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje_desarrollo" class="delete2"> </button>
                                                 </div>
                                             </div>
                                             @endif                          
@@ -143,15 +143,15 @@
                                         {{$aprend['id']}}                 
                                     </td> 
                                     <td style="display: none">{{$aprend['descripcion_aprendizaje']}}  </td>
-                                    <td style="text-align: center"> 
+                                    <td style="text-align: center; word-wrap: break-word; max-width:0;"> 
                                         @if ($aprend['nivel_aprend'] == 'Logrado')           
                                             {{$aprend['descripcion_aprendizaje']}}   
                                             @if (Auth::user()->rol != 'Dirección de docencia')
                                             <div class="dropdown-container" tabindex="-1" style="margin-left: auto; margin-right: auto">
                                                 <div class="three-dots" style="margin-left: auto; margin-right: auto"></div>
                                                 <div class="dropdown dropdown-table">
-                                                    <button type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_saber" class="edit"> </button>
-                                                    <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_saber" class="delete"> </button>
+                                                    <button type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_logrado" class="edit3"> </button>
+                                                    <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje_logrado" class="delete3"> </button>
                                                 </div>
                                             </div>
                                             @endif                      
@@ -164,15 +164,15 @@
                                         {{$aprend['id']}}                 
                                     </td> 
                                     <td style="display: none">{{$aprend['descripcion_aprendizaje']}}  </td>
-                                    <td style="text-align: center">
+                                    <td style="text-align: center; word-wrap: break-word; max-width:0;">
                                         @if ($aprend['nivel_aprend'] == 'Especialización')                                             
                                             {{$aprend['descripcion_aprendizaje']}}  
                                             @if (Auth::user()->rol != 'Dirección de docencia')
                                             <div class="dropdown-container" tabindex="-1" style="margin-left: auto; margin-right: auto">
                                                 <div class="three-dots" style="margin-left: auto; margin-right: auto"></div>
                                                 <div class="dropdown dropdown-table">
-                                                    <button type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_saber" class="edit"> </button>
-                                                    <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_saber" class="delete"> </button>
+                                                    <button type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_especializacion" class="edit4"> </button>
+                                                    <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje_especializacion" class="delete4"> </button>
                                                 </div>
                                             </div>
                                             @endif                   
@@ -226,14 +226,19 @@
                                                 <select class="form-select form-select-lg" name="refCompCrear" id="refCompCrear" onchange="addDimension()" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
                                                     <option selected disabled="true" value="">Seleccione la competencia asociada</option>          
                                                     @foreach ($competencia as $comp)                           
-                                                        <option value="{{$comp['id']}}">{{$comp['descripcion']}}</option>     
+                                                        <option value="{{$comp['id']}}">{{$comp['orden']}}. {{$comp['descripcion']}}</option>     
                                                     @endforeach                                                                                  
                                                 </select>
                                             </div>
 
-
-
-                                            <div id="dimension-crear"></div>
+                                            <div id="dimension-crear">
+                                                <div class="form-group" style="margin: auto">
+                                                    <label style="font-size: 20; font-weight: bold">Dimension asociada</label>
+                                                    <select class="form-select form-select-lg" name="dimension" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>                                                                                     
+                                                        <option selected disabled="true" value="">Seleccione una dimensión</option>                                                                          
+                                                    </select>
+                                                </div>
+                                            </div>
                                           
                                     </div>
                                     <div class="modal-footer">
@@ -598,7 +603,7 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]],
+                "order": [[ 2, "asc" ]],
 
                 language: {
                     "decimal": "",
@@ -699,7 +704,7 @@
 
 
                 $('#aprendizaje_especializacion').val(data[17]);
-                $('#nivel_logrado').val(data[19]);
+                $('#nivel_especializacion').val(data[19]);
 
                 $('#editFormEspecializacion').attr('action', '<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes/'+data[16]);
                 $('#modal_modificar_aprendizaje_especializacion').modal('show');
@@ -801,7 +806,7 @@
                     //si la respuesta tiene a lo menos un objeto, se recorre el array añadiendo cada dimensión como una opción
                     if (response.length > 0) {
                         for (const prop in response) {         
-                                lista +=    '<option value="' + response[prop]['id'] + '">' + response[prop]['descripcion_dimension'] + '</option>';        
+                                lista +=    '<option value="' + response[prop]['id'] + '">' + response[prop]['orden'] + '. ' + response[prop]['descripcion_dimension'] + '</option>';        
                         } 
                     }       
                     

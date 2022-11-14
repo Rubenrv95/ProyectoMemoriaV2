@@ -28,6 +28,7 @@ class AprendizajeController extends Controller
         
         $competencia = DB::table('competencias')
         ->where('refcarrera', $id_carrera)
+        ->orderByRaw('orden * 1 asc')
         ->get();
         $dimension =  DB::table('dimensions')
         ->leftJoin('competencias', 'dimensions.refcompetencia', '=', 'competencias.id')
@@ -109,7 +110,7 @@ class AprendizajeController extends Controller
     public function show($id_carrera, $id_competencia)
     {
 
-        $dim =  DB::table('dimensions')->where('dimensions.refcompetencia', '=', $id_competencia)->get();
+        $dim =  DB::table('dimensions')->where('dimensions.refcompetencia', '=', $id_competencia)->orderByRaw('orden * 1 asc')->get();
 
         return response()->json($dim);
     }

@@ -101,7 +101,7 @@
                                             </div>
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 2%;">
-                                                <input type="file" name="file" style="margin-top: 1%; margin-bottom: 1%" required>
+                                                <input type="file" name="file" style="margin-top: 1%; margin-bottom: 1%; color: black;" required>
                                             </div>
 
 
@@ -161,7 +161,7 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]],
+                "order": [[ 2, "desc" ]],
 
                 language: {
                     "decimal": "",

@@ -72,9 +72,10 @@ class CarreraController extends Controller
      * Se crea un documento PDF con la información solicitada
      */
     public function createPDF($carrera) {
-        $competencia = DB::table('competencias')->where('refcarrera', $carrera)->get();
+        $competencia = DB::table('competencias')->orderBy('orden')->where('refcarrera', $carrera)->get();
         $tempo_competencia = DB::table('tempo_competencias')
         ->leftJoin('competencias', 'competencias.id', '=', 'tempo_competencias.competencia')
+        ->orderByRaw('competencias.orden * 1 asc')
         ->select('tempo_competencias.*', 'competencias.orden', 'competencias.descripcion')
         ->where('competencias.refcarrera', $carrera)
         ->get();
@@ -82,6 +83,8 @@ class CarreraController extends Controller
         $aprendizaje = DB::table('aprendizajes')
         ->leftJoin('dimensions', 'aprendizajes.refdimension', '=', 'dimensions.id')
         ->leftJoin('competencias', 'dimensions.refcompetencia', '=', 'competencias.id')
+        ->orderByRaw('competencias.orden * 1 asc')
+        ->orderByRaw('dimensions.orden * 1 asc')
         ->where('competencias.refcarrera', '=', $carrera)
         ->select('aprendizajes.*', 'competencias.descripcion', 'competencias.orden as OrdenComp', 'competencias.id as idComp', 'dimensions.descripcion_dimension', 'dimensions.orden', 'dimensions.id as idDim')
         ->get();
@@ -89,6 +92,8 @@ class CarreraController extends Controller
         ->leftJoin('aprendizajes', 'aprendizajes.id', '=', 'tempo_aprendizajes.aprendizaje')
         ->leftJoin('dimensions', 'dimensions.id', '=', 'aprendizajes.refdimension')
         ->leftJoin('competencias', 'competencias.id', '=', 'dimensions.refcompetencia')
+        ->orderByRaw('competencias.orden * 1 asc')
+        ->orderByRaw('dimensions.orden * 1 asc')
         ->select('tempo_aprendizajes.*', 'aprendizajes.descripcion_aprendizaje', 'aprendizajes.nivel_aprend', 'dimensions.descripcion_dimension', 'dimensions.orden', 'competencias.orden as OrdenComp', 'competencias.descripcion')
         ->where('competencias.refcarrera', $carrera)->get();
         
@@ -96,6 +101,7 @@ class CarreraController extends Controller
         ->leftJoin('aprendizajes', 'sabers.refaprendizaje', '=', 'aprendizajes.id')
         ->leftJoin('dimensions', 'aprendizajes.refdimension', '=', 'dimensions.id')
         ->leftJoin('competencias', 'dimensions.refcompetencia', '=', 'competencias.id')
+        ->orderByRaw('sabers.nivel * 1 asc')
         ->where('competencias.refcarrera', '=', $carrera)
         ->select('sabers.*', 'aprendizajes.descripcion_aprendizaje', 'dimensions.descripcion_dimension', 'dimensions.orden as OrdenDim', 'competencias.orden as OrdenComp', 'competencias.descripcion')
         ->get();
@@ -110,7 +116,7 @@ class CarreraController extends Controller
            ->leftJoin('competencias', 'dimensions.refcompetencia', '=', 'competencias.id')
            ->where('competencias.refcarrera', '=', $carrera)
            ->select('modulos.*', 'propuesta_modulos.nombre_modulo', 'propuesta_modulos.semestre')
-           ->orderBy('propuesta_modulos.semestre')
+           ->orderByRaw('propuesta_modulos.semestre * 1 asc')
            ->get()
        );
 

@@ -76,7 +76,7 @@
                                 <td style="text-align: center"><button type="button" id="info" value="{{$m['nombre_modulo']}}" class="info_sab" data-url="{{ route('modulos.show_datos', [ $c['id'] , $m['id'] ]) }}"> </button></td>
                                 <td style="text-align: center"><button type="button" id="info" class="info_aprend" data-url="{{ route('modulos.show_datos', [ $c['id'] , $m['id'] ]) }}">  </button> </td>
                                 <td style="text-align: center"><button type="button" id="info" class="info_comp" data-url="{{ route('modulos.show_datos', [ $c['id'] , $m['id'] ]) }}">  </button> </td>
-                                <td style="text-align: center">{{$m['nombre_modulo']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$m['nombre_modulo']}}</td>
                                 <td style="text-align: center">
                                     @if (Auth::user()->rol != 'Dirección de docencia')
                                         <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_modulo" class="edit"> </button>

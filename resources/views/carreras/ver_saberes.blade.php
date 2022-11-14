@@ -55,6 +55,7 @@
                                 <th style="text-align: center; width: 20%">Aprendizaje⇵</th>
                                 <th style="text-align: center; width: 20%">Saber⇵</th>
                                 <th style="text-align: center; width: 20%">Tipo de Saber⇵</th>
+                                <th style="text-align: center; width: 20%">Nivel⇵</th>
                                 <th style="text-align: center; width: 20%">Fecha de Creación⇵</th>
                                 <th style="text-align: center; width: 20%">Fecha de Actualización⇵</th>
                             </tr>
@@ -64,11 +65,12 @@
                         <tbody> 
                             @foreach ($saber as $s) 
                                 <tr>
-                                <td style="text-align: center">{{$s['OrdenComp']}}. {{$s['descripcion']}}</td>
-                                <td style="text-align: center">{{$s['OrdenDim']}}. {{$s['descripcion_dimension']}}</td>
-                                <td style="text-align: center">{{$s['descripcion_aprendizaje']}}</td>
-                                <td style="text-align: center">{{$s['descripcion_saber']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$s['OrdenComp']}}. {{$s['descripcion']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$s['OrdenDim']}}. {{$s['descripcion_dimension']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$s['descripcion_aprendizaje']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$s['descripcion_saber']}}</td>
                                 <td style="text-align: center">{{$s['tipo']}}</td>
+                                <td style="text-align: center">{{$s['nivel']}}</td>
                                 <td style="text-align: center">{{$s['created_at']}}</td>
                                 <td style="text-align: center">{{$s['updated_at']}}</td>
                                 </tr>

@@ -17,7 +17,7 @@
     <p style="font-weight: bold">Nombre de la carrera: {{$car['nombre']}}</p>
     <p style="font-weight: bold">Facultad: {{$car['facultad']}}</p>
     <p style="font-weight: bold">Formación: {{$car['formacion']}}</p>
-    <p style="font-weight: bold">Planificación: {{$car['formacion']}}</p>
+    <p style="font-weight: bold">Tipo: {{$car['tipo']}}</p>
     <p></p>
     <p>A continuación, se presenta un reporte de toda la información de la carrera de {{$car['nombre']}}, incluyendo
         competencias, aprendizajes, saberes y módulos asociados.
@@ -25,18 +25,18 @@
 
     <h2>Competencias</h2>
 
-    <table border="1" style='border-collapse: collapse; text-align: center;' >
+    <table border="1" style='border-collapse: collapse; text-align: center; margin-right: auto; margin-left: auto' >
         <thead>
             <tr>
                 <td>Orden</td>
-                <td>Descripción de Competencia</td>
+                <td style="width: 100%">Descripción de Competencia</td>
             </tr>
         </thead>
         <tbody>
         @foreach ($competencia as $c)
             <tr>
                 <td>{{$c['orden']}}</td>
-                <td>{{$c['descripcion']}}</td>
+                <td style="word-wrap: break-word; max-width: 0;">{{$c['descripcion']}}</td>
             </tr>
         @endforeach
         </tbody>
@@ -46,7 +46,7 @@
 
     <h2>Temporalización de Competencias</h2>
 
-    <table border="1" style='border-collapse: collapse; text-align: center;' >
+    <table border="1" style='border-collapse: collapse; text-align: center; margin-right: auto; margin-left: auto' >
         <thead>
             <tr>
                 <td>Descripción de Competencia</td>
@@ -58,7 +58,7 @@
         <tbody>
         @foreach ($tempo_competencia as $tc)
             <tr>
-                <td>{{$tc['orden']}}. {{$tc['descripcion']}}</td>
+                <td style="word-wrap: break-word; max-width:0;">{{$tc['orden']}}. {{$tc['descripcion']}}</td>
                 @for ($i = 1; $i <= 14; $i++)
                     <td  style="text-align: center"> 
                         @if ($tc['nivel_'.$i]== 1) 
@@ -77,21 +77,21 @@
 
     <h2>Aprendizajes</h2>
 
-    <table border="1" style='border-collapse: collapse; text-align: center;'>
+    <table border="1" style='border-collapse: collapse; text-align: center; margin-right: auto; margin-left: auto'>
         <thead>
             <tr>
                 <td>Competencia asociada</td>
-                <td>Dimensión</td>
-                <td>Aprendizaje</td>
+                <td>Dimensión asociada</td>
+                <td>Descripción de Aprendizaje</td>
                 <td>Nivel de aprendizaje</td>
             </tr>
         </thead>
         <tbody>
         @foreach ($aprendizaje as $a)
             <tr>
-                <td rowspan="1">{{$a['OrdenComp']}}. {{$a['descripcion']}}</td>
-                <td rowspan="1">{{$a['descripcion_dimension']}}</td>
-                <td rowspan="1">{{$a['descripcion_aprendizaje']}}</td>
+                <td rowspan="1" style="word-wrap: break-word; max-width:0;">{{$a['OrdenComp']}}. {{$a['descripcion']}}</td>
+                <td rowspan="1" style="word-wrap: break-word; max-width:0;">{{$a['orden']}}. {{$a['descripcion_dimension']}}</td>
+                <td rowspan="1" style="word-wrap: break-word; max-width:0;">{{$a['descripcion_aprendizaje']}}</td>
                 <td rowspan="1">{{$a['nivel_aprend']}}</td>
             </tr>
         @endforeach
@@ -102,13 +102,13 @@
 
     <h2>Temporalización de Aprendizajes</h2>
 
-    <table border="1" style='border-collapse: collapse; text-align: center;' >
+    <table border="1" style='border-collapse: collapse; text-align: center; margin-right: auto; margin-left: auto' >
         <thead>
             <tr>
-                <td>Competencia</td>
-                <td>Nivel de Aprendizaje</td>
-                <td>Aprendizaje</td>
-                <td>Dimensión</td>
+                <td>Competencia asociada</td>
+                <td>Nivel de Aprend.</td>
+                <td>Desc. de Aprendizaje</td>
+                <td>Dimensión asociada</td>
                 @for ($i = 1; $i <= 14; $i++)
                     <td>{{$i}}</td>
                 @endfor
@@ -117,10 +117,10 @@
         <tbody>
         @foreach ($tempo_aprendizaje as $ta)
             <tr>
-                <td >{{$ta['OrdenComp']}}. {{$ta['descripcion']}}</td>
+                <td style="word-wrap: break-word; max-width:0;">{{$ta['OrdenComp']}}. {{$ta['descripcion']}}</td>
                 <td >{{$ta['nivel_aprend']}}</td>
-                <td>{{$ta['descripcion_aprendizaje']}}</td>
-                <td>{{$ta['orden']}}. {{$ta['descripcion_dimension']}}</td>
+                <td style="word-wrap: break-word; max-width:0;">{{$ta['descripcion_aprendizaje']}}</td>
+                <td style="word-wrap: break-word; max-width:0;">{{$ta['orden']}}. {{$ta['descripcion_dimension']}}</td>
                 @for ($i = 1; $i <= 14; $i++)
                     <td  style="text-align: center"> 
                         @if ($ta['nivel_'.$i]== 1) 
@@ -140,24 +140,26 @@
 
     <h2>Saberes</h2>
 
-    <table border="1" style='border-collapse: collapse; text-align: center;'>
+    <table border="1" style='border-collapse: collapse; text-align: center; margin-right: auto; margin-left: auto'>
         <thead>
             <tr>
                 <td>Competencia asociada</td>
-                <td>Dimensión</td>
-                <td>Aprendizaje</td>
-                <td>Saber</td>
+                <td>Dimensión asociada</td>
+                <td>Aprendizaje asociado</td>
+                <td>Descripción de Saber</td>
                 <td>Tipo de Saber</td>
+                <td>Nivel</td>
             </tr>
         </thead>
         <tbody>
         @foreach ($saber as $s)
             <tr>
-                <td rowspan="1">{{$s['OrdenComp']}}. {{$s['descripcion']}}</td>
-                <td rowspan="1">{{$s['descripcion_dimension']}}</td>
-                <td rowspan="1">{{$s['descripcion_aprendizaje']}}</td>
-                <td rowspan="1">{{$s['descripcion_saber']}}</td>
+                <td rowspan="1" style="word-wrap: break-word; max-width:0;">{{$s['OrdenComp']}}. {{$s['descripcion']}}</td>
+                <td rowspan="1" style="word-wrap: break-word; max-width:0;">{{$s['OrdenDim']}}. {{$s['descripcion_dimension']}}</td>
+                <td rowspan="1" style="word-wrap: break-word; max-width:0;">{{$s['descripcion_aprendizaje']}}</td>
+                <td rowspan="1" style="word-wrap: break-word; max-width:0;">{{$s['descripcion_saber']}}</td>
                 <td rowspan="1">{{$s['tipo']}}</td>
+                <td rowspan="1">{{$s['nivel']}}</td>
             </tr>
         @endforeach
         </tbody>
@@ -167,7 +169,7 @@
 
     <h2>Carga Académica</h2>
 
-    <table border="1" style='border-collapse: collapse; text-align: center;'>
+    <table border="1" style='border-collapse: collapse; text-align: center; margin-right: auto; margin-left: auto'>
         <thead style="text-align: center">
 
             <tr>
@@ -203,7 +205,7 @@
             @foreach ($modulo as $m)
             <tr>                                 
                 <td style="text-align: center">{{$m['semestre']}}</td>
-                <td style="text-align: center">{{$m['nombre_modulo']}}</td>
+                <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$m['nombre_modulo']}}</td>
                 <td style="text-align: center">{{$m['tipo']}}</td>
                 <td style="text-align: center">
                     @if ($m['clases'] == 1)

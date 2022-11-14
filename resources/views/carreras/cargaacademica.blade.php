@@ -94,7 +94,7 @@
                                 <td style="display: none">{{$m['id']}}</td>                                
                                 <td style="text-align: center">{{$m['semestre']}}</td>
                                 <td style="display: none">{{$m['idprop']}}</td>     
-                                <td style="text-align: center">{{$m['nombre_modulo']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$m['nombre_modulo']}}</td>
                                 <td style="text-align: center">{{$m['tipo']}}</td>
                                 <td style="text-align: center"><button type="button" id="info" class="info_req" data-url="{{ route('carga_academica.show_requisitos', [ $c['id'] , $m['id'] ]) }}"> </button></td>     
                                 <td style="text-align: center">

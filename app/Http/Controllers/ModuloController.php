@@ -35,6 +35,7 @@ class ModuloController extends Controller
         ->leftJoin('aprendizajes', 'sabers.refaprendizaje', '=', 'aprendizajes.id')
         ->leftJoin('dimensions', 'aprendizajes.refdimension', '=', 'dimensions.id')
         ->leftJoin('competencias', 'dimensions.refcompetencia', '=', 'competencias.id')
+        ->orderBy('sabers.nivel')
         ->where('competencias.refcarrera', '=', $id_carrera)
         ->whereNull('propuesta_tiene_saber.saber')
         ->select('sabers.*')

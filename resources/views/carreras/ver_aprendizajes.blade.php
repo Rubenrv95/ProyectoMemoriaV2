@@ -64,9 +64,9 @@
                         <tbody> 
                             @foreach ($aprendizaje as $a) 
                                 <tr>
-                                <td style="text-align: center">{{$a['OrdenComp']}}. {{$a['descripcion']}}</td>
-                                <td style="text-align: center">{{$a['OrdenDim']}}. {{$a['descripcion_dimension']}}</td>
-                                <td style="text-align: center">{{$a['descripcion_aprendizaje']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$a['OrdenComp']}}. {{$a['descripcion']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$a['OrdenDim']}}. {{$a['descripcion_dimension']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$a['descripcion_aprendizaje']}}</td>
                                 <td style="text-align: center">{{$a['nivel_aprend']}}</td>
                                 <td style="text-align: center">{{$a['created_at']}}</td>
                                 <td style="text-align: center">{{$a['updated_at']}}</td>
@@ -88,7 +88,7 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]],
+                "order": [[ 0, "asc" ]],
 
                 language: {
                     "decimal": "",

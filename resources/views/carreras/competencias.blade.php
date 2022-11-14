@@ -69,7 +69,7 @@
                                 <tr>
                                     <td style="display: none">{{$comp['id']}}</td>
                                     <td rowspan="1" style="text-align: center">{{$comp['orden']}}</td>
-                                    <td rowspan="1" style="text-align: center">{{$comp['descripcion']}}</td>
+                                    <td rowspan="1" style="text-align: center; word-wrap: break-word; max-width:0;">{{$comp['descripcion']}}</td>
                                     <td rowspan="1" style="text-align: center">{{$comp['created_at']}}</td>
                                     <td style="text-align: center">{{$comp['updated_at']}}</td>
                                     <td rowspan="1" style="text-align: center">

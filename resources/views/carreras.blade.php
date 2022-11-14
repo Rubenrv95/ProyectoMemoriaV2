@@ -30,11 +30,11 @@
                                 <tr style="font-weight: bold; color: white">
                                 <th style="display: none">ID </th>
                                 <th style="display: none">Nombre</th>
-                                <th style="text-align: center">Facultad⇵</th>
-                                <th style="text-align: center">Carrera⇵</th>
-                                <th style="text-align: center">Formación⇵</th>
-                                <th style="text-align: center">Tipo⇵</th>
-                                <th style="width: 10%; text-align: center"></th>
+                                <th style="width: 25%;text-align: center">Facultad⇵</th>
+                                <th style="width: 35%;text-align: center">Carrera⇵</th>
+                                <th style="width: 15%;text-align: center">Formación⇵</th>
+                                <th style="width: 10%;text-align: center">Tipo⇵</th>
+                                <th style="width: 15%; text-align: center"></th>
                                 </tr>
                         </thead>
                         
@@ -45,7 +45,7 @@
                                 <td style="display: none">{{$item['id']}}</td>
                                 <td style="display: none">{{$item['nombre']}}</td>
                                 <td style="text-align: center">{{$item['facultad']}}</td>
-                                <td style="text-align: center"><a href="<?=ENV('APP_URL')?>carreras/{{$item['id']}}/competencias">{{$item['nombre']}} </a> </td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;"><a href="<?=ENV('APP_URL')?>carreras/{{$item['id']}}/competencias">{{$item['nombre']}} </a> </td>
                                 <td style="text-align: center">{{$item['formacion']}}</td>
                                 <td style="text-align: center">{{$item['tipo']}}</td>
                                 <td style="text-align: center">
@@ -253,7 +253,7 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]],
+                "order": [[ 2, "asc" ]],
 
                 language: {
                     "decimal": "",

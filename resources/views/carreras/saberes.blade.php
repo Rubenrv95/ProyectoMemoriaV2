@@ -77,10 +77,10 @@
                         <tbody> 
                             @foreach ($saber as $s) 
                                 <tr>
-                                <td style="text-align: center;">{{$s['OrdenComp']}}. {{$s['descripcion']}}</td>
-                                <td style="text-align: center">{{$s['OrdenDim']}}. {{$s['descripcion_dimension']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$s['OrdenComp']}}. {{$s['descripcion']}}</td>
+                                <td style="text-align: cente; word-wrap: break-word; max-width:0;r">{{$s['OrdenDim']}}. {{$s['descripcion_dimension']}}</td>
                                 <td style="text-align: center; display: none;">{{$s['idAprend']}}</td>
-                                <td style="text-align: center;">{{$s['descripcion_aprendizaje']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$s['descripcion_aprendizaje']}}</td>
 
                                 @for ($i = 0; $i <= 14; $i++)
                                     <td style="display: none">{{$s['id']}}</td>
@@ -293,7 +293,7 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]],
+                "order": [[ 0, "asc" ]],
 
                 language: {
                     "decimal": "",

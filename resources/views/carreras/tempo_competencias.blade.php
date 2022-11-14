@@ -58,7 +58,7 @@
                 <tbody>
                     @foreach ($tempo as $t)
                     <tr>
-                        <td  style="text-align: center; font-size: 80%">{{$t['orden']}}. {{$t['descripcion']}}</td>
+                        <td  style="text-align: center; font-size: 80%; word-wrap: break-word; max-width:0;">{{$t['orden']}}. {{$t['descripcion']}}</td>
                         @for ($i = 1; $i <= 14; $i++)
                         <td  style="text-align: center"> 
                              <!-- Se muestran las temporalizaciones, pero no se pueden editar-->
@@ -94,7 +94,7 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]],
+                "order": [[ 0, "asc" ]],
 
                 language: {
                     "decimal": "",

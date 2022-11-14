@@ -32,6 +32,7 @@ class SaberController extends Controller
         ->leftJoin('dimensions', 'aprendizajes.refdimension', '=', 'dimensions.id')
         ->leftJoin('competencias', 'dimensions.refcompetencia', '=', 'competencias.id')
         ->where('competencias.refcarrera', '=', $id_carrera)
+        ->orderBy('aprendizajes.nivel_aprend')
         ->select('aprendizajes.*')
         ->get();
         $saber = DB::table('sabers')

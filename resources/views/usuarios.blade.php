@@ -37,8 +37,8 @@
                                 @foreach($user as $u)
                                 <tr>
                                 <td style="display: none"> {{$u['id']}}</td>
-                                <td style="text-align: center"> {{$u['nombre']}}</td>
-                                <td style="text-align: center">{{$u['email']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;"> {{$u['nombre']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$u['email']}}</td>
                                 <td style="text-align: center">{{$u['rol']}}</td>
                                 <td style="text-align: center">
                                         <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_carrera" class="edit"> </button>

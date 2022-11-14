@@ -73,9 +73,9 @@
                                 <tr>
                                     <td style="display: none">{{$dim['id']}}</td>
                                     <td style="display: none">{{$dim['idComp']}}</td>
-                                    <td style="text-align: center">{{$dim['Orden_comp']}}. {{$dim['descripcion']}}</td>
+                                    <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$dim['Orden_comp']}}. {{$dim['descripcion']}}</td>
                                     <td style="text-align: center">{{$dim['orden']}}</td>
-                                    <td style="text-align: center">{{$dim['descripcion_dimension']}}</td>
+                                    <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$dim['descripcion_dimension']}}</td>
                                     <td style="text-align: center">{{$dim['created_at']}}</td>
                                     <td style="text-align: center">{{$dim['updated_at']}}</td>
                                     <td style="text-align: center">
@@ -130,7 +130,7 @@
                                                 <select class="form-select form-select-lg" name="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required> 
                                                     <option selected disabled="true" value="">Seleccione una competencia</option>
                                                     @foreach ($competencia as $comp) 
-                                                    <option value="{{$comp['id']}}" required>{{$comp['descripcion']}}</option>
+                                                    <option value="{{$comp['id']}}">{{$comp['orden']}}. {{$comp['descripcion']}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -186,7 +186,7 @@
                                             <select class="form-select form-select-lg" name="refComp" id="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required> 
                                                 <option selected disabled="true" value="">Seleccione una competencia</option>
                                                 @foreach ($competencia as $comp) 
-                                                <option value="{{$comp['id']}}" required>{{$comp['descripcion']}}</option>
+                                                <option value="{{$comp['id']}}">{{$comp['orden']}}. {{$comp['descripcion']}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -251,7 +251,7 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]],
+                "order": [[ 3, "asc" ]],
 
                 language: {
                     "decimal": "",

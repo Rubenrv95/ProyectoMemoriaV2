@@ -26,7 +26,7 @@ class DimensionController extends Controller
     {
         $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
         $carrera = json_decode($carrera, true);
-        $competencia = DB::table('competencias')->where('refcarrera', $id_carrera)->get();
+        $competencia = DB::table('competencias')->where('refcarrera', $id_carrera)->orderBy('orden')->get();
         $dimension = DB::table('dimensions')
         ->leftJoin('competencias', 'dimensions.refcompetencia', '=', 'competencias.id')
         ->where('competencias.refcarrera', '=', $id_carrera)

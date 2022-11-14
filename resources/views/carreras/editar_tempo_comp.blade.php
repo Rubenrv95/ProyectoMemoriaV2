@@ -65,7 +65,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td  style="text-align: center; font-size: 80%">{{$t['orden']}}. {{$t['descripcion']}}</td>
+                            <td  style="text-align: center; font-size: 80%; word-wrap: break-word; max-width:0;">{{$t['orden']}}. {{$t['descripcion']}}</td>
                             @for ($i = 1; $i <= 14; $i++)
                             <!--Se marcan las casillas para indicar la temporalización de la competencia en un nivel -->
                             @php

@@ -58,10 +58,10 @@
                 <table id="lista" class="table table-striped table-bordered" width="100%">
                     <thead>
                         <tr style="font-weight: bold; color: white">
-                            <th style="width: 20%; text-align: center">Competencia Asociada⇵</th>
+                            <th style="width: 20%; text-align: center; word-wrap: break-word; max-width:0;">Competencia Asociada⇵</th>
                             <th style="width: 20%; text-align: center">Nivel de Aprendizaje⇵</th>
-                            <th style="width: 20%; text-align: center">Aprendizaje⇵</th>
-                            <th style="width: 20%; text-align: center">Dimension⇵</th>
+                            <th style="width: 20%; text-align: center; word-wrap: break-word; max-width:0;">Aprendizaje⇵</th>
+                            <th style="width: 20%; text-align: center; word-wrap: break-word; max-width:0;">Dimension⇵</th>
                             @for ($i = 1; $i <= 14; $i++)
                                 <th style="text-align: center">Nivel {{$i}}</th>
                             @endfor
