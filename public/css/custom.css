@@ -318,6 +318,28 @@ header {
     border-radius: 12px;
 }
 
+#pdf {
+  background-image: url('../images/pdf_icon.png');
+  background-repeat: no-repeat;
+  background-color: transparent;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  border: none;   
+}
+#pdf:hover {
+  background-color: rgb(129, 42, 42);
+  border-radius: 10px;
+}
+
+#pdf:active {
+  background-color: rgb(87, 30, 30);
+  border-radius: 10px;
+}
+
+
 #download {
 
     background-image: url('../images/download_icon.png');
