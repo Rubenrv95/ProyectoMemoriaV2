@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateModuloTieneSaberTable extends Migration
+class CreatePropuestaTieneSaberTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,9 +15,8 @@ class CreateModuloTieneSaberTable extends Migration
     {
         Schema::create('propuesta_tiene_saber', function (Blueprint $table) {
             $table->unsignedbigInteger('propuesta_modulo');
-            $table->unsignedbigInteger('saber');
-            $table->foreign('propuesta_modulo')->references('id')->on('propuesta_modulos')->onDelete('cascade');
-            $table->foreign('saber')->references('id')->on('sabers')->onDelete('cascade');
+            $table->foreign('propuesta_modulo')->references('id')->on('propuesta_modulos')->onUpdate('cascade')->onDelete('cascade');
+            $table->id('saber');
         });
     }
 

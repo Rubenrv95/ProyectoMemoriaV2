@@ -18,7 +18,7 @@ class CreateArchivosTable extends Migration
             $table->string('nombre');
             $table->string('archivo');
             $table->unsignedbigInteger('refcarrera');
-            $table->foreign('refcarrera')->references('id')->on('carreras')->onDelete('cascade');
+            $table->foreign('refcarrera')->references('id')->on('carreras')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

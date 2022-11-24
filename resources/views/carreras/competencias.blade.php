@@ -20,8 +20,7 @@
 @section('content')
 <body >
         <div class="container-fluid">   
-                
-                <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
+                    
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Competencias {{$c['nombre']}} </h1>
                 </div>
@@ -74,8 +73,8 @@
                                     <td style="text-align: center">{{$comp['updated_at']}}</td>
                                     <td rowspan="1" style="text-align: center">
                                         @if (Auth::user()->rol != 'Dirección de docencia')
-                                            <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_competencia" class="edit"> </button>
-                                            <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_competencia" class="delete"> </button>
+                                            <button title="Editar" type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_competencia" class="edit"> </button>
+                                            <button title="Eliminar" type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_competencia" class="delete"> </button>
                                         @endif
                                     </td>                  
                                 </tr>
@@ -200,7 +199,7 @@
                                     </div>
                                     <div class="modal-body" style="text-align: center">
                                         <input type="hidden" name="method" value="DELETE"> 
-                                        <p style="font-size: 18">¿Está seguro de que desea eliminar ésta competencia? Se eliminarán todas las dimensiones, aprendizajes, saberes y módulos vinculados.</p>
+                                        <p style="font-size: 18">¿Está seguro de que desea eliminar ésta competencia? Se eliminarán todas las dimensiones vinculadas.</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>

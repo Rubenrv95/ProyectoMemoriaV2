@@ -50,11 +50,11 @@
                                 <td style="text-align: center">{{$item['tipo']}}</td>
                                 <td style="text-align: center">
                                         @if (Auth::user()->rol != 'Dirección de docencia')
-                                        <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_carrera" class="edit"> </button>
-                                        <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_carrera" class="delete"> </button>
+                                        <button title="Editar" type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_carrera" class="edit"> </button>
+                                        <button title="Eliminar" type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_carrera" class="delete"> </button>
                                         @endif
-                                        <a href="<?=ENV('APP_URL')?>carreras/{{ $item['id'] }}/descargar_reporte"><button type="button" id="download"  style="margin-left: 2%" > </button></a>
-                                        <a href="<?=ENV('APP_URL')?>carreras/{{ $item['id'] }}/descargar_tabla"><button type="button" id="excel"  style="margin-left: 2%" > </button></a>
+                                        <a href="<?=ENV('APP_URL')?>carreras/{{ $item['id'] }}/descargar_reporte"><button title="Descargar reporte" type="button" id="download"  style="margin-left: 2%" > </button></a>
+                                        <a href="<?=ENV('APP_URL')?>carreras/{{ $item['id'] }}/descargar_tabla"><button title="Descargar plantilla" type="button" id="excel"  style="margin-left: 2%" > </button></a>
                                         
                                 </td>
                                 

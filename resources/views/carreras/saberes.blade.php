@@ -19,27 +19,26 @@
 @section('content')
 <body >
         <div class="container-fluid">   
-                
-                <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="mb-0 text-gray-800">Saberes {{$c['nombre']}} </h1>
-                </div>
+                       
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="mb-0 text-gray-800">Saberes {{$c['nombre']}} </h1>
+            </div>
 
-                <hr class="solid" style="border-width: 1px; background-color: black">
+            <hr class="solid" style="border-width: 1px; background-color: black">
 
-                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
-                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
-                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
-                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
-                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/archivos"><button type="button" class="boton_gestionar">Archivos</button></a> 
+            <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/competencias"><button type="button" class="boton_gestionar">Competencias</button></a> 
+            <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/aprendizajes"><button type="button" class="boton_gestionar">Aprendizajes</button></a> 
+            <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/saberes"><button type="button" class="boton_gestionar">Saberes</button></a> 
+            <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/modulos"><button type="button" class="boton_gestionar">Módulos</button></a> 
+            <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/archivos"><button type="button" class="boton_gestionar">Archivos</button></a> 
 
 
-                <hr class="solid" style="border-width: 1px; background-color: black">
+            <hr class="solid" style="border-width: 1px; background-color: black">
 
-                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/saberes"><button type="button" class="btn btn-secondary">Gestión de Saberes</button></a> 
-                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/ver_saberes"><button type="button" class="btn btn-secondary">Visualización de Saberes</button></a> 
+            <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/saberes"><button type="button" class="btn btn-secondary">Gestión de Saberes</button></a> 
+            <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/ver_saberes"><button type="button" class="btn btn-secondary">Visualización de Saberes</button></a> 
 
-                <hr class="solid" style="border-width: 1px; background-color: black">
+            <hr class="solid" style="border-width: 1px; background-color: black">
 
         </div>
 
@@ -78,7 +77,7 @@
                             @foreach ($saber as $s) 
                                 <tr>
                                 <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$s['OrdenComp']}}. {{$s['descripcion']}}</td>
-                                <td style="text-align: cente; word-wrap: break-word; max-width:0;r">{{$s['OrdenDim']}}. {{$s['descripcion_dimension']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;r">{{$s['OrdenDim']}}. {{$s['descripcion_dimension']}}</td>
                                 <td style="text-align: center; display: none;">{{$s['idAprend']}}</td>
                                 <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$s['descripcion_aprendizaje']}}</td>
 
@@ -94,8 +93,8 @@
                                             <div class="dropdown-container" tabindex="-1" style="margin-left: auto; margin-right: auto">
                                                 <div class="three-dots" style="margin-left: auto; margin-right: auto"></div>
                                                 <div class="dropdown dropdown-table">
-                                                    <button type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_saber" class="edit"> </button>
-                                                    <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_saber" class="delete"> </button>
+                                                    <button title="Editar" type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_saber" class="edit"> </button>
+                                                    <button title="Eliminar" type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_saber" class="delete"> </button>
                                                 </div>
                                             </div>
                                             @endif                         
@@ -262,7 +261,7 @@
                                     </div>
                                     <div class="modal-body" style="text-align: center">
                                         <input type="hidden" name="method" value="DELETE"> 
-                                        <p style="font-size: 18">¿Está seguro de que desea eliminar éste saber? Se desvincularán todos los módulos asociados a éste.</p>
+                                        <p style="font-size: 18">¿Está seguro de que desea eliminar éste saber? Es posible que los módulos asociados a éste se eliminen.</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>

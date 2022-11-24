@@ -19,8 +19,7 @@
 @section('content')
 <body >
         <div class="container-fluid">   
-                
-                <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
+
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Aprendizajes {{$c['nombre']}} </h1>
                 </div>
@@ -58,10 +57,10 @@
                 <table id="lista" class="table table-striped table-bordered" width="100%">
                     <thead>
                         <tr style="font-weight: bold; color: white">
-                            <th style="width: 20%; text-align: center; word-wrap: break-word; max-width:0;">Competencia Asociada⇵</th>
+                            <th style="width: 20%; text-align: center">Competencia Asociada⇵</th>
                             <th style="width: 20%; text-align: center">Nivel de Aprendizaje⇵</th>
-                            <th style="width: 20%; text-align: center; word-wrap: break-word; max-width:0;">Aprendizaje⇵</th>
-                            <th style="width: 20%; text-align: center; word-wrap: break-word; max-width:0;">Dimension⇵</th>
+                            <th style="width: 20%; text-align: center">Aprendizaje⇵</th>
+                            <th style="width: 20%; text-align: center">Dimension⇵</th>
                             @for ($i = 1; $i <= 14; $i++)
                                 <th style="text-align: center">Nivel {{$i}}</th>
                             @endfor
@@ -69,10 +68,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="text-align: center; font-size: 80%">{{$t['orden']}}. {{$t['descripcion']}}</td>
-                            <td style="text-align: center; font-size: 80%">{{$t['nivel_aprend']}}</td>
-                            <td style="text-align: center; font-size: 80%">{{$t['descripcion_aprendizaje']}}</td>
-                            <td style="text-align: center; font-size: 80%">{{$t['descripcion_dimension']}}</td>
+                            <td style="text-align: center; font-size: 80%; word-wrap: break-word; max-width:0;">{{$t['orden']}}. {{$t['descripcion']}}</td>
+                            <td style="text-align: center; font-size: 80%; word-wrap: break-word; max-width:0;">{{$t['nivel_aprend']}}</td>
+                            <td style="text-align: center; font-size: 80%; word-wrap: break-word; max-width:0;">{{$t['descripcion_aprendizaje']}}</td>
+                            <td style="text-align: center; font-size: 80%; word-wrap: break-word; max-width:0;">{{$t['descripcion_dimension']}}</td>
                             <!--Se marcan las casillas para indicar la temporalización del aprendizaje en un nivel -->
                             @for ($i = 1; $i <= 14; $i++)
                             <td style="text-align: center"> 

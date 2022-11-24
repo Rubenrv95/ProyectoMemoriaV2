@@ -283,19 +283,18 @@ class AprendizajeController extends Controller
      */
     public function destroy($id_carrera, $id_aprend)
     {
-        $query = DB::table('aprendizajes')->where('id', $id_aprend)->delete();
-
-        $query2= 'DELETE tempo_aprendizajes, sabers, propuesta_modulos, propuesta_tiene_saber, modulos, modulo_tiene_prerrequisito FROM tempo_aprendizajes
-        INNER JOIN sabers ON sabers.refaprendizaje = tempo_aprendizajes.aprendizaje
+    
+        $query= 'DELETE sabers, propuesta_modulos, propuesta_tiene_saber FROM sabers
         INNER JOIN propuesta_tiene_saber ON sabers.id = propuesta_tiene_saber.saber
-        INNER JOIN propuesta_modulos  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
-        INNER JOIN modulos  ON  propuesta_modulos.id = modulos.refpropuesta
-        INNER JOIN modulo_tiene_prerrequisito  ON  modulos.id = modulo_tiene_prerrequisito.modulo
+        INNER JOIN propuesta_modulos ON propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
         WHERE sabers.refaprendizaje = ?';
 
-        $status = \DB::delete($query2, array($id_aprend));
+        $status = \DB::delete($query, array($id_aprend));
 
-        
+        $query2 = DB::table('aprendizajes')->where('id', $id_aprend)->delete();
+
+        $query3 = DB::table('tempo_aprendizajes')->where('aprendizaje', $id_aprend)->delete();
+
         return back()->withSuccess('Aprendizaje eliminado con éxito');
     }
 }

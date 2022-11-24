@@ -20,7 +20,6 @@
 <body >
         <div class="container-fluid">   
                 
-                <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Módulos {{$c['nombre']}} </h1>
                 </div>
@@ -79,8 +78,8 @@
                                 <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$m['nombre_modulo']}}</td>
                                 <td style="text-align: center">
                                     @if (Auth::user()->rol != 'Dirección de docencia')
-                                        <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_modulo" class="edit"> </button>
-                                        <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_modulo" class="delete"> </button>
+                                        <button title="Editar" type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_modulo" class="edit"> </button>
+                                        <button title="Eliminar" type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_modulo" class="delete"> </button>
                                     @endif
                                 </td>
                             </tr>
@@ -217,8 +216,8 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-success" type="submit" name="submit" id="submit"> Guardar</button>
-                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button"> Cancelar</button>
+                                        <button class="btn btn-success" type="submit" name="submit" id="submit">Guardar</button>
+                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancelar</button>
                                     </div> 
                                 
                                 </div>
@@ -268,7 +267,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-success">Guardar</button>
-                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button"> Cancelar</button>
+                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancelar</button>
                                     </div> 
                                 </div>
                             </form>
@@ -303,7 +302,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
-                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button"> Cancelar</button>
+                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancelar</button>
                                     </div> 
                                 </div>
 
@@ -406,7 +405,7 @@
                     '<select class="form-select form-select-lg lista_saberes" name="saber[' + i + ']" aria-label=".form-select-lg example" style= "font-size: 18; width: 90%" required>' +
                     '<option selected disabled="true" value="">Seleccionar un saber</option>' +
                     '@foreach ($saber as $s)' +
-                        '<option value="{{$s['id']}}">{{$s['descripcion_saber']}}</option>' +
+                        '<option value="{{$s['id']}}">{{$s['descripcion_saber']}} (Nivel {{$s['nivel']}})</option>' +
                     '@endforeach' +
                     '</select>' +
                     '<button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove" style="position: absolute; top: 0; margin: 0; right: 0">X</button>' +

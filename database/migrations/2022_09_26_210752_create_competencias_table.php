@@ -18,7 +18,7 @@ class CreateCompetenciasTable extends Migration
             $table->longText('descripcion');
             $table->integer('orden');
             $table->unsignedbigInteger('refcarrera');
-            $table->foreign('refcarrera')->references('id')->on('carreras')->onDelete('cascade');
+            $table->foreign('refcarrera')->references('id')->on('carreras')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamp('created_at')->nullable('false')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));
         });

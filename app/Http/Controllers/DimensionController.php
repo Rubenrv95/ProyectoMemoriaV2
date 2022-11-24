@@ -121,18 +121,16 @@ class DimensionController extends Controller
      */
     public function destroy($id_carrera, $id_dim)
     {
-        $query = DB::table('dimensions')->where('id', $id_dim)->delete();
-
-        $query2= 'DELETE aprendizajes, sabers, propuesta_modulos, propuesta_tiene_saber, modulos, modulo_tiene_prerrequisito FROM aprendizajes 
+        $query= 'DELETE aprendizajes, sabers, propuesta_modulos, propuesta_tiene_saber FROM aprendizajes 
         INNER JOIN sabers ON sabers.refaprendizaje = aprendizajes.id
         INNER JOIN propuesta_tiene_saber ON sabers.id = propuesta_tiene_saber.saber
-        INNER JOIN propuesta_modulos  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
-        INNER JOIN modulos  ON  propuesta_modulos.id = modulos.refpropuesta
-        INNER JOIN modulo_tiene_prerrequisito  ON  modulos.id = modulo_tiene_prerrequisito.modulo
+        INNER JOIN propuesta_modulos ON propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
         WHERE aprendizajes.refdimension = ?';
 
-        $status = \DB::delete($query2, array($id_dim));
-        
+        $status = \DB::delete($query, array($id_dim));
+
+        $query2 = DB::table('dimensions')->where('id', $id_dim)->delete();
+
         return back()->withSuccess('Dimensión eliminada con éxito');
     }
 }

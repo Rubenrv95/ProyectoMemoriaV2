@@ -145,16 +145,15 @@ class SaberController extends Controller
      * @param id_saber, id del saber seleccionado
      */
     public function destroy($id_carrera, $id_saber)
-    {
-        $query = DB::table('sabers')->where('id', $id_saber)->delete();
-
-        $query2= 'DELETE propuesta_modulos, propuesta_tiene_saber, modulos, modulo_tiene_prerrequisito FROM propuesta_modulos
-        INNER JOIN propuesta_tiene_saber  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
-        INNER JOIN modulos  ON  propuesta_modulos.id = modulos.refpropuesta
-        INNER JOIN modulo_tiene_prerrequisito  ON  modulos.id = modulo_tiene_prerrequisito.modulo
+    {  
+        $query= 'DELETE propuesta_modulos, propuesta_tiene_saber FROM propuesta_modulos
+        INNER JOIN propuesta_tiene_saber ON propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
         WHERE propuesta_tiene_saber.saber = ?';
 
-        $status = \DB::delete($query2, array($id_saber));
+        $status = \DB::delete($query, array($id_saber));
+
+        $query2 = DB::table('sabers')->where('id', $id_saber)->delete();
+
         
         return back()->withSuccess('Saber eliminado con éxito');
     }

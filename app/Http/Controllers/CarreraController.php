@@ -197,21 +197,20 @@ class CarreraController extends Controller
      */
     public function destroy($id)
     {
-        $query = DB::table('carreras')->where('id', $id)->delete();
 
-        $query2= 'DELETE competencias, dimensions, aprendizajes, sabers, propuesta_modulos, propuesta_tiene_saber, modulos, modulo_tiene_prerrequisito, tempo_competencias, tempo_aprendizajes FROM competencias 
+        $query= 'DELETE competencias, dimensions, aprendizajes, sabers, propuesta_modulos, propuesta_tiene_saber, tempo_competencias, tempo_aprendizajes FROM competencias 
           INNER JOIN tempo_competencias ON tempo_competencias.competencia = competencias.id
           INNER JOIN dimensions ON dimensions.refcompetencia = competencias.id
           INNER JOIN aprendizajes ON aprendizajes.refdimension = dimensions.id
           INNER JOIN tempo_aprendizajes ON tempo_aprendizajes.aprendizaje = aprendizajes.id
           INNER JOIN sabers ON sabers.refaprendizaje = aprendizajes.id
           INNER JOIN propuesta_tiene_saber ON sabers.id = propuesta_tiene_saber.saber
-          INNER JOIN propuesta_modulos  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
-          INNER JOIN modulos  ON  propuesta_modulos.id = modulos.refpropuesta
-          INNER JOIN modulo_tiene_prerrequisito  ON  modulos.id = modulo_tiene_prerrequisito.modulo
+          INNER JOIN propuesta_modulos ON propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
           WHERE competencias.refcarrera = ?';
 
-        $status = \DB::delete($query2, array($id));
+        $status = \DB::delete($query, array($id));
+
+        $query2 = DB::table('carreras')->where('id', $id)->delete();
 
         $query3 = DB::table('archivos')->where('refcarrera', $id)->delete();
         

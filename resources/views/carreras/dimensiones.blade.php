@@ -20,10 +20,6 @@
 <body >
         <div class="container-fluid">   
                 
-
-                <h4>
-                    <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
-                </h4>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Competencias {{$c['nombre']}} </h1>
                 </div>
@@ -80,8 +76,8 @@
                                     <td style="text-align: center">{{$dim['updated_at']}}</td>
                                     <td style="text-align: center">
                                         @if (Auth::user()->rol != 'Dirección de docencia')
-                                            <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_dimension" class="edit"> </button>
-                                            <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_dimension" class="delete"> </button>
+                                            <button title="Editar" type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_dimension" class="edit"> </button>
+                                            <button title="Eliminar" type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_dimension" class="delete"> </button>
                                         @endif
                                     </td>                  
                                 </tr>
@@ -226,7 +222,7 @@
                                     </div>
                                     <div class="modal-body" style="text-align: center">
                                         <input type="hidden" name="method" value="DELETE"> 
-                                        <p style="font-size: 18">¿Está seguro de que desea eliminar ésta dimensión? Se eliminarán todos los aprendizajes, saberes y módulos vinculados</p>
+                                        <p style="font-size: 18">¿Está seguro de que desea eliminar ésta dimensión? Se eliminarán todos los aprendizajes vinculados</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>

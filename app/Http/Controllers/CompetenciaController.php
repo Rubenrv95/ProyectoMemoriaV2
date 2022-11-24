@@ -184,24 +184,23 @@ class CompetenciaController extends Controller
      */
     public function destroy($id, $id_comp)
     {
-        $query = DB::table('competencias')->where('id', $id_comp)->delete();
 
-        $query2= 'DELETE tempo_competencias, dimensions, aprendizajes, tempo_aprendizajes, sabers, propuesta_modulos, propuesta_tiene_saber, modulos, modulo_tiene_prerrequisito FROM tempo_competencias
+        $query= 'DELETE tempo_competencias, dimensions, aprendizajes, tempo_aprendizajes, sabers, propuesta_modulos, propuesta_tiene_saber FROM tempo_competencias
             INNER JOIN dimensions ON tempo_competencias.competencia = dimensions.refcompetencia
             INNER JOIN aprendizajes ON aprendizajes.refdimension = dimensions.id
             INNER JOIN tempo_aprendizajes ON aprendizajes.id = tempo_aprendizajes.aprendizaje
             INNER JOIN sabers ON sabers.refaprendizaje = aprendizajes.id
             INNER JOIN propuesta_tiene_saber ON sabers.id = propuesta_tiene_saber.saber
-            INNER JOIN propuesta_modulos  ON  propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
-            INNER JOIN modulos  ON  propuesta_modulos.id = modulos.refpropuesta
-            INNER JOIN modulo_tiene_prerrequisito  ON  modulos.id = modulo_tiene_prerrequisito.modulo
+            INNER JOIN propuesta_modulos ON propuesta_tiene_saber.propuesta_modulo = propuesta_modulos.id
             WHERE dimensions.refcompetencia = ?';
 
 
+        $status = \DB::delete($query, array($id_comp));
 
-        $query = DB::table('tempo_competencias')->where('competencia', $id_comp)->delete();
+        $query2 = DB::table('competencias')->where('id', $id_comp)->delete();
 
-        $status = \DB::delete($query2, array($id_comp));
+
+
         
         return back()->withSuccess('Competencia eliminada con éxito');
     }

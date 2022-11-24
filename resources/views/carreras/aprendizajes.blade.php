@@ -20,7 +20,6 @@
 <body>
         <div class="container-fluid">   
                 
-                <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Aprendizajes {{$c['nombre']}} </h1>
                 </div>
@@ -106,8 +105,8 @@
                                                 <div class="dropdown-container" tabindex="-1" style="margin-left: auto; margin-right: auto">
                                                     <div class="three-dots" style="margin-left: auto; margin-right: auto"></div>
                                                     <div class="dropdown dropdown-table">
-                                                        <button type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_inicial" class="edit1"> </button>
-                                                        <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje_inicial" class="delete1"> </button>
+                                                        <button title="Editar" type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_inicial" class="edit1"> </button>
+                                                        <button title="Eliminar" type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje_inicial" class="delete1"> </button>
                                                     </div>
                                                 </div>
                                             @endif                   
@@ -129,8 +128,8 @@
                                             <div class="dropdown-container" tabindex="-1" style="margin-left: auto; margin-right: auto">
                                                 <div class="three-dots" style="margin-left: auto; margin-right: auto"></div>
                                                 <div class="dropdown dropdown-table">
-                                                    <button type="button" id="mod"  data-bs-toggle="modal" data-bs-target="modal_modificar_aprendizaje_desarrollo" class="edit2"> </button>
-                                                    <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje_desarrollo" class="delete2"> </button>
+                                                    <button title="Editar" type="button" id="mod"  data-bs-toggle="modal" data-bs-target="modal_modificar_aprendizaje_desarrollo" class="edit2"> </button>
+                                                    <button title="Eliminar" type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje_desarrollo" class="delete2"> </button>
                                                 </div>
                                             </div>
                                             @endif                          
@@ -150,8 +149,8 @@
                                             <div class="dropdown-container" tabindex="-1" style="margin-left: auto; margin-right: auto">
                                                 <div class="three-dots" style="margin-left: auto; margin-right: auto"></div>
                                                 <div class="dropdown dropdown-table">
-                                                    <button type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_logrado" class="edit3"> </button>
-                                                    <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje_logrado" class="delete3"> </button>
+                                                    <button title="Editar" type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_logrado" class="edit3"> </button>
+                                                    <button title="Eliminar" type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje_logrado" class="delete3"> </button>
                                                 </div>
                                             </div>
                                             @endif                      
@@ -171,8 +170,8 @@
                                             <div class="dropdown-container" tabindex="-1" style="margin-left: auto; margin-right: auto">
                                                 <div class="three-dots" style="margin-left: auto; margin-right: auto"></div>
                                                 <div class="dropdown dropdown-table">
-                                                    <button type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_especializacion" class="edit4"> </button>
-                                                    <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje_especializacion" class="delete4"> </button>
+                                                    <button title="Editar" type="button" id="mod"  data-bs-toggle="modal" data-bs-target="#modal_modificar_aprendizaje_especializacion" class="edit4"> </button>
+                                                    <button title="Eliminar" type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_aprendizaje_especializacion" class="delete4"> </button>
                                                 </div>
                                             </div>
                                             @endif                   
@@ -510,7 +509,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <input type="hidden" name="method" value="DELETE"> 
-                                        <p style="font-size: 18">¿Está seguro de que desea eliminar éste aprendizaje? Se eliminarán todos los saberes y módulos vinculados.</p>
+                                        <p style="font-size: 18">¿Está seguro de que desea eliminar éste aprendizaje? Se eliminarán todos los saberes vinculados.</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>

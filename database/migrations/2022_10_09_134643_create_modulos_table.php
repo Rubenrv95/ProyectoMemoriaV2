@@ -30,7 +30,7 @@ class CreateModulosTable extends Migration
             $table->boolean('tareas')->nullable();
             $table->boolean('estudios')->nullable();
             $table->unsignedbigInteger('refpropuesta');
-            $table->foreign('refpropuesta')->references('id')->on('propuesta_modulos')->onDelete('cascade');
+            $table->foreign('refpropuesta')->references('id')->on('propuesta_modulos')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamp('created_at')->nullable('false')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));
         });

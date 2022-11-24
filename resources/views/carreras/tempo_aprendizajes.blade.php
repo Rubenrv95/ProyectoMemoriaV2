@@ -19,8 +19,6 @@
 @section('content')
 <body >
         <div class="container-fluid">   
-                
-                <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Aprendizajes {{$c['nombre']}} </h1>
                 </div>
@@ -83,7 +81,7 @@
                             @endfor
                             <td  style="text-align: center">
                             @if (Auth::user()->rol != 'Dirección de docencia')
-                                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/tempo_aprendizajes/{{$t['aprendizaje']}}"><button type="button" id="mod" class="edit"> </button> </a> 
+                                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/tempo_aprendizajes/{{$t['aprendizaje']}}"><button title="Editar temporalización" type="button" id="mod" class="edit"> </button> </a> 
                             @endif
                             </td>
                         </tr>

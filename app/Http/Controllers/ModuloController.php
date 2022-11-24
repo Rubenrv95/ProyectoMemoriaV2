@@ -385,7 +385,7 @@ class ModuloController extends Controller
         $query2 = DB::table('propuesta_tiene_saber')->where('propuesta_modulo', $id_modulo)->delete();
         
         $query3= 'DELETE modulos, modulo_tiene_prerrequisito FROM modulos
-        INNER JOIN modulo_tiene_prerrequisito  ON  modulos.id = modulo_tiene_prerrequisito.modulo
+        INNER JOIN modulo_tiene_prerrequisito ON modulos.id = modulo_tiene_prerrequisito.modulo
         WHERE modulos.refpropuesta = ?';
 
         $status = \DB::delete($query3, array($id_modulo));

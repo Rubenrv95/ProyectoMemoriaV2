@@ -64,21 +64,6 @@
                             </div>
                         </div>
 
-                        <!-- Modulos totales -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-danger shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                                Módulos totales</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$modulos}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
 
                     <!-- Calendario -->
@@ -97,6 +82,19 @@
                         </div>
 
                         
+                    </div>
+
+                    <!-- Approach -->
+                    <div class="card shadow mb-4" style="margin-top: 3%">
+                        <div class="card-header py-3" style="background-color: #333333;">
+                            <h6 class="m-0 font-weight-bold" style="color: white">Acerca de</h6>
+                        </div>
+                        <div class="card-body">
+                            <p>El sistema web Arquitectura Curricular tiene como finalidad entregar una plataforma para planificar los planes de estudio para las carreras impartidas
+                                por la Universidad de Talca, ya sean planes para carreras nuevas o rediseños de una carrera ya existente. 
+                            </p>
+                            <p class="mb-0">Es necesario familiarizarse con los conceptos de "competencia", "dimensión", "aprendizaje" y "saber" antes de utilizar éste sistema.</p>
+                        </div>
                     </div>
 
         </div>
