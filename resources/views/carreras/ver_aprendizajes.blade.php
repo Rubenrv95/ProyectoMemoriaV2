@@ -19,8 +19,7 @@
 @section('content')
 <body >
         <div class="container-fluid">   
-                
-                <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
+        
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Aprendizajes {{$c['nombre']}} </h1>
                 </div>
@@ -44,7 +43,7 @@
 
         </div>
 
-        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
+        <div class="container-fluid">   
 
             <h3 class="mb-0 text-gray-800">Visualización de Aprendizajes</h3>
                 <table id="lista" class="table table-striped table-bordered" width="100%">
@@ -64,10 +63,10 @@
                         <tbody> 
                             @foreach ($aprendizaje as $a) 
                                 <tr>
-                                <td style="text-align: center">{{$a['OrdenComp']}}. {{$a['Descripcion']}}</td>
-                                <td style="text-align: center">{{$a['OrdenDim']}}. {{$a['Descripcion_dimension']}}</td>
-                                <td style="text-align: center">{{$a['Descripcion_aprendizaje']}}</td>
-                                <td style="text-align: center">{{$a['Nivel_aprend']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$a['OrdenComp']}}. {{$a['descripcion']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$a['OrdenDim']}}. {{$a['descripcion_dimension']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$a['descripcion_aprendizaje']}}</td>
+                                <td style="text-align: center">{{$a['nivel_aprend']}}</td>
                                 <td style="text-align: center">{{$a['created_at']}}</td>
                                 <td style="text-align: center">{{$a['updated_at']}}</td>
                                 </tr>
@@ -88,7 +87,7 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]],
+                "order": [[ 0, "asc" ]],
 
                 language: {
                     "decimal": "",

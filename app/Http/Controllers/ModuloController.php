@@ -30,8 +30,26 @@ class ModuloController extends Controller
         $carrera = DB::table('carreras')->where('id', $id_carrera)->get(); 
         $carrera = json_decode($carrera, true);
 
-        $saber = DB::table('sabers')->leftJoin('propuesta_tiene_saber', 'sabers.id', '=', 'propuesta_tiene_saber.saber')->leftJoin('aprendizajes', 'sabers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->whereNull('propuesta_tiene_saber.saber')->select('sabers.*')->get();
-        $coleccion= collect(DB::table('propuesta_modulos')->leftJoin('propuesta_tiene_saber', 'propuesta_modulos.id', '=', 'propuesta_tiene_saber.propuesta_modulo')->leftJoin('sabers', 'propuesta_tiene_saber.saber', '=', 'sabers.id')->leftJoin('aprendizajes', 'sabers.refAprendizaje', '=', 'aprendizajes.id')->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')->where('competencias.refCarrera', '=', $id_carrera)->select('propuesta_modulos.*', 'propuesta_tiene_saber.propuesta_modulo as prop', 'sabers.Descripcion_saber', 'sabers.Tipo', 'aprendizajes.Descripcion_aprendizaje', 'aprendizajes.Nivel_aprend', 'dimensions.Descripcion_dimension', 'dimensions.Orden as OrdenDim', 'competencias.Orden as OrdenComp', 'competencias.Descripcion')->get());
+        $saber = DB::table('sabers')
+        ->leftJoin('propuesta_tiene_saber', 'sabers.id', '=', 'propuesta_tiene_saber.saber')
+        ->leftJoin('aprendizajes', 'sabers.refaprendizaje', '=', 'aprendizajes.id')
+        ->leftJoin('dimensions', 'aprendizajes.refdimension', '=', 'dimensions.id')
+        ->leftJoin('competencias', 'dimensions.refcompetencia', '=', 'competencias.id')
+        ->orderBy('sabers.nivel')
+        ->where('competencias.refcarrera', '=', $id_carrera)
+        ->whereNull('propuesta_tiene_saber.saber')
+        ->select('sabers.*')
+        ->get();
+
+        $coleccion= collect(DB::table('propuesta_modulos')
+        ->leftJoin('propuesta_tiene_saber', 'propuesta_modulos.id', '=', 'propuesta_tiene_saber.propuesta_modulo')
+        ->leftJoin('sabers', 'propuesta_tiene_saber.saber', '=', 'sabers.id')
+        ->leftJoin('aprendizajes', 'sabers.refaprendizaje', '=', 'aprendizajes.id')
+        ->leftJoin('dimensions', 'aprendizajes.refdimension', '=', 'dimensions.id')
+        ->leftJoin('competencias', 'dimensions.refcompetencia', '=', 'competencias.id')
+        ->where('competencias.refcarrera', '=', $id_carrera)
+        ->select('propuesta_modulos.*', 'propuesta_tiene_saber.propuesta_modulo as prop', 'sabers.descripcion_saber', 'sabers.tipo', 'aprendizajes.descripcion_aprendizaje', 'aprendizajes.nivel_aprend', 'dimensions.descripcion_dimension', 'dimensions.orden as OrdenDim', 'competencias.orden as OrdenComp', 'competencias.descripcion')
+        ->get());
 
         $propuestas = $coleccion->unique('prop');
         $propuestas->values()->all();
@@ -68,8 +86,8 @@ class ModuloController extends Controller
 
         $query = DB::table('propuesta_modulos')->insert([
             'id'=>$random,
-            'Nombre_modulo'=>$request->input('nombre_modulo'),
-            'Semestre'=>$request->input('semestre'),
+            'nombre_modulo'=>$request->input('nombre_modulo'),
+            'semestre'=>$request->input('semestre'),
         ]);
 
 
@@ -110,21 +128,21 @@ class ModuloController extends Controller
 
         $query = DB::table('modulos')->insert([
             'id' => $random,
-            'refPropuesta'=>$request->input('modulo'),
-            'Tipo'=>$request->input('curso'),
-            'Creditos'=>$request->input('creditos'),
-            'Horas_semanales'=>$request->input('horas_semanales'),
-            'Horas_totales'=>$request->input('horas_totales'),
-            'Clases'=>$request->input('clases'),
-            'Seminario'=>$request->input('seminario'),
-            'Actividades_practicas'=>$request->input('practicas'),
-            'Talleres'=>$request->input('talleres'),
-            'Laboratorios'=>$request->input('labs'),
-            'Actividades_clinicas'=>$request->input('clinicas'),
-            'Actividades_terreno'=>$request->input('terreno'),
-            'Ayudantias'=>$request->input('ayudantias'),
-            'Tareas'=>$request->input('tareas'),
-            'Estudios'=>$request->input('estudio'),
+            'refpropuesta'=>$request->input('modulo'),
+            'tipo'=>$request->input('curso'),
+            'creditos'=>$request->input('creditos'),
+            'horas_semanales'=>$request->input('horas_semanales'),
+            'horas_totales'=>$request->input('horas_totales'),
+            'clases'=>$request->input('clases'),
+            'seminario'=>$request->input('seminario'),
+            'actividades_practicas'=>$request->input('practicas'),
+            'talleres'=>$request->input('talleres'),
+            'laboratorios'=>$request->input('labs'),
+            'actividades_clinicas'=>$request->input('clinicas'),
+            'actividades_terreno'=>$request->input('terreno'),
+            'ayudantias'=>$request->input('ayudantias'),
+            'tareas'=>$request->input('tareas'),
+            'estudios'=>$request->input('estudio'),
 
         ]);
 
@@ -188,18 +206,18 @@ class ModuloController extends Controller
         ->leftJoin('propuesta_tiene_saber', 'sabers.id', '=', 'propuesta_tiene_saber.saber')
         ->leftJoin('propuesta_modulos', 'propuesta_modulos.id', '=', 'propuesta_tiene_saber.propuesta_modulo')
         ->where('propuesta_tiene_saber.propuesta_modulo', '=', $id_modulo)
-        ->select('sabers.Descripcion_saber', 'sabers.Tipo', 'propuesta_modulos.Nombre_modulo')
+        ->select('sabers.descripcion_saber', 'sabers.tipo', 'propuesta_modulos.nombre_modulo')
         ->get();
 
         $coleccion= collect(
             DB::table('competencias')
-            ->leftJoin('dimensions', 'competencias.id', '=', 'dimensions.refCompetencia')
-            ->leftJoin('aprendizajes', 'dimensions.id', '=', 'aprendizajes.refDimension')
-            ->leftJoin('sabers', 'aprendizajes.id', '=', 'sabers.refAprendizaje')
+            ->leftJoin('dimensions', 'competencias.id', '=', 'dimensions.refcompetencia')
+            ->leftJoin('aprendizajes', 'dimensions.id', '=', 'aprendizajes.refdimension')
+            ->leftJoin('sabers', 'aprendizajes.id', '=', 'sabers.refaprendizaje')
             ->leftJoin('propuesta_tiene_saber', 'sabers.id', '=', 'propuesta_tiene_saber.saber')
             ->leftJoin('propuesta_modulos', 'propuesta_modulos.id', '=', 'propuesta_tiene_saber.propuesta_modulo')
             ->where('propuesta_tiene_saber.propuesta_modulo', '=', $id_modulo)
-            ->select('competencias.Descripcion','competencias.Orden', 'competencias.id as idComp')
+            ->select('competencias.descripcion','competencias.orden', 'competencias.id as idComp')
             ->get()       
         );
 
@@ -208,11 +226,11 @@ class ModuloController extends Controller
 
         $coleccion2= collect(
             DB::table('aprendizajes')
-            ->leftJoin('sabers', 'aprendizajes.id', '=', 'sabers.refAprendizaje')
+            ->leftJoin('sabers', 'aprendizajes.id', '=', 'sabers.refaprendizaje')
             ->leftJoin('propuesta_tiene_saber', 'sabers.id', '=', 'propuesta_tiene_saber.saber')
             ->leftJoin('propuesta_modulos', 'propuesta_modulos.id', '=', 'propuesta_tiene_saber.propuesta_modulo')
             ->where('propuesta_tiene_saber.propuesta_modulo', '=', $id_modulo)
-            ->select('aprendizajes.Descripcion_aprendizaje', 'aprendizajes.Nivel_aprend', 'aprendizajes.id as idAprend')
+            ->select('aprendizajes.descripcion_aprendizaje', 'aprendizajes.nivel_aprend', 'aprendizajes.id as idAprend')
             ->get()       
         );
 
@@ -234,16 +252,16 @@ class ModuloController extends Controller
         //prerrequisitos del módulo seleccionado
          $req = DB::table('modulos')
          ->leftJoin('modulo_tiene_prerrequisito', 'modulo_tiene_prerrequisito.prerrequisito', '=', 'modulos.id')
-         ->leftJoin('propuesta_modulos', 'propuesta_modulos.id', '=', 'modulos.refPropuesta')
+         ->leftJoin('propuesta_modulos', 'propuesta_modulos.id', '=', 'modulos.refpropuesta')
          ->where('modulo_tiene_prerrequisito.modulo', '=', $id_modulo)
-         ->select('modulos.*', 'propuesta_modulos.Nombre_modulo')
+         ->select('modulos.*', 'propuesta_modulos.nombre_modulo')
          ->get();
 
          //nombre del módulo seleccionado
          $name = DB::table('modulos')
-         ->leftJoin('propuesta_modulos', 'propuesta_modulos.id', '=', 'modulos.refPropuesta')
+         ->leftJoin('propuesta_modulos', 'propuesta_modulos.id', '=', 'modulos.refpropuesta')
          ->where('modulos.id', '=', $id_modulo)
-         ->select('propuesta_modulos.Nombre_modulo')
+         ->select('propuesta_modulos.nombre_modulo')
          ->get();
 
 
@@ -268,23 +286,23 @@ class ModuloController extends Controller
             ->leftJoin('propuesta_modulos', 'modulos.refPropuesta', '=', 'propuesta_modulos.id')
             ->leftJoin('propuesta_tiene_saber', 'propuesta_tiene_saber.propuesta_modulo', '=', 'propuesta_modulos.id')
             ->leftJoin('sabers', 'propuesta_tiene_saber.saber', '=', 'sabers.id')
-            ->leftJoin('aprendizajes', 'sabers.refAprendizaje', '=', 'aprendizajes.id')
-            ->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')
-            ->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')
-            ->where('competencias.refCarrera', '=', $id_carrera)
-            ->select('modulos.*', 'propuesta_modulos.Nombre_modulo', 'propuesta_modulos.Semestre', 'propuesta_modulos.id as idprop')
+            ->leftJoin('aprendizajes', 'sabers.refaprendizaje', '=', 'aprendizajes.id')
+            ->leftJoin('dimensions', 'aprendizajes.refdimension', '=', 'dimensions.id')
+            ->leftJoin('competencias', 'dimensions.refcompetencia', '=', 'competencias.id')
+            ->where('competencias.refcarrera', '=', $id_carrera)
+            ->select('modulos.*', 'propuesta_modulos.nombre_modulo', 'propuesta_modulos.semestre', 'propuesta_modulos.id as idprop')
             ->get()
         );
 
         $coleccion2= collect(
             DB::table('propuesta_modulos')
-            ->leftJoin('modulos', 'propuesta_modulos.id', '=', 'modulos.refPropuesta')
+            ->leftJoin('modulos', 'propuesta_modulos.id', '=', 'modulos.refpropuesta')
             ->leftJoin('propuesta_tiene_saber', 'propuesta_modulos.id', '=', 'propuesta_tiene_saber.propuesta_modulo')
             ->leftJoin('sabers', 'propuesta_tiene_saber.saber', '=', 'sabers.id')
-            ->leftJoin('aprendizajes', 'sabers.refAprendizaje', '=', 'aprendizajes.id')
-            ->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')
-            ->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')
-            ->where('competencias.refCarrera', '=', $id_carrera)
+            ->leftJoin('aprendizajes', 'sabers.refaprendizaje', '=', 'aprendizajes.id')
+            ->leftJoin('dimensions', 'aprendizajes.refdimension', '=', 'dimensions.id')
+            ->leftJoin('competencias', 'dimensions.refcompetencia', '=', 'competencias.id')
+            ->where('competencias.refcarrera', '=', $id_carrera)
             ->select('propuesta_modulos.*', 'propuesta_tiene_saber.propuesta_modulo as prop')->get()
         );
 
@@ -323,8 +341,8 @@ class ModuloController extends Controller
     public function update(Request $request, $id_carrera, $id_modulo)
     {
         $query = DB::table('propuesta_modulos')->where('id', $id_modulo)->update([
-            'Nombre_modulo'=>$request->input('nombre_modulo'),
-            'Semestre'=>$request->input('semestre'),
+            'nombre_modulo'=>$request->input('nombre_modulo'),
+            'semestre'=>$request->input('semestre'),
         ]);
 
 
@@ -337,21 +355,21 @@ class ModuloController extends Controller
     public function update_carga(Request $request, $id_carrera, $id_modulo)
     {
         $query = DB::table('modulos')->where('id', $id_modulo)->update([
-            'refPropuesta'=>$request->input('modulo'),
-            'Tipo'=>$request->input('curso'),
-            'Creditos'=>$request->input('creditos'),
-            'Horas_semanales'=>$request->input('horas_semanales'),
-            'Horas_totales'=>$request->input('horas_totales'),
-            'Clases'=>$request->input('clases'),
-            'Seminario'=>$request->input('seminario'),
-            'Actividades_practicas'=>$request->input('practicas'),
-            'Talleres'=>$request->input('talleres'),
-            'Laboratorios'=>$request->input('labs'),
-            'Actividades_clinicas'=>$request->input('clinicas'),
-            'Actividades_terreno'=>$request->input('terreno'),
-            'Ayudantias'=>$request->input('ayudantias'),
-            'Tareas'=>$request->input('tareas'),
-            'Estudios'=>$request->input('estudio'),
+            'refpropuesta'=>$request->input('modulo'),
+            'tipo'=>$request->input('curso'),
+            'creditos'=>$request->input('creditos'),
+            'horas_semanales'=>$request->input('horas_semanales'),
+            'horas_totales'=>$request->input('horas_totales'),
+            'clases'=>$request->input('clases'),
+            'seminario'=>$request->input('seminario'),
+            'actividades_practicas'=>$request->input('practicas'),
+            'talleres'=>$request->input('talleres'),
+            'laboratorios'=>$request->input('labs'),
+            'actividades_clinicas'=>$request->input('clinicas'),
+            'actividades_terreno'=>$request->input('terreno'),
+            'ayudantias'=>$request->input('ayudantias'),
+            'tareas'=>$request->input('tareas'),
+            'estudios'=>$request->input('estudio'),
 
         ]);
 
@@ -367,12 +385,12 @@ class ModuloController extends Controller
         $query2 = DB::table('propuesta_tiene_saber')->where('propuesta_modulo', $id_modulo)->delete();
         
         $query3= 'DELETE modulos, modulo_tiene_prerrequisito FROM modulos
-        INNER JOIN modulo_tiene_prerrequisito  ON  modulos.id = modulo_tiene_prerrequisito.modulo
-        WHERE modulos.refPropuesta = ?';
+        INNER JOIN modulo_tiene_prerrequisito ON modulos.id = modulo_tiene_prerrequisito.modulo
+        WHERE modulos.refpropuesta = ?';
 
         $status = \DB::delete($query3, array($id_modulo));
 
-        $query4= DB::table('modulos')->where('refPropuesta', $id_modulo)->delete();
+        $query4= DB::table('modulos')->where('refpropuesta', $id_modulo)->delete();
 
         return back()->withSuccess('Módulo eliminado con éxito');
     }

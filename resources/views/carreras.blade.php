@@ -30,11 +30,11 @@
                                 <tr style="font-weight: bold; color: white">
                                 <th style="display: none">ID </th>
                                 <th style="display: none">Nombre</th>
-                                <th style="text-align: center">Facultad⇵</th>
-                                <th style="text-align: center">Carrera⇵</th>
-                                <th style="text-align: center">Formación⇵</th>
-                                <th style="text-align: center">Planificación⇵</th>
-                                <th style="width: 10%; text-align: center"></th>
+                                <th style="width: 25%;text-align: center">Facultad⇵</th>
+                                <th style="width: 35%;text-align: center">Carrera⇵</th>
+                                <th style="width: 15%;text-align: center">Formación⇵</th>
+                                <th style="width: 10%;text-align: center">Tipo⇵</th>
+                                <th style="width: 15%; text-align: center"></th>
                                 </tr>
                         </thead>
                         
@@ -45,16 +45,16 @@
                                 <td style="display: none">{{$item['id']}}</td>
                                 <td style="display: none">{{$item['nombre']}}</td>
                                 <td style="text-align: center">{{$item['facultad']}}</td>
-                                <td style="text-align: center"><a href="<?=ENV('APP_URL')?>carreras/{{$item['id']}}/competencias">{{$item['nombre']}} </a> </td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;"><a href="<?=ENV('APP_URL')?>carreras/{{$item['id']}}/competencias">{{$item['nombre']}} </a> </td>
                                 <td style="text-align: center">{{$item['formacion']}}</td>
                                 <td style="text-align: center">{{$item['tipo']}}</td>
                                 <td style="text-align: center">
                                         @if (Auth::user()->rol != 'Dirección de docencia')
-                                        <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_carrera" class="edit"> </button>
-                                        <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_carrera" class="delete"> </button>
+                                        <button title="Editar" type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_carrera" class="edit"> </button>
+                                        <button title="Eliminar" type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_carrera" class="delete"> </button>
                                         @endif
-                                        <a href="<?=ENV('APP_URL')?>carreras/{{ $item['id'] }}/descargar_reporte"><button type="button" id="download"  style="margin-left: 2%" > </button></a>
-                                        <a href="<?=ENV('APP_URL')?>carreras/{{ $item['id'] }}/descargar_tabla"><button type="button" id="excel"  style="margin-left: 2%" > </button></a>
+                                        <a href="<?=ENV('APP_URL')?>carreras/{{ $item['id'] }}/descargar_reporte"><button title="Descargar reporte" type="button" id="download"  style="margin-left: 2%" > </button></a>
+                                        <a href="<?=ENV('APP_URL')?>carreras/{{ $item['id'] }}/descargar_tabla"><button title="Descargar plantilla" type="button" id="excel"  style="margin-left: 2%" > </button></a>
                                         
                                 </td>
                                 
@@ -85,10 +85,15 @@
                                                 <label style="font-size: 20; font-weight: bold">Facultad</label>
                                                 <select class="form-select form-select-lg" name="facultad" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
                                                     <option selected disabled="true" value="">Seleccione una facultad</option>
-                                                    <option value="Linares">Linares</option>
-                                                    <option value="Los Niches">Los Niches</option>       
-                                                    <option value="Santiago">Santiago</option>      
-                                                    <option value="Talca">Talca</option>                                                 
+                                                    <option value="Facultad de Arquitectura, Música y Diseño">Facultad de Arquitectura, Música y Diseño</option>   
+                                                    <option value="Facultad de Ciencias Agrarias">Facultad de Ciencias Agrarias</option>   
+                                                    <option value="Facultad de Ciencias de la Educación">Facultad de Ciencias de la Educación</option>  
+                                                    <option value="Facultad de Ciencias de la Salud">Facultad de Ciencias de la Salud</option>                                                        
+                                                    <option value="Facultad de Ciencias Jurídicas y Sociales">Facultad de Ciencias Jurídicas y Sociales</option> 
+                                                    <option value="Facultad de Economía y Negocios">Facultad de Economía y Negocios</option>        
+                                                    <option value="Facultad de Ingeniería">Facultad de Ingeniería</option>      
+                                                    <option value="Facultad de Odontología">Facultad de Odontología</option>   
+                                                    <option value="Facultad de Psicología">Facultad de Psicología</option>                                               
                                                 </select>
                                             </div>
 
@@ -144,7 +149,7 @@
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Modificar carrera</h1>
+                                        <h1 class="justify-content-center" style="margin: auto"> Editar carrera</h1>
                                     </div>
                                     <div class="modal-body">
 
@@ -152,10 +157,15 @@
                                             <label style="font-size: 20; font-weight: bold">Facultad</label>
                                             <select class="form-select form-select-lg" name="facultad" id = "facultad" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 2%; font-size: 18" required>
                                                     <option selected disabled="true" value="">Seleccione una facultad</option>
-                                                    <option value="Linares">Linares</option>
-                                                    <option value="Los Niches">Los Niches</option>       
-                                                    <option value="Santiago">Santiago</option>      
-                                                    <option value="Talca">Talca</option>      
+                                                    <option value="Facultad de Arquitectura, Música y Diseño">Facultad de Arquitectura, Música y Diseño</option>   
+                                                    <option value="Facultad de Ciencias Agrarias">Facultad de Ciencias Agrarias</option>   
+                                                    <option value="Facultad de Ciencias de la Educación">Facultad de Ciencias de la Educación</option>  
+                                                    <option value="Facultad de Ciencias de la Salud">Facultad de Ciencias de la Salud</option>                                                        
+                                                    <option value="Facultad de Ciencias Jurídicas y Sociales">Facultad de Ciencias Jurídicas y Sociales</option> 
+                                                    <option value="Facultad de Economía y Negocios">Facultad de Economía y Negocios</option>        
+                                                    <option value="Facultad de Ingeniería">Facultad de Ingeniería</option>      
+                                                    <option value="Facultad de Odontología">Facultad de Odontología</option>   
+                                                    <option value="Facultad de Psicología">Facultad de Psicología</option>       
                                             </select>
                                         </div>
                                         
@@ -243,7 +253,7 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]],
+                "order": [[ 2, "asc" ]],
 
                 language: {
                     "decimal": "",

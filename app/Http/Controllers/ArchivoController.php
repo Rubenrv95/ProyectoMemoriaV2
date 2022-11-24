@@ -67,9 +67,9 @@ class ArchivoController extends Controller
 
             $data->nombre = $request->nombre;
 
-            $data->file = $filename;
+            $data->archivo = $filename;
 
-            $data->refCarrera = $id;
+            $data->refcarrera = $id;
 
             $data->save();
 

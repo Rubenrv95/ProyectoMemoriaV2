@@ -37,12 +37,12 @@
                                 @foreach($user as $u)
                                 <tr>
                                 <td style="display: none"> {{$u['id']}}</td>
-                                <td style="text-align: center"> {{$u['nombre']}}</td>
-                                <td style="text-align: center">{{$u['email']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;"> {{$u['nombre']}}</td>
+                                <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$u['email']}}</td>
                                 <td style="text-align: center">{{$u['rol']}}</td>
                                 <td style="text-align: center">
-                                        <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_carrera" class="edit"> </button>
-                                        <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_carrera" class="delete"> </button>
+                                        <button title="Editar" type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_carrera" class="edit"> </button>
+                                        <button title="Eliminar" type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_carrera" class="delete"> </button>
                                 </td>
                                 
                                 </tr>
@@ -137,7 +137,7 @@
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Modificar Usuario</h1>
+                                        <h1 class="justify-content-center" style="margin: auto"> Editar Usuario</h1>
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group" style="margin: auto;">

@@ -28,13 +28,11 @@ class HomeController extends Controller
         $carreras = DB::table('carreras')->where('formacion', 'Profesional')->get();
         $carreras2 = DB::table('carreras')->where('formacion', 'Técnica')->get();
         $usuarios = DB::table('users')->where('nombre', '<>', 'Administrador')->get();
-        $modulos = DB::table('propuesta_modulos')->get();
 
         $cant_1 = $carreras->count();
         $cant_2 = $carreras2->count();
         $cant_3 = $usuarios->count();
-        $cant_4 = $modulos->count();
 
-        return view('home')->with('carreras', $cant_1)->with('tecnicas', $cant_2)->with('usuarios', $cant_3)->with('modulos', $cant_4);
+        return view('home')->with('carreras', $cant_1)->with('tecnicas', $cant_2)->with('usuarios', $cant_3);
     }
 }

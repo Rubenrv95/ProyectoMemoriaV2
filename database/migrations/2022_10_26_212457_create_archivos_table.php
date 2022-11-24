@@ -16,8 +16,9 @@ class CreateArchivosTable extends Migration
         Schema::create('archivos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('file');
-            $table->bigInteger('refCarrera');
+            $table->string('archivo');
+            $table->unsignedbigInteger('refcarrera');
+            $table->foreign('refcarrera')->references('id')->on('carreras')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

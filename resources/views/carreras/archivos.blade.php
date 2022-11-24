@@ -20,7 +20,6 @@
 <body >
         <div class="container-fluid">   
                 
-                <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Archivos {{$c['nombre']}} </h1>
                 </div>
@@ -66,7 +65,7 @@
                                     <td style="text-align: center">{{$a['nombre']}}</td>
                                     <td style="text-align: center">{{$a['created_at']}}</td>
                                     <td style="text-align: center">
-                                        <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/archivos/{{$a['file']}}"><button type="button" id="download" > </button></a>
+                                        <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/archivos/{{$a['archivo']}}"><button type="button" id="download" > </button></a>
                                         @if (Auth::user()->rol != 'Dirección de docencia')
                                             <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_archivo" class="delete"> </button>
                                         @endif
@@ -101,7 +100,7 @@
                                             </div>
 
                                             <div class="form-group" style="margin: auto; margin-bottom: 2%;">
-                                                <input type="file" name="file" style="margin-top: 1%; margin-bottom: 1%" required>
+                                                <input type="file" name="file" style="margin-top: 1%; margin-bottom: 1%; color: black;" required>
                                             </div>
 
 
@@ -161,7 +160,7 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]],
+                "order": [[ 2, "desc" ]],
 
                 language: {
                     "decimal": "",

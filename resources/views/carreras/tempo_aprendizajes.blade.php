@@ -19,8 +19,6 @@
 @section('content')
 <body >
         <div class="container-fluid">   
-                
-                <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Aprendizajes {{$c['nombre']}} </h1>
                 </div>
@@ -42,7 +40,7 @@
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
         </div>
-        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
+        <div class="container-fluid">   
             <h3 class="mb-0 text-gray-800">Temporalización de Aprendizajes</h3>
 
 
@@ -63,15 +61,18 @@
                     <tbody>
                         @foreach ($tempo as $t)
                         <tr>
-                            <td style="text-align: center">{{$t['Orden']}}. {{$t['Descripcion']}}</td>
-                            <td style="text-align: center">{{$t['Nivel_aprend']}}</td>
-                            <td style="text-align: center">{{$t['Descripcion_aprendizaje']}}</td>
-                            <td style="text-align: center">{{$t['Descripcion_dimension']}}</td>
+                            <td style="text-align: center; font-size: 80%; word-wrap: break-word; max-width:0;" >{{$t['orden']}}. {{$t['descripcion']}}</td>
+                            <td style="text-align: center; font-size: 80%">{{$t['nivel_aprend']}}</td>
+                            <td style="text-align: center; font-size: 80%; word-wrap: break-word; max-width:0;">{{$t['descripcion_aprendizaje']}}</td>
+                            <td style="text-align: center; font-size: 80%; word-wrap: break-word; max-width:0;">{{$t['descripcion_dimension']}}</td>
 
                             @for ($i = 1; $i <= 14; $i++)
                             <td style="text-align: center"> 
                                 <!-- Se muestran las temporalizaciones, pero no se pueden editar-->
-                                @if ($t[$i]== 1) 
+                                @php
+                                $var = 'nivel_'.$i;
+                                @endphp
+                                @if ($t[$var]== 1) 
                                 <input type="checkbox" value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center;" checked onclick="return false;">
                                 @else
                                 <input type="checkbox" value="1" id="nivel[{{$i}}]" name="nivel[{{$i}}]" style="width: 30px; height: 30px; text-align: center" onclick="return false;">
@@ -80,7 +81,7 @@
                             @endfor
                             <td  style="text-align: center">
                             @if (Auth::user()->rol != 'Dirección de docencia')
-                                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/tempo_aprendizajes/{{$t['aprendizaje']}}"><button type="button" id="mod" class="edit"> </button> </a> 
+                                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/tempo_aprendizajes/{{$t['aprendizaje']}}"><button title="Editar temporalización" type="button" id="mod" class="edit"> </button> </a> 
                             @endif
                             </td>
                         </tr>
@@ -101,7 +102,7 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]],
+                "order": [[ 0, "asc" ]],
 
                 language: {
                     "decimal": "",

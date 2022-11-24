@@ -20,10 +20,6 @@
 <body >
         <div class="container-fluid">   
                 
-
-                <h4>
-                    <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
-                </h4>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Competencias {{$c['nombre']}} </h1>
                 </div>
@@ -45,7 +41,7 @@
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
         </div>
-        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
+        <div class="container-fluid">   
             <h3 class="mb-0 text-gray-800">Gestión de Dimensiones</h3>
             @if (Auth::user()->rol != 'Dirección de docencia')
                 <button class="agregar" data-bs-toggle="modal" data-bs-target="#modal_crear_dimension" style="margin-bottom: 1%; margin-top: 1%">
@@ -73,15 +69,15 @@
                                 <tr>
                                     <td style="display: none">{{$dim['id']}}</td>
                                     <td style="display: none">{{$dim['idComp']}}</td>
-                                    <td style="text-align: center">{{$dim['Orden_comp']}}. {{$dim['Descripcion']}}</td>
-                                    <td style="text-align: center">{{$dim['Orden']}}</td>
-                                    <td style="text-align: center">{{$dim['Descripcion_dimension']}}</td>
+                                    <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$dim['Orden_comp']}}. {{$dim['descripcion']}}</td>
+                                    <td style="text-align: center">{{$dim['orden']}}</td>
+                                    <td style="text-align: center; word-wrap: break-word; max-width:0;">{{$dim['descripcion_dimension']}}</td>
                                     <td style="text-align: center">{{$dim['created_at']}}</td>
                                     <td style="text-align: center">{{$dim['updated_at']}}</td>
                                     <td style="text-align: center">
                                         @if (Auth::user()->rol != 'Dirección de docencia')
-                                            <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_dimension" class="edit"> </button>
-                                            <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_dimension" class="delete"> </button>
+                                            <button title="Editar" type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_dimension" class="edit"> </button>
+                                            <button title="Eliminar" type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_dimension" class="delete"> </button>
                                         @endif
                                     </td>                  
                                 </tr>
@@ -130,7 +126,7 @@
                                                 <select class="form-select form-select-lg" name="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required> 
                                                     <option selected disabled="true" value="">Seleccione una competencia</option>
                                                     @foreach ($competencia as $comp) 
-                                                    <option value="{{$comp['id']}}" required>{{$comp['Descripcion']}}</option>
+                                                    <option value="{{$comp['id']}}">{{$comp['orden']}}. {{$comp['descripcion']}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -165,7 +161,7 @@
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Modificar dimensión</h1>
+                                        <h1 class="justify-content-center" style="margin: auto"> Editar dimensión</h1>
                                     </div>
                                     <div class="modal-body">
 
@@ -186,7 +182,7 @@
                                             <select class="form-select form-select-lg" name="refComp" id="refComp" aria-label=".form-select-lg example" style="width:100%; margin-bottom: 20px; font-size: 18" required> 
                                                 <option selected disabled="true" value="">Seleccione una competencia</option>
                                                 @foreach ($competencia as $comp) 
-                                                <option value="{{$comp['id']}}" required>{{$comp['Descripcion']}}</option>
+                                                <option value="{{$comp['id']}}">{{$comp['orden']}}. {{$comp['descripcion']}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -226,7 +222,7 @@
                                     </div>
                                     <div class="modal-body" style="text-align: center">
                                         <input type="hidden" name="method" value="DELETE"> 
-                                        <p style="font-size: 18">¿Está seguro de que desea eliminar ésta dimensión? Se eliminarán todos los aprendizajes, saberes y módulos vinculados</p>
+                                        <p style="font-size: 18">¿Está seguro de que desea eliminar ésta dimensión? Se eliminarán todos los aprendizajes vinculados</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -251,7 +247,7 @@
             var table = $('#lista').DataTable({
 
                 "sDom": '<"top"f>        rt      <"bottom"ip>      <"clear">',
-                "order": [[ 1, "asc" ]],
+                "order": [[ 3, "asc" ]],
 
                 language: {
                     "decimal": "",

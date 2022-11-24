@@ -20,8 +20,7 @@
 @section('content')
 <body >
         <div class="container-fluid">   
-                
-                <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
+                    
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Competencias {{$c['nombre']}} </h1>
                 </div>
@@ -43,7 +42,7 @@
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
         </div>
-        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
+        <div class="container-fluid">   
             <h3 class="mb-0 text-gray-800">Gestión de Competencias</h3>
             @if (Auth::user()->rol != 'Dirección de docencia')
                 <button class="agregar" data-bs-toggle="modal" data-bs-target="#modal_crear_competencia" style="margin-bottom: 1%; margin-top: 1%">
@@ -68,14 +67,14 @@
                             @foreach ($competencia as $comp)   
                                 <tr>
                                     <td style="display: none">{{$comp['id']}}</td>
-                                    <td rowspan="1" style="text-align: center">{{$comp['Orden']}}</td>
-                                    <td rowspan="1" style="text-align: center">{{$comp['Descripcion']}}</td>
+                                    <td rowspan="1" style="text-align: center">{{$comp['orden']}}</td>
+                                    <td rowspan="1" style="text-align: center; word-wrap: break-word; max-width:0;">{{$comp['descripcion']}}</td>
                                     <td rowspan="1" style="text-align: center">{{$comp['created_at']}}</td>
                                     <td style="text-align: center">{{$comp['updated_at']}}</td>
                                     <td rowspan="1" style="text-align: center">
                                         @if (Auth::user()->rol != 'Dirección de docencia')
-                                            <button type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_competencia" class="edit"> </button>
-                                            <button type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_competencia" class="delete"> </button>
+                                            <button title="Editar" type="button" id="mod" data-bs-toggle="modal" data-bs-target="#modal_modificar_competencia" class="edit"> </button>
+                                            <button title="Eliminar" type="button" id="del" data-bs-toggle="modal" data-bs-target="#modal_eliminar_competencia" class="delete"> </button>
                                         @endif
                                     </td>                  
                                 </tr>
@@ -150,7 +149,7 @@
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h1 class="justify-content-center" style="margin: auto"> Modificar competencia</h1>
+                                        <h1 class="justify-content-center" style="margin: auto"> Editar competencia</h1>
                                     </div>
                                     <div class="modal-body">
 
@@ -200,7 +199,7 @@
                                     </div>
                                     <div class="modal-body" style="text-align: center">
                                         <input type="hidden" name="method" value="DELETE"> 
-                                        <p style="font-size: 18">¿Está seguro de que desea eliminar ésta competencia? Se eliminarán todas las dimensiones, aprendizajes, saberes y módulos vinculados.</p>
+                                        <p style="font-size: 18">¿Está seguro de que desea eliminar ésta competencia? Se eliminarán todas las dimensiones vinculadas.</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-danger">Eliminar</button>

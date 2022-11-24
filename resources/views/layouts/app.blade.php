@@ -52,8 +52,8 @@
             <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: #333333">
 
                 <!-- Sidebar - Logo -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=ENV('APP_URL')?>home" style="height: 100px; ">
-                    <div class="sidebar-brand-text mx-3"><img src="<?=ENV('APP_URL')?>images/logo.png" alt="" style="width: 130px; height: 100px"></div>
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" style="height: 100px; margin-top: 5%; margin-bottom: 5%">
+                    <div class="sidebar-brand-text mx-3"><img src="<?=ENV('APP_URL')?>images/logo.png" alt="" style="width: 130px; height: 120px;"></div>
                 </a>
 
                 <hr class="sidebar-divider my-0">
@@ -61,7 +61,7 @@
                 <!-- Dashboard -->
                 <li class="text-center" style="font-size: 15px; color: white; font-weight: bold">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
+                        <span>Arquitectura Curricular</span>
                 </li>
 
                 <hr class="sidebar-divider">
@@ -102,7 +102,7 @@
 
                 <!-- Mensaje -->
                 <div class="sidebar-card d-none d-lg-flex">
-                    <p class="text-center mb-2">Sitio Web desarrollado por <strong>Rubén Ramírez</strong> para la Universidad de Talca</p>
+                    <p class="text-center mb-2">Sitio Web desarrollado para la <strong>Universidad de Talca</strong></p>
                 </div>
 
             </ul>
@@ -159,7 +159,9 @@
                 <div class="loader-wrapper">
                     <span class="loader"><span class="loader-inner"></span></span>
                 </div>
+                <div style="overflow-x:scroll; height: 92vh">
                     @yield('content')
+                </div>
                 </div>
 
             </div>
@@ -298,9 +300,6 @@
         });
     </script>
     <script>
-
-
-        //href="<?=ENV('APP_URL')?>home"
 
         //Función para mostrar u ocultar la contraseña para cada uno de los 3 input
         $(document).ready(function() {

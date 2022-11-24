@@ -20,7 +20,6 @@
 <body >
         <div class="container-fluid">   
                 
-                <a href="<?=ENV('APP_URL')?>carreras"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0 text-gray-800">Competencias {{$c['nombre']}} </h1>
                 </div>
@@ -42,8 +41,12 @@
                 <hr class="solid" style="border-width: 1px; background-color: black">
 
         </div>
-        <div class="container-fluid" style="overflow-x:scroll; height: 92vh">   
-            <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/tempo_competencias"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px"></a>
+        <div class="container-fluid">   
+            <div class="display: inline-block">
+                <a href="<?=ENV('APP_URL')?>carreras/{{$c['id']}}/tempo_competencias"><img src="<?=ENV('APP_URL')?>images/back.png" alt="" srcset="" style="margin-top: 10px; margin-bottom: 10px; display: inline"></a> 
+                <h5 class="mb-0 text-gray-800" style="display: inline">Volver a temporalización</h5>
+            </div>
+            <h1>   </h1>
             <h3 class="mb-0 text-gray-800">Editar temporalización</h3>
 
             @foreach ($tempo as $t)
@@ -61,11 +64,14 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td  style="text-align: center">{{$t['Orden']}}. {{$t['Descripcion']}}</td>
+                            <td  style="text-align: center; font-size: 80%; word-wrap: break-word; max-width:0;">{{$t['orden']}}. {{$t['descripcion']}}</td>
                             @for ($i = 1; $i <= 14; $i++)
                             <!--Se marcan las casillas para indicar la temporalización de la competencia en un nivel -->
+                            @php
+                            $var = 'nivel_'.$i;
+                            @endphp
                             <td  style="text-align: center"> 
-                                @if ($t[$i]== 1) 
+                                @if ($t[$var]== 1) 
                                     <input type="checkbox" value="1" id="nivel_{{$i}}" name="nivel_{{$i}}" style="width: 30px; height: 30px; text-align: center" checked>
                                 @else
                                     <input type="checkbox" value="1" id="nivel_{{$i}}" name="nivel_{{$i}}" style="width: 30px; height: 30px; text-align: center">

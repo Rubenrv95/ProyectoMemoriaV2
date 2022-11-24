@@ -21,11 +21,11 @@ class SaberesSheets implements FromCollection, WithTitle
     public function collection()
     {
         return DB::table('sabers')
-        ->leftJoin('aprendizajes', 'sabers.refAprendizaje', '=', 'aprendizajes.id')
-        ->leftJoin('dimensions', 'aprendizajes.refDimension', '=', 'dimensions.id')
-        ->leftJoin('competencias', 'dimensions.refCompetencia', '=', 'competencias.id')
-        ->where('competencias.refCarrera', '=',  $this->id)
-        ->select('sabers.Descripcion_saber', 'sabers.Tipo', 'sabers.Nivel', 'aprendizajes.Descripcion_aprendizaje', 'dimensions.Descripcion_dimension', 'competencias.Descripcion')
+        ->leftJoin('aprendizajes', 'sabers.refaprendizaje', '=', 'aprendizajes.id')
+        ->leftJoin('dimensions', 'aprendizajes.refdimension', '=', 'dimensions.id')
+        ->leftJoin('competencias', 'dimensions.refcompetencia', '=', 'competencias.id')
+        ->where('competencias.refcarrera', '=',  $this->id)
+        ->select('sabers.descripcion_saber', 'sabers.tipo', 'sabers.nivel', 'aprendizajes.descripcion_aprendizaje', 'dimensions.descripcion_dimension', 'competencias.descripcion')
         ->get();
     }
 
